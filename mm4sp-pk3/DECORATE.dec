@@ -17,3 +17,6 @@ actor GitTest
 #include "decorate/players/ringman/0_ringmanclass.dec"
 #include "decorate/players/ringman/1_ringboomerang.dec"
 
+// ENEMIES
+#include "decorate/enemies/woodman.dec"
+

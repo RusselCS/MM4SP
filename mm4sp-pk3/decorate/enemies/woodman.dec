@@ -1,0 +1,428 @@
+actor Pipi : GenericRobot 30051
+{
+//$Category MM8BDM-Enemies
+Health 10
+Height 32
+Radius 16
+maxstepheight 50
++DROPOFF
++NOGRAVITY
++FLOATBOB
+-COUNTKILL
+States
+{
+Spawn:
+TNT1 A 0
+TNT1 A 0 ACS_ExecuteAlways(400,0)
+Look:
+TNT1 A 0 A_ChangeVelocity(12.0, 0.0, 0.0, CVF_RELATIVE|CVF_REPLACE)
+PIPI ABABABABAB 2 //A_LookEx(LOF_NOSOUNDCHECK,0,400,0,360,"See")
+goto See//loop
+Fly:
+PIPI CD 2
+loop
+See:
+TNT1 A 0 A_SpawnItemEx("PipiEgg",0,0,-8,0,0,0,0,SXF_SETMASTER)
+Goto Fly
+Death:
+TNT1 A 0 A_Pain
+TNT1 A 0 A_KillChildren
+TNT1 A 0 A_Stop
+TNT1 A 0 A_ChangeFlag("NOGRAVITY",1)
+TNT1 A 0 A_Fall
+MMFX BCDE 3
+stop
+}
+}
+
+actor PipiEgg : GenericRobot
+{
++THRUSPECIES
+-SOLID
+-COUNTKILL
+scale 2.5
+Health 1
+Height 16
+Radius 16
+deathsound "misc/devilpain"
+States
+{
+Spawn:
+TNT1 A 0
+TNT1 A 0 ThrustThingZ(0,5,0,0)
+SpawnLoop:
+PIPI E 1 A_JumpIf(velz==0,"ExDeath")
+loop
+ExDeath:
+PIPI F 1 A_SpawnItemEx("Copipi",0,0,16)
+PIPI F 1 A_SpawnItemEx("Copipi",64,0,32)
+PIPI F 1 A_SpawnItemEx("Copipi",-64,0,16)
+PIPI F 1 A_SpawnItemEx("Copipi",0,64,32)
+PIPI F 1 A_SpawnItemEx("Copipi",0,-64,16)
+PIPI F 5
+stop
+Death:
+PIPI F 1 A_JumpIf(floorz-z==0,"ExDeath")
+TNT1 A 0 A_Pain
+TNT1 A 0 A_Fall
+TNT1 A 0 A_Stop
+TNT1 A 0 A_ChangeFlag("NOGRAVITY",1)
+MMFX BCDE 3
+stop
+}
+}
+
+actor Copipi : GenericRobot
+{
+Health 7
+Height 16
+Radius 16
+-SOLID
+maxstepheight 50
++NOGRAVITY
++FLOATBOB
+-COUNTKILL
+States
+{
+Spawn:
+TNT1 A 0
+TNT1 A 0 ACS_ExecuteAlways(400,0)
+Look:
+COPI AB 2 A_LookEx(LOF_NOSOUNDCHECK,0,2500,0,360,"See")
+loop
+See:
+TNT1 A 0 A_FaceTarget
+COPI A 1 ThrustThing(angle*256/360,10,0,0)
+TNT1 A 0 A_CustomMissile("CopipiDive",0,0,0,0)
+stop
+}
+}
+
+actor CopipiDive
+{
+PROJECTILE
+damage (10)
+scale 2.5
++SHOOTABLE
+-NOBLOCKMAP
+Height 10
+Radius 10
+Speed 10
+health 1
+damagetype "Enemy"
+Obituary "%o was pecked by a Copipi."
+deathsound "misc/devilpain"
+States
+{
+Spawn:
+COPI AB 2
+loop
+Death:
+TNT1 A 0 A_Fall
+TNT1 A 0 A_Pain
+TNT1 A 0 A_ChangeFlag("NOGRAVITY",1)
+MMFX BCDE 3
+stop
+}
+}
+
+actor Robbit : GenericRobot 30047
+{
+//$Category MM8BDM-Enemies
+Health 50
+Height 64
+Radius 64
+Obituary "%o was gnawed on by a Robbit."
+maxstepheight 50
++DROPOFF
++LOOKALLAROUND
+States
+{
+Spawn:
+TNT1 A 0
+TNT1 A 0 ACS_ExecuteAlways(400,0)
+Look:
+ROBB A 0 A_ChangeFlag("SOLID",1)
+ROBB A 6 A_LookEx(LOF_NOSOUNDCHECK,0,2000,0,360,"See")
+loop
+See:
+ROBB A 20 A_FaceTarget
+ROBB A 12 A_FaceTarget 
+ROBB A 0 A_Recoil(-15)
+ROBB A 1 A_FaceTarget
+ROBB A 10 ThrustThingZ(0,50,0,0)
+Goto Leaping
+Leaping:
+ROBB B 0 A_SpawnItemEx("RobbitStomp")
+ROBB B 1 A_FaceTarget
+ROBB B 1 A_JumpIf(Floorz-z==0,"Land")
+loop
+Land:
+ROBB A 1 A_FaceTarget
+ROBB A 4 A_Stop
+ROBB AAAAA 6 A_FaceTarget
+ROBB A 0 A_FaceTarget
+ROBB A 20 A_CustomMissile("RobbitCarrot",32,8,random(-4,4))
+ROBB A 0 A_FaceTarget
+ROBB A 20 A_CustomMissile("RobbitCarrot",32,8,random(-4,4))
+ROBB A 0 A_FaceTarget
+ROBB A 20 A_CustomMissile("RobbitCarrot",32,8,random(-4,4))
+ROBB A 2 A_ClearTarget
+Goto Look
+}
+}
+
+actor RobbitStomp
+{
+-SOLID
+PROJECTILE
+damagetype "Enemy"
+States
+{
+Spawn:
+TNT1 A 0
+TNT1 A 1 A_Explode(20,76,0)
+stop
+}
+}
+
+actor RobbitCarrot
+{
+PROJECTILE
+Damage (15)
+Obituary "%o was pelted by a Robbit."
+damagetype "Enemy"
+Speed 20
+scale 2.5
+Height 16
+Radius 16
+States
+{
+Spawn:
+RCAR A 1
+loop
+}
+}
+
+actor SP_AtomicChicken : GenericRobot 30048
+{
+//$Category MM8BDM-Enemies
+Health 50
+Height 64
+Radius 48
+//-SOLID
+-COUNTKILL
+maxstepheight 50
++DROPOFF
++LOOKALLAROUND
+Obituary "%o was ran over by an Atomic Chicken."
+States
+{
+Spawn:
+TNT1 A 0
+TNT1 A 0 ACS_NamedExecuteAlways("4SP_EnemyStart",0)
+TNT1 A 0 A_GiveInventory("DamageCounter",15)
+TNT1 A 0 A_SpawnItemEX("BasicEnemyContactDamager")
+Look:
+ATOC B 0 A_ChangeVelocity(9, vely, velz, CVF_REPLACE)
+ATOC B 1 A_JumpIf(z-floorz>0,"Jumping")
+ATOC B 0 A_ChangeVelocity(9, vely, velz, CVF_REPLACE)
+ATOC B 1 A_JumpIf(z-floorz>0,"Jumping")
+ATOC B 0 A_ChangeVelocity(9, vely, velz, CVF_REPLACE)
+ATOC B 1 A_JumpIf(z-floorz>0,"Jumping")
+ATOC B 0 A_ChangeVelocity(9, vely, velz, CVF_REPLACE)
+ATOC B 1 A_JumpIf(z-floorz>0,"Jumping")
+ATOC A 0 A_ChangeVelocity(9, vely, velz, CVF_REPLACE)
+ATOC A 1 A_JumpIf(z-floorz>0,"Jumping")
+ATOC A 0 A_ChangeVelocity(9, vely, velz, CVF_REPLACE)
+ATOC A 1 A_JumpIf(z-floorz>0,"Jumping")
+ATOC A 0 A_ChangeVelocity(9, vely, velz, CVF_REPLACE)
+ATOC A 1 A_JumpIf(z-floorz>0,"Jumping")
+ATOC A 0 A_ChangeVelocity(9, vely, velz, CVF_REPLACE)
+ATOC A 1 A_JumpIf(z-floorz>0,"Jumping")
+ATOC B 0 A_ChangeVelocity(9, vely, velz, CVF_REPLACE)
+ATOC B 1 A_JumpIf(z-floorz>0,"Jumping")
+ATOC B 0 A_ChangeVelocity(9, vely, velz, CVF_REPLACE)
+ATOC B 1 A_JumpIf(z-floorz>0,"Jumping")
+ATOC B 0 A_ChangeVelocity(9, vely, velz, CVF_REPLACE)
+ATOC B 1 A_JumpIf(z-floorz>0,"Jumping")
+ATOC B 0 A_ChangeVelocity(9, vely, velz, CVF_REPLACE)
+ATOC B 1 A_JumpIf(z-floorz>0,"Jumping")
+Jump:
+ATOC C 0 ThrustThingZ(0,60,0,0)
+ATOC CCCC 1 A_ChangeVelocity(9, vely, velz, CVF_REPLACE)
+Goto Jumping
+Jumping:
+ATOC C 0 A_ChangeVelocity(9, vely, velz, CVF_REPLACE)
+ATOC C 1 A_JumpIf(Floorz-z==0,"Look")
+loop
+Death:
+CRAZ A 0 A_Pain
+CRAZ A 0 A_Fall
+CRAZ A 0 A_SpawnItem("EnemyDeathFX",0,32)
+TNT1 A 1
+stop
+}
+}
+
+actor SP_Monking : GenericRobot 30049
+{
+//$Category MM8BDM-Enemies
+Health 30
+painchance 0
+Height 64
+Radius 48
+Obituary "%o was jumped on by a Monking."
++NOGRAVITY
+speed 0
+maxstepheight 50
+painsound "misc/devilpain"
++DROPOFF
++LOOKALLAROUND
+States
+{
+Spawn:
+TNT1 A 0
+TNT1 A 0 A_JumpIfInventory("HealthScaled",1,"Look")
+TNT1 A 0 ACS_NamedExecuteAlways("4SP_EnemyStart",0)
+TNT1 A 0 A_GiveInventory("DamageCounter",20)
+TNT1 A 0 A_SpawnItemEX("BasicEnemyContactDamager")
+SpawnLoop:
+MONK D 0 A_JumpIf(ceilingz-z<=100,"OperationConsistentHeight")
+MONK D 1 ThrustThingZ(0,65,0,0)
+loop
+OperationConsistentHeight:
+MONK D 1 ThrustThingZ(0,-4*(101-(ceilingz-z)),0,0)
+goto WoofWoof
+WoofWoof:
+MONK A 0 A_Stop
+MONK D 0 ThrustThingZ(0,0,0,0)
+MONK ABCB 6 A_LookEx(LOF_NOSOUNDCHECK,0,300,0,360,"SeeDrop")
+loop
+SeeDrop:
+MONK D 0 A_FaceTarget
+TNT1 A 0 A_ChangeFlag("NOGRAVITY",0)
+MONK D 1 ThrustThing(angle*256/360,5,0,0)
+Goto Leaping
+See:
+MONK D 0 A_FaceTarget
+TNT1 A 0 A_ChangeFlag("NOGRAVITY",0)
+MONK D 0 ThrustThingZ(0,50,0,0)
+MONK D 1 ThrustThing(angle*256/360,5,0,0)
+TNT1 A 0 A_ChangeFlag("NOGRAVITY",0)
+Goto Leaping
+Leaping:
+MONK D 1 A_FaceTarget
+MONK D 1 A_JumpIf(Floorz-z==0,"Land")
+loop
+Land: 
+Wait:
+MONK A 0 A_Stop
+MONK AAA 0 A_Chase
+MONK E 0 A_FaceTarget
+MONK E 25
+Look:
+MONK E 1 A_LookEx(LOF_NOSOUNDCHECK,0,500,0,360,"See")
+loop
+Death:
+CRAZ A 0 A_Pain
+CRAZ A 0 A_Fall
+CRAZ A 0 A_SpawnItem("EnemyDeathFX",0,32)
+TNT1 A 1
+stop
+}
+}
+
+actor HotDog : GenericRobot 30050
+{
+//$Category MM8BDM-Enemies
+Health 200
+Height 128
++DONTRIP
+Radius 128
+Obituary "%o was burnt to ashes by a Hotdog."
+maxstepheight 50
++LOOKALLAROUND
+States
+{
+Spawn:
+TNT1 A 0
+TNT1 A 0 ACS_ExecuteAlways(400,0)
+Look:
+FRIN ABCD 3 A_LookEx(LOF_NOSOUNDCHECK,0,2500,0,360,"See")
+loop
+See:
+FRIN ABCD 3 A_FaceTarget
+Attack:
+FRIN E 1 A_Jump(85,"AttackS")
+FRIN E 1 A_Jump(85,"AttackM")
+FRIN E 1 A_Jump(85,"AttackL")
+loop
+AttackS:
+FRIN E 0 A_PlaySoundEx("weapon/atomicfire","Voice")
+FRIN E 1 A_SpawnItemEx("FrienderFire",0,0,10)
+FRIN E 1 A_SpawnItemEx("FrienderFire",0,0,10)
+FRIN E 1 A_SpawnItemEx("FrienderFire",0,0,10)
+FRIN E 1 A_SpawnItemEx("FrienderFire",0,0,10)
+FRIN E 15
+Goto Look
+AttackM:
+FRIN E 0 A_PlaySoundEx("weapon/atomicfire","Voice")
+FRIN E 1 A_SpawnItemEx("FrienderFire",0,0,10)
+FRIN E 1 A_SpawnItemEx("FrienderFire",0,0,10)
+FRIN E 1 A_SpawnItemEx("FrienderFire",0,0,10)
+FRIN E 1 A_SpawnItemEx("FrienderFire",0,0,10)
+FRIN E 1 A_SpawnItemEx("FrienderFire",0,0,10)
+FRIN E 1 A_SpawnItemEx("FrienderFire",0,0,10)
+FRIN E 1 A_SpawnItemEx("FrienderFire",0,0,10)
+FRIN E 1 A_SpawnItemEx("FrienderFire",0,0,10)
+FRIN E 15
+Goto Look
+AttackL:
+FRIN E 0 A_PlaySoundEx("weapon/atomicfire","Voice")
+FRIN E 1 A_SpawnItemEx("FrienderFire",0,0,10)
+FRIN E 1 A_SpawnItemEx("FrienderFire",0,0,10)
+FRIN E 1 A_SpawnItemEx("FrienderFire",0,0,10)
+FRIN E 1 A_SpawnItemEx("FrienderFire",0,0,10)
+FRIN E 1 A_SpawnItemEx("FrienderFire",0,0,10)
+FRIN E 1 A_SpawnItemEx("FrienderFire",0,0,10)
+FRIN E 1 A_SpawnItemEx("FrienderFire",0,0,10)
+FRIN E 1 A_SpawnItemEx("FrienderFire",0,0,10)
+FRIN E 1 A_SpawnItemEx("FrienderFire",0,0,10)
+FRIN E 1 A_SpawnItemEx("FrienderFire",0,0,10)
+FRIN E 1 A_SpawnItemEx("FrienderFire",0,0,10)
+FRIN E 1 A_SpawnItemEx("FrienderFire",0,0,10)
+FRIN E 1 A_SpawnItemEx("FrienderFire",0,0,10)
+FRIN E 15
+Goto Look
+Death:
+FRIN E 0 A_ChangeFlag("NOGRAVITY",1)
+FRIN E 0 A_Stop
+FRIN E 0 A_FaceTarget
+FRIN EEEEEEEEEEEEEEEEEEEE 5 A_SpawnItemEx("BigEnemyExplode",random(-128,128),random(-128,128),random(0,128))
+NAPA A 0 A_PlaySoundEx("weapon/drillexplode", "Voice",0,1)
+NAPA EFGHIJKLMNOPQRS 2
+stop
+}
+}
+
+actor FrienderFire
+{
+PROJECTILE
+damagetype "Enemy"
+-SOLID
+scale 2.5
+Height 8
+Radius 8
+Damage (2)
+States
+{
+Spawn:
+TNT1 A 0
+FRIN FGFGFGFGFGFG 1 ThrustThing(angle*256/360,3,0,0)
+TNT1 A 0 A_ChangeFlag("NOGRAVITY",1)
+FRIN FG 1 ThrustThingZ(0,20,0,0)
+FRIN FGFGFGFGFGFG 1
+stop
+}
+}
