@@ -1,0 +1,192 @@
+// A stolen ClassBase0 from core Classes.
+// Credit to Jaxof7 and Celebi
+// Since weaknesses do not exist in Napkin, this can be ported as ClassBase
+
+actor ClassBase : PlayerPawn
+{
+	player.displayname "Copy Robot"
+	player.damagescreencolor "yellow"
+	player.maxhealth 100
+	player.forwardmove 0.8, 0.8
+	player.sidemove 0.78, 0.78
+	player.jumpz 10
+	+NOBLOOD
+	+DONTBLAST
+	+NODAMAGETHRUST
+	player.colorrange 0 0
+	mass 9999
+	damagefactor "Dummy", 0.0
+	gravity 0.8
+	scale 2.5
+	+QUICKTORETALIATE
+	Species "Megaman"
+	Player.MaxSkinSizeFactor 0, 0
+
+	States
+	{
+	Spawn:
+		"----" A 0
+		"----" B 1
+		"----" A 1
+		Goto Spawn+2
+	See:
+		"----" BCDE 5
+		Goto Spawn
+	Missile:
+		"----" F 5
+		"----" G 4
+		goto Spawn
+
+	Pain.BotSight:
+		"----" B 5 HealThing(1)
+		Goto Spawn+2
+	
+	Pain:
+		"----" H 0 A_GiveInventory("PainStun",1)
+		"----" H 0 A_GiveInventory("PainRecoil",1)
+		"----" H 0 A_Pain
+		"----" H 0
+		"----" H 0 A_JumpIf(true, "ClassPain")
+		goto ClassPain
+	ClassPain:
+		"----" H 0
+		goto PainContinue
+	PainContinue:
+		//"----" H 1 A_SpawnItem("PainFX",0,3)
+		//"----" H 1// A_GiveInventory("PainRecoilC",1)
+		"----" "##########" 2 A_SpawnItem("PainFX",0,3)//HHHHHHHHHH
+		"----" H 1 
+		"----" H 0 A_JumpIf(true, "Spawn")
+		"----" H 1 A_JumpIf(true, "Spawn")
+		Goto Spawn
+	
+	Death.Fire: Death.Slime: Death.Drowning: Death.Exit:
+	Death:
+		"----" H 0 A_PlaySoundEx("*pain100", "Voice")
+		"----" H 0 A_Stop
+		"----" H 0 A_JumpIf(true, "DeathFix")
+		goto DeathFix
+
+	DeathFix://Used to show the H sprite for a class on death and check if a class should do a special death.
+		"----" H 0
+		"----" H 1
+		goto DeathContinue
+
+	ClassDeath://Used for special deaths. (such as grenademan)
+		"----" H 0
+		"----" H 1
+		goto MegaDeathEnd
+
+	DeathContinue://Which state to hop to
+		"----" H 0 A_Stop
+		"----" H 0 A_JumpIfInventory("SpecialDeathFlag",1,"ClassDeath")
+		"----" H 0 A_JumpIfInventory("InstagibFlag",1,"MegaDeathEnd")
+		"----" H 0 A_JumpIfInventory("RiseDeathFlag",1,"RiseDeath")
+		"----" H 0 A_JumpIfInventory("IceDeathFlag",1,"IceDeath")
+		"----" H 19
+		"----" H 0
+		goto MegaDeathEnd
+
+	RiseDeath:
+		"----" H 1 ThrustThingZ(0,20,0,1)
+		"----" H 0 A_JumpIf(ceilingz-z<64,"MegaDeathEnd")
+		"----" H 0 A_GiveInventory("RiseDeathFlag",1)
+		"----" H 0 A_JumpIfInventory("RiseDeathFlag",16,"MegaDeathEnd")
+		Goto RiseDeath
+	IceDeath:
+		"----" H 0 ACS_ExecuteAlways(998,0,666,10)
+		"----" H 1 A_PlaySoundEx("misc/freeze","Voice")
+		"----" HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH 1 A_SpawnItemEx("FrozenDeathBitFX",frandom(16,48),0,fRandom(16,48),0,0,0,random(0,359))
+		"----" H 0 A_PlaySoundEx("misc/icebreak","Body")
+		"----" H 0 A_SpawnItemEx("FrozenDeathFXN",0,0,0)
+		goto DeathWait
+	Death.Falling:
+		"----" H 0 A_GiveInventory("FallingFlag",1)
+		"----" H 0 A_SetTranslucent(0.0,0)
+		"----" H 0 A_PlaySoundEx("*death","Voice")
+		goto DeathWait
+
+	MegaDeathEnd:
+		"----" H 0 A_ChangeVelocity(0,0,0,CVF_REPLACE)
+		"----" H 0 A_PlaySoundEx("*death","Voice")
+		"----" H 0 A_SpawnItemEx("FakeDeathFX",0,0,32)
+		"----" H 0
+		goto DeathWait
+
+	DeathWait:
+		PLY1 Z 1 A_CheckPlayerDone
+		wait
+
+	TheEnd:
+		"----" G 4
+		loop
+	CreditWalk:
+		"----" BCDE 8
+		loop
+	}
+}
+
+actor FallingFlag : Once {}
+actor RiseDeathFlag : Counter {}
+actor SpecialDeathFlag : Once {}
+actor InstagibFlag : Once {}
+actor IceDeathFlag : Once {}
+
+actor FrozenDeathFXN : FrozenDeathFX
+{
+	Radius 16
+	Height 56
+}
+
+actor FrozenDeathBitFX : BasicClientside
+{
+	Translation "192:192=4:4", "198:198=201:201", "3:8=72:72", "243:247=72:72", "208:215=4:4"
+	Scale 1.25
+	States
+	{
+		Spawn:
+			TNT1 A 0
+			TNT1 A 0 A_Jump(256, "Spawn1","Spawn2","Spawn3","Spawn4","Spawn5","Spawn6")
+		Spawn1:
+			BLIZ A 3 bright
+			TNT1 A 1
+			BLIZ B 3 bright
+			TNT1 A 1
+			BLIZ C 2 bright
+			stop
+		Spawn2:
+			TNT1 A 0 A_Jump(128,"Spawn2a")
+			MRFP EDC 3 bright
+			stop
+		Spawn2a:
+			MRFP CDE 3 bright
+			stop
+		Spawn3:
+			TNT1 A 0 A_Jump(128,"Spawn3a")
+			FLSA RST 3 bright
+			stop
+		Spawn3a:
+			FLSA USW 3 bright
+			stop
+		Spawn4:
+			TNT1 A 0 A_Jump(128,"Spawn4a")
+			FLSA UVW 3 bright
+			stop
+		Spawn4a:
+			FLSA RVT 3 bright
+			stop
+		Spawn5:
+			FCRA E 3 bright
+			TNT1 A 1
+			FCRA E 3 bright
+			TNT1 A 1
+			FCRA E 3 bright
+			stop
+		Spawn6:
+			FCRA IJJJ 2 bright
+			stop
+		End:
+			TNT1 A 0
+			stop
+	}
+}

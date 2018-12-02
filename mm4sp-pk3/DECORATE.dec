@@ -8,3 +8,12 @@ actor GitTest
         stop
     }
 }
+
+// BASE DEFINITIONS
+#include "decorate/basedefs.dec"
+#include "decorate/players/classbase.dec"
+
+// CLASSES (followed by weapons)
+#include "decorate/players/ringman/0_ringmanclass.dec"
+#include "decorate/players/ringman/1_ringboomerang.dec"
+

@@ -1,0 +1,75 @@
+//HORIZONTAL BARS
+height 0;
+
+statusbar normal, forcescaled
+{
+InInventory not NoHud, 1
+{
+InInventory not NoHealthBar, 1
+{
+	Drawbar "VARHEALT", "VAREMPTY", Health, horizontal, 130, 184;
+
+	InInventory BasicArmor, 1{DrawBar "VARAMT31", "VNOBAR", Armor, horizontal, 130, 184;}
+
+	//IfCVarInt mm8bdm_healthnumber, 1
+	InInventory AmmoNumberFlag, 1
+	{
+		WeaponAmmo not BusterAmmo
+		{
+			DrawNumber 3, "8BDMAFONT", Untranslated, Ammo1, alignment(left), 80, 177;
+		}
+	}
+
+	//IfCVarInt mm8bdm_healthnumber, 1
+	InInventory HealthNumberFlag, 1
+	{
+		//DrawNumber 5,CMBHPFONT,Untranslated,Health,/*interpolate(10),*/alignment(left),150,177;
+		DrawNumber 3, "8BDMAFONT", Untranslated, Health, alignment(left), 152, 177;
+	}
+} // END InInventory not NoHealthBar
+
+DrawSelectedInventory INDEXFONT ,122, 184, 120, 185, white;
+DrawImage weaponicon, 50, 184;
+
+IsSelected RingManWep
+{
+	DrawImage "04_5_VA0",58,176;
+	InInventory RingManAmmo, 1	{ DrawImage "04_5_VA1",58,176; }
+	InInventory RingManAmmo, 2	{ DrawImage "04_5_VA2",58,176; }
+	InInventory RingManAmmo, 3	{ DrawImage "04_5_VA3",58,176; }
+	InInventory RingManAmmo, 4	{ DrawImage "04_5_VA4",58,176; }
+	InInventory RingManAmmo, 5	{ DrawImage "04_5_VA5",58,176; }
+}
+
+}
+
+//Assists
+InInventory RushJetCounter, 5{DrawImage "RUSHH2H8", 290,16;}
+InInventory RushJetCounter, 1{DrawImage "RUSHOUT", 290,16;}
+InInventory RushMarineCounter, 1{InInventory IsUnderWater, 1{
+	InInventory RushMarineCounter, 5{DrawImage "RUSHO0", 290,8;}
+	InInventory RushMarineCounter, 1{DrawImage "RUSHMOUT", 290,8;}}
+	InInventory Not IsUnderWater, 1{DrawImage "RUSHP0", 290,8;}}
+InInventory BeatCallCheck, 1{DrawImage "BEATD0", 298,16;}
+InInventory BeatCounter, 5{DrawImage "BEATB8B2", 298,16;}
+InInventory BeatCounter, 1{DrawImage "BEATOUT",298,16;}
+InInventory BeatSupportActivated, 1{DrawImage "BSPTA0",314,16;}
+InInventory BeatSupportFired, 1 {DrawImage "BSPTB0",314,16;}
+InInventory Flashed, 1{DrawImage "FBLIND",  -30,-20;}	
+InInventory EnergyBalancerActive, 1{DrawImage "NRGOUT", 267, 10;}
+
+//Boss Health
+InInventory BossHealth1, 1{DrawBar "VARHEALT", "VAREMPTY", BossHealth1, horizontal, 202, 184;}
+InInventory BossHealth2, 1{DrawBar "VARHEALT", "VAREMPTY", BossHealth2, horizontal, 202, 184;}
+InInventory BossHealth3, 1{DrawBar "VARHEALT", "VAREMPTY", BossHealth3, horizontal, 202, 184;}
+InInventory BossHealth4, 1{DrawBar "VARHEALT", "VAREMPTY", BossHealth4, horizontal, 202, 184;}
+InInventory BossHealth5, 1{DrawBar "VARHEALT", "VAREMPTY", BossHealth5, horizontal, 202, 184;}
+InInventory BossHealth6, 1{DrawBar "VARHEALT", "VAREMPTY", BossHealth6, horizontal, 202, 184;}
+InInventory BossHealth7, 1{DrawBar "VARHEALT", "VAREMPTY", BossHealth7, horizontal, 202, 168;}
+InInventory BossHealth8, 1{DrawBar "VARHEALT", "VAREMPTY", BossHealth8, horizontal, 202, 184;}
+InInventory EvilRobotShield, 1{DrawBar "VARAMM32", "VAREMPTY", BossHealth1, horizontal, 202, 184;}
+
+// Misc
+InInventory TimeStoppedCounter, 1{DrawImage "FLASHS", 36, 0;}
+}
+}

@@ -1,0 +1,20 @@
+actor ClassFlag : Once {}
+
+actor RingManFlag : ClassFlag {}
+
+actor Counter : Inventory {
+    inventory.amount 1
+    inventory.maxamount 65535
+}
+
+actor BasicClientside
+{
+	+NOINTERACTION
+	+NOGRAVITY
+	+CLIENTSIDEONLY
+	+FORCEXYBILLBOARD
+	-SOLID
+	scale 2.5
+	height 1
+	radius 1
+}

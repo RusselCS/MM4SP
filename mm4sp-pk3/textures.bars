@@ -1,0 +1,8 @@
+
+//Ringman
+graphic 04_5_VA5,56,16{patch 04_5_BA5,0,0{rotate 90}}
+graphic 04_5_VA4,56,16{patch 04_5_BA4,0,0{rotate 90}}
+graphic 04_5_VA3,56,16{patch 04_5_BA3,0,0{rotate 90}}
+graphic 04_5_VA2,56,16{patch 04_5_BA2,0,0{rotate 90}}
+graphic 04_5_VA1,56,16{patch 04_5_BA1,0,0{rotate 90}}
+graphic 04_5_VA0,56,16{patch 04_5_BA0,0,0{rotate 90}}

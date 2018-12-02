@@ -1,0 +1,33 @@
+actor Ringman : ClassBase
+{
+player.displayname "ringman"
+
+player.startitem "RingManWep"
+player.startitem "RingManAmmo", 5
+player.startitem "RingManFlag"
+player.jumpz 13
+States
+{
+Spawn:
+RINM A 0
+RINM B 1
+RINM A 1
+Goto Spawn+2
+See:
+RINM BCDE 5
+Goto Spawn
+Missile:
+RINM F 5
+RINM G 4
+goto Spawn
+ClassPain:
+RINM H 0
+goto PainContinue
+DeathFix:
+RINM H 0
+goto DeathContinue
+ClassDeath:
+RINM H 1
+goto MegaDeathEnd
+}
+}

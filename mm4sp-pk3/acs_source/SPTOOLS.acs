@@ -1,0 +1,21 @@
+#library "SPTOOLS"
+
+#include "zcommon.acs"
+
+// [Russel] Simple inventory count script.
+// 
+script "4SP_CountInv" (int which) {
+
+    switch(which) {
+        case 0: // Ring Man
+            SetResultValue(CheckInventory("RingManAmmo"));
+            break;
+    }
+}
+
+script "4SP_CheckAlive" (void) {
+    SetActivatorToTarget(0);
+	if(PlayerNumber() == -1 || CheckInventory("IsDead") || !PlayerInGame(PlayerNumber())){
+		SetResultValue(0);
+	}
+}

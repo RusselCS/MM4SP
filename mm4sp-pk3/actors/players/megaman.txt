@@ -1,4 +1,5 @@
 // [MM4SP] Removed MegaMan class.
+// This file was not renamed to .dec because it replaces the 8BDM core amount.
 
 actor FrozenDeathFX
 {

@@ -1,2 +1,2 @@
 clearplayerclasses
-addplayerclass DoomPlayer
+addplayerclass Ringman
