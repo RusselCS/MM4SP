@@ -1,3 +1,103 @@
+actor SP_Batton : GenericRobot 30035
+{
+//$Category MM8BDM-Enemies
+Health 20
+Height 32
+Radius 32
+Obituary "%o was sucked on by a Batton."
+maxstepheight 50
++DROPOFF
++NOGRAVITY
+speed 5
+States
+{
+Spawn:
+BATT A 0
+BATT A 0 A_JumpIfInventory("HealthScaled",1,"SpawnLoop")
+BATT A 0 ACS_NamedExecuteAlways("4SP_EnemyStart",0)
+BATT A 0 A_GiveInventory("DamageCounter",15)
+BATT A 0 A_SpawnItemEX("BasicEnemyContactDamager")
+goto SpawnLoop
+SpawnLoopWait:
+BATT C 0 A_GiveInventory("CutterFlag",20)
+SpawnLoop:
+BATT C 0 A_ClearTarget
+BATT C 0 A_ChangeFlag("FLOAT",0)
+BATT C 0 A_JumpIf(ceilingz-z<=60,"OperationConsistentHeight")
+BATT C 1 ThrustThingZ(0,65,0,0)
+BATT C 0 A_JumpIf(ceilingz-z<=60,"OperationConsistentHeight")
+BATT C 1 ThrustThingZ(0,65,0,0)
+BATT C 0 A_JumpIf(ceilingz-z<=60,"OperationConsistentHeight")
+BATT C 1 ThrustThingZ(0,65,0,0)
+BATT C 0 A_JumpIf(ceilingz-z<=60,"OperationConsistentHeight")
+BATT C 1 ThrustThingZ(0,65,0,0)
+BATT A 0 A_JumpIf(ceilingz-z<=60,"OperationConsistentHeight")
+BATT A 1 ThrustThingZ(0,65,0,0)
+BATT A 0 A_JumpIf(ceilingz-z<=60,"OperationConsistentHeight")
+BATT A 1 ThrustThingZ(0,65,0,0)
+BATT A 0 A_JumpIf(ceilingz-z<=60,"OperationConsistentHeight")
+BATT A 1 ThrustThingZ(0,65,0,0)
+BATT A 0 A_JumpIf(ceilingz-z<=60,"OperationConsistentHeight")
+BATT A 1 ThrustThingZ(0,65,0,0)
+BATT B 0 A_JumpIf(ceilingz-z<=60,"OperationConsistentHeight")
+BATT B 1 ThrustThingZ(0,65,0,0)
+BATT B 0 A_JumpIf(ceilingz-z<=60,"OperationConsistentHeight")
+BATT B 1 ThrustThingZ(0,65,0,0)
+BATT B 0 A_JumpIf(ceilingz-z<=60,"OperationConsistentHeight")
+BATT B 1 ThrustThingZ(0,65,0,0)
+BATT B 0 A_JumpIf(ceilingz-z<=60,"OperationConsistentHeight")
+BATT B 1 ThrustThingZ(0,65,0,0)
+loop
+OperationConsistentHeight:
+BATT D 0 A_ChangeFlag("INVULNERABLE",1)
+BATT D 1 ThrustThingZ(0,-4*(61-(ceilingz-z)),0,0)
+BATT D 0 A_JumpIfInventory("CutterFlag",20,"Waiting")
+goto Look
+Waiting:
+BATT D 0 A_TakeInventory("CutterFlag",999)
+BATT D 0 A_Stop
+BATT D 0 ThrustThingZ(0,0,0,0)
+BATT D 30
+Look:
+BATT D 0 A_Stop
+BATT D 0 ThrustThingZ(0,0,0,0)
+BATT D 4 A_LookEx(LOF_NOSOUNDCHECK,0,500,0,360,"See")
+loop
+See:
+BATT D 0 A_ChangeFlag("INVULNERABLE",0)
+BATT E 0 A_ChangeFlag("FLOAT",1)
+BATT EFG 4 A_FaceTarget
+Chase:
+BATT C 0 A_JumpIfInTargetInventory("EnemyContactDamagerProtect",1,"SpawnLoopWait")
+BATT C 2 A_Chase("")
+BATT C 0 A_JumpIfInTargetInventory("EnemyContactDamagerProtect",1,"SpawnLoopWait")
+BATT C 2 A_Chase("")
+BATT A 0 A_JumpIfInTargetInventory("EnemyContactDamagerProtect",1,"SpawnLoopWait")
+BATT A 2 A_Chase("")
+BATT A 0 A_JumpIfInTargetInventory("EnemyContactDamagerProtect",1,"SpawnLoopWait")
+BATT A 2 A_Chase("")
+BATT B 0 A_JumpIfInTargetInventory("EnemyContactDamagerProtect",1,"SpawnLoopWait")
+BATT B 2 A_Chase("")
+BATT B 0 A_JumpIfInTargetInventory("EnemyContactDamagerProtect",1,"SpawnLoopWait")
+BATT B 2 A_Chase("")
+BATT A 0 A_GiveInventory("CutterFlag",1)
+BATT A 0 A_JumpIfInventory("CutterFlag",60,"SpawnLoop")
+Goto Chase
+Pain.PunctureNeedle:
+TNT1 A 0 A_Stop
+TNT1 A 0 A_Pain
+BATT A 30 A_SpawnItemEx("ShockFX",4,0,32)
+Goto Waiting
+Death:
+BATT A 0 A_Pain
+BATT A 0 A_Fall
+BATT A 0 A_Stop
+BATT A 0 A_ChangeFlag("NOGRAVITY",1)
+MMFX BCDE 3
+stop
+}
+}
+
 actor Pipi : GenericRobot 30051
 {
 //$Category MM8BDM-Enemies
@@ -257,10 +357,13 @@ ATOC C 0 A_ChangeVelocity(9, vely, velz, CVF_REPLACE)
 ATOC C 1 A_JumpIf(Floorz-z==0,"Look")
 loop
 Death:
-CRAZ A 0 A_Pain
-CRAZ A 0 A_Fall
-CRAZ A 0 A_SpawnItem("EnemyDeathFX",0,32)
+ATOC C 0 A_Pain
+ATOC C 0 A_Fall
+ATOC C 0 A_SpawnItem("EnemyDeathFX",0,32)
 TNT1 A 1
+stop
+Despawn:
+ATOC C 0
 stop
 }
 }
@@ -278,6 +381,7 @@ speed 0
 maxstepheight 50
 painsound "misc/devilpain"
 +DROPOFF
++SLIDESONWALLS
 +LOOKALLAROUND
 States
 {
