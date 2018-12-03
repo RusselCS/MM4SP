@@ -20,6 +20,7 @@ BATT A 0 A_SpawnItemEX("BasicEnemyContactDamager")
 goto SpawnLoop
 SpawnLoopWait:
 BATT C 0 A_GiveInventory("CutterFlag",20)
+goto SpawnLoop
 SpawnLoop:
 BATT C 0 A_ClearTarget
 BATT C 0 A_ChangeFlag("FLOAT",0)
@@ -68,17 +69,41 @@ BATT D 0 A_ChangeFlag("INVULNERABLE",0)
 BATT E 0 A_ChangeFlag("FLOAT",1)
 BATT EFG 4 A_FaceTarget
 Chase:
-BATT C 0 A_JumpIfInTargetInventory("EnemyContactDamagerProtect",1,"SpawnLoopWait")
+BATT C 0 A_JumpIfInTargetInventory("EnemyContactDamagerProtect",1,"SpawnLoopCheck1")
+goto Chase2
+SpawnLoopCheck1:
+BATT C 0 A_JumpIfCloser(64,"SpawnLoopWait")
+Chase2:
 BATT C 2 A_Chase("")
-BATT C 0 A_JumpIfInTargetInventory("EnemyContactDamagerProtect",1,"SpawnLoopWait")
+BATT C 0 A_JumpIfInTargetInventory("EnemyContactDamagerProtect",1,"SpawnLoopCheck2")
+goto Chase3
+SpawnLoopCheck2:
+BATT C 0 A_JumpIfCloser(64,"SpawnLoopWait")
+Chase3:
 BATT C 2 A_Chase("")
-BATT A 0 A_JumpIfInTargetInventory("EnemyContactDamagerProtect",1,"SpawnLoopWait")
+BATT A 0 A_JumpIfInTargetInventory("EnemyContactDamagerProtect",1,"SpawnLoopCheck3")
+goto Chase4
+SpawnLoopCheck3:
+BATT C 0 A_JumpIfCloser(64,"SpawnLoopWait")
+Chase4:
 BATT A 2 A_Chase("")
-BATT A 0 A_JumpIfInTargetInventory("EnemyContactDamagerProtect",1,"SpawnLoopWait")
+BATT A 0 A_JumpIfInTargetInventory("EnemyContactDamagerProtect",1,"SpawnLoopCheck4")
+goto Chase5
+SpawnLoopCheck4:
+BATT C 0 A_JumpIfCloser(64,"SpawnLoopWait")
+Chase5:
 BATT A 2 A_Chase("")
-BATT B 0 A_JumpIfInTargetInventory("EnemyContactDamagerProtect",1,"SpawnLoopWait")
+BATT B 0 A_JumpIfInTargetInventory("EnemyContactDamagerProtect",1,"SpawnLoopCheck5")
+goto Chase6
+SpawnLoopCheck5:
+BATT C 0 A_JumpIfCloser(64,"SpawnLoopWait")
+Chase6:
 BATT B 2 A_Chase("")
-BATT B 0 A_JumpIfInTargetInventory("EnemyContactDamagerProtect",1,"SpawnLoopWait")
+BATT B 0 A_JumpIfInTargetInventory("EnemyContactDamagerProtect",1,"SpawnLoopCheck6")
+goto Chase7
+SpawnLoopCheck6:
+BATT C 0 A_JumpIfCloser(64,"SpawnLoopWait")
+Chase7:
 BATT B 2 A_Chase("")
 BATT A 0 A_GiveInventory("CutterFlag",1)
 BATT A 0 A_JumpIfInventory("CutterFlag",60,"SpawnLoop")
@@ -226,62 +251,58 @@ stop
 }
 }
 
-actor Robbit : GenericRobot 30047
+actor SP_Robbit : GenericRobot 30047
 {
 //$Category MM8BDM-Enemies
 Health 50
 Height 64
-Radius 64
+Radius 48
+speed 0
 Obituary "%o was gnawed on by a Robbit."
 maxstepheight 50
 +DROPOFF
++SLIDESONWALLS
 +LOOKALLAROUND
 States
 {
 Spawn:
 TNT1 A 0
-TNT1 A 0 ACS_ExecuteAlways(400,0)
+TNT1 A 0 A_JumpIfInventory("HealthScaled",1,"Look")
+TNT1 A 0 ACS_NamedExecuteAlways("4SP_EnemyStart",0)
+TNT1 A 0 A_GiveInventory("DamageCounter",20)
+TNT1 A 0 A_SpawnItemEX("BasicEnemyContactDamager")
 Look:
-ROBB A 0 A_ChangeFlag("SOLID",1)
-ROBB A 6 A_LookEx(LOF_NOSOUNDCHECK,0,2000,0,360,"See")
+ROBB B 6 A_LookEx(LOF_NOSOUNDCHECK,0,2000,0,360,"See")
 loop
 See:
-ROBB A 20 A_FaceTarget
-ROBB A 12 A_FaceTarget 
-ROBB A 0 A_Recoil(-15)
-ROBB A 1 A_FaceTarget
-ROBB A 10 ThrustThingZ(0,50,0,0)
+ROBB B 20 A_FaceTarget
+ROBB C 0 ThrustThingZ(0,60,0,0)
+ROBB C 1 ThrustThing(angle*256/360,4,0,0)
 Goto Leaping
 Leaping:
-ROBB B 0 A_SpawnItemEx("RobbitStomp")
-ROBB B 1 A_FaceTarget
-ROBB B 1 A_JumpIf(Floorz-z==0,"Land")
+ROBB C 0 A_FaceTarget
+ROBB C 1 A_JumpIf(Floorz-z==0,"Land")
 loop
 Land:
-ROBB A 1 A_FaceTarget
-ROBB A 4 A_Stop
-ROBB AAAAA 6 A_FaceTarget
-ROBB A 0 A_FaceTarget
-ROBB A 20 A_CustomMissile("RobbitCarrot",32,8,random(-4,4))
-ROBB A 0 A_FaceTarget
-ROBB A 20 A_CustomMissile("RobbitCarrot",32,8,random(-4,4))
-ROBB A 0 A_FaceTarget
-ROBB A 20 A_CustomMissile("RobbitCarrot",32,8,random(-4,4))
-ROBB A 2 A_ClearTarget
+ROBB A 0 A_Stop
+ROBB AAA 0 A_Chase
+ROBB A 5 A_FaceTarget
+ROBB B 5
+ROBB B 0 A_PlaySoundEx("misc/devilfire","Voice")
+ROBB B 35 A_CustomMissile("RobbitCarrot",32,0,random(-4,4))
+ROBB B 0 A_FaceTarget
+ROBB B 0 A_PlaySoundEx("misc/devilfire","Voice")
+ROBB B 35 A_CustomMissile("RobbitCarrot",32,0,random(-4,4))
+ROBB B 0 A_FaceTarget
+ROBB B 0 A_PlaySoundEx("misc/devilfire","Voice")
+ROBB B 35 A_CustomMissile("RobbitCarrot",32,0,random(-4,4))
+ROBB B 0 A_ClearTarget
 Goto Look
-}
-}
-
-actor RobbitStomp
-{
--SOLID
-PROJECTILE
-damagetype "Enemy"
-States
-{
-Spawn:
-TNT1 A 0
-TNT1 A 1 A_Explode(20,76,0)
+Death:
+ROBB B 0 A_Pain
+ROBB B 0 A_Fall
+ROBB B 0 A_SpawnItem("EnemyDeathFX",0,32)
+TNT1 A 1
 stop
 }
 }
@@ -289,17 +310,17 @@ stop
 actor RobbitCarrot
 {
 PROJECTILE
-Damage (15)
+Damage (7)
 Obituary "%o was pelted by a Robbit."
 damagetype "Enemy"
 Speed 20
 scale 2.5
-Height 16
-Radius 16
+Height 8
+Radius 8
 States
 {
 Spawn:
-RCAR A 1
+ROBB D 1
 loop
 }
 }
@@ -379,7 +400,6 @@ Obituary "%o was jumped on by a Monking."
 +NOGRAVITY
 speed 0
 maxstepheight 50
-painsound "misc/devilpain"
 +DROPOFF
 +SLIDESONWALLS
 +LOOKALLAROUND
@@ -416,7 +436,7 @@ MONK D 1 ThrustThing(angle*256/360,5,0,0)
 TNT1 A 0 A_ChangeFlag("NOGRAVITY",0)
 Goto Leaping
 Leaping:
-MONK D 1 A_FaceTarget
+MONK D 0 A_FaceTarget
 MONK D 1 A_JumpIf(Floorz-z==0,"Land")
 loop
 Land: 
@@ -437,26 +457,31 @@ stop
 }
 }
 
-actor HotDog : GenericRobot 30050
+actor SP_HotDog : GenericRobot 30050
 {
 //$Category MM8BDM-Enemies
 Health 200
 Height 128
-+DONTRIP
+//+DONTRIP
 Radius 128
 Obituary "%o was burnt to ashes by a Hotdog."
-maxstepheight 50
-+LOOKALLAROUND
 States
 {
 Spawn:
 TNT1 A 0
-TNT1 A 0 ACS_ExecuteAlways(400,0)
+TNT1 A 0 ACS_NamedExecuteAlways("4SP_EnemyStart",0)
 Look:
-FRIN ABCD 3 A_LookEx(LOF_NOSOUNDCHECK,0,2500,0,360,"See")
+FRIN A 0 A_ClearTarget
+FRIN ABABACDACD 3 A_LookEx(LOF_NOSOUNDCHECK,0,2500,0,180,"See")
 loop
 See:
-FRIN ABCD 3 A_FaceTarget
+FRIN A 0 A_Jump(256,"Wag","Paw")
+Wag:
+FRIN ABABABAB 5
+goto Attack
+Paw:
+FRIN ACDACD 7
+goto Attack
 Attack:
 FRIN E 1 A_Jump(85,"AttackS")
 FRIN E 1 A_Jump(85,"AttackM")
@@ -464,48 +489,122 @@ FRIN E 1 A_Jump(85,"AttackL")
 loop
 AttackS:
 FRIN E 0 A_PlaySoundEx("weapon/atomicfire","Voice")
-FRIN E 1 A_SpawnItemEx("FrienderFire",0,0,10)
-FRIN E 1 A_SpawnItemEx("FrienderFire",0,0,10)
-FRIN E 1 A_SpawnItemEx("FrienderFire",0,0,10)
-FRIN E 1 A_SpawnItemEx("FrienderFire",0,0,10)
-FRIN E 15
+FRIN E 3 A_CustomMissile("FrienderFireSpawnS",30,0,0,CMF_TRACKOWNER|CMF_ABSOLUTEPITCH,0)
+FRIN E 7
 Goto Look
 AttackM:
 FRIN E 0 A_PlaySoundEx("weapon/atomicfire","Voice")
-FRIN E 1 A_SpawnItemEx("FrienderFire",0,0,10)
-FRIN E 1 A_SpawnItemEx("FrienderFire",0,0,10)
-FRIN E 1 A_SpawnItemEx("FrienderFire",0,0,10)
-FRIN E 1 A_SpawnItemEx("FrienderFire",0,0,10)
-FRIN E 1 A_SpawnItemEx("FrienderFire",0,0,10)
-FRIN E 1 A_SpawnItemEx("FrienderFire",0,0,10)
-FRIN E 1 A_SpawnItemEx("FrienderFire",0,0,10)
-FRIN E 1 A_SpawnItemEx("FrienderFire",0,0,10)
-FRIN E 15
+FRIN E 6 A_CustomMissile("FrienderFireSpawnM",30,0,0,CMF_TRACKOWNER|CMF_ABSOLUTEPITCH,0)
+FRIN E 7
 Goto Look
 AttackL:
 FRIN E 0 A_PlaySoundEx("weapon/atomicfire","Voice")
-FRIN E 1 A_SpawnItemEx("FrienderFire",0,0,10)
-FRIN E 1 A_SpawnItemEx("FrienderFire",0,0,10)
-FRIN E 1 A_SpawnItemEx("FrienderFire",0,0,10)
-FRIN E 1 A_SpawnItemEx("FrienderFire",0,0,10)
-FRIN E 1 A_SpawnItemEx("FrienderFire",0,0,10)
-FRIN E 1 A_SpawnItemEx("FrienderFire",0,0,10)
-FRIN E 1 A_SpawnItemEx("FrienderFire",0,0,10)
-FRIN E 1 A_SpawnItemEx("FrienderFire",0,0,10)
-FRIN E 1 A_SpawnItemEx("FrienderFire",0,0,10)
-FRIN E 1 A_SpawnItemEx("FrienderFire",0,0,10)
-FRIN E 1 A_SpawnItemEx("FrienderFire",0,0,10)
-FRIN E 1 A_SpawnItemEx("FrienderFire",0,0,10)
-FRIN E 1 A_SpawnItemEx("FrienderFire",0,0,10)
-FRIN E 15
+FRIN E 9 A_CustomMissile("FrienderFireSpawnL",30,0,0,CMF_TRACKOWNER|CMF_ABSOLUTEPITCH,0)
+FRIN E 7
 Goto Look
 Death:
 FRIN E 0 A_ChangeFlag("NOGRAVITY",1)
 FRIN E 0 A_Stop
-FRIN E 0 A_FaceTarget
+FRIN E 0 A_Fall
 FRIN EEEEEEEEEEEEEEEEEEEE 5 A_SpawnItemEx("BigEnemyExplode",random(-128,128),random(-128,128),random(0,128))
 NAPA A 0 A_PlaySoundEx("weapon/drillexplode", "Voice",0,1)
 NAPA EFGHIJKLMNOPQRS 2
+stop
+}
+}
+
+actor FrienderFireSpawnS
+{
+PROJECTILE
+damagetype "Enemy"
+scale 2.5
+Height 8
+Radius 8
+speed 1
++NOINTERACTION
++NOCLIP
++RIPPER
+Damage (0)
+States
+{
+Spawn:
+TNT1 A 0
+TNT1 A 0 A_SpawnItemEx("FrienderFire",20,0,0,30,0,0,-7)
+TNT1 A 0 A_SpawnItemEx("FrienderFire",20,0,0,30,0,0,7)
+TNT1 A 1 A_SpawnItemEx("FrienderFire",20,0,0,30)
+TNT1 A 0 A_SpawnItemEx("FrienderFire",20,0,0,30,0,0,-7)
+TNT1 A 0 A_SpawnItemEx("FrienderFire",20,0,0,30,0,0,7)
+TNT1 A 1 A_SpawnItemEx("FrienderFire",20,0,0,30)
+TNT1 A 0 A_SpawnItemEx("FrienderFire",20,0,0,30,0,0,-7)
+TNT1 A 0 A_SpawnItemEx("FrienderFire",20,0,0,30,0,0,7)
+TNT1 A 1 A_SpawnItemEx("FrienderFire",20,0,0,30)
+stop
+}
+}
+
+actor FrienderFireSpawnM : FrienderFireSpawnS
+{
+States
+{
+Spawn: 
+Spawn:
+TNT1 A 0
+TNT1 A 0 A_SpawnItemEx("FrienderFire",20,0,0,30,0,0,-7)
+TNT1 A 0 A_SpawnItemEx("FrienderFire",20,0,0,30,0,0,7)
+TNT1 A 1 A_SpawnItemEx("FrienderFire",20,0,0,30)
+TNT1 A 0 A_SpawnItemEx("FrienderFire",20,0,0,30,0,0,-7)
+TNT1 A 0 A_SpawnItemEx("FrienderFire",20,0,0,30,0,0,7)
+TNT1 A 1 A_SpawnItemEx("FrienderFire",20,0,0,30)
+TNT1 A 0 A_SpawnItemEx("FrienderFire",20,0,0,30,0,0,-7)
+TNT1 A 0 A_SpawnItemEx("FrienderFire",20,0,0,30,0,0,7)
+TNT1 A 1 A_SpawnItemEx("FrienderFire",20,0,0,30)
+TNT1 A 0 A_SpawnItemEx("FrienderFire",20,0,0,30,0,0,-7)
+TNT1 A 0 A_SpawnItemEx("FrienderFire",20,0,0,30,0,0,7)
+TNT1 A 1 A_SpawnItemEx("FrienderFire",20,0,0,30)
+TNT1 A 0 A_SpawnItemEx("FrienderFire",20,0,0,30,0,0,-7)
+TNT1 A 0 A_SpawnItemEx("FrienderFire",20,0,0,30,0,0,7)
+TNT1 A 1 A_SpawnItemEx("FrienderFire",20,0,0,30)
+TNT1 A 0 A_SpawnItemEx("FrienderFire",20,0,0,30,0,0,-7)
+TNT1 A 0 A_SpawnItemEx("FrienderFire",20,0,0,30,0,0,7)
+TNT1 A 1 A_SpawnItemEx("FrienderFire",20,0,0,30)
+stop
+}
+}
+
+actor FrienderFireSpawnL : FrienderFireSpawnS
+{
+States
+{
+Spawn: 
+Spawn:
+TNT1 A 0
+TNT1 A 0 A_SpawnItemEx("FrienderFire",20,0,0,30,0,0,-7)
+TNT1 A 0 A_SpawnItemEx("FrienderFire",20,0,0,30,0,0,7)
+TNT1 A 1 A_SpawnItemEx("FrienderFire",20,0,0,30)
+TNT1 A 0 A_SpawnItemEx("FrienderFire",20,0,0,30,0,0,-7)
+TNT1 A 0 A_SpawnItemEx("FrienderFire",20,0,0,30,0,0,7)
+TNT1 A 1 A_SpawnItemEx("FrienderFire",20,0,0,30)
+TNT1 A 0 A_SpawnItemEx("FrienderFire",20,0,0,30,0,0,-7)
+TNT1 A 0 A_SpawnItemEx("FrienderFire",20,0,0,30,0,0,7)
+TNT1 A 1 A_SpawnItemEx("FrienderFire",20,0,0,30)
+TNT1 A 0 A_SpawnItemEx("FrienderFire",20,0,0,30,0,0,-7)
+TNT1 A 0 A_SpawnItemEx("FrienderFire",20,0,0,30,0,0,7)
+TNT1 A 1 A_SpawnItemEx("FrienderFire",20,0,0,30)
+TNT1 A 0 A_SpawnItemEx("FrienderFire",20,0,0,30,0,0,-7)
+TNT1 A 0 A_SpawnItemEx("FrienderFire",20,0,0,30,0,0,7)
+TNT1 A 1 A_SpawnItemEx("FrienderFire",20,0,0,30)
+TNT1 A 0 A_SpawnItemEx("FrienderFire",20,0,0,30,0,0,-7)
+TNT1 A 0 A_SpawnItemEx("FrienderFire",20,0,0,30,0,0,7)
+TNT1 A 1 A_SpawnItemEx("FrienderFire",20,0,0,30)
+TNT1 A 0 A_SpawnItemEx("FrienderFire",20,0,0,30,0,0,-7)
+TNT1 A 0 A_SpawnItemEx("FrienderFire",20,0,0,30,0,0,7)
+TNT1 A 1 A_SpawnItemEx("FrienderFire",20,0,0,30)
+TNT1 A 0 A_SpawnItemEx("FrienderFire",20,0,0,30,0,0,-7)
+TNT1 A 0 A_SpawnItemEx("FrienderFire",20,0,0,30,0,0,7)
+TNT1 A 1 A_SpawnItemEx("FrienderFire",20,0,0,30)
+TNT1 A 0 A_SpawnItemEx("FrienderFire",20,0,0,30,0,0,-7)
+TNT1 A 0 A_SpawnItemEx("FrienderFire",20,0,0,30,0,0,7)
+TNT1 A 1 A_SpawnItemEx("FrienderFire",20,0,0,30)
 stop
 }
 }
@@ -514,19 +613,37 @@ actor FrienderFire
 {
 PROJECTILE
 damagetype "Enemy"
--SOLID
 scale 2.5
 Height 8
 Radius 8
+speed 30
 Damage (2)
 States
 {
 Spawn:
 TNT1 A 0
-FRIN FGFGFGFGFGFG 1 ThrustThing(angle*256/360,3,0,0)
-TNT1 A 0 A_ChangeFlag("NOGRAVITY",1)
-FRIN FG 1 ThrustThingZ(0,20,0,0)
-FRIN FGFGFGFGFGFG 1
-stop
+FRIN FFFFF 1 ThrustThingZ(0,4,1,0)
+EndLoop:
+FRIN G 0 A_ScaleVelocity(0.95)
+FRIN G 1 ThrustThingZ(0,6,0,1)
+FRIN G 0 A_ScaleVelocity(0.95)
+FRIN G 1 ThrustThingZ(0,6,0,1)
+FRIN G 0 A_ScaleVelocity(0.95)
+FRIN G 1 ThrustThingZ(0,6,0,1)
+FRIN G 0 A_ScaleVelocity(0.95)
+FRIN G 1 ThrustThingZ(0,6,0,1)
+FRIN G 0 A_ScaleVelocity(0.95)
+FRIN G 1 ThrustThingZ(0,6,0,1)
+FRIN F 0 A_ScaleVelocity(0.95)
+FRIN F 1 ThrustThingZ(0,6,0,1)
+FRIN F 0 A_ScaleVelocity(0.95)
+FRIN F 1 ThrustThingZ(0,6,0,1)
+FRIN F 0 A_ScaleVelocity(0.95)
+FRIN F 1 ThrustThingZ(0,6,0,1)
+FRIN F 0 A_ScaleVelocity(0.95)
+FRIN F 1 ThrustThingZ(0,6,0,1)
+FRIN F 0 A_ScaleVelocity(0.95)
+FRIN F 1 ThrustThingZ(0,6,0,1)
+loop
 }
 }
