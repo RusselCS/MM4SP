@@ -7,6 +7,10 @@ actor Counter : Inventory {
     inventory.maxamount 65535
 }
 
+actor RadiusCounter : Counter {inventory.maxamount 65535}
+actor HeightCounter : Counter {inventory.maxamount 65535}
+actor DamageCounter : Counter {inventory.maxamount 65535}
+
 actor BasicClientside
 {
 	+NOINTERACTION
@@ -17,4 +21,91 @@ actor BasicClientside
 	scale 2.5
 	height 1
 	radius 1
+}
+
+actor GenericRobot
+{
+damagefactor "Buster", 1.0
+damagefactor "Enemy", 0.0
+damagefactor "EnemyContact", 0.0
+MONSTER
+mass 99999999
++NOBLOOD
+painchance 256
+painsound "misc/devilpain"
+scale 2.5
+}
+
+actor EnemyDeathFX
+{
+Scale 2.5
++NOGRAVITY
+-SOLID
+States
+{
+Spawn:
+MMFX BCDE 3
+stop
+}
+}
+
+actor BigEnemyExplode
+{
++NOGRAVITY
++NOINTERACTION
+-SOLID
+scale 2.5
++CLIENTSIDEONLY
+states
+{
+Spawn:
+NAPA A 0 
+NAPA A 0 A_PlaySoundEx("weapon/drillexplode", "Weapon")
+NAPA EFGHIJKLMNOPQRS 2
+stop
+}
+}
+
+actor HealthScaled : Inventory
+{
+inventory.amount 1
+inventory.maxamount 1
+}
+
+actor BasicEnemyContactDamager
+{
+damagetype "EnemyContact"
++DONTSPLASH
++NOGRAVITY
++NOTARGETSWITCH
++MISSILE
++NOINTERACTION
++NOCLIP
++DONTBLAST
+var int user_R;
+var int user_H;
+var int user_D;
+States
+{
+Spawn:
+TNT1 A 0
+TNT1 A 0 A_SetUserVar("user_R",CallACS("4SP_CountInv",1,1))
+TNT1 A 0 A_SetUserVar("user_H",CallACS("4SP_CountInv",2,1))
+TNT1 A 0 A_SetUserVar("user_D",CallACS("4SP_CountInv",3,1))
+TNT1 A 1 A_Warp(AAPTR_TARGET,0,0,user_H/2,0,WARPF_NOCHECKPOSITION,"Continue")
+stop
+Continue:
+TNT1 A 0 A_SetUserVar("user_R",ACS_NamedExecuteWithResult("4SP_CountInv",1,1))
+TNT1 A 0 A_SetUserVar("user_H",ACS_NamedExecuteWithResult("4SP_CountInv",2,1))
+TNT1 A 0 A_SetUserVar("user_D",ACS_NamedExecuteWithResult("4SP_CountInv",3,1))
+TNT1 A 1 A_Explode(user_D,user_R+10,0,0,user_R+10)
+TNT1 A 1 A_Warp(AAPTR_TARGET,0,0,user_H/2,0,WARPF_NOCHECKPOSITION,"Continue")
+stop
+}
+}
+
+actor EnemyContactDamagerProtect : PowerProtection
+{
+Powerup.Duration 10
+damagefactor "EnemyContact", 0.0
 }

@@ -2,15 +2,76 @@
 
 #include "zcommon.acs"
 
+// [Trill] Scripts ported and slightly modified from MMSP-Basic
+//
+script "4SP_EnemyStart" (void)
+{
+Delay(1);
+ACS_NamedExecuteAlways("4SP_EnemyPain",0);
+GiveInventory("RadiusCounter",GetActorProperty(0,APROP_Radius)/65536);
+GiveInventory("HeightCounter",GetActorProperty(0,APROP_Height)/65536);
+if(CheckInventory("HealthScaled")==1){terminate;}
+
+SetActorProperty(0,APROP_Health,GetActorProperty (0,APROP_Health) + (GetActorProperty (0,APROP_Health)/4) * PlayerCount());
+GiveInventory("HealthScaled",1);
+}
+
+Script "4SP_EnemyPain" (void) //CLIENTSIDE
+{
+    if(CheckInventory("BoostFlag")>0){terminate;} // Do not run twice for one monster
+    int HP = GetActorProperty(0, APROP_Health);
+    GiveInventory("BoostFlag", 1);
+    
+	
+    while(GetActorProperty(0, APROP_Health)>0){
+	
+        if(HP != GetActorProperty(0, APROP_Health)){
+        PlayActorSound(0, SOUND_Pain, CHAN_BODY, 1.0, false, ATTN_NORM);
+        SetActorProperty(0, APROP_RenderStyle, STYLE_None);
+        Delay(1);
+        SetActorProperty(0, APROP_RenderStyle, STYLE_Normal);
+        HP = GetActorProperty(0, APROP_Health);
+		}
+		
+    Delay(4);
+    }
+}
+
 // [Russel] Simple inventory count script.
+// [Trill] Added onto it to include pointer selection.
 // 
-script "4SP_CountInv" (int which) {
+script "4SP_CountInv" (int which, int pointer)
+{
+
+    switch(pointer) {
+		default:
+			break;
+		case 1:
+			SetActivator(0,AAPTR_TARGET);
+			break;
+		case 2:
+			SetActivator(0,AAPTR_TRACER);
+			break;
+		case 3:
+			SetActivator(0,AAPTR_MASTER);
+			break;
+	}
 
     switch(which) {
         case 0: // Ring Man
             SetResultValue(CheckInventory("RingManAmmo"));
             break;
+        Case 1: // Enemy Radius
+			SetResultValue(CheckInventory("RadiusCounter"));
+			break;
+		Case 2: // Enemy Height
+			SetResultValue(CheckInventory("HeightCounter"));
+			break;
+		Case 3: // Enemy Damage
+			SetResultValue(CheckInventory("DamageCounter"));
+			break;    
     }
+
 }
 
 // [Russel] Check Alive script. Nicked from CBM.

@@ -5,6 +5,7 @@
 actor ClassBaseSP : PlayerPawn
 {
 	player.displayname "Copy Robot"
+	player.soundclass "megaman"
 	player.damagescreencolor "yellow"
 	player.soundclass "megaman"
 	player.maxhealth 100
@@ -42,6 +43,9 @@ actor ClassBaseSP : PlayerPawn
 	Pain.BotSight:
 		"----" B 5 HealThing(1)
 		Goto Spawn+2
+	Pain.EnemyContact:
+		"----" H 0 A_GiveInventory("EnemyContactDamagerProtect", 1)
+		Goto Pain+1	
 	
 	Pain:
 		"----" H 0 A_GiveInventory("PainStun",1)
