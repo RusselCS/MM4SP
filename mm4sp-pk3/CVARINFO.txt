@@ -1,0 +1,6 @@
+server bool SV_CC_AllWeapons = true;
+
+server bool SV_CC_Ring_Wood_Wep = false;
+server bool SV_CC_Ring_Spark_Wep = false;
+server bool SV_CC_Ring_Napalm_Wep = false;
+server bool SV_CC_Ring_Yamato_Wep = false;

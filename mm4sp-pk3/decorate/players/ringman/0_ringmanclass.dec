@@ -1,4 +1,4 @@
-actor Ringman : ClassBase
+actor RingManSP : ClassBaseSP
 {
 player.displayname "ringman"
 

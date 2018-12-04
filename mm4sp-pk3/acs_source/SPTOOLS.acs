@@ -1,4 +1,4 @@
-#library "SPTOOLS"
+#library "SPTOOLSL"
 
 #include "zcommon.acs"
 
@@ -13,9 +13,89 @@ script "4SP_CountInv" (int which) {
     }
 }
 
+// [Russel] Check Alive script. Nicked from CBM.
+//
 script "4SP_CheckAlive" (void) {
     SetActivatorToTarget(0);
 	if(PlayerNumber() == -1 || CheckInventory("IsDead") || !PlayerInGame(PlayerNumber())){
 		SetResultValue(0);
 	}
+}
+
+// [Russel] The big bad weapon script. Gives weapons based on completed bosses and selected class.
+// CVARS: SV_CC_[player]_[boss]_WEP
+// WEPS: [player]_[boss]WEP
+//
+#define MAX_BOSSES 4
+str bossList[MAX_BOSSES][2] = {
+    {"WoodManSP", "Wood"},
+    {"SparkManSP", "Spark"},
+    {"NapalmManSP", "Napalm"},
+    {"YamatoManSP", "Yamato"}
+};
+
+#define MAX_PLAYERS 1
+str playerList[MAX_PLAYERS][2] = {
+    {"RingManSP", "Ring"}
+};
+
+script "4SP_GiveWeapons" ENTER {
+
+    str player = getActorClass(0);
+
+    for(int i = 0; i < MAX_BOSSES; i++) {
+        // str cvar = strParam(s:"SV_CC_", s:player, s:"_", s:bossList[i], s:"_Wep");
+        // str wep = strParam(s:player, s:"_", s:bossList[i], s:"Wep");
+        // if(getCvar(cvar) > 0) {
+        //     GiveInventory(wep, 1);
+        // }
+    }
+}
+
+script "4SP_GiveWeapons_Respawn" RESPAWN {
+    ACS_NamedExecuteAlways("4SP_GiveWeapons", 0);
+}
+
+script "4SP_SetWeaponGiven" (int debug) {
+
+    str boss;
+    str cvar;
+    if(debug == 0) {
+        boss = getActorClass(0);
+    } else {
+        boss = bossList[debug-1][1];
+    }
+    str player = getActorClass(ACS_ExecuteWithResult(257)); // Player who killed the boss
+
+    if(GetCVar("SV_CC_AllWeapons")) {
+        for(int i = 0; i < MAX_PLAYERS; i++) {
+            //cvar = strParam(s:"SV_CC_", s:playerList[i], s:"_", s:boss, s:"_Wep");
+            setCVar(cvar, true);
+        }
+    } else {
+        //cvar = strParam(s:"SV_CC_", s:player, s:"_", s:boss, s:"_Wep");
+        setCVar(cvar, true);
+    }
+}
+
+function str getPrefix(str name, bool which) {
+
+    str res = "none";
+
+    if(!which) { // players
+
+        for(int i = 0; i < MAX_PLAYERS; i++) {
+            if(strcmp(playerList[i][0], name)==0) {
+                res = playerList[i][1];
+            }
+        }
+
+    } else { // bosses
+
+        for(int j = 0; j < MAX_PLAYERS; j++) {
+            
+        }
+    }
+
+    return res;
 }

@@ -2,10 +2,11 @@
 // Credit to Jaxof7 and Celebi
 // Since weaknesses do not exist in Napkin, this can be ported as ClassBase
 
-actor ClassBase : PlayerPawn
+actor ClassBaseSP : PlayerPawn
 {
 	player.displayname "Copy Robot"
 	player.damagescreencolor "yellow"
+	player.soundclass "megaman"
 	player.maxhealth 100
 	player.forwardmove 0.8, 0.8
 	player.sidemove 0.78, 0.78
@@ -19,6 +20,7 @@ actor ClassBase : PlayerPawn
 	gravity 0.8
 	scale 2.5
 	+QUICKTORETALIATE
+	+NOSKIN
 	Species "Megaman"
 	Player.MaxSkinSizeFactor 0, 0
 

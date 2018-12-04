@@ -16,4 +16,5 @@ actor GitTest
 // CLASSES (followed by weapons)
 #include "decorate/players/ringman/0_ringmanclass.dec"
 #include "decorate/players/ringman/1_ringboomerang.dec"
+#include "decorate/players/ringman/2_woodboomerang.dec"
 
