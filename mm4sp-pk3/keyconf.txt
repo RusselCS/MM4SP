@@ -1,2 +1,2 @@
 clearplayerclasses
-addplayerclass Ringman
+addplayerclass RingmanSP

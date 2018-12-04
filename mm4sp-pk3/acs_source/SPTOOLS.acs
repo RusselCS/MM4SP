@@ -102,14 +102,14 @@ str playerList[MAX_PLAYERS][2] = {
 
 script "4SP_GiveWeapons" ENTER {
 
-    str player = getActorClass(0);
+    str player = getPrefix(getActorClass(0), 0);
 
     for(int i = 0; i < MAX_BOSSES; i++) {
-        // str cvar = strParam(s:"SV_CC_", s:player, s:"_", s:bossList[i], s:"_Wep");
-        // str wep = strParam(s:player, s:"_", s:bossList[i], s:"Wep");
-        // if(getCvar(cvar) > 0) {
-        //     GiveInventory(wep, 1);
-        // }
+        str cvar = strParam(s:"SV_CC_", s:player, s:"_", s:bossList[i][1], s:"_Wep");
+        str wep = strParam(s:player, s:"_", s:bossList[i][1], s:"Wep");
+        if(getCvar(cvar) > 0) {
+            GiveInventory(wep, 1);
+        }
     }
 }
 
@@ -122,19 +122,19 @@ script "4SP_SetWeaponGiven" (int debug) {
     str boss;
     str cvar;
     if(debug == 0) {
-        boss = getActorClass(0);
+        boss = getPrefix(getActorClass(0), 1);
     } else {
         boss = bossList[debug-1][1];
     }
-    str player = getActorClass(ACS_ExecuteWithResult(257)); // Player who killed the boss
+    str player = getPrefix(getActorClass(ACS_ExecuteWithResult(257)), 0); // Player who killed the boss
 
     if(GetCVar("SV_CC_AllWeapons")) {
         for(int i = 0; i < MAX_PLAYERS; i++) {
-            //cvar = strParam(s:"SV_CC_", s:playerList[i], s:"_", s:boss, s:"_Wep");
+            cvar = strParam(s:"SV_CC_", s:playerList[i][1], s:"_", s:boss, s:"_Wep");
             setCVar(cvar, true);
         }
     } else {
-        //cvar = strParam(s:"SV_CC_", s:player, s:"_", s:boss, s:"_Wep");
+        cvar = strParam(s:"SV_CC_", s:player, s:"_", s:boss, s:"_Wep");
         setCVar(cvar, true);
     }
 }
@@ -153,8 +153,10 @@ function str getPrefix(str name, bool which) {
 
     } else { // bosses
 
-        for(int j = 0; j < MAX_PLAYERS; j++) {
-            
+        for(int j = 0; j < MAX_BOSSES; j++) {
+            if(strcmp(bossList[j][0], name)==0) {
+                res = bossList[j][1];
+            }
         }
     }
 

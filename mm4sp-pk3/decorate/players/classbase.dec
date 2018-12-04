@@ -1,6 +1,6 @@
 // A stolen ClassBase0 from core Classes.
 // Credit to Jaxof7 and Celebi
-// Since weaknesses do not exist in Napkin, this can be ported as ClassBase
+// Pulled in all the relevant code from CBM that would allow for a modular classbase.
 
 actor ClassBaseSP : PlayerPawn
 {
@@ -131,6 +131,47 @@ actor ClassBaseSP : PlayerPawn
 		loop
 	}
 }
+
+actor PainStun : CustomInventory
+{
+	+INVENTORY.AUTOACTIVATE
+	States
+	{
+	Use:
+		TNT1 A 0 A_JumpIfInventory("StunArmor", 1, "NoStun")
+		TNT1 A 0 A_JumpIfInventory("SemiStunArmor", 1, "SemiStun")
+		TNT1 A 1 A_JumpIf(true, "FullStun") // So things can just replace the necessary states
+		wait
+	FullStun:
+		TNT1 A 0 A_ScaleVelocity(0.75)
+		stop
+	SemiStun:
+		TNT1 A 0 A_ScaleVelocity(0.875)
+		stop
+	NoStun:
+		TNT1 A 0
+		stop
+	}
+}
+
+actor PainRecoil : PainStun
+{
+	States
+	{
+	Use:
+		TNT1 A 0 A_JumpIfInventory("PainRecoilCooldown",1,"NoStun")
+		TNT1 A 0 A_JumpIfInventory("SemiStunArmor",1,"NoStun")
+		goto Super::Use
+	FullStun:
+		TNT1 A 0 A_Recoil(1)
+		TNT1 A 0 A_GiveInventory("PainRecoilCooldown", 1)
+		stop
+	}
+}
+
+actor StunArmor : Once {}
+actor SemiStunArmor : Once {}
+actor PainRecoilCooldown : Powerup { Powerup.Duration 1 }
 
 actor FallingFlag : Once {}
 actor RiseDeathFlag : Counter {}

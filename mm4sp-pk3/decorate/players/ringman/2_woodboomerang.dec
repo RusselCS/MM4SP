@@ -1,1 +1,1 @@
-actor RingManSP_WoodManSPWep : LeafShieldWep {}
+actor Ring_WoodWep : LeafShieldWep {}
