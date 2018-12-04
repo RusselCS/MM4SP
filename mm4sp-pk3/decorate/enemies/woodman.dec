@@ -336,7 +336,7 @@ Radius 48
 maxstepheight 50
 +DROPOFF
 +LOOKALLAROUND
-Obituary "%o was ran over by an Atomic Chicken."
+Obituary "%o was run over by an Atomic Chicken."
 States
 {
 Spawn:
@@ -464,17 +464,21 @@ Health 200
 Height 128
 //+DONTRIP
 Radius 128
+var int user_angle;
 Obituary "%o was burnt to ashes by a Hotdog."
 States
 {
 Spawn:
 TNT1 A 0
+TNT1 A 0 A_SetUserVar("user_angle",angle)
 TNT1 A 0 ACS_NamedExecuteAlways("4SP_EnemyStart",0)
 Look:
 FRIN A 0 A_ClearTarget
+FRIN A 0 A_SetAngle(user_angle)
 FRIN ABABACDACD 3 A_LookEx(LOF_NOSOUNDCHECK,0,2500,0,180,"See")
 loop
 See:
+FRIN A 0 A_FaceTarget
 FRIN A 0 A_Jump(256,"Wag","Paw")
 Wag:
 FRIN ABABABAB 5
@@ -483,23 +487,73 @@ Paw:
 FRIN ACDACD 7
 goto Attack
 Attack:
-FRIN E 1 A_Jump(85,"AttackS")
-FRIN E 1 A_Jump(85,"AttackM")
-FRIN E 1 A_Jump(85,"AttackL")
-loop
+FRIN E 0 A_FaceTarget
+FRIN E 0 A_Jump(256,"AttackS", "AttackM", "AttackL")
+goto AttackL
 AttackS:
 FRIN E 0 A_PlaySoundEx("weapon/atomicfire","Voice")
-FRIN E 3 A_CustomMissile("FrienderFireSpawnS",30,0,0,CMF_TRACKOWNER|CMF_ABSOLUTEPITCH,0)
+FRIN E 0 A_SpawnItemEX("FrienderFire",20,0,30,30,0,0,-7)
+FRIN E 0 A_SpawnItemEX("FrienderFire",20,0,30,30,0,0,7)
+FRIN E 1 A_SpawnItemEX("FrienderFire",20,0,30,30,0,0,0)
+FRIN E 0 A_SpawnItemEX("FrienderFire",20,0,30,30,0,0,-7)
+FRIN E 0 A_SpawnItemEX("FrienderFire",20,0,30,30,0,0,7)
+FRIN E 1 A_SpawnItemEX("FrienderFire",20,0,30,30,0,0,0)
+FRIN E 0 A_SpawnItemEX("FrienderFire",20,0,30,30,0,0,-7)
+FRIN E 0 A_SpawnItemEX("FrienderFire",20,0,30,30,0,0,7)
+FRIN E 1 A_SpawnItemEX("FrienderFire",20,0,30,30,0,0,0)
 FRIN E 7
 Goto Look
 AttackM:
 FRIN E 0 A_PlaySoundEx("weapon/atomicfire","Voice")
-FRIN E 6 A_CustomMissile("FrienderFireSpawnM",30,0,0,CMF_TRACKOWNER|CMF_ABSOLUTEPITCH,0)
+FRIN E 0 A_SpawnItemEX("FrienderFire",20,0,30,30,0,0,-7)
+FRIN E 0 A_SpawnItemEX("FrienderFire",20,0,30,30,0,0,7)
+FRIN E 1 A_SpawnItemEX("FrienderFire",20,0,30,30,0,0,0)
+FRIN E 0 A_SpawnItemEX("FrienderFire",20,0,30,30,0,0,-7)
+FRIN E 0 A_SpawnItemEX("FrienderFire",20,0,30,30,0,0,7)
+FRIN E 1 A_SpawnItemEX("FrienderFire",20,0,30,30,0,0,0)
+FRIN E 0 A_SpawnItemEX("FrienderFire",20,0,30,30,0,0,-7)
+FRIN E 0 A_SpawnItemEX("FrienderFire",20,0,30,30,0,0,7)
+FRIN E 1 A_SpawnItemEX("FrienderFire",20,0,30,30,0,0,0)
+FRIN E 0 A_SpawnItemEX("FrienderFire",20,0,30,30,0,0,-7)
+FRIN E 0 A_SpawnItemEX("FrienderFire",20,0,30,30,0,0,7)
+FRIN E 1 A_SpawnItemEX("FrienderFire",20,0,30,30,0,0,0)
+FRIN E 0 A_SpawnItemEX("FrienderFire",20,0,30,30,0,0,-7)
+FRIN E 0 A_SpawnItemEX("FrienderFire",20,0,30,30,0,0,7)
+FRIN E 1 A_SpawnItemEX("FrienderFire",20,0,30,30,0,0,0)
+FRIN E 0 A_SpawnItemEX("FrienderFire",20,0,30,30,0,0,-7)
+FRIN E 0 A_SpawnItemEX("FrienderFire",20,0,30,30,0,0,7)
+FRIN E 1 A_SpawnItemEX("FrienderFire",20,0,30,30,0,0,0)
 FRIN E 7
 Goto Look
 AttackL:
 FRIN E 0 A_PlaySoundEx("weapon/atomicfire","Voice")
-FRIN E 9 A_CustomMissile("FrienderFireSpawnL",30,0,0,CMF_TRACKOWNER|CMF_ABSOLUTEPITCH,0)
+FRIN E 0 A_SpawnItemEX("FrienderFire",20,0,30,30,0,0,-7)
+FRIN E 0 A_SpawnItemEX("FrienderFire",20,0,30,30,0,0,7)
+FRIN E 1 A_SpawnItemEX("FrienderFire",20,0,30,30,0,0,0)
+FRIN E 0 A_SpawnItemEX("FrienderFire",20,0,30,30,0,0,-7)
+FRIN E 0 A_SpawnItemEX("FrienderFire",20,0,30,30,0,0,7)
+FRIN E 1 A_SpawnItemEX("FrienderFire",20,0,30,30,0,0,0)
+FRIN E 0 A_SpawnItemEX("FrienderFire",20,0,30,30,0,0,-7)
+FRIN E 0 A_SpawnItemEX("FrienderFire",20,0,30,30,0,0,7)
+FRIN E 1 A_SpawnItemEX("FrienderFire",20,0,30,30,0,0,0)
+FRIN E 0 A_SpawnItemEX("FrienderFire",20,0,30,30,0,0,-7)
+FRIN E 0 A_SpawnItemEX("FrienderFire",20,0,30,30,0,0,7)
+FRIN E 1 A_SpawnItemEX("FrienderFire",20,0,30,30,0,0,0)
+FRIN E 0 A_SpawnItemEX("FrienderFire",20,0,30,30,0,0,-7)
+FRIN E 0 A_SpawnItemEX("FrienderFire",20,0,30,30,0,0,7)
+FRIN E 1 A_SpawnItemEX("FrienderFire",20,0,30,30,0,0,0)
+FRIN E 0 A_SpawnItemEX("FrienderFire",20,0,30,30,0,0,-7)
+FRIN E 0 A_SpawnItemEX("FrienderFire",20,0,30,30,0,0,7)
+FRIN E 1 A_SpawnItemEX("FrienderFire",20,0,30,30,0,0,0)
+FRIN E 0 A_SpawnItemEX("FrienderFire",20,0,30,30,0,0,-7)
+FRIN E 0 A_SpawnItemEX("FrienderFire",20,0,30,30,0,0,7)
+FRIN E 1 A_SpawnItemEX("FrienderFire",20,0,30,30,0,0,0)
+FRIN E 0 A_SpawnItemEX("FrienderFire",20,0,30,30,0,0,-7)
+FRIN E 0 A_SpawnItemEX("FrienderFire",20,0,30,30,0,0,7)
+FRIN E 1 A_SpawnItemEX("FrienderFire",20,0,30,30,0,0,0)
+FRIN E 0 A_SpawnItemEX("FrienderFire",20,0,30,30,0,0,-7)
+FRIN E 0 A_SpawnItemEX("FrienderFire",20,0,30,30,0,0,7)
+FRIN E 1 A_SpawnItemEX("FrienderFire",20,0,30,30,0,0,0)
 FRIN E 7
 Goto Look
 Death:
