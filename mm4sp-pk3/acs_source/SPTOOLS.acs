@@ -43,18 +43,8 @@ Script "4SP_EnemyPain" (void) //CLIENTSIDE
 script "4SP_CountInv" (int which, int pointer)
 {
 
-    switch(pointer) {
-		default:
-			break;
-		case 1:
-			SetActivator(0,AAPTR_TARGET);
-			break;
-		case 2:
-			SetActivator(0,AAPTR_TRACER);
-			break;
-		case 3:
-			SetActivator(0,AAPTR_MASTER);
-			break;
+    if(pointer != 0) {
+		setActivator(0, pointer);
 	}
 
     switch(which) {
