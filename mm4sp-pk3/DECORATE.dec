@@ -11,7 +11,8 @@ actor GitTest
 
 // BASE DEFINITIONS
 #include "decorate/basedefs.dec"
-#include "decorate/players/classbase.dec"
+#include "decorate/players/classbase_a.dec"
+#include "decorate/players/classbasesp.dec"
 
 // CLASSES (followed by weapons)
 #include "decorate/players/ringman/0_ringmanclass.dec"

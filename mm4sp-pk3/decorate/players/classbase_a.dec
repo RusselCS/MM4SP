@@ -2,7 +2,7 @@
 // Credit to Jaxof7 and Celebi
 // Pulled in all the relevant code from CBM that would allow for a modular classbase.
 
-actor ClassBaseSP : PlayerPawn
+actor ClassBaseSP_A : PlayerPawn
 {
 	player.displayname "Copy Robot"
 	player.soundclass "megaman"
