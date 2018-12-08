@@ -1,0 +1,36 @@
+actor DustManSP : ClassBaseSP
+{
+player.displayname "dustman"
+
+player.startitem "DustManWep"
+player.startitem "DustManAmmo", 5
+player.startitem "DustManFlag"
+player.jumpz 12
+player.forwardmove 0.8, 0.8
+player.sidemove 0.78, 0.78
+
+States
+{
+Spawn:
+DUSM A 0
+DUSM B 1
+DUSM A 1
+Goto Spawn+2
+See:
+DUSM BCDE 5
+Goto Spawn
+Missile:
+DUSM F 5
+DUSM G 4
+goto Spawn
+ClassPain:
+DUSM H 0
+goto PainContinue
+DeathFix:
+DUSM H 0
+goto DeathContinue
+ClassDeath:
+DUSM H 1
+goto MegaDeathEnd
+}
+}
