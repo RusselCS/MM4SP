@@ -1,6 +1,7 @@
 actor ClassFlag : Once {}
 
 actor RingManFlag : ClassFlag {}
+actor DustManFlag : ClassFlag {}
 
 actor Counter : Inventory {
     inventory.amount 1
