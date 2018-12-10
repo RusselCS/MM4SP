@@ -32,6 +32,7 @@ MONSTER
 mass 99999999
 +NOBLOOD
 painchance 256
+damagetype "Enemy"
 painsound "misc/devilpain"
 scale 2.5
 }

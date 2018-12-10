@@ -1,6 +1,7 @@
 #library "SPTOOLSL"
 
 #include "zcommon.acs"
+#include "8BDMLIB.acs"
 
 // [Trill] Scripts ported and slightly modified from MMSP-Basic
 //
@@ -62,6 +63,19 @@ script "4SP_CountInv" (int which, int pointer)
 			break;    
     }
 
+}
+
+// [Trill] Distance checker for BombThrown ported from MMSP-Basic
+//
+script "4SP_Distance" (void)
+{
+int dist;
+
+dist = xyDistance(ActivatorTID(),3800);
+
+//PrintBold(i:dist);
+
+SetThingSpecial (3800, 0, dist, 0, 0, 0, 0);
 }
 
 // [Russel] Check Alive script. Nicked from CBM.
