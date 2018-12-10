@@ -5,7 +5,10 @@ player.displayname "ringman"
 player.startitem "RingManWep"
 player.startitem "RingManAmmo", 5
 player.startitem "RingManFlag"
-player.jumpz 13
+player.jumpz 12
+player.forwardmove 0.9, 0.9
+player.sidemove 0.88, 0.88
+
 States
 {
 Spawn:

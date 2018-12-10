@@ -1,0 +1,201 @@
+// Hammer Joe
+// Args0 = Stand still
+actor SP_HammerJoe : GenericRobot 30010
+{
+//$Category MM8BDM-Enemies
+Height 52
+Radius 32
+Obituary "%o was smashed by a Hammer Joe."
+Health 40
+translation "192:192=227:227", "198:198=110:110"
+maxstepheight 50
++LOOKALLAROUND
++MISSILEMORE
+dropitem "WeaponEnergy", 16
+dropitem "SmallHealth", 16
+speed 4
+States
+{
+Spawn:
+TNT1 A 0
+TNT1 A 0 ACS_NamedExecuteAlways("4SP_EnemyStart",0)
+Look:
+HJOE A 0 A_ChangeFlag("INVULNERABLE",0)
+HJOE A 1 A_LookEx(LOF_NOSOUNDCHECK,0,0,0,360,"See")
+Goto Look+1
+See:
+HJOE A 1
+HJOE A 1 A_JumpIf(Args[0]==1, "See2")
+HJOE A 1
+HJOE GGGGGGHHHHHH 1 A_Chase("","Missile")
+HJOE G 0 A_PlaySoundEX("enemy/hammerjoestep","Voice")
+HJOE IIIIIIHHHHHH 1 A_Chase("","Missile")
+HJOE G 0 A_PlaySoundEX("enemy/hammerjoestep","Voice")
+Goto See+3
+See2:
+HJOE A 1
+Goto Missile
+Pain.PunctureNeedle:
+CRAZ A 0 A_Stop
+CRAZ A 0 A_Pain
+HJOE A 30 A_SpawnItemEx("ShockFX",4,0,32)
+Goto Look
+Missile:
+HJOE A 0 A_ChangeFlag("INVULNERABLE",1)
+HJOE A 0 A_FaceTarget
+HJOE A 0 A_SpawnItemEx("HammerJoeSwing")
+HJOE BCDE 3
+HJOE G 0 A_PlaySoundEX("enemy/hammerjoeswing","Voice")
+HJOE A 0 A_FaceTarget
+HJOE A 0 A_SpawnItemEx("HammerJoeSwing")
+HJOE BCDE 3
+HJOE G 0 A_PlaySoundEX("enemy/hammerjoeswing","Voice")
+HJOE A 0 A_FaceTarget
+HJOE A 0 A_SpawnItemEx("HammerJoeSwing")
+HJOE BCDE 3
+HJOE G 0 A_PlaySoundEX("enemy/hammerjoeswing","Voice")
+HJOE A 0 A_FaceTarget
+HJOE A 0 A_SpawnItemEx("HammerJoeSwing")
+HJOE BCDE 3
+HJOE G 0 A_PlaySoundEX("enemy/hammerjoeswing","Voice")
+HJOE A 0 A_FaceTarget
+HJOE A 0 A_SpawnItemEx("HammerJoeSwing")
+HJOE BCDE 2
+HJOE G 0 A_PlaySoundEX("enemy/hammerjoeswing","Voice")
+HJOE A 0 A_FaceTarget
+HJOE A 0 A_SpawnItemEx("HammerJoeSwing")
+HJOE BCDE 2
+HJOE G 0 A_PlaySoundEX("enemy/hammerjoeswing","Voice")
+HJOE A 0 A_FaceTarget
+HJOE A 0 A_SpawnItemEx("HammerJoeSwing")
+HJOE BCDE 2
+HJOE A 0 A_FaceTarget
+HJOE F 0 //A_PlaySoundEx("misc/devilfire","Voice")
+HJOE A 0 A_ChangeFlag("INVULNERABLE",0)
+HJOE G 0 A_PlaySoundEX("enemy/hammerjoethrow","Voice")
+HJOE F 40 A_CustomMissile("HammerJoeBall",18,8,0)
+SNIP A 0 A_JumpIf(Args[0]==1, "Look")
+Goto See
+Death:
+CRAZ A 0 A_Pain
+CRAZ A 0 A_Fall
+CRAZ A 0 A_SpawnItem("EnemyDeathFX",0,32)
+TNT1 A -1
+stop
+}
+}
+
+actor HammerJoeSwing
+{
+PROJECTILE
+Damage (0)
+damagetype "Enemy"
+States
+{
+Spawn:
+TNT1 A 2
+TNT1 A 2 A_Explode(50,90,0)
+stop
+}
+}
+
+actor HammerJoeBall
+{
+PROJECTILE
+damage (20)
+scale 2.5
+damagetype "Enemy"
+Height 8
+Radius 8
+Speed 25
+States
+{
+Spawn:
+HJOE JK 2
+loop
+}
+}
+
+actor SP_GiantSpringer : GenericRobot 30016
+{
+//$Category MM8BDM-Enemies
+Height 52
+Radius 52
+Obituary "%o was shot by a giant springer."
+HitObituary "%o was bounced by a giant springer."
+Health 150
+maxstepheight 50
++LOOKALLAROUND
+dropitem "BigWeaponEnergy", 64
+dropitem "BigHealth", 64
+dropitem "WeaponEnergy", 32
+dropitem "SmallHealth", 32
+speed 2
+meleerange 60
+States
+{
+Spawn:
+TNT1 A 0
+TNT1 A 0 ACS_NamedExecuteAlways("4SP_EnemyStart",0)
+Look:
+GSPR A 5 A_LookEx(LOF_NOSOUNDCHECK,0,0,0,360,"See")
+Goto Look
+See:
+GSPR AAAAABBBBBAAAAABBBBBAAAAABBBBBAAAAABBBBBAAAAABBBBBAAAAABBBBB 1 A_Chase("Melee","") //maybe I'll implement contact damager stuff here to avoid use of Melee
+GSPR A 0 A_LookEx(LOF_NOSOUNDCHECK,0,6000,0,360,"Missile")
+Goto See
+Pain.PunctureNeedle:
+CRAZ A 0 A_Stop
+CRAZ A 0 A_Pain
+GSPR A 30 A_SpawnItemEx("ShockFX",4,0,32)
+Goto Look
+Missile:
+GSPR A 0 A_FaceTarget
+GSPR A 0 A_PlaySoundEx("weapon/magnetmissile","Voice")
+GSPR A 0 A_CustomMissile("SpringerHomingMissile",64,0,0)//A_SpawnItemEx("SpringerHomingMissile",0,0,64,0,0,12,0)
+Goto See
+Melee:
+GSPR D 0 A_CustomMeleeAttack(45)
+GSPR D 0 A_FaceTarget
+GSPR CDEDCDEDCDEDCDEDCDED 4
+Goto See
+Death:
+CRAZ A 0 A_Pain
+CRAZ A 0 A_Fall
+CRAZ A 0 A_SpawnItem("EnemyDeathFX",0,32)
+TNT1 A 1
+stop
+}
+}
+
+actor SpringerHomingMissile// : MageStaffFX2
+{
++MISSILE
++NOGRAVITY
+-NOBLOCKMAP
+-SOLID
++SHOOTABLE
++SEEKERMISSILE
+damagetype "Enemy"
+Health 10
+Height 16
+Radius 16
+scale 2.5
+speed 13
+Damage (9)
+States
+{
+Spawn:
+GSPR F 0
+GSPR F 10  A_ChangeVelocity(0.0,0.0,12.0,CVF_RELATIVE|CVF_REPLACE)// A_GiveInventory("CutterFlag",1)
+Goto See
+See:
+GSPR G 15 A_ChangeVelocity(12.0,0.0,0.0,CVF_RELATIVE|CVF_REPLACE)
+See2:
+GSPR G 1  A_SeekerMissile(2, 10)//A_MStaffTrack
+loop
+Death:
+CRAZ A 0 A_SpawnItem("EnemyDeathFX",0,32)
+stop
+}
+}

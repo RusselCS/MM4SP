@@ -1,6 +1,7 @@
 #library "SPTOOLSL"
 
 #include "zcommon.acs"
+#include "8BDMLIB.acs"
 
 // [Trill] Scripts ported and slightly modified from MMSP-Basic
 //
@@ -43,18 +44,8 @@ Script "4SP_EnemyPain" (void) //CLIENTSIDE
 script "4SP_CountInv" (int which, int pointer)
 {
 
-    switch(pointer) {
-		default:
-			break;
-		case 1:
-			SetActivator(0,AAPTR_TARGET);
-			break;
-		case 2:
-			SetActivator(0,AAPTR_TRACER);
-			break;
-		case 3:
-			SetActivator(0,AAPTR_MASTER);
-			break;
+    if(pointer != 0) {
+		setActivator(0, pointer);
 	}
 
     switch(which) {
@@ -72,6 +63,19 @@ script "4SP_CountInv" (int which, int pointer)
 			break;    
     }
 
+}
+
+// [Trill] Distance checker for BombThrown ported from MMSP-Basic
+//
+script "4SP_Distance" (void)
+{
+int dist;
+
+dist = xyDistance(ActivatorTID(),3800);
+
+//PrintBold(i:dist);
+
+SetThingSpecial (3800, 0, dist, 0, 0, 0, 0);
 }
 
 // [Russel] Check Alive script. Nicked from CBM.
@@ -95,9 +99,10 @@ str bossList[MAX_BOSSES][2] = {
     {"YamatoManSP", "Yamato"}
 };
 
-#define MAX_PLAYERS 1
+#define MAX_PLAYERS 2
 str playerList[MAX_PLAYERS][2] = {
-    {"RingManSP", "Ring"}
+    {"RingManSP", "Ring"},
+    {"DustManSP", "Dust"}
 };
 
 script "4SP_GiveWeapons" ENTER {

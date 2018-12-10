@@ -1,0 +1,713 @@
+actor SP_Taban : GenericRobot 30032
+{
+//$Category MM8BDM-Enemies
+Height 40
+Radius 32
+Health 35
+scale 2.5
+species "Telly"
+Obituary "%o was killed by a Taban."
++SOLID
++NOGRAVITY
++LOOKALLAROUND
++INVULNERABLE
+dropitem "WeaponEnergy", 32
+dropitem "SmallHealth", 32
+speed 4
+floatspeed 3
+States
+{
+Spawn:
+TNT1 A 0
+TNT1 A 0 A_JumpIfInventory("HealthScaled",1,"SpawnLoop")
+TNT1 A 0 ACS_NamedExecuteAlways("4SP_EnemyStart",0)
+TNT1 A 0 A_GiveInventory("DamageCounter",15)
+TNT1 A 0 A_SpawnItemEX("BasicEnemyContactDamager")
+SpawnLoop:
+TABA C 0 A_ClearTarget
+TABA C 0 A_ChangeFlag("FLOAT",0)
+TABA C 0 A_JumpIf(ceilingz-z<=40,"OperationConsistentHeight")
+TABA C 1 ThrustThingZ(0,65,0,0)
+TABA C 0 A_JumpIf(ceilingz-z<=40,"OperationConsistentHeight")
+TABA C 1 ThrustThingZ(0,65,0,0)
+TABA C 0 A_JumpIf(ceilingz-z<=40,"OperationConsistentHeight")
+TABA C 1 ThrustThingZ(0,65,0,0)
+TABA C 0 A_JumpIf(ceilingz-z<=40,"OperationConsistentHeight")
+TABA C 1 ThrustThingZ(0,65,0,0)
+TABA C 0 A_JumpIf(ceilingz-z<=40,"OperationConsistentHeight")
+TABA C 1 ThrustThingZ(0,65,0,0)
+TABA D 0 A_JumpIf(ceilingz-z<=40,"OperationConsistentHeight")
+TABA D 1 ThrustThingZ(0,65,0,0)
+TABA D 0 A_JumpIf(ceilingz-z<=40,"OperationConsistentHeight")
+TABA D 1 ThrustThingZ(0,65,0,0)
+TABA D 0 A_JumpIf(ceilingz-z<=40,"OperationConsistentHeight")
+TABA D 1 ThrustThingZ(0,65,0,0)
+TABA D 0 A_JumpIf(ceilingz-z<=40,"OperationConsistentHeight")
+TABA D 1 ThrustThingZ(0,65,0,0)
+TABA D 0 A_JumpIf(ceilingz-z<=40,"OperationConsistentHeight")
+TABA D 1 ThrustThingZ(0,65,0,0)
+loop
+OperationConsistentHeight:
+TABA A 0 A_ChangeFlag("INVULNERABLE",1)
+TABA A 1 ThrustThingZ(0,-4*(41-(ceilingz-z)),0,0)
+goto Look
+Look:
+TABA A 0 A_Stop
+TABA A 0 ThrustThingZ(0,0,0,0)
+TABA A 5 A_LookEx(LOF_NOSOUNDCHECK,0,300,0,360,"See2")
+Goto Look+1
+See:
+TABA CCCCCDDDDDCCCCCDDDDDCCCCCDDDDDCCCCCDDDDDCCCCC 1 A_Chase("")
+TABA D 1 A_FaceTarget
+TABA D 1 A_CustomMissile("TabanShot",2,0,0,0)
+TABA DDD 1 A_Chase
+loop
+See2:
+TABA A 150
+APAC B 0 A_PlaySoundEX("enemy/taban","SoundSlot6")
+TABA B 5 A_GiveInventory("CutterFlag",1)
+TABA B 1 A_FaceTarget
+TABA A 0 A_ChangeFlag("FLOAT",1)
+TABA A 0 A_ChangeFlag("INVULNERABLE",0)
+TABA A 0 A_CustomMissile("TabanShot",2,0,0,0)
+Goto See
+Pain.PunctureNeedle:
+CRAZ A 0 A_Stop
+CRAZ A 0 A_Pain
+TABA A 30 A_SpawnItemEx("ShockFX",4,0,32)
+Goto Look
+Death:
+TABA A 0 A_Pain
+TABA A 0 A_Fall
+TABA A 0 A_ChangeFlag("NOGRAVITY",1)
+MMFX BCDE 3
+stop
+}
+}
+
+actor TabanShot : FastProjectile
+{
+PROJECTILE
+translation "214:215=208:208"
+damagetype "Enemy"
+//seesound "misc/devilfire"
+Speed 30
+Damage (10)
+radius 8
+height 8
+scale 2.5
+States
+{
+Spawn:
+BASB A -1
+loop
+}
+}
+
+actor SP_Yudon : GenericRobot 30033
+{
+//$Category MM8BDM-Enemies
+Height 120
+Radius 32
+Obituary "%o couldn't hide from a Yudon."
+Health 150
+maxstepheight 50
++LOOKALLAROUND
+dropitem "BigWeaponEnergy", 64
+dropitem "BigHealth", 64
+dropitem "WeaponEnergy", 32
+dropitem "SmallHealth", 32
+speed 2
+meleerange 60
+States
+{
+Spawn:
+TNT1 A 0
+TNT1 A 0 ACS_NamedExecuteAlways("4SP_EnemyStart",0)
+TNT1 A 0 A_SpawnItemEx("YudonButt",0,0,0)
+Look:
+YADO AB 5 A_LookEx(LOF_NOSOUNDCHECK,0,0,0,360,"See")
+Goto Look
+See:
+YADO ABABAB 5
+YADO C 8 A_SpawnItemEx("YudonRadius")
+YADO DEFGH 3
+YADO H 3 A_CustomMissile("YudonHomingMissile",25,0,0,2,0)
+YADO GFED 3
+Goto Look
+Pain.PunctureNeedle:
+CRAZ A 0 A_Stop
+CRAZ A 0 A_Pain
+YADO A 30 A_SpawnItemEx("ShockFX",4,0,32)
+Goto Look
+Death:
+CRAZ A 0 A_Pain
+CRAZ A 0 A_Fall
+CRAZ A 0 A_SpawnItem("BigEnemyExplode",0,32)
+TNT1 A 1
+stop
+}
+}
+
+actor YudonButt
+{
+Radius 52
+Height 64
+renderstyle none
++SHOOTABLE
++NODAMAGE
++DONTBLAST
++DONTRIP
++MISSILE
+damagefactor "Enemy", 0.0
++NOTARGETSWITCH
+mass 99999999
+Health 900
+painchance 256
+painsound "item/protoreflect"
+States
+{
+Spawn:
+Pain.Enemy:
+PLAY B 1
+PLAY B 0 A_ChangeFlag("MISSILE",0)
+PLAY A 1 A_JumpIfCloser(100,"Spawn")
+stop
+Pain:
+PLAY A 3 A_Pain
+Goto Spawn
+}
+}
+
+actor YudonHomingMissile// : MageStaffFX2
+{
++MISSILE
++NOGRAVITY
+-NOBLOCKMAP
+-SOLID
++SHOOTABLE
++NOCLIP
++SEEKERMISSILE
+Health 10
+Height 16
+Radius 16
+scale 2.5
+speed 13
+Damage (9)
+damagetype "Enemy"
+deathsound "misc/devilpain"
+States
+{
+Spawn:
+YADO IJ 6
+YADO I 0 A_ChangeFlag("NOCLIP",0)
+Goto See
+See:
+YADO IIIJJJ 2 A_SeekerMissile(2, 10)
+loop
+Death:
+CRAZ A 0 A_SpawnItem("EnemyDeathFX",0,32)
+stop
+}
+}
+
+actor YudonRadius
+{
++MISSILE
+damagetype "Enemy"
+States
+{
+Spawn:
+TNT1 A 0
+TNT1 A 0 A_Explode(80,150,0)
+stop
+}
+}
+
+actor SP_ApacheJoe : GenericRobot 30034
+{
+Height 110
+Radius 48
+Health 120
+Obituary "%o was gunned down by an Apache Joe."
+translation "192:192=58:58", "198:198=225:225"
++FLOAT
++NOGRAVITY
++LOOKALLAROUND
+//dropitem "BigWeaponEnergy", 16
+//dropitem "BigHealth", 16
+dropitem "WeaponEnergy", 32
+dropitem "SmallHealth", 32
+speed 12
+States
+{
+Spawn:
+TNT1 A 0
+TNT1 A 0 ACS_NamedExecuteAlways("4SP_EnemyStart",0)
+Look:
+APAC BC 4 A_LookEx(LOF_NOSOUNDCHECK,0,0,0,360,"See")
+loop
+See:
+BLAD A 0 A_PlaySoundEX("weapon/gyroattack","SoundSlot6")
+APAC BBBBCCCC 1 A_Chase
+loop
+Missile:
+APAC B 1 A_ChangeFlag("FLOAT",0)
+APAC B 0 A_PlaySoundEX("weapon/gyroattack","SoundSlot6")
+APAC B 0 A_FaceTarget
+APAC B 0 A_Recoil(-12)
+APAC BC 4 A_FaceTarget
+APAC B 0 A_CustomMissile("ApacheJoeShot",18,0,0,0)
+APAC B 0 A_PlaySoundEX("weapon/gyroattack","SoundSlot6")
+APAC BC 4 A_FaceTarget
+APAC B 0 A_CustomMissile("ApacheJoeShot",18,0,0,0)
+APAC B 0 A_PlaySoundEX("weapon/gyroattack","SoundSlot6")
+APAC BC 4 A_FaceTarget
+APAC B 0 A_CustomMissile("ApacheJoeShot",18,0,0,0)
+APAC B 0 A_PlaySoundEX("weapon/gyroattack","SoundSlot6")
+APAC BC 4 A_FaceTarget
+APAC B 0 A_CustomMissile("ApacheJoeShot",18,0,0,0)
+APAC B 0 A_PlaySoundEX("weapon/gyroattack","SoundSlot6")
+APAC BC 4 A_FaceTarget
+APAC B 0 A_CustomMissile("ApacheJoeShot",18,0,0,0)
+APAC B 0 A_PlaySoundEX("weapon/gyroattack","SoundSlot6")
+APAC BC 4 A_FaceTarget
+APAC B 0 A_CustomMissile("ApacheJoeShot",18,0,0,0)
+APAC B 0 A_PlaySoundEX("weapon/gyroattack","SoundSlot6")
+APAC BC 4 A_FaceTarget
+APAC B 0 A_CustomMissile("ApacheJoeShot",18,0,0,0)
+APAC B 0 A_PlaySoundEX("weapon/gyroattack","SoundSlot6")
+APAC BC 4 A_FaceTarget
+APAC B 0 A_CustomMissile("ApacheJoeShot",18,0,0,0)
+APAC B 0 A_PlaySoundEX("weapon/gyroattack","SoundSlot6")
+APAC BC 4 A_FaceTarget
+APAC B 0 A_CustomMissile("ApacheJoeShot",18,0,0,0)
+APAC B 0 A_PlaySoundEX("weapon/gyroattack","SoundSlot6")
+APAC BC 4 A_FaceTarget
+APAC B 0 A_PlaySoundEX("weapon/gyroattack","SoundSlot6")
+APAC BC 4 A_FaceTarget
+APAC B 0 A_PlaySoundEX("weapon/gyroattack","SoundSlot6")
+APAC BC 4 A_FaceTarget
+APAC B 0 A_PlaySoundEX("weapon/gyroattack","SoundSlot6")
+APAC BC 4 A_FaceTarget
+APAC B 0 A_PlaySoundEX("weapon/gyroattack","SoundSlot6")
+APAC BC 4 A_ChangeFlag("FLOAT",1)
+APAC B 1 A_Stop 
+Goto See
+Pain.PunctureNeedle:
+CRAZ A 0 A_Stop
+CRAZ A 0 A_Pain
+APAC B 30 A_SpawnItemEx("ShockFX",4,0,32)
+Goto Look
+Death:
+CRAZ A 0 A_SpawnItem("BigEnemyExplode",0,32)
+BLAD A 0 A_Pain
+BLAD A 0 A_Fall
+BLAD A 0 A_ChangeFlag("NOGRAVITY",1)
+MMFX BCDE 3
+stop
+}
+}
+
+actor ApacheJoeShot : FastProjectile
+{
+PROJECTILE
+translation "214:215=208:208"
+damagetype "Enemy"
+seesound "weapon/pshot"
+Speed 50
+Damage (10)
+radius 8
+height 8
+scale 2.5
+States
+{
+Spawn:
+APAC D -1
+loop
+}
+}
+
+actor SP_MetallCannon : GenericRobot 30025
+{
+//$Category MM8BDM-Enemies
+Height 120
+Radius 45
+Obituary "%o was blasted by a Metall Cannon."
+Health 60
+maxstepheight 50
++INVULNERABLE
++LOOKALLAROUND
+dropitem "WeaponEnergy", 32
+dropitem "SmallHealth", 32
+speed 2
+meleerange 60
+States
+{
+Spawn:
+TNT1 A 0
+TNT1 A 0 ACS_NamedExecuteAlways("4SP_EnemyStart",0)
+Look:
+METC A 5 A_LookEx(LOF_NOSOUNDCHECK,0,600,0,360,"See")
+Goto Look
+See:
+METC AAAAAA 10 A_FaceTarget
+METC A 1 A_ChangeFlag("INVULNERABLE",0)
+METC ABCC 5 A_FaceTarget
+METC D 5 A_CustomMissile("MetallCannonBall",48,0,0,0)
+METC C 4
+METC A 40 A_ChangeFlag("INVULNERABLE",1)
+Goto Look
+Pain.PunctureNeedle:
+CRAZ A 0 A_Stop
+CRAZ A 0 A_Pain
+METC D 30 A_SpawnItemEx("ShockFX",4,0,32)
+Goto Look
+Death:
+CRAZ A 0 A_Pain
+CRAZ A 0 A_Fall
+TNT1 A 5 A_SpawnItem("EnemyDeathFX",0,32)
+TNT1 A 1
+stop
+}
+}
+
+actor MetallCannonBall
+{
+PROJECTILE
+damage (0)
+scale 2.5
+Height 8
+Radius 8
+Speed 20
+damagetype "Enemy"
+SeeSound "enemy/metcannon"
+States
+{
+Spawn:
+METC E 5
+loop
+Death:
+METC E 0 A_PlaySoundEx("weapon/coilexplode","Body")
+METC E 0 A_Explode(40,128,0)
+METC E 0 A_Stop
+METC E 0 A_ChangeFlag("NOGRAVITY",1)
+NAPA EFGHIJKLMNOPQRS 2
+stop
+}
+}
+
+actor SP_BombThrown : GenericRobot 30036
+{
+//$Category MM8BDM-Enemies
+Height 64
+Radius 45
+Obituary "%o was bombed by a Bomb Thrown."
+Health 50
+translation "192:192=4:4", "68:191=227:227"
+maxstepheight 50
++LOOKALLAROUND
+dropitem "WeaponEnergy", 32
+dropitem "SmallHealth", 32
+speed 2
+meleerange 60
+States
+{
+Spawn:
+TNT1 A 0
+TNT1 A 0 ACS_NamedExecuteAlways("4SP_EnemyStart",0)
+Look:
+ROMB A 5 A_LookEx(LOF_NOSOUNDCHECK,0,0,0,360,"See")
+Goto Look
+See:
+ROMB A 10 A_FaceTarget
+ROMB D 5 A_FaceTarget
+
+ROMB D 1 Thing_ChangeTID(0,3800)
+ROMB D 0 A_GiveToTarget("DistanceChecker",1)
+ROMB D 1
+ROMB D 1 A_SpawnItemEx("BombThrownBomb",0,0,70,args[0] / 45,0,20)
+ROMB D 0 Thing_ChangeTID(3800,0)
+
+ROMB B 10 A_FaceTarget
+ROMB C 20
+Goto Look
+Pain.PunctureNeedle:
+CRAZ A 0 A_Stop
+CRAZ A 0 A_Pain
+ROMB C 30 A_SpawnItemEx("ShockFX",4,0,32)
+Goto Look
+Death:
+CRAZ A 0 A_Pain
+CRAZ A 0 A_Fall
+TNT1 A 5 A_SpawnItem("EnemyDeathFX",0,32)
+TNT1 A 1
+stop
+}
+}
+
+actor DistanceChecker : CustomInventory
+{
+States
+{
+Spawn:
+TNT1 A 1
+stop
+Pickup:
+TNT1 A 1 ACS_NamedExecuteAlways("4SP_Distance",0)
+stop
+}
+}
+
+actor BombThrownBomb
+{
+PROJECTILE
+damage (0)
+-NOGRAVITY
+scale 2.5
+Height 8
+Radius 8
+Speed 20
+translation "192:192=4:4", "68:191=227:227"
+damagetype "Enemy"
+SeeSound "enemy/cannon"
+States
+{
+Spawn:
+ROMB E 5
+loop
+Death:
+METC E 0 A_PlaySoundEx("weapon/coilexplode","Body")
+METC E 0 A_Explode(40,128,0)
+METC E 0 A_Stop
+METC E 0 A_ChangeFlag("NOGRAVITY",1)
+NAPA EFGHIJKLMNOPQRS 2
+stop
+}
+}
+
+
+actor SP_Subeil : GenericRobot 30037
+{
+//$Category MM8BDM-Enemies
+Height 50
+Radius 32
+Health 5
+Obituary "%o tripped over a Subeil."
+MeleeRange 40
+maxstepheight 5
++DROPOFF
+MONSTER
++LOOKALLAROUND
+mass 99999999
+painchance 256
+painsound "misc/devilpain"
+speed 15
+//fastspeed 10
+States
+{
+Spawn:
+TNT1 A 0
+TNT1 A 0 A_JumpIfInventory("HealthScaled",1,"Look")
+TNT1 A 0 ACS_NamedExecuteAlways("4SP_EnemyStart",0)
+TNT1 A 0 A_GiveInventory("DamageCounter",20)
+TNT1 A 0 A_SpawnItemEX("BasicEnemyContactDamager")
+SUBE CB 5
+Look:
+SUBE AB 8 A_LookEx(LOF_NOSOUNDCHECK,0,300,0,360,"See")
+loop
+See:
+SUBE ACD 5
+Chase:
+SUBE E 0 A_JumpIfInTargetInventory("EnemyContactDamagerProtect",1,"SpawnLoopCheck1")
+goto Chase2
+SpawnLoopCheck1:
+SUBE E 0 A_JumpIfCloser(64,"Death")
+Chase2:
+SUBE E 1 A_Chase("")
+SUBE E 0 A_JumpIfInTargetInventory("EnemyContactDamagerProtect",1,"SpawnLoopCheck2")
+goto Chase3
+SpawnLoopCheck2:
+SUBE E 0 A_JumpIfCloser(64,"Death")
+Chase3:
+SUBE E 1 A_Chase("")
+SUBE E 0 A_JumpIfInTargetInventory("EnemyContactDamagerProtect",1,"SpawnLoopCheck3")
+goto Chase4
+SpawnLoopCheck3:
+SUBE E 0 A_JumpIfCloser(64,"Death")
+Chase4:
+SUBE E 1 A_Chase("")
+SUBE E 0 A_JumpIfInTargetInventory("EnemyContactDamagerProtect",1,"SpawnLoopCheck4")
+goto Chase5
+SpawnLoopCheck4:
+SUBE F 0 A_JumpIfCloser(64,"Death")
+Chase5:
+SUBE F 1 A_Chase("")
+SUBE F 0 A_JumpIfInTargetInventory("EnemyContactDamagerProtect",1,"SpawnLoopCheck5")
+goto Chase6
+SpawnLoopCheck5:
+SUBE F 0 A_JumpIfCloser(64,"Death")
+Chase6:
+SUBE F 1 A_Chase("")
+SUBE F 0 A_JumpIfInTargetInventory("EnemyContactDamagerProtect",1,"SpawnLoopCheck6")
+goto Chase7
+SpawnLoopCheck6:
+SUBE F 0 A_JumpIfCloser(64,"Death")
+Chase7:
+SUBE F 1 A_Chase("")
+SUBE E 0 A_JumpIfInTargetInventory("EnemyContactDamagerProtect",1,"SpawnLoopCheck7")
+goto Chase8
+SpawnLoopCheck7:
+SUBE D 0 A_JumpIfCloser(64,"Death")
+Chase8:
+SUBE D 1 A_Chase("")
+SUBE D 0 A_JumpIfInTargetInventory("EnemyContactDamagerProtect",1,"SpawnLoopCheck8")
+goto Chase9
+SpawnLoopCheck8:
+SUBE D 0 A_JumpIfCloser(64,"Death")
+Chase9:
+SUBE D 1 A_Chase("")
+SUBE D 0 A_JumpIfInTargetInventory("EnemyContactDamagerProtect",1,"SpawnLoopCheck9")
+goto Chase10
+SpawnLoopCheck9:
+SUBE D 0 A_JumpIfCloser(64,"Death")
+Chase10:
+SUBE D 1 A_Chase("")
+goto Chase
+Pain.PunctureNeedle:
+SPRH A 0 A_Stop
+SPRH A 0 A_Pain
+SUBE A 30 A_SpawnItemEx("ShockFX",4,0,32)
+Goto Look
+Death:
+CRAZ A 0 A_Pain
+CRAZ A 0 A_Fall
+MMFX BCDE 3
+TNT1 A 1
+stop
+}
+}
+
+actor SP_PowerMuscler : GenericRobot 30038
+{
+//$Category MM8BDM-Enemies
+Health 250
+Height 160
+Radius 64
+Obituary "%o was smashed by a Power Muscler."
+maxstepheight 50
++DROPOFF
++LOOKALLAROUND
++DONTBLAST
+-SOLID
+-CANPASS
+speed 8
+dropitem "BigWeaponEnergy", 64
+dropitem "BigHealth", 64
+States
+{
+Spawn:
+TNT1 A 0
+TNT1 A 0 A_JumpIfInventory("HealthScaled",1,"Look")
+TNT1 A 0 ACS_NamedExecuteAlways("4SP_EnemyStart",0)
+TNT1 A 0 A_GiveInventory("DamageCounter",50)
+TNT1 A 0 A_SpawnItemEX("BasicEnemyContactDamager")
+Look:
+PWRM A 6 A_LookEx(LOF_NOSOUNDCHECK,0,2000,0,360,"See")
+loop
+See:
+PWRM EEEEEEEEEE 1 A_Chase
+PWRM DDDDDDDDDD 1 A_Chase
+PWRM A 0 A_PlaySoundEx("enemy/powermusclerland","Voice")
+PWRM EEEEEEEEEE 1 A_Chase
+PWRM FFFFFFFFFF 1 A_Chase
+PWRM A 0 A_PlaySoundEx("enemy/powermusclerland","Voice")
+loop
+Missile:
+PWRM AAA 5 A_FaceTarget
+PWRM A 1 A_FaceTarget
+PWRM B 1 A_ChangeVelocity(45.0,0.0,15.0,CVF_REPLACE|CVF_RELATIVE)
+Goto Leaping
+Leaping:
+PWRM B 1 A_JumpIfCloser(100,"ForcedLand")
+PWRM B 1 A_JumpIf(Floorz-z==0,"Land")
+loop
+ForcedLand:
+PWRM B 0 A_ChangeFlag("NOGRAVITY",1)
+PWRM B 2 A_Stop
+PWRM B 0 A_ChangeVelocity(0.0,0.0,-10.0,CVF_REPLACE|CVF_RELATIVE)
+Leaping2:
+PWRM E 0 A_SpawnItemEx("PowerMusclerFX",-26,27,115)
+PWRM E 0 A_SpawnItemEx("PowerMusclerFX",-26,-27,115)
+PWRM B 0 A_ChangeFlag("NOGRAVITY",0)
+PWRM B 1 A_JumpIf(Floorz-z==0,"Land")
+loop
+Land:
+PWRM B 0 A_ChangeFlag("NOGRAVITY",0)
+PWRM E 0 A_SpawnItemEx("SP_PowerMusclerShockWave")
+PWRM A 0 A_PlaySoundEx("misc/hugequake2","Voice")
+PWRM C 3 A_Stop
+PWRM A 20
+Goto See
+Death:
+PWRM A 0 A_Stop
+PWRM A 0 A_Pain
+PWRM A 0 A_Fall
+PWRM A 0 A_ChangeFlag("NOGRAVITY",1)
+TNT1 AAAAAA 2 A_SpawnItemEx("BigEnemyExplode",random(-128,128),random(-128,128),random(0,128))
+TNT1 A 1
+stop
+}
+}
+
+
+actor SP_PowerMusclerShockWave
+{
+PROJECTILE
+damagetype "Enemy"
+States
+{
+Spawn:
+TNT1 A 0
+TNT1 A 0 A_Explode(20,64,0)
+TNT1 A 0 A_SpawnItemEx("PowerMusclerShockwavePart",0,0,0,18,0,0,0)
+TNT1 A 0 A_SpawnItemEx("PowerMusclerShockwavePart",0,0,0,18,0,0,15)
+TNT1 A 0 A_SpawnItemEx("PowerMusclerShockwavePart",0,0,0,18,0,0,30)
+TNT1 A 0 A_SpawnItemEx("PowerMusclerShockwavePart",0,0,0,18,0,0,45)
+TNT1 A 0 A_SpawnItemEx("PowerMusclerShockwavePart",0,0,0,18,0,0,60)
+TNT1 A 0 A_SpawnItemEx("PowerMusclerShockwavePart",0,0,0,18,0,0,75)
+TNT1 A 0 A_SpawnItemEx("PowerMusclerShockwavePart",0,0,0,18,0,0,90)
+TNT1 A 0 A_SpawnItemEx("PowerMusclerShockwavePart",0,0,0,18,0,0,105)
+TNT1 A 0 A_SpawnItemEx("PowerMusclerShockwavePart",0,0,0,18,0,0,120)
+TNT1 A 0 A_SpawnItemEx("PowerMusclerShockwavePart",0,0,0,18,0,0,135)
+TNT1 A 0 A_SpawnItemEx("PowerMusclerShockwavePart",0,0,0,18,0,0,150)
+TNT1 A 0 A_SpawnItemEx("PowerMusclerShockwavePart",0,0,0,18,0,0,165)
+TNT1 A 0 A_SpawnItemEx("PowerMusclerShockwavePart",0,0,0,18,0,0,180)
+TNT1 A 0 A_SpawnItemEx("PowerMusclerShockwavePart",0,0,0,18,0,0,195)
+TNT1 A 0 A_SpawnItemEx("PowerMusclerShockwavePart",0,0,0,18,0,0,210)
+TNT1 A 0 A_SpawnItemEx("PowerMusclerShockwavePart",0,0,0,18,0,0,225)
+TNT1 A 0 A_SpawnItemEx("PowerMusclerShockwavePart",0,0,0,18,0,0,240)
+TNT1 A 0 A_SpawnItemEx("PowerMusclerShockwavePart",0,0,0,18,0,0,255)
+TNT1 A 0 A_SpawnItemEx("PowerMusclerShockwavePart",0,0,0,18,0,0,270)
+TNT1 A 0 A_SpawnItemEx("PowerMusclerShockwavePart",0,0,0,18,0,0,285)
+TNT1 A 0 A_SpawnItemEx("PowerMusclerShockwavePart",0,0,0,18,0,0,300)
+TNT1 A 0 A_SpawnItemEx("PowerMusclerShockwavePart",0,0,0,18,0,0,315)
+TNT1 A 0 A_SpawnItemEx("PowerMusclerShockwavePart",0,0,0,18,0,0,330)
+TNT1 A 0 A_SpawnItemEx("PowerMusclerShockwavePart",0,0,0,18,0,0,345)
+stop
+}
+}
+
+
+actor SP_PowerMusclerRadius
+{
++MISSILE
+damagetype "Enemy"
+States
+{
+Spawn:
+TNT1 A 0
+TNT1 A 0 A_Explode(50,128,0)
+stop
+}
+}
