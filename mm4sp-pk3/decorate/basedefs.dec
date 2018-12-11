@@ -3,6 +3,9 @@ actor ClassFlag : Once {}
 actor RingManFlag : ClassFlag {}
 actor DustManFlag : ClassFlag {}
 
+actor OnGround : Once {}
+actor InAir : Once {}
+
 actor Counter : Inventory {
     inventory.amount 1
     inventory.maxamount 65535
