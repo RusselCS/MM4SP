@@ -99,10 +99,11 @@ str bossList[MAX_BOSSES][2] = {
     {"YamatoManSP", "Yamato"}
 };
 
-#define MAX_PLAYERS 2
+#define MAX_PLAYERS 3
 str playerList[MAX_PLAYERS][2] = {
     {"RingManSP", "Ring"},
-    {"DustManSP", "Dust"}
+    {"DustManSP", "Dust"},
+    {"ToadManSP", "Toad"}
 };
 
 script "4SP_GiveWeapons" ENTER {

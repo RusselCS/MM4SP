@@ -1,3 +1,4 @@
 clearplayerclasses
 addplayerclass RingmanSP
 addplayerclass DustmanSP
+addplayerclass ToadmanSP
