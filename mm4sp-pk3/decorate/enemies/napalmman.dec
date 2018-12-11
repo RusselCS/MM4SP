@@ -168,6 +168,7 @@ painsound "item/protoreflect"
 States
 {
 Spawn:
+Pain.EnemyContact:
 Pain.Enemy:
 PLAY B 1
 PLAY B 0 A_ChangeFlag("MISSILE",0)
@@ -196,9 +197,14 @@ speed 13
 Damage (9)
 damagetype "Enemy"
 deathsound "misc/devilpain"
+painsound "misc/devilpain"
+painchance 256
 States
 {
 Spawn:
+YADO I 0
+YADO I 0 A_GiveInventory("HealthScaled",1)
+YADO I 0 ACS_NamedExecuteAlways("4SP_EnemyStart",0)
 YADO IJ 6
 YADO I 0 A_ChangeFlag("NOCLIP",0)
 Goto See
@@ -206,7 +212,8 @@ See:
 YADO IIIJJJ 2 A_SeekerMissile(2, 10)
 loop
 Death:
-CRAZ A 0 A_SpawnItem("EnemyDeathFX",0,32)
+TNT1 A 0 A_Pain
+TNT1 A 5 A_SpawnItem("EnemyDeathFX",0,32)
 stop
 }
 }
@@ -580,6 +587,7 @@ SPRH A 0 A_Pain
 SUBE A 30 A_SpawnItemEx("ShockFX",4,0,32)
 Goto Look
 Death:
+CRAZ A 0 A_TakeInventory("DamageCounter",999)
 CRAZ A 0 A_Pain
 CRAZ A 0 A_Fall
 MMFX BCDE 3
