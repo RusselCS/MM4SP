@@ -4,3 +4,13 @@ weapon/ringcatch 0RINGCAT
 
 // DUST MAN
 weapon/dustshot DUSTBIT
+
+// ENEMIES
+misc/door2	bdoor2
+enemy/hammerjoeswing	hjswin
+enemy/hammerjoestep		hjstep
+enemy/hammerjoethrow	hjthrw
+enemy/cannon	canon
+enemy/powermusclerland	muscle
+enemy/taban	batwing
+enemy/metcannon	metcan
