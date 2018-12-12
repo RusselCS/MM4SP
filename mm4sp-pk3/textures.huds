@@ -1,0 +1,52 @@
+//RING MAN
+//Ring Boomerang
+sprite RIN1A0, 148, 80 {Offset -202, -103 Patch RINAA0, 0, 0 {Translation "192:192=160:160", "198:198=219:219"}}
+sprite RIN1B0, 176, 144 {Offset -272, 46 Patch RINAB0, 0, 0 {Translation "192:192=160:160", "198:198=219:219"}}
+sprite RIN1C0, 176, 144 {Offset -202, 0 Patch RINAC0, 0, 0 {Translation "192:192=160:160", "198:198=219:219"}}
+sprite RIN1D0, 176, 144 {Offset -170, -39 Patch RINAD0, 0, 0 {Translation "192:192=160:160", "198:198=219:219"}}
+sprite RIN1E0, 192, 92 {Offset -132, -126 Patch RINAE0, 0, 0 {Translation "192:192=160:160", "198:198=219:219"}}
+sprite RIN1F0, 192, 92 {Offset -100, -150 Patch RINAF0, 0, 0 {Translation "192:192=160:160", "198:198=219:219"}}
+sprite RIN1G0, 148, 80 {Offset -202, -143 Patch RINAG0, 0, 0 {Translation "192:192=160:160", "198:198=219:219"}}
+sprite RIN1H0, 148, 80 {Offset -202, -123 Patch RINAH0, 0, 0 {Translation "192:192=160:160", "198:198=219:219"}}
+
+//Stump Satellite
+sprite RIN2A0, 148, 80 {Offset -202, -103 Patch RINAA0, 0, 0 {Translation "192:192=4:4", "198:198=129:129", "199:199=131:131"}}
+sprite RIN2B0, 192, 92 {Offset -100, -150 Patch RINAF0, 0, 0 {Translation "192:192=4:4", "198:198=129:129", "199:199=131:131"}}
+sprite RIN2C0, 192, 92 {Offset -132, -126 Patch RINAE0, 0, 0 {Translation "192:192=4:4", "198:198=129:129", "199:199=131:131"}}
+sprite RIN2D0, 176, 144 {Offset -170, -39 Patch RINAD0, 0, 0 {Translation "192:192=4:4", "198:198=129:129", "199:199=131:131"}}
+sprite RIN2E0, 176, 144 {Offset -202, 0 Patch RINAC0, 0, 0 {Translation "192:192=4:4", "198:198=129:129", "199:199=131:131"}}
+sprite RIN2F0, 176, 144 {Offset -272, 46 Patch RINAB0, 0, 0 {Translation "192:192=4:4", "198:198=129:129", "199:199=131:131"}}
+sprite RIN2G0, 148, 80 {Offset -202, -143 Patch RINAG0, 0, 0 {Translation "192:192=4:4", "198:198=129:129", "199:199=131:131"}}
+sprite RIN2H0, 148, 80 {Offset -202, -123 Patch RINAH0, 0, 0 {Translation "192:192=4:4", "198:198=129:129", "199:199=131:131"}}
+
+//DUST MAN
+//Dust Buster
+sprite DUS1A0, 384, 308 {Offset -32, 93 Patch DUSAA0, 0, 0 {Translation "192:192=4:4", "198:198=197:197", "199:199=198:198"}}
+sprite DUS1B0, 384, 308 {Offset -32, 93 Patch DUSAB0, 0, 0 {Translation "192:192=4:4", "198:198=197:197", "199:199=198:198"}}
+sprite DUS1C0, 384, 308 {Offset -32, 93 Patch DUSAC0, 0, 0 {Translation "192:192=4:4", "198:198=197:197", "199:199=198:198"}}
+
+//Log Chipper
+sprite DUS2A0, 384, 308 {Offset -32, 93 Patch DUSAA0, 0, 0 {Translation "192:192=4:4", "198:198=129:129", "199:199=131:131"}}
+sprite DUS2B0, 384, 308 {Offset -32, 93 Patch DUSAH0, 0, 0 {Translation "192:192=4:4", "198:198=129:129", "199:199=131:131"}}
+sprite DUS2C0, 384, 308 {Offset -32, 93 Patch DUSAI0, 0, 0 {Translation "192:192=4:4", "198:198=129:129", "199:199=131:131"}}
+
+//TOAD MAN
+//Rain Flush
+sprite TAR1A0, 380, 80 {Offset 30, -103 Patch TARMA0, 0, 0 {Translation "192:192=104:104", "198:198=128:128"}}
+sprite TAR1B0, 427, 40 {Offset 52, -145 Patch TARMB0, 0, 0 {Translation "192:192=104:104", "198:198=128:128"}}
+sprite TAR1C0, 427, 52 {Offset 53, -133 Patch TARMC0, 0, 0 {Translation "192:192=104:104", "198:198=128:128"}}
+sprite TAR1D0, 427, 104 {Offset 53, -81 Patch TARMD0, 0, 0 {Translation "192:192=104:104", "198:198=128:128"}}
+sprite TAR1E0, 427, 112 {Offset 53, -73 Patch TARME0, 0, 0 {Translation "192:192=104:104", "198:198=128:128"}}
+sprite TAR1F0, 427, 128 {Offset 53, -57 Patch TARMF0, 0, 0 {Translation "192:192=104:104", "198:198=128:128"}}
+sprite TAR1G0, 380, 80 {Offset 30, -139 Patch TARMG0, 0, 0 {Translation "192:192=104:104", "198:198=128:128"}}
+sprite TAR1H0, 380, 80 {Offset 30, -119 Patch TARMH0, 0, 0 {Translation "192:192=104:104", "198:198=128:128"}}
+
+//Natural Downpour
+sprite TAR2A0, 380, 80 {Offset 30, -103 Patch TARMA0, 0, 0 {Translation "192:192=4:4", "198:198=129:129", "199:199=131:131"}}
+sprite TAR2B0, 427, 40 {Offset 52, -145 Patch TARMB0, 0, 0 {Translation "192:192=4:4", "198:198=129:129", "199:199=131:131"}}
+sprite TAR2C0, 427, 52 {Offset 53, -133 Patch TARMC0, 0, 0 {Translation "192:192=4:4", "198:198=129:129", "199:199=131:131"}}
+sprite TAR2D0, 427, 104 {Offset 53, -81 Patch TARMD0, 0, 0 {Translation "192:192=4:4", "198:198=129:129", "199:199=131:131"}}
+sprite TAR2E0, 427, 112 {Offset 53, -73 Patch TARME0, 0, 0 {Translation "192:192=4:4", "198:198=129:129", "199:199=131:131"}}
+sprite TAR2F0, 427, 128 {Offset 53, -57 Patch TARMF0, 0, 0 {Translation "192:192=4:4", "198:198=129:129", "199:199=131:131"}}
+sprite TAR2G0, 380, 80 {Offset 30, -139 Patch TARMG0, 0, 0 {Translation "192:192=4:4", "198:198=129:129", "199:199=131:131"}}
+sprite TAR2H0, 380, 80 {Offset 30, -119 Patch TARMH0, 0, 0 {Translation "192:192=4:4", "198:198=129:129", "199:199=131:131"}}

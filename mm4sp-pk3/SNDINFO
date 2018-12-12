@@ -1,6 +1,8 @@
 
 // RING MAN
 weapon/ringcatch 0RINGCAT
+weapon/woodsatellite WOODSAT
+weapon/woodsatellitehit WOODSA1
 
 // DUST MAN
 weapon/dustshot DUSTBIT

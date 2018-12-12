@@ -41,6 +41,7 @@ IsSelected RingManWep
 	InInventory RingManAmmo, 4	{ DrawImage "04_5_BA4",8,8;	}
 	InInventory RingManAmmo, 5	{ DrawImage "04_5_BA5",8,8;	}
 }
+IsSelected Ring_WoodWep{Drawbar"BARAM201", "BAREMPTY", Ammo1, vertical, 16, 8;}	
 
 }
 

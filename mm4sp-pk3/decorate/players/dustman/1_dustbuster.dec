@@ -1,43 +1,41 @@
 actor DustManWep : BaseMM8BDMWep
 {
+Dropitem ""
+inventory.icon "NULLICON"
 Weapon.AmmoUse 1
 Weapon.AmmoGive 3
 Weapon.SlotNumber 1
+Tag "Dust Buster"
 Inventory.Pickupmessage "Power up! Taking out the trash!"
-Obituary "$OB_DUSTCRUSHER"
 weapon.ammotype "DustManAmmo"
-inventory.icon "NULLICON"
-Dropitem ""
-+WEAPON.WIMPY_WEAPON
-+WEAPON.ALLOW_WITH_RESPAWN_INVUL
 States
 {
 Spawn:
 WEAP X 1
 loop
 Ready:
-DUSA A 0 ACS_ExecuteAlways(998,0,785)
-DUSA A 1 A_WeaponReady
+DUS1 A 0 ACS_ExecuteAlways(998,0,785)
+DUS1 A 1 A_WeaponReady
 Goto Ready+1
 Deselect:
 TNT1 AAAAAAAAAAAAAAAAAAAAAA 0 A_Lower
-DUSA A 1 A_Lower
+DUS1 A 1 A_Lower
 Loop
 Select:
 TNT1 AAAAAAAAAAAAAAAAAAAAAA 0 A_Raise
-DUSA A 1 A_Raise
+DUS1 A 1 A_Raise
 Loop
 Fire:
-DUSA A 0 A_JumpIfNoAmmo("NoAmmo")
-DUSA A 0 A_PlaySoundEx("weapon/dustshot","Weapon")
-DUSA A 0 A_FireCustomMissile("DustShot",0,0,8,0)
-DUSA B 3
-DUSA C 3
-DUSA A 4
-DUSA B 0 A_Refire
+DUS1 A 0 A_JumpIfNoAmmo("NoAmmo")
+DUS1 A 0 A_PlaySoundEx("weapon/dustshot","Weapon")
+DUS1 A 0 A_FireCustomMissile("DustShot",0,0,8,0)
+DUS1 B 3
+DUS1 C 3
+DUS1 A 4
+DUS1 B 0 A_Refire
 goto Ready+1
 NoAmmo:
-DUSA A 1
+DUS1 A 1
 Goto Ready+1
 Flash:
 TNT1 A 1
@@ -61,6 +59,7 @@ actor DustShot
 PROJECTILE
 damagetype "Buster"
 Obituary "$OB_DUSTCRUSHER"
+translation "93:93=87:87"
 Speed 28
 Damage (9)
 radius 5

@@ -6,8 +6,7 @@ player.startitem "DustManWep"
 player.startitem "DustManAmmo", 5
 player.startitem "DustManFlag"
 player.jumpz 12
-player.forwardmove 0.8, 0.8
-player.sidemove 0.78, 0.78
+speed 1.0
 
 States
 {
