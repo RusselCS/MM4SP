@@ -2,6 +2,7 @@ actor ClassFlag : Once {}
 
 actor RingManFlag : ClassFlag {}
 actor DustManFlag : ClassFlag {}
+actor ToadManFlag : ClassFlag {}
 
 actor OnGround : Once {}
 actor InAir : Once {}
@@ -25,6 +26,14 @@ actor BasicClientside
 	scale 2.5
 	height 1
 	radius 1
+}
+
+actor BasicBouncer
+{
++BOUNCEONWALLS
++BOUNCEONFLOORS
++BOUNCEONCEILINGS
++CANBOUNCEWATER
 }
 
 actor GenericRobot

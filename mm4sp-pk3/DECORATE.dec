@@ -13,6 +13,7 @@ actor GitTest
 #include "decorate/basedefs.dec"
 #include "decorate/players/classbase_a.dec"
 #include "decorate/players/classbasesp.dec"
+#include "decorate/wepgivers.dec"
 
 // CLASSES (followed by weapons)
 #include "decorate/players/ringman/0_ringmanclass.dec"
@@ -22,6 +23,7 @@ actor GitTest
 #include "decorate/players/dustman/1_dustbuster.dec"
 #include "decorate/players/toadman/0_toadmanclass.dec"
 #include "decorate/players/toadman/1_rainflush.dec"
+#include "decorate/players/toadman/2_naturaldownpour.dec"
 
 // ENEMIES
 #include "decorate/enemies/basics.dec"

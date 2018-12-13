@@ -9,6 +9,7 @@ weapon/dustshot DUSTBIT
 
 // TOAD MAN
 weapon/raindrizzle DRIZZLE
+weapon/raindance S_M4TOA3
 
 // ENEMIES
 misc/door2	bdoor2

@@ -47,6 +47,5 @@ sprite TAR2B0, 427, 40 {Offset 52, -145 Patch TARMB0, 0, 0 {Translation "192:192
 sprite TAR2C0, 427, 52 {Offset 53, -133 Patch TARMC0, 0, 0 {Translation "192:192=4:4", "198:198=129:129", "199:199=131:131"}}
 sprite TAR2D0, 427, 104 {Offset 53, -81 Patch TARMD0, 0, 0 {Translation "192:192=4:4", "198:198=129:129", "199:199=131:131"}}
 sprite TAR2E0, 427, 112 {Offset 53, -73 Patch TARME0, 0, 0 {Translation "192:192=4:4", "198:198=129:129", "199:199=131:131"}}
-sprite TAR2F0, 427, 128 {Offset 53, -57 Patch TARMF0, 0, 0 {Translation "192:192=4:4", "198:198=129:129", "199:199=131:131"}}
 sprite TAR2G0, 380, 80 {Offset 30, -139 Patch TARMG0, 0, 0 {Translation "192:192=4:4", "198:198=129:129", "199:199=131:131"}}
 sprite TAR2H0, 380, 80 {Offset 30, -119 Patch TARMH0, 0, 0 {Translation "192:192=4:4", "198:198=129:129", "199:199=131:131"}}

@@ -8,6 +8,7 @@ Weapon.SlotNumber 1
 Tag "Dust Buster"
 Inventory.Pickupmessage "Power up! Taking out the trash!"
 weapon.ammotype "DustManAmmo"
++WEAPON.NOAUTOFIRE
 States
 {
 Spawn:
@@ -37,12 +38,6 @@ goto Ready+1
 NoAmmo:
 DUS1 A 1
 Goto Ready+1
-Flash:
-TNT1 A 1
-stop
-NoFlash:
-TNT1 A 1
-stop
 }
 }
 

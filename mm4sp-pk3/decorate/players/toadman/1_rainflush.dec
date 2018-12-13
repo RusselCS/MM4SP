@@ -4,10 +4,11 @@ dropitem ""
 inventory.icon "NULLICON"
 Weapon.AmmoUse 1
 Weapon.AmmoGive 3
-Weapon.SlotNumber 6
+Weapon.SlotNumber 1
 Tag "Rain Flush"
 Inventory.Pickupmessage "Power up! Acid Rain!"
 weapon.ammotype "ToadManAmmo"
++WEAPON.NOAUTOFIRE
 States
 {
 Spawn:
@@ -36,12 +37,6 @@ goto Ready+1
 NoAmmo:
 TAR1 A 1
 Goto Ready+1
-Flash:
-TNT1 A 1
-stop
-NoFlash:
-TNT1 A 1
-stop
 }
 }
 
@@ -160,15 +155,8 @@ stop
 }
 }
 
-actor RainDrizzle_SP
+actor RainDrizzle_SP : RainSprinkle_SP
 {
-+CLIENTSIDEONLY
-+NOINTERACTION
-- SOLID
-+NOGRAVITY
-height 0
-radius 0
-Scale 2.5
 States
 {
 Spawn:

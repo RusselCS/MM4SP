@@ -1,0 +1,89 @@
+actor RingWeapons : MMWeaponGiver
+{
++INVENTORY.AUTOACTIVATE
+States
+{
+SpawnWeapons:
+TNT1 A 0
+TNT1 A 0 A_SpawnItemEx("Ring_WoodWep", 32)
+TNT1 A 0 //A_SpawnItemEx("Ring_SparkWep", 32, 0, 0, 0, 0, 0, 45)
+TNT1 A 0 //A_SpawnItemEx("Ring_NapalmWep", 32, 0, 0, 0, 0, 0, 90)
+TNT1 A 0 //A_SpawnItemEx("Ring_YamatoWep", 32, 0, 0, 0, 0, 0, 135)
+TNT1 A 0 //A_SpawnItemEx("Ring_BurstWep", 32, 0, 0, 0, 0, 0, 180)
+TNT1 A 0 //A_SpawnItemEx("Ring_SwordWep", 32, 0, 0, 0, 0, 0, 225)
+TNT1 A 0 //A_SpawnItemEx("Ring_ColdWep", 32, 0, 0, 0, 0, 0, 270)
+TNT1 A 0 //A_SpawnItemEx("Ring_GalaxyWep", 32, 0, 0, 0, 0, 0, 315)
+stop
+Use:
+TNT1 A 0 A_PlaySoundEx("item/refill","Voice")
+TNT1 A 0 A_GiveInventory("Ring_WoodWep", 1)
+TNT1 A 0 //A_GiveInventory("Ring_SparkWep", 1)
+TNT1 A 0 //A_GiveInventory("Ring_NapalmWep", 1)
+TNT1 A 0 //A_GiveInventory("Ring_YamatoWep", 1)
+TNT1 A 0 //A_GiveInventory("Ring_BurstWep", 1)
+TNT1 A 0 //A_GiveInventory("Ring_SwordWep", 1)
+TNT1 A 0 //A_GiveInventory("Ring_ColdWep", 1)
+TNT1 A 0 //A_GiveInventory("Ring_GalaxyWep", 1)
+stop
+}
+}
+
+actor DustWeapons : MMWeaponGiver
+{
++INVENTORY.AUTOACTIVATE
+States
+{
+SpawnWeapons:
+TNT1 A 0
+TNT1 A 0 //A_SpawnItemEx("Dust_WoodWep", 32)
+TNT1 A 0 //A_SpawnItemEx("Dust_SparkWep", 32, 0, 0, 0, 0, 0, 45)
+TNT1 A 0 //A_SpawnItemEx("Dust_NapalmWep", 32, 0, 0, 0, 0, 0, 90)
+TNT1 A 0 //A_SpawnItemEx("Dust_YamatoWep", 32, 0, 0, 0, 0, 0, 135)
+TNT1 A 0 //A_SpawnItemEx("Dust_BurstWep", 32, 0, 0, 0, 0, 0, 180)
+TNT1 A 0 //A_SpawnItemEx("Dust_SwordWep", 32, 0, 0, 0, 0, 0, 225)
+TNT1 A 0 //A_SpawnItemEx("Dust_ColdWep", 32, 0, 0, 0, 0, 0, 270)
+TNT1 A 0 //A_SpawnItemEx("Dust_GalaxyWep", 32, 0, 0, 0, 0, 0, 315)
+stop
+Use:
+TNT1 A 0 A_PlaySoundEx("item/refill","Voice")
+TNT1 A 0 //A_GiveInventory("Dust_WoodWep", 1)
+TNT1 A 0 //A_GiveInventory("Dust_SparkWep", 1)
+TNT1 A 0 //A_GiveInventory("Dust_NapalmWep", 1)
+TNT1 A 0 //A_GiveInventory("Dust_YamatoWep", 1)
+TNT1 A 0 //A_GiveInventory("Dust_BurstWep", 1)
+TNT1 A 0 //A_GiveInventory("Dust_SwordWep", 1)
+TNT1 A 0 //A_GiveInventory("Dust_ColdWep", 1)
+TNT1 A 0 //A_GiveInventory("Dust_GalaxyWep", 1)
+stop
+}
+}
+
+actor ToadWeapons : MMWeaponGiver
+{
++INVENTORY.AUTOACTIVATE
+States
+{
+SpawnWeapons:
+TNT1 A 0
+TNT1 A 0 A_SpawnItemEx("Toad_WoodWep", 32)
+TNT1 A 0 //A_SpawnItemEx("Toad_SparkWep", 32, 0, 0, 0, 0, 0, 45)
+TNT1 A 0 //A_SpawnItemEx("Toad_NapalmWep", 32, 0, 0, 0, 0, 0, 90)
+TNT1 A 0 //A_SpawnItemEx("Toad_YamatoWep", 32, 0, 0, 0, 0, 0, 135)
+TNT1 A 0 //A_SpawnItemEx("Toad_BurstWep", 32, 0, 0, 0, 0, 0, 180)
+TNT1 A 0 //A_SpawnItemEx("Toad_SwordWep", 32, 0, 0, 0, 0, 0, 225)
+TNT1 A 0 //A_SpawnItemEx("Toad_ColdWep", 32, 0, 0, 0, 0, 0, 270)
+TNT1 A 0 //A_SpawnItemEx("Toad_GalaxyWep", 32, 0, 0, 0, 0, 0, 315)
+stop
+Use:
+TNT1 A 0 A_PlaySoundEx("item/refill","Voice")
+TNT1 A 0 A_GiveInventory("Toad_WoodWep", 1)
+TNT1 A 0 //A_GiveInventory("Toad_SparkWep", 1)
+TNT1 A 0 //A_GiveInventory("Toad_NapalmWep", 1)
+TNT1 A 0 //A_GiveInventory("Toad_YamatoWep", 1)
+TNT1 A 0 //A_GiveInventory("Toad_BurstWep", 1)
+TNT1 A 0 //A_GiveInventory("Toad_SwordWep", 1)
+TNT1 A 0 //A_GiveInventory("Toad_ColdWep", 1)
+TNT1 A 0 //A_GiveInventory("Toad_GalaxyWep", 1)
+stop
+}
+}
