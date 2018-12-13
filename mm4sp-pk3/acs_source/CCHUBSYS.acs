@@ -1,0 +1,109 @@
+#library "CCHUB"
+#include "zcommon.acs"
+
+// LINESTART = name
+// +1 = art
+// +2 = bg
+#define LINESTART 20
+#define CAMSTART 30
+#define SELECTSTART 40
+#define FACESTART 50
+#define LEVELNUM_START 500
+ 
+// [Russel] Stage Select Array Pseudo-objects
+// 0 - Boss Name (ex. "Wood Man")
+// 1 - Mug Shot (ex CCMUG02)
+// 2 - Boss Art (ex. CCART02)
+// 3 - Boss Name Texture (ex. CCNAME02)
+// 4 - Camera Texture Name (ex. CCCAM02)
+//
+str boss_obj[9][5] = {
+    {"Wood Man", "CCMUG02", "CCART02", "CCNAME02", "CCCAM02"},
+    {"Spark Man", "CCMUG03", "CCART03", "CCNAME03", "CCCAM00"},
+    {"Napalm Man", "CCMUG05", "CCART05", "CCNAME05", "CCCAM00"},
+   
+    {"Yamato Man", "CCMUG06", "CCART06", "CCNAME06", "CCCAM00"},
+    {"", "BLACK", "CLOUINVS", "CCNAME00", "CCCAM00"}, // This should always be empty
+    {"Burst Man", "CCMUG07", "CCART07", "CCNAME07", "CCCAM00"},
+   
+    {"Sword Man", "CCMUG08", "CCART08", "CCNAME08", "CCCAM00"},
+    {"Cold Man", "CCMUG0B", "CCART0B", "CCNAME0B", "CCCAM00"},
+    {"Galaxy Man", "CCMUG09", "CCART09", "CCNAME09", "CCCAM00"}
+};
+ 
+str defCam = "CCCAM00";
+ 
+script "4SP_DefineSelect" (void) {
+ 
+    for(int i = 0; i < 9; i++) {
+ 
+        if(strcmp(defCam, boss_obj[i][4]) != 0) {
+            SetCameraToTexture(CAMSTART+i+1, boss_obj[i][4], 120);
+        }
+        SetLineTexture(FACESTART+i+1, SIDE_FRONT, TEXTURE_MIDDLE, boss_obj[i][1]);
+    }
+    SetLineTexture(LINESTART, SIDE_FRONT, TEXTURE_MIDDLE, "CCNAME00");
+    SetLineTexture(LINESTART+1, SIDE_FRONT, TEXTURE_MIDDLE, "CLOUINVS");
+    SetLineTexture(LINESTART+2, SIDE_FRONT, TEXTURE_MIDDLE, "CCCAM00");
+}
+ 
+script "4SP_StageSelect" (void) {
+ 
+    int tid = ActivatorTID();
+    int pln = PlayerNumber();
+ 
+    int buttons = GetPlayerInput(pln, INPUT_BUTTONS);
+    int oldButtons = 0;
+    int ended = false;
+    int select = 4;
+    int oldSelect = 0;
+    int menuDelay = 0;
+ 
+    while(!ended) {
+
+        if(menuDelay > 0) {
+            menuDelay--;
+        }
+ 
+        if(buttons & BT_FORWARD && menuDelay == 0) {
+            menuDelay = 4;
+            select = wrapAround(select - 3, 9);
+        }
+
+        if(buttons & BT_BACK && menuDelay == 0) {
+            menuDelay = 4;
+            select = wrapAround(select + 3, 9);
+        }
+
+        if((buttons & BT_MOVERIGHT || (buttons & BT_RIGHT)) && menuDelay == 0) {
+            menuDelay = 4;
+            select = wrapAround(select + 1, 9);
+        }
+
+        if((buttons & BT_MOVELEFT || (buttons & BT_LEFT)) && menuDelay == 0) {
+            menuDelay = 4;
+            select = wrapAround(select - 1, 9);
+        }
+
+        if(select != oldSelect) {
+            SetLineTexture(SELECTSTART+oldSelect+1, SIDE_FRONT, TEXTURE_MIDDLE, "4WINDOW1");
+            SetLineTexture(SELECTSTART+select+1, SIDE_FRONT, TEXTURE_MIDDLE, "4WINDOW2");
+            SetLineTexture(LINESTART, SIDE_FRONT, TEXTURE_MIDDLE, boss_obj[select][3]);
+            SetLineTexture(LINESTART+1, SIDE_FRONT, TEXTURE_MIDDLE, boss_obj[select][2]);
+            SetLineTexture(LINESTART+2, SIDE_FRONT, TEXTURE_MIDDLE, boss_obj[select][4]);
+            oldSelect = select;
+        }
+ 
+        oldButtons = buttons;
+        buttons = GetPlayerInput(pln, INPUT_BUTTONS);
+        Delay(1);
+    }
+}
+ 
+function int wrapAround(int x, int n) {
+ 
+    while(x < 0) {
+        x += n;
+    }
+    return x % n;
+}
