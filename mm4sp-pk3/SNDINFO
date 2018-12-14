@@ -11,6 +11,9 @@ weapon/dustshot DUSTBIT
 weapon/raindrizzle DRIZZLE
 weapon/raindance S_M4TOA3
 
+// BRIGHT MAN
+weapon/brightshot BUSTER
+
 // ENEMIES
 misc/door2	bdoor2
 enemy/hammerjoeswing	hjswin
