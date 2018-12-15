@@ -45,8 +45,7 @@ actor BrightManAmmo : Ammo
 {
 inventory.amount 1
 inventory.maxamount 3
-ammo.backpackamount 1
-ammo.backpackmaxamount 3
++INVENTORY.IGNORESKILL
 }
 
 actor BrightShot
