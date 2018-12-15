@@ -206,7 +206,7 @@ stop
 }
 }
 
-actor Elecn : GenericRobot 30009
+actor SP_Elecn : GenericRobot 30009
 {
 //$Category MM8BDM-Enemies
 Height 40
@@ -220,7 +220,7 @@ FloatSpeed 10
 fastspeed 10
 dropitem "WeaponEnergy", 16
 dropitem "SmallHealth", 16
-speed 10
+speed 4
 States
 {
 Spawn:
@@ -276,6 +276,7 @@ TNT1 A 1
 stop
 }
 }
+
 actor ElecnShot
 {
 PROJECTILE
