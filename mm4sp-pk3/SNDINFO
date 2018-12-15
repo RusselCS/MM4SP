@@ -19,6 +19,7 @@ misc/door2	bdoor2
 enemy/hammerjoeswing	hjswin
 enemy/hammerjoestep		hjstep
 enemy/hammerjoethrow	hjthrw
+enemy/elecnshot sprksprd
 enemy/cannon	canon
 enemy/powermusclerland	muscle
 enemy/taban	batwing
