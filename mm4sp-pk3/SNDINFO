@@ -14,3 +14,7 @@ enemy/cannon	canon
 enemy/powermusclerland	muscle
 enemy/taban	batwing
 enemy/metcannon	metcan
+
+// SOUNDS
+menu/ccmenu M_SELE
+menu/ccselect DSRADIO

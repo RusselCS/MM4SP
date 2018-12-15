@@ -11,9 +11,13 @@ actor Counter : Inventory {
     inventory.maxamount 65535
 }
 
-actor RadiusCounter : Counter {inventory.maxamount 65535}
-actor HeightCounter : Counter {inventory.maxamount 65535}
-actor DamageCounter : Counter {inventory.maxamount 65535}
+actor RadiusCounter : Counter {}
+actor HeightCounter : Counter {}
+actor DamageCounter : Counter {}
+
+actor BossFlag : Once {}
+
+Actor BossHealthBar : Counter { inventory.maxamount 100 }
 
 actor BasicClientside
 {
