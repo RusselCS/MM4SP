@@ -30,8 +30,7 @@ Fire:
 DUS1 A 0 A_JumpIfNoAmmo("NoAmmo")
 DUS1 A 0 A_PlaySoundEx("weapon/dustshot","Weapon")
 DUS1 A 0 A_FireCustomMissile("DustShot",0,0,8,0)
-DUS1 B 3
-DUS1 C 3
+DUS1 BC 3
 DUS1 A 4
 DUS1 B 0 A_Refire
 goto Ready+1
@@ -45,15 +44,13 @@ actor DustManAmmo : Ammo
 {
 inventory.amount 1
 inventory.maxamount 3
-ammo.backpackamount 1
-ammo.backpackmaxamount 3
++INVENTORY.IGNORESKILL
 }
 
 actor DustShot
 {
 PROJECTILE
 damagetype "Buster"
-Obituary "$OB_DUSTCRUSHER"
 translation "93:93=87:87"
 Speed 28
 Damage (9)
@@ -63,7 +60,7 @@ scale 2.5
 States
 {
 Spawn:
-TNT1 A 2
+TNT1 A 0
 DUST B 1 A_Jump(256, "Option1", "Option2", "Option3")
 goto Option1
 Option1:

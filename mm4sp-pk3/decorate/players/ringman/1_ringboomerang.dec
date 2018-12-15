@@ -106,8 +106,7 @@ actor RingBoomerangB : BasicBouncer
 	var int user_POWER;
 	Translation "192:192=229:229"
 	PROJECTILE
-	damagetype "RingBoomerangB"
-	Obituary "$OB_RINGBOOMERANG"
+	damagetype "Buster"
 	+RIPPER
 	+NOTARGETSWITCH
 	+SKYEXPLODE

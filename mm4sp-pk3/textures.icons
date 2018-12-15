@@ -7,6 +7,15 @@ graphic RINI2, 30, 30
    Patch RIN2M0, 0, 0
 }
 
+//DUST MAN
+//Log Chipper
+graphic DUSI2, 30, 30
+{
+   XScale 2.0
+   YScale 2.0
+   Patch DUS2E0, 0, 0
+}
+
 //TOAD MAN
 //Natural Downpour
 graphic TARI2, 30, 30

@@ -43,8 +43,10 @@ IsSelected RingManWep
 }
 IsSelected Ring_WoodWep{Drawbar"BARAM201", "BAREMPTY", Ammo1, vertical, 16, 8;}	
 
+IsSelected Dust_WoodWep{Drawbar"BARAM201", "BAREMPTY", Ammo1, vertical, 16, 8;}	
+
 IsSelected Toad_WoodWep{Drawbar"BARAM201", "BAREMPTY", Ammo1, vertical, 16, 8;}	
-}
+
 
 //Assists
 InInventory RushJetCounter, 5{DrawImage "RUSHH2H8", 290,16;}
