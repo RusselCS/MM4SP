@@ -1,0 +1,44 @@
+clearepisodes // if we wanna bring back the core campaign alongside our stuff, just swap this back
+clearskills
+
+episode CCHUB
+{
+   name = "Cossack's Crusaders"
+}
+
+map CCHUB "QUARTER OF CRUSADERS"
+{
+   next = "CCWOO"
+   sky1 = "BLACK", 0
+   cluster = 1
+   music = "4DC1MUS"
+   aircontrol = 0.5
+   levelnum = 500
+   nointermission
+   clipmidtextures
+   KeepFullInventory
+}
+
+map CCWOO "WOOD MAN - SECRET GROVE"
+{
+   next = "SPTEST"
+   sky1 = "BLACK", 0
+   cluster = 1
+   music = "MM8INT"
+   aircontrol = 0.5
+   levelnum = 501
+   par = 1
+   clipmidtextures
+   nointermission
+}
+
+skill normal
+{
+   SpawnFilter = normal 
+   name = "Normal"
+   textcolor = "cyan"
+   ACSReturn = 2
+   Key = 2
+   DefaultSkill
+   DoubleAmmoFactor = 1.0
+}

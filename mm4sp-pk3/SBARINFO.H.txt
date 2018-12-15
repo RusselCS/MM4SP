@@ -69,6 +69,8 @@ InInventory BossHealth6, 1{DrawBar "VARHEALT", "VAREMPTY", BossHealth6, horizont
 InInventory BossHealth7, 1{DrawBar "VARHEALT", "VAREMPTY", BossHealth7, horizontal, 202, 168;}
 InInventory BossHealth8, 1{DrawBar "VARHEALT", "VAREMPTY", BossHealth8, horizontal, 202, 184;}
 InInventory EvilRobotShield, 1{DrawBar "VARAMM32", "VAREMPTY", BossHealth1, horizontal, 202, 184;}
+// [Russ] TO-DO: TEMP. REMOVE WHEN THE BOSS SYSTEM IS ACTUALLY IMPLEMENTED.
+InInventory BossHealthBar, 1 { DrawBar "BARHEALT", "BAREMPTY", BossHealthBar, vertical, 292, 8; }
 
 // Misc
 InInventory TimeStoppedCounter, 1{DrawImage "FLASHS", 36, 0;}

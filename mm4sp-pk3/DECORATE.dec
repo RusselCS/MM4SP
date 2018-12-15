@@ -34,3 +34,5 @@ actor GitTest
 #include "decorate/enemies/woodman.dec"
 #include "decorate/enemies/sparkman.dec"
 
+// BOSSES
+#include "decorate/bosses/woodmanboss.dec"

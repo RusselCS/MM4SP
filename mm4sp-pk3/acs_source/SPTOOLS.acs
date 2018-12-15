@@ -93,10 +93,10 @@ script "4SP_CheckAlive" (void) {
 //
 #define MAX_BOSSES 4
 str bossList[MAX_BOSSES][2] = {
-    {"WoodManSP", "Wood"},
-    {"SparkManSP", "Spark"},
-    {"NapalmManSP", "Napalm"},
-    {"YamatoManSP", "Yamato"}
+    {"WoodManBossCC", "Wood"},
+    {"SparkManBossCC", "Spark"},
+    {"NapalmManBossCC", "Napalm"},
+    {"YamatoManBossCC", "Yamato"}
 };
 
 #define MAX_PLAYERS 4
