@@ -25,6 +25,8 @@ actor GitTest
 #include "decorate/players/toadman/0_toadmanclass.dec"
 #include "decorate/players/toadman/1_rainflush.dec"
 #include "decorate/players/toadman/2_naturaldownpour.dec"
+#include "decorate/players/brightman/0_brightmanclass.dec"
+#include "decorate/players/brightman/1_brightbuster.dec"
 
 // ENEMIES
 #include "decorate/enemies/basics.dec"
