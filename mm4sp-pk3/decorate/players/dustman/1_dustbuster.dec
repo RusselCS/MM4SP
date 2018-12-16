@@ -52,8 +52,8 @@ actor DustShot
 PROJECTILE
 damagetype "Buster"
 translation "93:93=87:87"
-Speed 28
-Damage (9)
+Speed 30
+Damage (15)
 radius 5
 height 5
 scale 2.5
