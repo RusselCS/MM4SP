@@ -17,6 +17,8 @@ actor RadiusCounter : Counter {}
 actor HeightCounter : Counter {}
 actor DamageCounter : Counter {}
 
+actor MonsterFreezeFlag : Counter {}
+
 actor BossFlag : Once {}
 
 Actor BossHealthBar : Counter { inventory.maxamount 100 }
@@ -53,6 +55,18 @@ painchance 256
 damagetype "Enemy"
 painsound "misc/devilpain"
 scale 2.5
+States
+{
+Pain.FlashStopper:
+"####" "#" 0 ACS_NamedExecuteAlways("4SP_EnemyManage",0,1,1)
+"####" "#" 30 A_SpawnItemEx("ShockFX",4,0,32)
+"####" "#" 0 ACS_NamedExecuteAlways("4SP_EnemyManage",0,1,0)
+"####" "#" 1 A_Jump(256,"Return")
+wait
+Return:
+"####" "#" 1 A_Jump(256,"Look")
+wait
+}
 }
 
 actor EnemyDeathFX

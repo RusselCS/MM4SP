@@ -19,7 +19,7 @@ BATT A 0 A_GiveInventory("DamageCounter",15)
 BATT A 0 A_SpawnItemEX("BasicEnemyContactDamager")
 goto SpawnLoop
 SpawnLoopWait:
-BATT C 0 A_GiveInventory("CutterFlag",20)
+BATT C 0 A_GiveInventory("CutterFlag",60)
 goto SpawnLoop
 SpawnLoop:
 BATT C 0 A_ClearTarget
@@ -52,7 +52,7 @@ loop
 OperationConsistentHeight:
 BATT D 0 A_ChangeFlag("INVULNERABLE",1)
 BATT D 1 ThrustThingZ(0,-4*(61-(ceilingz-z)),0,0)
-BATT D 0 A_JumpIfInventory("CutterFlag",20,"Waiting")
+BATT D 0 A_JumpIfInventory("CutterFlag",60,"Waiting")
 goto Look
 Waiting:
 BATT D 0 A_TakeInventory("CutterFlag",999)
@@ -106,6 +106,7 @@ BATT C 0 A_JumpIfCloser(64,"SpawnLoopWait")
 Chase7:
 BATT B 2 A_Chase("")
 BATT A 0 A_GiveInventory("CutterFlag",1)
+Return:
 BATT A 0 A_JumpIfInventory("CutterFlag",60,"SpawnLoop")
 Goto Chase
 Pain.PunctureNeedle:
@@ -475,8 +476,8 @@ TNT1 A 0 ACS_NamedExecuteAlways("4SP_EnemyStart",0)
 Look:
 FRIN A 0 A_ClearTarget
 FRIN A 0 A_SetAngle(user_angle)
-FRIN ABAB 3 A_LookEx(LOF_NOSOUNDCHECK,0,2500,0,180,"See")
-FRIN CDACD 4 A_LookEx(LOF_NOSOUNDCHECK,0,2500,0,180,"See")
+FRIN ABAB 3 A_LookEx(LOF_NOSOUNDCHECK,0,2500,0,360,"See")
+FRIN CDACD 4 A_LookEx(LOF_NOSOUNDCHECK,0,2500,0,360,"See")
 loop
 See:
 FRIN A 0 A_FaceTarget

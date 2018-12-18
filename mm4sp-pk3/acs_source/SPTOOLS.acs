@@ -38,6 +38,36 @@ Script "4SP_EnemyPain" (void) //CLIENTSIDE
     }
 }
 
+script "4SP_EnemyManage" (int source, int value)
+{
+    switch(source) // "source" of damage
+    {
+    Case 1:
+        if(value > 0)
+        {
+            if(!CheckFlag(0, "NOGRAVITY"))
+            {
+                SetActorFlag(0, "NOGRAVITY", true);
+                GiveInventory("MonsterFreezeFlag", 1);
+            }
+            SetActorVelocity(0, 0, 0, 0, 0, 0);
+            Thing_Stop(0);
+        }
+        else
+        {
+            if(CheckInventory("MonsterFreezeFlag") > 0)
+            {
+                TakeInventory("MonsterFreezeFlag", 1);
+                if(CheckInventory("MonsterFreezeFlag") == 0)
+                {
+                    SetActorFlag(0, "NOGRAVITY", false);
+                }
+            }
+        }
+    break;
+    }
+}
+
 // [Russel] Simple inventory count script.
 // [Trill] Added onto it to include pointer selection.
 // 
