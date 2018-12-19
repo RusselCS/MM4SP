@@ -49,3 +49,10 @@ sprite TAR2D0, 427, 104 {Offset 53, -81 Patch TARMD0, 0, 0 {Translation "192:192
 sprite TAR2E0, 427, 112 {Offset 53, -73 Patch TARME0, 0, 0 {Translation "192:192=4:4", "198:198=129:129", "199:199=131:131"}}
 sprite TAR2G0, 380, 80 {Offset 30, -139 Patch TARMG0, 0, 0 {Translation "192:192=4:4", "198:198=129:129", "199:199=131:131"}}
 sprite TAR2H0, 380, 80 {Offset 30, -119 Patch TARMH0, 0, 0 {Translation "192:192=4:4", "198:198=129:129", "199:199=131:131"}}
+
+//BRIGHT MAN
+//Flash Stopper
+sprite FST1D0, 148, 80 {Offset 30, -103 Patch FSTBD0, 0, 0 {Translation "192:192=248:248", "198:198=226:226", "199:199=42:42"}}
+sprite FST1E0, 116, 96 {Offset 5, -96 Patch FSTBE0, 0, 0 {Translation "192:192=248:248", "198:198=226:226", "199:199=42:42"}}
+sprite FST1F0, 116, 96 {Offset -15, -82 Patch FSTBF0, 0, 0 {Translation "192:192=248:248", "198:198=226:226", "199:199=42:42"}}
+sprite FST1G0, 128, 128 {Offset -15, -50 Patch FSTBG0, 0, 0 {Translation "192:192=248:248", "198:198=226:226", "199:199=42:42"}}

@@ -17,6 +17,12 @@ SetActorProperty(0,APROP_Health,GetActorProperty (0,APROP_Health) + (GetActorPro
 GiveInventory("HealthScaled",1);
 }
 
+// [Trill] Stop respawning enemies overflowing, ported from MMSP-Basic
+script "4SP_OverflowCheck" (int Enemy)
+{
+if(Enemy==0){if(ThingCountName("SP_Claw",0)>25){SetActorState(0, "Despawn"); }}
+}
+
 Script "4SP_EnemyPain" (void) //CLIENTSIDE
 {
     if(CheckInventory("BoostFlag")>0){terminate;} // Do not run twice for one monster
@@ -47,21 +53,20 @@ script "4SP_EnemyManage" (int source, int value)
         {
             if(!CheckFlag(0, "NOGRAVITY"))
             {
-                SetActorFlag(0, "NOGRAVITY", true);
+                SetActorProperty(0, APROP_GRAVITY, 0);
                 GiveInventory("MonsterFreezeFlag", 1);
             }
+            GiveInventory("ChangeNoPainTrue",1);
             SetActorVelocity(0, 0, 0, 0, 0, 0);
             Thing_Stop(0);
         }
         else
         {
+            GiveInventory("ChangeNoPainFalse",1);
             if(CheckInventory("MonsterFreezeFlag") > 0)
             {
                 TakeInventory("MonsterFreezeFlag", 1);
-                if(CheckInventory("MonsterFreezeFlag") == 0)
-                {
-                    SetActorFlag(0, "NOGRAVITY", false);
-                }
+                SetActorProperty(0, APROP_GRAVITY, 1*65536);
             }
         }
     break;

@@ -1,6 +1,6 @@
 // Hammer Joe
 // Args0 = Stand still
-actor SP_HammerJoe : GenericRobot 30010
+actor SP_HammerJoe : GenericRobot 30014
 {
 //$Category MM8BDM-Enemies
 Height 52
@@ -116,7 +116,7 @@ loop
 }
 }
 
-actor SP_GiantSpringer : GenericRobot 30016
+actor SP_GiantSpringer : GenericRobot 30015
 {
 //$Category MM8BDM-Enemies
 Height 52
@@ -206,7 +206,7 @@ stop
 }
 }
 
-actor SP_Elecn : GenericRobot 30009
+actor SP_Elecn : GenericRobot 30016
 {
 //$Category MM8BDM-Enemies
 Height 40

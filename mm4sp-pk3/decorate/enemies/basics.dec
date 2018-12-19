@@ -1,4 +1,4 @@
-actor SP_SniperJoeScout : GenericRobot 30006
+actor SP_SniperJoeScout : GenericRobot 30000
 {
 //$Category MM8BDM-Enemies
 Height 52
@@ -72,7 +72,7 @@ loop
 
 // A Sniper joe with a shield
 // Args0 = Stand still
-actor SP_SniperJoeShielded : GenericRobot 30007
+actor SP_SniperJoeShielded : GenericRobot 30001
 {
 //$Category MM8BDM-Enemies
 Height 52
@@ -217,7 +217,127 @@ stop
 }
 }
 
-actor SP_SniperArmor : GenericRobot 30028
+// A Sniper joe that chucks grenades
+// Args0 = Stand still
+// Args1 = Don't use buster
+actor SP_SniperJoeGrenader : SP_SniperJoeShielded 30002
+{
+Obituary "%o was sniped by a Sniper Joe Grenader."
+Health 90
+translation "192:192=4:4", "198:198=106:106"
+States
+{
+Spawn:
+TNT1 A 0
+TNT1 A 0 ACS_NamedExecuteAlways("4SP_EnemyStart",0)
+Look:
+SNIP A 5 A_LookEx(LOF_NOSOUNDCHECK,0,0,0,360,"See")
+loop
+See:
+SNIP B 1
+SNIP B 1 A_JumpIf(Args[0]==1, "See2")
+SNIP B 1 //A_JumpIfTargetInLOS("ShieldUp") // THIS FUNCTION IS BUGGED ONLINE ARGH!
+SNIP BBBB 1 A_Chase
+SNIP A 0// A_JumpIfTargetInLOS("ShieldUp")
+SNIP CCCC 1 A_Chase
+SNIP A 0 //A_JumpIfTargetInLOS("ShieldUp")
+SNIP DDDD 1 A_Chase
+SNIP A 0 //A_JumpIfTargetInLOS("ShieldUp")
+SNIP EEEE 1 A_Chase
+Goto See+3
+See2:
+SNIP A 1 //A_JumpIfTargetInLOS("ShieldUp")
+Goto Missile
+Pain.PunctureNeedle:
+CRAZ A 0 A_Stop
+CRAZ A 0 A_Pain
+SNIP A 30 A_SpawnItemEx("ShockFX",4,0,32)
+Goto Look
+ShieldUp:
+Missile:
+TNT1 A 0 A_SpawnItemEx("SniperJoeShieldX",23,-7,8,momx, momy, momz, 0, SXF_NOCHECKPOSITION|SXF_ABSOLUTEMOMENTUM, 0)
+TNT1 A 0 A_SpawnItemEx("SniperJoeShieldGFX",23,-17,8,momx, momy, momz, 0, SXF_NOCHECKPOSITION|SXF_ABSOLUTEMOMENTUM, 0)
+SNIP A 2 A_FaceTarget
+TNT1 A 0 A_GiveInventory("CutterFlag",1)
+TNT1 A 0 A_JumpIfInventory("CutterFlag",30,"ReadyFire")
+loop
+ReadyFire:
+TNT1 A 0 A_TakeInventory("CutterFlag",999)
+TNT1 A 0 A_SpawnItemEx("SniperJoeShieldX",23,-7,8,momx, momy, momz, 0, SXF_NOCHECKPOSITION|SXF_ABSOLUTEMOMENTUM, 0)
+TNT1 A 0 A_SpawnItemEx("SniperJoeShieldGFX",23,-17,8,momx, momy, momz, 0, SXF_NOCHECKPOSITION|SXF_ABSOLUTEMOMENTUM, 0)
+SNIP A 2 A_FaceTarget
+SNIP A 0 A_Jump(20,"ShieldFire")
+SNIP A 0 //A_JumpIfTargetInLOS("ReadyFire")
+Goto ReadyFire//See
+ShieldFire:
+SNIP F 1 A_JumpIf(Args[1]==1, "ThrowGrenade")
+TNT1 A 0 A_JumpIfInventory("BusterAmmo",1,"ThrowGrenade")
+TNT1 A 0 A_GiveInventory("BusterAmmo",1)
+SNIP F 15 A_FaceTarget
+SNIP F 0 A_FaceTarget
+KYOR F 0 A_PlaySoundEx("misc/devilfire","Voice")
+SNIP F 0 A_CustomMissile("SniperJoeShot",12,6,0)
+SNIP F 17
+SNIP F 0 A_FaceTarget
+KYOR F 0 A_PlaySoundEx("misc/devilfire","Voice")
+SNIP F 0 A_CustomMissile("SniperJoeShot",12,6,0)
+SNIP F 17
+SNIP F 1 A_JumpIf(Args[0]==0, "See")
+SNIP A 0 A_ClearTarget
+Goto Look
+ThrowGrenade:
+SNIP J 5 A_FaceTarget
+SNIP A 10 A_TakeInventory("BusterAmmo",1)
+SNIP K 1 A_FaceTarget
+SNIP K 20 A_CustomMissile("SniperJoeGrenade",12,-10,0)
+Goto Look
+Death:
+CRAZ A 0 A_Pain
+CRAZ A 0 A_Fall
+TNT1 A 5 A_SpawnItem("EnemyDeathFX",0,32)
+TNT1 A 1
+stop
+}
+}
+
+
+actor SniperJoeShieldGFX : SniperJoeShieldFX
+{
+translation "192:192=4:4", "198:198=106:106"
+}
+
+actor SniperJoeGrenade
+{
+PROJECTILE
+damagetype "Enemy"
+-NOGRAVITY
++DOOMBOUNCE
+scale 2.5
+Height 12
+Radius 12
+Speed 26
+BounceFactor 0.7
+WallbounceFactor 0.8
+SeeSound "weapon/adapterreturn"
+Damage (0)
+States
+{
+Spawn:
+JGRE A 0
+JGRE A 1 ThrustThingZ(0,42,0,0)
+Fyling:
+JGRE ABCDE 5
+loop
+Death:
+JGRE A 0 A_Explode(50,135,0)
+BOMB A 0 A_PlaySoundEx("weapon/coilexplode", "Weapon")
+BOMB A 0 A_ChangeFlag("NOGRAVITY",1)
+BOMB BCDEFGHIJKLMNOPQR 1
+stop
+}
+}
+
+actor SP_SniperArmor : GenericRobot 30003
 {
 //$Category MM8BDM-Enemies
 Health 250
@@ -388,7 +508,7 @@ translation "192:192=4:4", "198:198=225:225"
 
 // A metool
 // Args0 = Don't move after firing
-actor SP_MetEnemy : GenericRobot 30029
+actor SP_MetEnemy : GenericRobot 30004
 {
 //$Category MM8BDM-Enemies
 Health 20
@@ -467,7 +587,7 @@ loop
 }
 }
 
-actor SP_Cannon1 : GenericRobot 30013
+actor SP_Cannon1 : GenericRobot 30005
 {
 //$Category MM8BDM-Enemies
 Height 52

@@ -47,6 +47,8 @@ IsSelected Dust_WoodWep{Drawbar"BARAM201", "BAREMPTY", Ammo1, vertical, 16, 8;}
 
 IsSelected Toad_WoodWep{Drawbar"BARAM201", "BAREMPTY", Ammo1, vertical, 16, 8;}	
 
+IsSelected BrightmanWep2{Drawbar"BARAMM18", "BAREMPTY", Ammo1, vertical, 16, 8;}
+
 
 //Assists
 InInventory RushJetCounter, 5{DrawImage "RUSHH2H8", 290,16;}
@@ -73,9 +75,9 @@ InInventory BossHealth5, 1{DrawBar "BARHEALT", "BAREMPTY", BossHealth5, vertical
 InInventory BossHealth6, 1{DrawBar "BARHEALT", "BAREMPTY", BossHealth6, vertical, 292, 8;}
 InInventory BossHealth7, 1{DrawBar "BARHEALT", "BAREMPTY", BossHealth7, vertical, 306, 8;}
 InInventory BossHealth8, 1{DrawBar "BARHEALT", "BAREMPTY", BossHealth8, vertical, 292, 8;}
-InInventory EvilRobotShield, 1{DrawBar "BARAMM32", "BAREMPTY", BossHealth1, vertical, 292, 8;}
 // [Russ] TO-DO: TEMP. REMOVE WHEN THE BOSS SYSTEM IS ACTUALLY IMPLEMENTED.
 InInventory BossHealthBar, 1 { DrawBar "BARHEALT", "BAREMPTY", BossHealthBar, vertical, 292, 8; }
+InInventory EvilRobotShield, 1{DrawBar "BARAMM32", "BAREMPTY", BossHealthBar, vertical, 292, 8;}
 
 // Misc
 InInventory TimeStoppedCounter, 1{DrawImage "FLASHS", 36, 0;}

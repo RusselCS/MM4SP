@@ -15,28 +15,28 @@ Spawn:
 WEAP X 1
 loop
 Ready:
-FSTB A 0 ACS_ExecuteAlways(998,0,780)
-FSTB A 1 A_WeaponReady
+FST1 A 0 ACS_ExecuteAlways(998,0,780)
+FST1 A 1 A_WeaponReady
 Goto Ready+1
 Deselect:
 TNT1 AAAAAAAAAAAAAAAAAAAAAA 0 A_Lower
-FSTB A 1 A_Lower
+FST1 A 1 A_Lower
 Loop
 Select:
 TNT1 AAAAAAAAAAAAAAAAAAAAAA 0 A_Raise
-FTSB A 1 A_Raise
+FTS1 A 1 A_Raise
 Loop
 Fire:
-FSTB A 0 A_JumpIfNoAmmo("NoAmmo")
-FSTB A 0 A_PlaySoundEx("weapon/pshot","Weapon")
-FSTB A 0 A_FireCustomMissile("BrightShot", random(-2, 2),0,8,0,0,random(-2,2))
-FSTB B 3
-FSTB C 3
-FSTB A 2
-FSTB B 0 A_Refire
+FST1 A 0 A_JumpIfNoAmmo("NoAmmo")
+FST1 A 0 A_PlaySoundEx("weapon/pshot","Weapon")
+FST1 A 0 A_FireCustomMissile("BrightShot", random(-2, 2),0,8,0,0,random(-2,2))
+FST1 B 3
+FST1 C 3
+FST1 A 2
+FST1 B 0 A_Refire
 goto Ready+1
 NoAmmo:
-FSTB A 1
+FST1 A 1
 Goto Ready+1
 }
 }
@@ -62,7 +62,7 @@ States
 {
 Spawn:
 TNT1 A 0
-FSTB D 1
+FST1 H 1
 wait
 }
 }

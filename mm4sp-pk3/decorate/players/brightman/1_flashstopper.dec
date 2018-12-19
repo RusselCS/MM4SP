@@ -1,0 +1,124 @@
+actor BrightManWep2 : BaseMM8BDMWep
+{
+Dropitem ""
+inventory.icon "BRIGHSI"
+Weapon.AmmoUse 7
+Weapon.AmmoGive 28
+Weapon.SlotNumber 6
+Tag "Flash Stopper"
+Inventory.Pickupmessage "Power up! It's lights out!"
+weapon.ammotype "BrightManAmmo2"
++WEAPON.NOAUTOFIRE
+States
+{
+Spawn:
+WEA3 E 1
+loop
+Ready:
+FST1 D 0 ACS_ExecuteAlways(998,0,780)
+FST1 D 1 A_WeaponReady
+Goto Ready+1
+Deselect:
+TNT1 AAAAAAAAAAAAAAAAAAAAAA 0 A_Lower
+FST1 D 1 A_Lower
+Loop
+Select:
+TNT1 AAAAAAAAAAAAAAAAAAAAAA 0 A_Raise
+FST1 D 1 A_Raise
+Loop
+Fire:
+FST1 D 0 A_JumpIfNoAmmo("NoAmmo")
+FST1 D 0 A_GiveInventory("BrightStopperUsed",1)
+FST1 EF 3 
+FST1 D 0 A_SpawnItemEx("BrightStopperFX",0,0,64)
+FST1 D 0 A_PlaySoundEx("weapon/flashstopper","Weapon")
+FST1 D 0 A_FireCustomMissile("BrightStopper",0,1,8,0)
+FST1 G 40
+FST1 F 3 
+FST1 D 0 A_TakeInventory("BrightStopperUsed",999)
+FST1 D 0 A_Refire
+goto Ready+1
+NoAmmo:
+FST1 D 1
+Goto Ready+1
+}
+}
+
+actor BrightStopperUsed : Once {}
+
+actor BrightManAmmo2 : Ammo
+{
+inventory.amount 1
+inventory.maxamount 28
++INVENTORY.IGNORESKILL
+}
+
+actor BrightStopper
+{
+-SOLID
++NOGRAVITY
+PROJECTILE
++DONTBLAST
++NOINTERACTION
+damage 0
+radius 1
+height 1
+damagetype "FlashStopper"
+States
+{
+Spawn:
+TNT1 A 0
+TNT1 A 0 A_GiveToTarget("BrightStopperFlash", 1)
+TNT1 A 1 A_Explode(5,450,0,0,450)
+stop
+}
+}
+
+actor BrightStopperFlash : CustomInventory
+{
++INVENTORY.AUTOACTIVATE
+States
+{
+Use:
+TNT1 A 0 A_SetBlend("99 99 99", 0.95, 15)
+stop
+}
+}
+
+actor BrightStopperFX : BasicClientside
+{
+renderstyle translucent
+alpha 1.0
+scale 5.0
+states
+{
+Spawn:
+FST1 IJKLMN 1 A_FadeOut(0.12)
+stop
+}
+}
+
+//[Trill] Borrowed FX from CBM
+//
+actor BrightStoppedFX : BasicClientside
+{
+scale 2.25
+states
+{
+Spawn:
+TNT1 A 0
+TNT1 A 0 A_Jump(256,"Spawn1","Spawn2","Spawn3","Spawn4")
+Spawn1:
+FST1 OPQR 2
+stop
+Spawn2:
+FST1 OPPQQRR 1
+stop
+Spawn3:
+FST1 POOPQR 1
+stop
+Spawn4:
+FST1 POPQR 1
+stop
+}
+}
