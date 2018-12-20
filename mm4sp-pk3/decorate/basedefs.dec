@@ -55,6 +55,9 @@ painchance 256
 damagetype "Enemy"
 painsound "misc/devilpain"
 scale 2.5
+var int user_velx;
+var int user_vely;
+var int user_velz;
 States
 {
 Pain.FlashStopper:
@@ -180,4 +183,48 @@ actor EnemyContactDamagerProtect : PowerProtection
 {
 Powerup.Duration 10
 damagefactor "EnemyContact", 0.0
+}
+
+//[Trill] Base actors nicked from CBM
+//
+actor EnemyFloorQuake
+{
++MISSILE
+-SOLID
++DONTBLAST
++NOGRAVITY
++RIPPER
++SKYEXPLODE
++NOINTERACTION
++DONTSPLASH
++THRUGHOST
++THRUACTORS
++DONTREFLECT
+Damage 0
+radius 2
+height 2
+damagetype "Enemy"
++NOCLIP
+Renderstyle None
+States
+{
+Spawn:
+TNT1 A 0
+TNT1 A 0 A_SetScale(angle*256/360)
+TNT1 A 0 Thing_Move(0,1000+momz*8,1)
+TNT1 A 4 A_SpawnItemEx("EnemyFloorQuakeBoom",0,0,28,0,0,0,0,16384)
+stop
+}
+}
+
+actor EnemyFloorQuakeBoom : EnemyFloorQuake
+{
+States
+{
+Spawn:
+TNT1 A 0
+TNT1 A 0 A_Explode(ScaleX,15,0,0,15)
+TNT1 A 4
+stop
+}
 }

@@ -119,128 +119,184 @@ stop
 }
 }
 
-actor SP_Pipi : GenericRobot 30007
+actor SP_PipiSpawner 30007
+{
+//$Category MM8BDM-Enemies
++NOGRAVITY
++NOINTERACTION
++ISMONSTER
+height 32
+radius 32
+renderstyle none
+states
+{
+Spawn:
+BLAD B 1 A_LookEx(LOF_NOSOUNDCHECK,0,2000,0,360,"See")
+loop
+See:
+BLAD B 200 A_SpawnItemEx("SP_Pipi")
+Goto Spawn
+}
+}
+
+actor SP_Pipi : GenericRobot
 {
 //$Category MM8BDM-Enemies
 Health 10
-Height 32
-Radius 16
+Height 22
+Radius 22
 maxstepheight 50
 +DROPOFF
 +NOGRAVITY
 -COUNTKILL
+species "Enemy"
 States
 {
 Spawn:
 TNT1 A 0
 BATT A 0 ACS_NamedExecuteAlways("4SP_EnemyStart",0)
-BATT A 0 A_GiveInventory("DamageCounter",15)
-BATT A 0 A_SpawnItemEX("BasicEnemyContactDamager")
+BATT A 0 A_SpawnItemEx("PipiEgg",0,0,-25,0,0,0,0,SXF_SETMASTER)
 Look:
 TNT1 A 0 A_ChangeVelocity(12.0, 0.0, 0.0, CVF_RELATIVE|CVF_REPLACE)
-PIPI AB 2 A_LookEx(LOF_NOSOUNDCHECK,0,400,0,360,"See")
+PIPI C 2 A_LookEx(LOF_NOSOUNDCHECK,0,400,0,360,"See")
+PIPI D 2 A_LookEx(LOF_NOSOUNDCHECK,0,400,0,360,"See2")
 loop
 Fly:
 TNT1 A 0 A_ChangeVelocity(12.0, 0.0, 0.0, CVF_RELATIVE|CVF_REPLACE)
-PIPI CD 2
-loop
+PIPI C 2
+Fly2:
+PIPI D 2
+goto Fly
+Return:
+TNT1 A 0 A_JumpIfInventory("DamageCounter",1,"Fly")
 See:
-TNT1 A 0 A_SpawnItemEx("PipiEgg",0,0,-8,0,0,0,0,SXF_SETMASTER)
+TNT1 A 0 A_GiveInventory("DropPipiEgg",1)
+BATT A 0 A_GiveInventory("DamageCounter",15)
+BATT A 0 A_SpawnItemEX("BasicEnemyContactDamager")
 Goto Fly
+See2:
+TNT1 A 0 A_GiveInventory("DropPipiEgg",1)
+BATT A 0 A_GiveInventory("DamageCounter",15)
+BATT A 0 A_SpawnItemEX("BasicEnemyContactDamager")
+Goto Fly2
 Death:
 TNT1 A 0 A_Pain
 TNT1 A 0 A_KillChildren
 TNT1 A 0 A_Stop
-TNT1 A 0 A_ChangeFlag("NOGRAVITY",1)
-TNT1 A 0 A_Fall
+BATT A 0 A_Fall
+BATT A 0 A_ChangeFlag("NOGRAVITY",1)
 MMFX BCDE 3
 stop
 }
 }
 
-actor PipiEgg : GenericRobot
+actor DropPipiEgg : Once {}
+
+actor PipiEgg
 {
-+THRUSPECIES
--SOLID
++ISMONSTER
 -COUNTKILL
-scale 2.5
++MISSILE
++NOGRAVITY
++NOTARGETSWITCH
+-SOLID
++SHOOTABLE
++THRUSPECIES
+species "Enemy"
+damagetype "Enemy"
 Health 1
 Height 16
-Radius 16
+Radius 10
+scale 2.5
+speed 0
+Damage (0)
+painsound "misc/devilpain"
 deathsound "misc/devilpain"
+damagefactor "Enemy", 0.0
+damagefactor "EnemyContact", 0.0
+painchance 256
 States
 {
 Spawn:
-TNT1 A 0
-TNT1 A 0 ThrustThingZ(0,5,0,0)
-SpawnLoop:
-PIPI E 1 A_JumpIf(velz==0,"ExDeath")
-loop
-ExDeath:
-PIPI F 1 A_SpawnItemEx("Copipi",0,0,16)
-PIPI F 1 A_SpawnItemEx("Copipi",64,0,32)
-PIPI F 1 A_SpawnItemEx("Copipi",-64,0,16)
-PIPI F 1 A_SpawnItemEx("Copipi",0,64,32)
-PIPI F 1 A_SpawnItemEx("Copipi",0,-64,16)
+GSPR F 0
+GSPR F 0 A_GiveInventory("HealthScaled",1)
+GSPR F 0 ACS_NamedExecuteAlways("4SP_EnemyStart",0)
+Goto See
+See:
+PIPI E 1 A_JumpIfInventory("DropPipiEgg",1,"Drop",AAPTR_MASTER)
+PIPI E 1 A_Warp(AAPTR_MASTER,0,0,-25,0,WARPF_INTERPOLATE,"See")
+PIPI E 1 A_Jump(true,"Death")
+wait
+Drop:
+PIPI E 1 A_ChangeFlag("NOGRAVITY",0)
+PIPI E 1 A_Warp(AAPTR_MASTER,0,0,0,0,WARPF_INTERPOLATE|WARPF_TESTONLY,"Drop")
+PIPI E 1 A_Jump(true,"Death")
+wait
+Crash:
+PIPI F 0 A_SpawnItemEx("Copipi",0,0,32,random(8,12),0,12,random(0,359))
+PIPI F 0 A_SpawnItemEx("Copipi",0,0,32,random(8,12),0,10,random(0,359))
+PIPI F 0 A_SpawnItemEx("Copipi",0,0,32,random(8,12),0,8,random(0,359))
+PIPI F 0 A_SpawnItemEx("Copipi",0,0,32,random(8,12),0,6,random(0,359))
+PIPI F 0 A_SpawnItemEx("Copipi",0,0,32,random(8,12),0,4,random(0,359))
+PIPI F 0 A_SpawnItemEx("Copipi",0,0,32,random(8,12),0,2,random(0,359))
+PIPI F 0 A_SpawnItemEx("Copipi",0,0,32,random(8,12),0,0,random(0,359))
 PIPI F 5
 stop
 Death:
-PIPI F 1 A_JumpIf(floorz-z==0,"ExDeath")
+TNT1 A 0 A_JumpIf(z-floorz==0,"Crash")
 TNT1 A 0 A_Pain
-TNT1 A 0 A_Fall
 TNT1 A 0 A_Stop
-TNT1 A 0 A_ChangeFlag("NOGRAVITY",1)
+BATT A 0 A_Fall
+BATT A 0 A_ChangeFlag("NOGRAVITY",1)
 MMFX BCDE 3
 stop
 }
 }
 
-actor Copipi : GenericRobot
+actor Copipi
 {
-Health 7
++MISSILE
++NOGRAVITY
++NOTARGETSWITCH
+-SOLID
++SHOOTABLE
++THRUSPECIES
+species "Enemy"
+damagetype "Enemy"
+Obituary "%o was pecked by a Copipi."
+Health 1
 Height 16
 Radius 16
--SOLID
-maxstepheight 50
-+NOGRAVITY
--COUNTKILL
+scale 2.5
+speed 10
+Damage (5)
+painsound "misc/devilpain"
+deathsound "misc/devilpain"
+damagefactor "Enemy", 0.0
+damagefactor "EnemyContact", 0.0
+painchance 256
+reactiontime 44
 States
 {
 Spawn:
 TNT1 A 0
+TNT1 A 0 A_GiveInventory("HealthScaled",1)
 TNT1 A 0 ACS_NamedExecuteAlways("4SP_EnemyStart",0)
+Start:
+COPI ABAB 2
 Look:
+COPI A 0 A_Stop
 COPI AB 2 A_LookEx(LOF_NOSOUNDCHECK,0,2500,0,360,"See")
+COPI A 0 A_Countdown
 loop
 See:
-TNT1 A 0 A_FaceTarget
-COPI A 1 ThrustThing(angle*256/360,10,0,0)
-TNT1 A 0 A_CustomMissile("CopipiDive",0,0,0,0)
-stop
-}
-}
-
-actor CopipiDive
-{
-PROJECTILE
-damage (10)
-scale 2.5
-+SHOOTABLE
--NOBLOCKMAP
-Height 10
-Radius 10
-Speed 10
-health 1
-damagetype "Enemy"
-Obituary "%o was pecked by a Copipi."
-deathsound "misc/devilpain"
-States
-{
-Spawn:
-COPI AB 2
+TNT1 A 0 A_FaceTarget(0,180)
+TNT1 A 0 A_RearrangePointers(AAPTR_NULL, AAPTR_NULL, AAPTR_NULL)
+SeeLoop:
+COPI AABB 1 A_ChangeVelocity(10, 0, sin(pitch)*10,3)
 loop
 Death:
-TNT1 A 0 A_Fall
+TNT1 A 0 A_Stop
 TNT1 A 0 A_Pain
 TNT1 A 0 A_ChangeFlag("NOGRAVITY",1)
 MMFX BCDE 3
@@ -329,13 +385,32 @@ loop
 }
 }
 
-actor SP_AtomicChicken : GenericRobot 30009
+actor SP_AtomicChickenSpawner 30009
+{
+//$Category MM8BDM-Enemies
++NOGRAVITY
++NOINTERACTION
++ISMONSTER
+height 32
+radius 32
+renderstyle none
+states
+{
+Spawn:
+BLAD B 1 A_LookEx(LOF_NOSOUNDCHECK,0,2000,0,360,"See")
+loop
+See:
+BLAD B 200 A_SpawnItemEx("SP_AtomicChicken")
+Goto Spawn
+}
+}
+
+actor SP_AtomicChicken : GenericRobot 
 {
 //$Category MM8BDM-Enemies
 Health 80
 Height 64
 Radius 48
-//-SOLID
 maxstepheight 50
 +DROPOFF
 +LOOKALLAROUND
@@ -664,12 +739,32 @@ stop
 }
 }
 
+actor SP_ClawSpawner 30013
+{
+//$Category MM8BDM-Enemies
++NOGRAVITY
++NOINTERACTION
++ISMONSTER
+height 32
+radius 32
+renderstyle none
+states
+{
+Spawn:
+BLAD B 1 A_LookEx(LOF_NOSOUNDCHECK,0,2000,0,360,"See")
+loop
+See:
+BLAD B 200 A_SpawnItemEx("SP_Claw")
+Goto Spawn
+}
+}
+
 actor SP_Claw : GenericRobot 30013
 {
 //$Category MM8BDM-Enemies
 Health 10
-height 16
-radius 18
+height 20
+radius 16
 speed 7
 Obituary "%o was clawed by a Claw."
 maxstepheight 32
@@ -682,6 +777,7 @@ States
 {
 Spawn:
 TNT1 A 0
+TNT1 A 0 ACS_NamedExecuteAlways("4SP_OverflowCheck",0)
 TNT1 A 0 A_JumpIfInventory("HealthScaled",1,"Look")
 TNT1 A 0 A_GiveInventory("HealthScaled",1)
 TNT1 A 0 ACS_NamedExecuteAlways("4SP_EnemyStart",0)
@@ -700,7 +796,7 @@ loop
 Look:
 CLAW A 0 A_GiveInventory("CutterFlag",1)
 CLAW A 0 A_ChangeFlag("NOGRAVITY",0)
-CLAW AB 4 A_LookEx(LOF_NOSOUNDCHECK,0,300,0,360,"See")
+CLAW AB 4 A_LookEx(LOF_NOSOUNDCHECK,0,2000,0,360,"See")
 loop
 See:
 CLAW A 0 A_FaceTarget
@@ -726,6 +822,9 @@ ROBB B 0 A_Pain
 ROBB B 0 A_Fall
 ROBB B 0 A_SpawnItem("EnemyDeathFX",0,32)
 TNT1 A 1
+stop
+Despawn:
+TNT1 A 0
 stop
 }
 }

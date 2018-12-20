@@ -57,6 +57,9 @@ script "4SP_EnemyManage" (int source, int value)
                 GiveInventory("MonsterFreezeFlag", 1);
             }
             GiveInventory("ChangeNoPainTrue",1);
+            SetUserVariable(0,"user_velx",GetActorVelX(0));
+            SetUserVariable(0,"user_vely",GetActorVelY(0));
+            SetUserVariable(0,"user_velz",GetActorVelZ(0));
             SetActorVelocity(0, 0, 0, 0, 0, 0);
             Thing_Stop(0);
         }
@@ -65,9 +68,10 @@ script "4SP_EnemyManage" (int source, int value)
             GiveInventory("ChangeNoPainFalse",1);
             if(CheckInventory("MonsterFreezeFlag") > 0)
             {
-                TakeInventory("MonsterFreezeFlag", 1);
+                TakeInventory("MonsterFreezeFlag", 999);
                 SetActorProperty(0, APROP_GRAVITY, 1*65536);
             }
+            SetActorVelocity(0,GetUserVariable(0,"user_velx"),GetUserVariable(0,"user_vely"),GetUserVariable(0,"user_velz"),0,0);
         }
     break;
     }
@@ -111,6 +115,24 @@ dist = xyDistance(ActivatorTID(),3800);
 //PrintBold(i:dist);
 
 SetThingSpecial (3800, 0, dist, 0, 0, 0, 0);
+}
+
+//[Trill] Floor quakes in a radius, heavily modified from CBM. Niche script probably
+//
+script "4SP_FloorQuakeDamage" (int maxRange, int QuakePower)
+{
+	int zDist;
+	for(int p = 0;p < ServerMAX; p++)
+	{
+		if(!PlayerInGame(p))
+		{
+			continue;
+		}
+		if(xyDistance(0, p+1000) < maxRange && zDistance(0, p+1000) >= -32 && zDistance(0, p+1000) <= 32)
+		{
+			SpawnProjectile(0,"EnemyFloorQuake",QuakePower,0,p,0,0);
+		}
+	}
 }
 
 // [Russel] Check Alive script. Nicked from CBM.

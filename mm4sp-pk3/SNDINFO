@@ -25,6 +25,9 @@ enemy/powermusclerland	muscle
 enemy/taban	batwing
 enemy/metcannon	metcan
 
+// BOSSES
+weapon/WoodSlam WOODHIT
+
 // SOUNDS
 menu/ccmenu M_SELE
 menu/ccselect DSRADIO

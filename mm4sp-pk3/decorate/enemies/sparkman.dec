@@ -185,6 +185,8 @@ speed 13
 Damage (9)
 painsound "misc/devilpain"
 deathsound "misc/devilpain"
+damagefactor "Enemy", 0.0
+damagefactor "EnemyContact", 0.0
 painchance 256
 States
 {

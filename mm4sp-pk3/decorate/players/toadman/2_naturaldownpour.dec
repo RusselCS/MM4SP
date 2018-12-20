@@ -142,7 +142,7 @@ States
 {
 Spawn:
 TNT1 A 0 
-TNT1 A 0 A_Explode(10,512,0,0,512)
+TNT1 A 0 A_Explode(16,512,0,0,512)
 TNT1 A 0 A_SpawnItemEx("NaturalDownpourFX2", random(-128,384), random(-256,256), 256, -30, 0, -30, 180, SXF_CLIENTSIDE)
 TNT1 A 0 A_SpawnItemEx("NaturalDownpourFX", random(-128,384), random(-256,256), 256, -60, 0, -60, 180, SXF_CLIENTSIDE)
 TNT1 A 0 A_SpawnItemEx("NaturalDownpourFX", random(-128,384), random(-256,256), 256, -60, 0, -60, 180, SXF_CLIENTSIDE)
