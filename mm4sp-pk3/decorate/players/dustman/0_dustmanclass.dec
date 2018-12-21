@@ -3,7 +3,7 @@ actor DustManSP : ClassBaseSP
 player.displayname "dustman"
 
 player.startitem "DustManWep"
-player.startitem "DustManAmmo", 5
+player.startitem "DustManAmmo", 3
 player.startitem "DustManFlag"
 player.jumpz 12
 speed 1.0

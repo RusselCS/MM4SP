@@ -5,6 +5,7 @@ actor DustManFlag : ClassFlag {}
 actor ToadManFlag : ClassFlag {}
 actor BrightManFlag : ClassFlag {}
 actor SkullManFlag : ClassFlag {}
+actor DiveManFlag : ClassFlag {}
 
 actor OnGround : Once {}
 actor InAir : Once {}

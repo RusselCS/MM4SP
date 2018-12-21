@@ -68,3 +68,10 @@ sprite SKU1D0, 148, 80 {Offset -202, -103 Patch SKUBD0, 0, 0 {Translation "192:1
 sprite SKU1E0, 116, 96 {Offset -209, -96 Patch SKUBE0, 0, 0 {Translation "192:192=4:4", "198:198=87:87"}}
 sprite SKU1F0, 116, 96 {Offset -189, -82 Patch SKUBF0, 0, 0 {Translation "192:192=4:4", "198:198=87:87"}}
 sprite SKU1G0, 128, 128 {Offset -177, -50 Patch SKUBG0, 0, 0 {Translation "192:192=4:4", "198:198=87:87"}}
+
+//DIVE MAN
+//Dive Missile
+sprite DIV1A0, 420, 136 {Offset 50, -47 Patch DIVAA0, 0, 0 {Translation "192:192=194:194", "198:198=195:195"}}
+sprite DIV1B0, 420, 136 {Offset 50, -64 Patch DIVAB0, 0, 0 {Translation "192:192=194:194", "198:198=195:195"}}
+sprite DIV1C0, 420, 136 {Offset 50, -64 Patch DIVAC0, 0, 0 {Translation "192:192=194:194", "198:198=195:195"}}
+sprite DIV1D0, 420, 136 {Offset 50, -64 Patch DIVAD0, 0, 0 {Translation "192:192=194:194", "198:198=195:195"}}
