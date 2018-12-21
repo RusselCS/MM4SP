@@ -1,0 +1,89 @@
+actor DiveManWep : BaseMM8BDMWep 10068
+{
+//$Category MM8BDM-Weapons
+//$Title Dive Missile
+Weapon.AmmoUse 1
+Weapon.AmmoGive 3
+Weapon.SlotNumber 1
+Inventory.Pickupmessage "$PU_DIVEMISSILE"
+Obituary "$OB_DIVEMISSILE"
+Tag "Dive Missile"
+weapon.ammotype "DiveManAmmo"
+inventory.icon "NULLICON"
+States
+{
+Spawn:
+WEA2 S 1
+loop
+Ready:
+DIVA A 0 ACS_ExecuteAlways(998,0,786)
+DIVA A 1 A_WeaponReady
+Goto Ready+1
+Deselect:
+TNT1 AAAAAAAAAAAAAAAAAAAAAA 0 A_Lower
+DIVA A 1 A_Lower
+Loop
+Select:
+TNT1 AAAAAAAAAAAAAAAAAAAAAA 0 A_Raise
+DIVA A 1 A_Raise
+Loop
+Fire:
+DIVA A 0 A_JumpIfNoAmmo("NoAmmo")
+DIVA A 0 A_PlaySoundEx("weapon/mbuster","Weapon")
+DIVA A 0 A_FireCustomMissile("SPDiveMissile",0,0,8,0)
+DIVA A 0 A_GiveInventory("SPDiveCounter",23)
+DIVA BCDCB 3
+Waiting:
+DIVA A 1 A_TakeInventory("SPDiveCounter",1)
+DIVA A 0 A_JumpIfInventory("SPDiveCounter",1,"Waiting")
+DIVA A 4
+DIVA A 0 A_Refire
+Goto Ready+1
+NoAmmo:
+DIVA A 1 ACS_Execute(979,0)
+Goto Ready+1
+}
+}
+
+actor DiveManAmmo : Ammo
+{
+inventory.amount 1
+inventory.maxamount 3
++INVENTORY.IGNORESKILL
+}
+
+
+actor SPDiveMissile
+{
+PROJECTILE
+translation "192:192=4:4", "198:198=227:227"
++SEEKERMISSILE
++SCREENSEEKER
+-EXTREMEDEATH
+Radius 5
+Height 5
+scale 2.5
+damage (12)
+damagetype "DiveMissile"
+Obituary "$OB_DIVEMISSILE"
+speed 25
+ReactionTime 85
+States
+{
+Spawn:
+DIVS A 1 A_SeekerMissile (2, 10, SMF_LOOK, 50, 10)
+DIVS A 0 A_CountDown
+loop
+Crash:
+MMFX B 0 A_TakeFromTarget("DiveCounter",9999)
+Death:
+MMFX BCDE 2
+stop
+}
+}
+
+actor SPDiveCounter : Inventory
+{
+inventory.amount 1
+inventory.maxamount 23
+}
