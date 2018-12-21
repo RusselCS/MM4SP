@@ -14,6 +14,7 @@ States
 Spawn:
 WEAP X 1
 loop
+Altfire:
 Ready:
 FST1 A 0 ACS_ExecuteAlways(998,0,780)
 FST1 A 0 A_TakeInventory("BrightStopperUsed",999)
@@ -31,8 +32,7 @@ Fire:
 FST1 A 0 A_JumpIfNoAmmo("NoAmmo")
 FST1 A 0 A_PlaySoundEx("weapon/pshot","Weapon")
 FST1 A 0 A_FireCustomMissile("BrightShot", random(-2, 2),0,8,0,0,random(-2,2))
-FST1 B 3
-FST1 C 3
+FST1 BC 3
 FST1 A 2
 FST1 B 0 A_Refire
 goto Ready+2

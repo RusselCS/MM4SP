@@ -56,3 +56,15 @@ sprite FST1D0, 148, 80 {Offset -202, -103 Patch FSTBD0, 0, 0 {Translation "192:1
 sprite FST1E0, 116, 96 {Offset -209, -96 Patch FSTBE0, 0, 0 {Translation "192:192=248:248", "198:198=226:226", "199:199=42:42"}}
 sprite FST1F0, 116, 96 {Offset -189, -82 Patch FSTBF0, 0, 0 {Translation "192:192=248:248", "198:198=226:226", "199:199=42:42"}}
 sprite FST1G0, 128, 128 {Offset -177, -50 Patch FSTBG0, 0, 0 {Translation "192:192=248:248", "198:198=226:226", "199:199=42:42"}}
+
+//SKULL MAN
+//Skull Sniper
+sprite SKU1A0, 120, 100 {Offset -184, -94 Patch SKUBA0, 0, 0 {Translation "192:192=4:4", "198:198=87:87"}}
+sprite SKU1B0, 140, 116 {Offset -184, -98 Patch SKUBB0, 0, 0 {Translation "192:192=4:4", "198:198=87:87"}}
+sprite SKU1C0, 144, 112 {Offset -187, -102 Patch SKUBC0, 0, 0 {Translation "192:192=4:4", "198:198=87:87"}}
+
+//Skull Barrier
+sprite SKU1D0, 148, 80 {Offset -202, -103 Patch SKUBD0, 0, 0 {Translation "192:192=4:4", "198:198=87:87"}}
+sprite SKU1E0, 116, 96 {Offset -209, -96 Patch SKUBE0, 0, 0 {Translation "192:192=4:4", "198:198=87:87"}}
+sprite SKU1F0, 116, 96 {Offset -189, -82 Patch SKUBF0, 0, 0 {Translation "192:192=4:4", "198:198=87:87"}}
+sprite SKU1G0, 128, 128 {Offset -177, -50 Patch SKUBG0, 0, 0 {Translation "192:192=4:4", "198:198=87:87"}}

@@ -9,6 +9,8 @@ InInventory not NoHealthBar, 1
 {
 	DrawBar "BARHEALT", "BAREMPTY", Health, vertical, 24, 8;
 
+	InInventory SkullShieldCheck, 1{DrawBar "BARFLS5", "NOBAR", SkullShieldCheck, vertical, 24, 8;}
+	InInventory SkullBarrierProtection, 1{DrawBar "BARFLS5", "NOBAR", SkullShieldCheck, vertical, 24, 8;}
 	InInventory BasicArmor, 1{DrawBar "BARAMT31", "NOBAR", Armor, vertical, 24, 8;}
 
 	//IfCVarInt mm8bdm_ammonumber, 1
@@ -49,6 +51,8 @@ IsSelected Toad_WoodWep{Drawbar"BARAM201", "BAREMPTY", Ammo1, vertical, 16, 8;}
 
 IsSelected BrightmanWep2{Drawbar"BARAMM18", "BAREMPTY", Ammo1, vertical, 16, 8;}
 
+IsSelected SkullManWep2{Drawbar"BARAMM21", "BAREMPTY", Ammo1, vertical, 16, 8;	
+	InInventory SkullBarrierCooldown, 1{DrawBar "BARAMM65", "BAREMPTY", Ammo1, vertical, 16, 8;}}
 
 //Assists
 InInventory RushJetCounter, 5{DrawImage "RUSHH2H8", 290,16;}

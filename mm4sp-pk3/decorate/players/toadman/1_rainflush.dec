@@ -26,6 +26,7 @@ Select:
 TNT1 AAAAAAAAAAAAAAAAAAAAAA 0 A_Raise
 TAR1 A 1 A_Raise
 Loop
+Altfire:
 Fire:
 TAR1 A 0 A_JumpIfNoAmmo("NoAmmo")
 TAR1 A 0 A_SpawnItemEx("RainFlush_SP",0,0,0)

@@ -14,6 +14,10 @@ weapon/raindance S_M4TOA3
 // BRIGHT MAN
 weapon/brightshot BUSTER
 
+// SKULL MAN
+weapon/skullshieldbuzz SKULBAR4
+weapon/skullbust SKULSHOT
+
 // ENEMIES
 misc/door2	bdoor2
 enemy/hammerjoeswing	hjswin

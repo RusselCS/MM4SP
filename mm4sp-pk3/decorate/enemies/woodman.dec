@@ -158,14 +158,14 @@ BATT A 0 ACS_NamedExecuteAlways("4SP_EnemyStart",0)
 BATT A 0 A_SpawnItemEx("PipiEgg",0,0,-25,0,0,0,0,SXF_SETMASTER)
 Look:
 TNT1 A 0 A_ChangeVelocity(12.0, 0.0, 0.0, CVF_RELATIVE|CVF_REPLACE)
-PIPI C 2 A_LookEx(LOF_NOSOUNDCHECK,0,400,0,360,"See")
-PIPI D 2 A_LookEx(LOF_NOSOUNDCHECK,0,400,0,360,"See2")
+PIPI A 2 A_LookEx(LOF_NOSOUNDCHECK,0,400,0,360,"See")
+PIPI B 2 A_LookEx(LOF_NOSOUNDCHECK,0,400,0,360,"See2")
 loop
 Fly:
 TNT1 A 0 A_ChangeVelocity(12.0, 0.0, 0.0, CVF_RELATIVE|CVF_REPLACE)
-PIPI C 2
+PIPI A 2
 Fly2:
-PIPI D 2
+PIPI B 2
 goto Fly
 Return:
 TNT1 A 0 A_JumpIfInventory("DamageCounter",1,"Fly")
@@ -228,26 +228,26 @@ GSPR F 0 A_GiveInventory("HealthScaled",1)
 GSPR F 0 ACS_NamedExecuteAlways("4SP_EnemyStart",0)
 Goto See
 See:
-PIPI E 1 A_JumpIfInventory("DropPipiEgg",1,"Drop",AAPTR_MASTER)
-PIPI E 1 A_Warp(AAPTR_MASTER,0,0,-25,0,WARPF_INTERPOLATE,"See")
-PIPI E 1 A_Jump(true,"Death")
+PIPI C 1 A_JumpIfInventory("DropPipiEgg",1,"Drop",AAPTR_MASTER)
+PIPI C 1 A_Warp(AAPTR_MASTER,0,0,-25,0,WARPF_INTERPOLATE,"See")
+PIPI C 1 A_Jump(true,"Death")
 wait
 Drop:
-PIPI E 1 A_ChangeFlag("NOGRAVITY",0)
-PIPI E 1 A_Warp(AAPTR_MASTER,0,0,0,0,WARPF_INTERPOLATE|WARPF_TESTONLY,"Drop")
-PIPI E 1 A_Jump(true,"Death")
+PIPI C 1 A_ChangeFlag("NOGRAVITY",0)
+PIPI C 1 A_Warp(AAPTR_MASTER,0,0,0,0,WARPF_INTERPOLATE|WARPF_TESTONLY,"Drop")
+PIPI C 1 A_Jump(true,"Death")
 wait
 Crash:
 TNT1 A 0 A_Stop
 BATT A 0 A_ChangeFlag("NOGRAVITY",1)
-PIPI F 0 A_SpawnItemEx("Copipi",0,0,32,random(8,12),0,12,random(0,359))
-PIPI F 0 A_SpawnItemEx("Copipi",0,0,32,random(8,12),0,10,random(0,359))
-PIPI F 0 A_SpawnItemEx("Copipi",0,0,32,random(8,12),0,8,random(0,359))
-PIPI F 0 A_SpawnItemEx("Copipi",0,0,32,random(8,12),0,6,random(0,359))
-PIPI F 0 A_SpawnItemEx("Copipi",0,0,32,random(8,12),0,4,random(0,359))
-PIPI F 0 A_SpawnItemEx("Copipi",0,0,32,random(8,12),0,2,random(0,359))
-PIPI F 0 A_SpawnItemEx("Copipi",0,0,32,random(8,12),0,0,random(0,359))
-PIPI F 8
+PIPI D 0 A_SpawnItemEx("Copipi",0,0,32,random(8,12),0,12,random(0,359))
+PIPI D 0 A_SpawnItemEx("Copipi",0,0,32,random(8,12),0,10,random(0,359))
+PIPI D 0 A_SpawnItemEx("Copipi",0,0,32,random(8,12),0,8,random(0,359))
+PIPI D 0 A_SpawnItemEx("Copipi",0,0,32,random(8,12),0,6,random(0,359))
+PIPI D 0 A_SpawnItemEx("Copipi",0,0,32,random(8,12),0,4,random(0,359))
+PIPI D 0 A_SpawnItemEx("Copipi",0,0,32,random(8,12),0,2,random(0,359))
+PIPI D 0 A_SpawnItemEx("Copipi",0,0,32,random(8,12),0,0,random(0,359))
+PIPI D 8
 stop
 Death:
 TNT1 A 0 A_Stop
@@ -338,7 +338,7 @@ ROBB A 0 A_Stop
 ROBB AAA 0 A_Chase
 ROBB A 5
 Look:
-ROBB B 6 A_LookEx(LOF_NOSOUNDCHECK,0,300,0,360,"See")
+ROBB B 6 A_LookEx(LOF_NOSOUNDCHECK,0,500,0,360,"See")
 loop
 See:
 ROBB B 20 A_FaceTarget
@@ -365,7 +365,6 @@ ROBB B 35 A_CustomMissile("RobbitCarrot",32,0,random(-4,4))
 ROBB B 0 A_FaceTarget
 ROBB B 0 A_PlaySoundEx("misc/devilfire","Voice")
 ROBB B 35 A_CustomMissile("RobbitCarrot",32,0,random(-4,4))
-ROBB B 0 A_ClearTarget
 Goto Look
 Death:
 ROBB B 0 A_Pain

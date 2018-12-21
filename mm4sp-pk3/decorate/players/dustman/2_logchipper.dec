@@ -26,6 +26,7 @@ Select:
 TNT1 AAAAAAAAAAAAAAAAAAAAAA 0 A_Raise
 DUS2 A 1 A_Raise
 Loop
+Altfire:
 Fire:
 DUS2 A 0 A_JumpIfNoAmmo("NoAmmo")
 DUS2 A 0 A_PlaySoundEx("weapon/woodsatellite","Weapon")

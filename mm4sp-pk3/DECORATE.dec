@@ -29,6 +29,10 @@ actor GitTest
 #include "decorate/players/brightman/1_brightbuster.dec"
 #include "decorate/players/brightman/1_flashstopper.dec"
 
+#include "decorate/players/skullman/0_skullmanclass.dec"
+#include "decorate/players/skullman/1_skullsniper.dec"
+#include "decorate/players/skullman/1_skullbarrier.dec"
+
 // ENEMIES
 #include "decorate/enemies/basics.dec"
 #include "decorate/enemies/napalmman.dec"
