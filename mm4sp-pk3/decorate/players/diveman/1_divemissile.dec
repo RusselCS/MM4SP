@@ -77,10 +77,10 @@ ReactionTime 86
 States
 {
 Spawn:
-DIVS A 0
-DIVS A 0 A_CountDown
-DIVS A 0 A_TakeFromTarget("SPDiveCounter",999)
-DIVS A 1 A_SeekerMissile (2, 10, SMF_LOOK, 50, 10)
+DIV1 E 0
+DIV1 E 0 A_CountDown
+DIV1 E 0 A_TakeFromTarget("SPDiveCounter",999)
+DIV1 E 1 A_SeekerMissile (2, 10, SMF_LOOK, 50, 10)
 loop 
 Death:
 MMFX B 0 A_TakeFromTarget("SPDiveCounter",999)
@@ -95,10 +95,10 @@ actor SPDiveMissile2 : SPDiveMissile
 States
 {
 Spawn:
-DIVS A 0
-DIVS A 0 A_CountDown
-DIVS A 0 A_TakeFromTarget("SPDiveCounter2",999)
-DIVS A 1 A_SeekerMissile (2, 10, SMF_LOOK, 50, 10)
+DIV1 E 0
+DIV1 E 0 A_CountDown
+DIV1 E 0 A_TakeFromTarget("SPDiveCounter2",999)
+DIV1 E 1 A_SeekerMissile (2, 10, SMF_LOOK, 50, 10)
 loop 
 Death:
 MMFX B 0 A_TakeFromTarget("SPDiveCounter2",999)
