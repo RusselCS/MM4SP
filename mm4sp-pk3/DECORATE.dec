@@ -33,6 +33,8 @@ actor GitTest
 #include "decorate/players/skullman/1_skullbarrier.dec"
 #include "decorate/players/diveman/0_divemanclass.dec"
 #include "decorate/players/diveman/1_divemissile.dec"
+#include "decorate/players/pharaohman/0_pharaohmanclass.dec"
+#include "decorate/players/pharaohman/1_pharaohwave.dec"
 
 // ENEMIES
 #include "decorate/enemies/basics.dec"

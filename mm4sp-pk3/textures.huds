@@ -10,14 +10,14 @@ sprite RIN1G0, 148, 80 {Offset -202, -143 Patch RINAG0, 0, 0 {Translation "192:1
 sprite RIN1H0, 148, 80 {Offset -202, -123 Patch RINAH0, 0, 0 {Translation "192:192=160:160", "198:198=219:219"}}
 
 //Stump Satellite
-sprite RIN2A0, 148, 80 {Offset -202, -103 Patch RINAA0, 0, 0 {Translation "192:192=4:4", "198:198=129:129", "199:199=131:131"}}
-sprite RIN2B0, 192, 92 {Offset -100, -150 Patch RINAF0, 0, 0 {Translation "192:192=4:4", "198:198=129:129", "199:199=131:131"}}
-sprite RIN2C0, 192, 92 {Offset -132, -126 Patch RINAE0, 0, 0 {Translation "192:192=4:4", "198:198=129:129", "199:199=131:131"}}
-sprite RIN2D0, 176, 144 {Offset -170, -39 Patch RINAD0, 0, 0 {Translation "192:192=4:4", "198:198=129:129", "199:199=131:131"}}
-sprite RIN2E0, 176, 144 {Offset -202, 0 Patch RINAC0, 0, 0 {Translation "192:192=4:4", "198:198=129:129", "199:199=131:131"}}
-sprite RIN2F0, 176, 144 {Offset -272, 46 Patch RINAB0, 0, 0 {Translation "192:192=4:4", "198:198=129:129", "199:199=131:131"}}
-sprite RIN2G0, 148, 80 {Offset -202, -143 Patch RINAG0, 0, 0 {Translation "192:192=4:4", "198:198=129:129", "199:199=131:131"}}
-sprite RIN2H0, 148, 80 {Offset -202, -123 Patch RINAH0, 0, 0 {Translation "192:192=4:4", "198:198=129:129", "199:199=131:131"}}
+sprite RIN2A0, 148, 80 {Offset -202, -103 Patch RINAA0, 0, 0 {Translation "192:192=4:4", "198:198=129:129"}}
+sprite RIN2B0, 192, 92 {Offset -100, -150 Patch RINAF0, 0, 0 {Translation "192:192=4:4", "198:198=129:129"}}
+sprite RIN2C0, 192, 92 {Offset -132, -126 Patch RINAE0, 0, 0 {Translation "192:192=4:4", "198:198=129:129"}}
+sprite RIN2D0, 176, 144 {Offset -170, -39 Patch RINAD0, 0, 0 {Translation "192:192=4:4", "198:198=129:129"}}
+sprite RIN2E0, 176, 144 {Offset -202, 0 Patch RINAC0, 0, 0 {Translation "192:192=4:4", "198:198=129:129"}}
+sprite RIN2F0, 176, 144 {Offset -272, 46 Patch RINAB0, 0, 0 {Translation "192:192=4:4", "198:198=129:129"}}
+sprite RIN2G0, 148, 80 {Offset -202, -143 Patch RINAG0, 0, 0 {Translation "192:192=4:4", "198:198=129:129"}}
+sprite RIN2H0, 148, 80 {Offset -202, -123 Patch RINAH0, 0, 0 {Translation "192:192=4:4", "198:198=129:129"}}
 
 //DUST MAN
 //Dust Buster
@@ -42,20 +42,20 @@ sprite TAR1G0, 380, 80 {Offset 30, -139 Patch TARMG0, 0, 0 {Translation "192:192
 sprite TAR1H0, 380, 80 {Offset 30, -119 Patch TARMH0, 0, 0 {Translation "192:192=104:104", "198:198=128:128"}}
 
 //Natural Downpour
-sprite TAR2A0, 380, 80 {Offset 30, -103 Patch TARMA0, 0, 0 {Translation "192:192=4:4", "198:198=129:129", "199:199=131:131"}}
-sprite TAR2B0, 427, 40 {Offset 52, -145 Patch TARMB0, 0, 0 {Translation "192:192=4:4", "198:198=129:129", "199:199=131:131"}}
-sprite TAR2C0, 427, 52 {Offset 53, -133 Patch TARMC0, 0, 0 {Translation "192:192=4:4", "198:198=129:129", "199:199=131:131"}}
-sprite TAR2D0, 427, 104 {Offset 53, -81 Patch TARMD0, 0, 0 {Translation "192:192=4:4", "198:198=129:129", "199:199=131:131"}}
-sprite TAR2E0, 427, 112 {Offset 53, -73 Patch TARME0, 0, 0 {Translation "192:192=4:4", "198:198=129:129", "199:199=131:131"}}
-sprite TAR2G0, 380, 80 {Offset 30, -139 Patch TARMG0, 0, 0 {Translation "192:192=4:4", "198:198=129:129", "199:199=131:131"}}
-sprite TAR2H0, 380, 80 {Offset 30, -119 Patch TARMH0, 0, 0 {Translation "192:192=4:4", "198:198=129:129", "199:199=131:131"}}
+sprite TAR2A0, 380, 80 {Offset 30, -103 Patch TARMA0, 0, 0 {Translation "192:192=4:4", "198:198=129:129"}}
+sprite TAR2B0, 427, 40 {Offset 52, -145 Patch TARMB0, 0, 0 {Translation "192:192=4:4", "198:198=129:129"}}
+sprite TAR2C0, 427, 52 {Offset 53, -133 Patch TARMC0, 0, 0 {Translation "192:192=4:4", "198:198=129:129"}}
+sprite TAR2D0, 427, 104 {Offset 53, -81 Patch TARMD0, 0, 0 {Translation "192:192=4:4", "198:198=129:129"}}
+sprite TAR2E0, 427, 112 {Offset 53, -73 Patch TARME0, 0, 0 {Translation "192:192=4:4", "198:198=129:129"}}
+sprite TAR2G0, 380, 80 {Offset 30, -139 Patch TARMG0, 0, 0 {Translation "192:192=4:4", "198:198=129:129"}}
+sprite TAR2H0, 380, 80 {Offset 30, -119 Patch TARMH0, 0, 0 {Translation "192:192=4:4", "198:198=129:129"}}
 
 //BRIGHT MAN
 //Flash Stopper
-sprite FST1D0, 148, 80 {Offset -202, -103 Patch FSTBD0, 0, 0 {Translation "192:192=248:248", "198:198=226:226", "199:199=42:42"}}
-sprite FST1E0, 116, 96 {Offset -209, -96 Patch FSTBE0, 0, 0 {Translation "192:192=248:248", "198:198=226:226", "199:199=42:42"}}
-sprite FST1F0, 116, 96 {Offset -189, -82 Patch FSTBF0, 0, 0 {Translation "192:192=248:248", "198:198=226:226", "199:199=42:42"}}
-sprite FST1G0, 128, 128 {Offset -177, -50 Patch FSTBG0, 0, 0 {Translation "192:192=248:248", "198:198=226:226", "199:199=42:42"}}
+sprite FST1D0, 148, 80 {Offset -202, -103 Patch FSTBD0, 0, 0 {Translation "192:192=226:226", "198:198=42:42"}}
+sprite FST1E0, 116, 96 {Offset -209, -96 Patch FSTBE0, 0, 0 {Translation "192:192=226:226", "198:198=42:42"}}
+sprite FST1F0, 116, 96 {Offset -189, -82 Patch FSTBF0, 0, 0 {Translation "192:192=226:226", "198:198=42:42"}}
+sprite FST1G0, 128, 128 {Offset -177, -50 Patch FSTBG0, 0, 0 {Translation "192:192=226:226", "198:198=42:42"}}
 
 //SKULL MAN
 //Skull Sniper
@@ -72,6 +72,24 @@ sprite SKU1G0, 128, 128 {Offset -177, -50 Patch SKUBG0, 0, 0 {Translation "192:1
 //DIVE MAN
 //Dive Missile
 sprite DIV1A0, 420, 136 {Offset 50, -47 Patch DIVAA0, 0, 0 {Translation "192:192=194:194", "198:198=195:195"}}
-sprite DIV1B0, 420, 136 {Offset 50, -64 Patch DIVAB0, 0, 0 {Translation "192:192=194:194", "198:198=195:195"}}
-sprite DIV1C0, 420, 136 {Offset 50, -64 Patch DIVAC0, 0, 0 {Translation "192:192=194:194", "198:198=195:195"}}
-sprite DIV1D0, 420, 136 {Offset 50, -64 Patch DIVAD0, 0, 0 {Translation "192:192=194:194", "198:198=195:195"}}
+sprite DIV1B0, 420, 136 {Offset 50, -65 Patch DIVAB0, 0, 0 {Translation "192:192=194:194", "198:198=195:195"}}
+sprite DIV1C0, 420, 136 {Offset 50, -65 Patch DIVAC0, 0, 0 {Translation "192:192=194:194", "198:198=195:195"}}
+sprite DIV1D0, 420, 136 {Offset 50, -65 Patch DIVAD0, 0, 0 {Translation "192:192=194:194", "198:198=195:195"}}
+
+//PHARAOH MAN
+//Pharaoh Wave
+sprite PHA1A0, 148, 80 {Offset -202, -103 Patch PHAAA0, 0, 0 {Translation "192:192=160:160", "198:198=162:162"}}
+sprite PHA1B0, 180, 160 {Offset -198, -84 Patch PHAAB0, 0, 0 {Translation "192:192=160:160", "198:198=162:162"}}
+sprite PHA1C0, 180, 160 {Offset -214, -52 Patch PHAAC0, 0, 0 {Translation "192:192=160:160", "198:198=162:162"}}
+sprite PHA1D0, 80, 200 {Offset -266, -13 Patch PHAAD0, 0, 0 {Translation "192:192=160:160", "198:198=162:162"}}
+sprite PHA1E0, 80, 200 {Offset -293, 0 Patch PHAAE0, 0, 0 {Translation "192:192=160:160", "198:198=162:162"}}
+sprite PHA1F0, 80, 200 {Offset -293, 0 Patch PHAAE0, 0, 0 {Translation "4:4=192:192", "89:89=198:198", "5:5=89:89", "0:0=4:4", "7:8=4:4"}}
+sprite PHA1G0, 308, 204 {Offset -272, 46 Patch PHAAG0, 0, 0 {Translation "192:192=160:160", "198:198=162:162"}}
+sprite PHA1H0, 308, 204 {Offset -202, 4 Patch PHAAH0, 0, 0 {Translation "192:192=160:160", "198:198=162:162"}}
+sprite PHA1I0, 308, 204 {Offset -151, -36 Patch PHAAI0, 0, 0 {Translation "192:192=160:160", "198:198=162:162"}}
+sprite PHA1J0, 308, 204 {Offset -126, -123 Patch PHAAJ0, 0, 0 {Translation "192:192=160:160", "198:198=162:162"}}
+sprite PHA1K0, 308, 204 {Offset -105, -147 Patch PHAAK0, 0, 0 {Translation "192:192=160:160", "198:198=162:162"}}
+sprite PHA1L0, 308, 204 {Offset -193, -175 Patch PHAAL0, 0, 0 {Translation "192:192=160:160", "198:198=162:162"}}
+sprite PHA1M0, 148, 80 {Offset -202, -135 Patch PHAAM0, 0, 0 {Translation "192:192=160:160", "198:198=162:162"}}
+sprite PHA1N0, 148, 80 {Offset -202, -119 Patch PHAAN0, 0, 0 {Translation "192:192=160:160", "198:198=162:162"}}
+

@@ -2,6 +2,7 @@ actor DiveManSP : ClassBaseSP
 {
 player.displayname "diveman"
 
+player.startitem "BusterAmmo", 1
 player.startitem "DiveManWep"
 player.startitem "DiveManAmmo", 3
 player.startitem "DiveManFlag"

@@ -31,7 +31,6 @@ Select:
 TNT1 AAAAAAAAAAAAAAAAAAAAAA 0 A_Raise
 SKU1 D 1 A_Raise
 Loop
-Altfire:
 Fire:
 SKU1 D 0 A_JumpIfInventory("SkullBarrierCooldown", 1, "NoAmmoNoSound")
 SKU1 D 0 A_JumpIfInventory("SkullShieldCheck", 1, "ShieldActive")
@@ -135,6 +134,7 @@ TNT1 A 0 A_JumpIf(user_countdown >= 130, "DeathSilent")
 TNT1 A 0 A_JumpIfInTargetInventory("ShieldHits", 3, "Spawn")
 Goto GotHit1
 GotHit1:
+TNT1 A 0 A_GiveToTarget("SkullBarrierProtection", 1)
 TNT1 A 0 A_GiveToTarget("SkullBreakSound", 1)
 Spawn2:
 TNT1 AA 1 //A_GiveToTarget("SkullBarrierFX1",1)
@@ -146,6 +146,7 @@ TNT1 A 0 A_JumpIf(user_countdown >= 130, "DeathSilent")
 TNT1 A 0 A_JumpIfInTargetInventory("ShieldHits", 2, "Spawn2")
 Goto GotHit2
 GotHit2:
+TNT1 A 0 A_GiveToTarget("SkullBarrierProtection", 1)
 TNT1 A 0 A_GiveToTarget("SkullBreakSound", 1)
 Spawn3:
 TNT1 AA 1 //A_GiveToTarget("SkullBarrierFX1",1)

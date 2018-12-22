@@ -54,6 +54,10 @@ IsSelected BrightmanWep2{Drawbar"BARAMM18", "BAREMPTY", Ammo1, vertical, 16, 8;}
 IsSelected SkullManWep2{Drawbar"BARAMM21", "BAREMPTY", Ammo1, vertical, 16, 8;	
 	InInventory SkullBarrierCooldown, 1{DrawBar "BARAMM65", "BAREMPTY", Ammo1, vertical, 16, 8;}}
 
+IsSelected PharaohManWep{DrawImage"BAREMPTY", 16, 8;
+	InInventory PharaohCharge, 1{DrawBar "BARPHAR1", "BAREMPTY", PharaohCharge, vertical, 16, 8;}}	
+	InInventory PharaohCharge, 78{DrawBar "BARPHAR3", "BAREMPTY", PharaohCharge, vertical, 16, 8;}
+
 //Assists
 InInventory RushJetCounter, 5{DrawImage "RUSHH2H8", 290,16;}
 InInventory RushJetCounter, 1{DrawImage "RUSHOUT", 290,16;}

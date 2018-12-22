@@ -2,6 +2,7 @@ actor ToadManSP : ClassBaseSP
 {
 player.displayname "toadman"
 
+player.startitem "BusterAmmo", 1
 player.startitem "ToadManWep"
 player.startitem "ToadManAmmo", 5
 player.startitem "ToadManFlag"

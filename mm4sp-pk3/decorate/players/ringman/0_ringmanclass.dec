@@ -2,6 +2,7 @@ actor RingManSP : ClassBaseSP
 {
 player.displayname "ringman"
 
+player.startitem "BusterAmmo", 1
 player.startitem "RingManWep"
 player.startitem "RingManAmmo", 5
 player.startitem "RingManFlag"

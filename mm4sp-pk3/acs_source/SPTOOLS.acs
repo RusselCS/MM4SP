@@ -3,6 +3,14 @@
 #include "zcommon.acs"
 #include "8BDMLIB.acs"
 
+#DEFINE PHARAOHFLASH 979
+
+script "4SP_Colors" OPEN CLIENTSIDE
+{
+Delay(25);
+CreateTranslation(PHARAOHFLASH, 4:4=192:192, 210:210=198:198, 0:0=4:4);
+}
+
 // [Trill] Scripts ported and slightly modified from MMSP-Basic
 //
 script "4SP_EnemyStart" (void)
@@ -156,14 +164,15 @@ str bossList[MAX_BOSSES][2] = {
     {"YamatoManBossCC", "Yamato"}
 };
 
-#define MAX_PLAYERS 6
+#define MAX_PLAYERS 7
 str playerList[MAX_PLAYERS][2] = {
     {"RingManSP", "Ring"},
     {"DustManSP", "Dust"},
     {"ToadManSP", "Toad"},
     {"BrightmanSP", "Bright"},
     {"SkullmanSP", "Skull"},
-    {"DivemanSP", "Dive"}
+    {"DivemanSP", "Dive"},
+    {"PharaohmanSP", "Pharaoh"}
 };
 
 script "4SP_GiveWeapons" ENTER {

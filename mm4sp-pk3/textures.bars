@@ -6,3 +6,10 @@ graphic 04_5_VA3,56,16{patch 04_5_BA3,0,0{rotate 90}}
 graphic 04_5_VA2,56,16{patch 04_5_BA2,0,0{rotate 90}}
 graphic 04_5_VA1,56,16{patch 04_5_BA1,0,0{rotate 90}}
 graphic 04_5_VA0,56,16{patch 04_5_BA0,0,0{rotate 90}}
+
+texture BARPHAR1, 8, 56{patch BARENERG, 0, 0 {Translation "192:192=4:4", "198:198=216:216"}}
+texture BARPHAR2, 8, 56{patch BARENERG, 0, 0}
+texture BARPHAR3, 8, 56{patch BARENERG, 0, 0}
+texture VARPHAR1, 56, 8{patch BARPHAR1, 0, 0{rotate 90}}
+texture VARPHAR2, 56, 8{patch BARPHAR2, 0, 0{rotate 90}}
+texture VARPHAR3, 56, 8{patch BARPHAR2, 0, 0{rotate 90}}

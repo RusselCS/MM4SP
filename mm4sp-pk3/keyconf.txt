@@ -5,3 +5,4 @@ addplayerclass ToadmanSP
 addplayerclass BrightmanSP
 addplayerclass SkullmanSP
 addplayerclass DivemanSP
+addplayerclass PharaohmanSP

@@ -1,0 +1,4 @@
+// Pharaoh Wave
+texture BARPHAR3
+pic BARPHAR2 tics 1
+pic BARPHAR1 tics 1

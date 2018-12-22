@@ -26,7 +26,6 @@ Select:
 TNT1 AAAAAAAAAAAAAAAAAAAAAA 0 A_Raise
 TAR2 A 1 A_Raise
 Loop
-Altfire:
 Fire:
 TAR2 A 0 A_JumpIfNoAmmo("NoAmmo")
 TAR2 A 0 A_GiveInventory("NaturalDownpourPowerdown",1)

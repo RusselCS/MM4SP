@@ -2,6 +2,7 @@ actor BrightManSP : ClassBaseSP
 {
 player.displayname "brightman"
 
+player.startitem "BusterAmmo", 1
 player.startitem "BrightManWep"
 player.startitem "BrightManAmmo", 3
 player.startitem "BrightmanWep2"
