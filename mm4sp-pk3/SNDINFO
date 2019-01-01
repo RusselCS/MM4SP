@@ -6,6 +6,8 @@ weapon/woodsatellitehit WOODSA1
 
 // DUST MAN
 weapon/dustshot DUSTBIT
+weapon/Shoomp DUSTSHOT
+item/JunkArmor JUNKARMR
 
 // TOAD MAN
 weapon/raindrizzle DRIZZLE

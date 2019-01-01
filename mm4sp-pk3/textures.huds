@@ -20,10 +20,14 @@ sprite RIN2G0, 148, 80 {Offset -202, -143 Patch RINAG0, 0, 0 {Translation "192:1
 sprite RIN2H0, 148, 80 {Offset -202, -123 Patch RINAH0, 0, 0 {Translation "192:192=4:4", "198:198=129:129"}}
 
 //DUST MAN
-//Dust Buster
+//Dust Crusher
 sprite DUS1A0, 384, 308 {Offset -32, 93 Patch DUSAA0, 0, 0 {Translation "192:192=4:4", "198:198=197:197", "199:199=198:198"}}
 sprite DUS1B0, 384, 308 {Offset -32, 93 Patch DUSAB0, 0, 0 {Translation "192:192=4:4", "198:198=197:197", "199:199=198:198"}}
 sprite DUS1C0, 384, 308 {Offset -32, 93 Patch DUSAC0, 0, 0 {Translation "192:192=4:4", "198:198=197:197", "199:199=198:198"}}
+
+sprite DUS1D0, 384, 308 {Offset -32, 93 Patch DUSAJ0, 0, 0 {Translation "192:192=4:4", "198:198=197:197", "199:199=198:198"}}
+sprite DUS1E0, 384, 308 {Offset -32, 93 Patch DUSAK0, 0, 0 {Translation "192:192=4:4", "198:198=197:197", "199:199=198:198"}}
+sprite DUS1F0, 384, 308 {Offset -32, 93 Patch DUSAL0, 0, 0 {Translation "192:192=4:4", "198:198=197:197", "199:199=198:198"}}
 
 //Log Chipper
 sprite DUS2A0, 384, 308 {Offset -32, 93 Patch DUSAA0, 0, 0 {Translation "192:192=4:4", "198:198=129:129", "199:199=131:131"}}

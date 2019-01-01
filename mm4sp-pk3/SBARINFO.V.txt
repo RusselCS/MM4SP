@@ -45,6 +45,7 @@ IsSelected RingManWep
 }
 IsSelected Ring_WoodWep{Drawbar"BARAM201", "BAREMPTY", Ammo1, vertical, 16, 8;}	
 
+IsSelected DustManWep{Drawbar"DUSBAR", "DUSEMPTY", DustCharge, vertical, 16, 8;}
 IsSelected Dust_WoodWep{Drawbar"BARAM201", "BAREMPTY", Ammo1, vertical, 16, 8;}	
 
 IsSelected Toad_WoodWep{Drawbar"BARAM201", "BAREMPTY", Ammo1, vertical, 16, 8;}	
@@ -55,8 +56,8 @@ IsSelected SkullManWep2{Drawbar"BARAMM21", "BAREMPTY", Ammo1, vertical, 16, 8;
 	InInventory SkullBarrierCooldown, 1{DrawBar "BARAMM65", "BAREMPTY", Ammo1, vertical, 16, 8;}}
 
 IsSelected PharaohManWep{DrawImage"BAREMPTY", 16, 8;
-	InInventory PharaohCharge, 1{DrawBar "BARPHAR1", "BAREMPTY", PharaohCharge, vertical, 16, 8;}}	
-	InInventory PharaohCharge, 78{DrawBar "BARPHAR3", "BAREMPTY", PharaohCharge, vertical, 16, 8;}
+	InInventory PharaohCharge, 1{DrawBar "BARPHAR1", "BAREMPTY", PharaohCharge, vertical, 16, 8;	
+	InInventory PharaohCharge, 78{DrawBar "BARPHAR3", "BAREMPTY", PharaohCharge, vertical, 16, 8;}}}
 
 //Assists
 InInventory RushJetCounter, 5{DrawImage "RUSHH2H8", 290,16;}
@@ -85,7 +86,7 @@ InInventory BossHealth7, 1{DrawBar "BARHEALT", "BAREMPTY", BossHealth7, vertical
 InInventory BossHealth8, 1{DrawBar "BARHEALT", "BAREMPTY", BossHealth8, vertical, 292, 8;}
 // [Russ] TO-DO: TEMP. REMOVE WHEN THE BOSS SYSTEM IS ACTUALLY IMPLEMENTED.
 InInventory BossHealthBar, 1 { DrawBar "BARHEALT", "BAREMPTY", BossHealthBar, vertical, 292, 8; }
-InInventory EvilRobotShield, 1{DrawBar "BARAMM32", "BAREMPTY", BossHealthBar, vertical, 292, 8;}
+InInventory EvilRobotShield, 1{DrawBar "BARAMM32", "NOBAR", BossHealthBar, vertical, 292, 8;}
 
 // Misc
 InInventory TimeStoppedCounter, 1{DrawImage "FLASHS", 36, 0;}

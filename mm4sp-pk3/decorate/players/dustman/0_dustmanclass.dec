@@ -5,6 +5,7 @@ player.displayname "dustman"
 player.startitem "BusterAmmo", 1
 player.startitem "DustManWep"
 player.startitem "DustManAmmo", 3
+player.startitem "DustCharge", 84
 player.startitem "DustManFlag"
 player.jumpz 12
 speed 1.0

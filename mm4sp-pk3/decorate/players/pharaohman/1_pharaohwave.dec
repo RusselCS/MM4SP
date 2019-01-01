@@ -47,25 +47,20 @@ Hold3a:
 PHA1 F 0 ACS_ExecuteAlways(991,0,979)
 PHA1 F 1
 PHA1 E 0 A_Refire("Hold3b")
-PHA1 E 0 A_JumpIfInventory("PharaohCharge",78,"Throw2")
-Goto Throw1
+Goto Throw2
 Hold3b:
-PHA1 E 0 ACS_ExecuteAlways(991,0,783)
-PHA1 E 1
-PHA1 E 0 A_Refire("Hold3a")
-PHA1 E 0 A_JumpIfInventory("PharaohCharge",78,"Throw2")
-Goto Throw1
+PHA1 F 1
+PHA1 E 0 A_Refire("Hold3c")
+Goto Throw2
 Hold3c:
 PHA1 E 0 ACS_ExecuteAlways(991,0,783)
 PHA1 E 1
 PHA1 E 0 A_Refire("Hold3d")
-PHA1 E 0 A_JumpIfInventory("PharaohCharge",78,"Throw2")
-Goto Throw1
+Goto Throw2
 Hold3d:
 PHA1 E 1
 PHA1 E 0 A_Refire("Hold3a")
-PHA1 E 0 A_JumpIfInventory("PharaohCharge",78,"Throw2")
-Goto Throw1
+Goto Throw2
 Throw1:
 Altfire:
 PHA1 G 0 A_JumpIfNoAmmo("NoAmmo")
@@ -144,7 +139,7 @@ PHA1 P 1 A_FadeOut
 wait
 Death:
 TNT1 A 0
-TNT1 A 0 A_Explode(60,96,0,0,16)
+TNT1 A 0 A_Explode(40,96,0,0,16)
 TNT1 A 0 A_SpawnItemEx("OilPitIgnite",0,0,8)
 PHAS LMNO 2
 stop

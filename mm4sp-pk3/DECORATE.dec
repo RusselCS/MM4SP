@@ -20,7 +20,7 @@ actor GitTest
 #include "decorate/players/ringman/1_ringboomerang.dec"
 #include "decorate/players/ringman/2_stumpsatellite.dec"
 #include "decorate/players/dustman/0_dustmanclass.dec"
-#include "decorate/players/dustman/1_dustbuster.dec"
+#include "decorate/players/dustman/1_dustcrusher.dec"
 #include "decorate/players/dustman/2_logchipper.dec"
 #include "decorate/players/toadman/0_toadmanclass.dec"
 #include "decorate/players/toadman/1_rainflush.dec"
