@@ -7,6 +7,7 @@ actor BrightManFlag : ClassFlag {}
 actor SkullManFlag : ClassFlag {}
 actor DiveManFlag : ClassFlag {}
 actor PharaohManFlag : ClassFlag {}
+actor DrillManFlag : ClassFlag {}
 
 actor OnGround : Once {}
 actor InAir : Once {}

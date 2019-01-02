@@ -4,7 +4,7 @@ player.displayname "toadman"
 
 player.startitem "BusterAmmo", 1
 player.startitem "ToadManWep"
-player.startitem "ToadManAmmo", 5
+player.startitem "ToadManAmmo", 3
 player.startitem "ToadManFlag"
 player.jumpz 14
 speed 1.0

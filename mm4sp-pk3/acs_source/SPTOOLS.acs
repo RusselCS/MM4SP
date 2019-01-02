@@ -164,7 +164,7 @@ str bossList[MAX_BOSSES][2] = {
     {"YamatoManBossCC", "Yamato"}
 };
 
-#define MAX_PLAYERS 7
+#define MAX_PLAYERS 8
 str playerList[MAX_PLAYERS][2] = {
     {"RingManSP", "Ring"},
     {"DustManSP", "Dust"},
@@ -172,7 +172,8 @@ str playerList[MAX_PLAYERS][2] = {
     {"BrightmanSP", "Bright"},
     {"SkullmanSP", "Skull"},
     {"DivemanSP", "Dive"},
-    {"PharaohmanSP", "Pharaoh"}
+    {"PharaohmanSP", "Pharaoh"},
+    {"DrillmanSP", "Drill"}
 };
 
 script "4SP_GiveWeapons" ENTER {
