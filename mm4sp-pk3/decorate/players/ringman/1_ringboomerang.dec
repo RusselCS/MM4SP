@@ -64,6 +64,7 @@ actor RingManWep : BaseMM8BDMWep
 
 	NoAmmo:
 		RIN1 A 1
+		RIN1 A 0 A_Refire
 		goto Ready+1
 	}
 }

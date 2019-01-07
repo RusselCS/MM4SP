@@ -49,6 +49,7 @@ DIV1 A 0 A_Refire
 goto Ready+1
 NoAmmo:
 DIV1 A 1
+DIV1 A 0 A_Refire
 Goto Ready+1
 }
 }
