@@ -24,3 +24,12 @@ graphic TARI2, 30, 30
    YScale 2.0
    Patch TAR2O0, 0, 0
 }
+
+//PHARAOH MAN
+//Pharaoh Power
+graphic PHAI1, 30, 30
+{
+   XScale 2.0
+   YScale 2.0
+   Patch PHAAV0, 0, 0
+}

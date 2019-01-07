@@ -20,6 +20,9 @@ weapon/brightshot BUSTER
 weapon/skullshieldbuzz SKULBAR4
 weapon/skullbust SKULSHOT
 
+// PHARAOH MAN
+classes/float PHACURSE
+
 // ENEMIES
 misc/door2	bdoor2
 enemy/hammerjoeswing	hjswin

@@ -518,7 +518,7 @@ goto WoofWoof
 WoofWoof:
 MONK A 0 A_Stop
 MONK D 0 ThrustThingZ(0,0,0,0)
-MONK ABCB 6 A_LookEx(LOF_NOSOUNDCHECK,0,300,0,360,"SeeDrop")
+MONK ABCB 6 A_LookEx(LOF_NOSOUNDCHECK,0,800,0,360,"SeeDrop")
 loop
 SeeDrop:
 MONK D 0 A_FaceTarget
@@ -544,7 +544,7 @@ MONK AAA 0 A_Chase
 MONK E 0 A_FaceTarget
 MONK E 25
 Look:
-MONK E 1 A_LookEx(LOF_NOSOUNDCHECK,0,500,0,360,"See")
+MONK E 1 A_LookEx(LOF_NOSOUNDCHECK,0,800,0,360,"See")
 loop
 Death:
 CRAZ A 0 A_Pain

@@ -15,7 +15,7 @@ Spawn:
 WEA2 L 1
 loop
 Ready:
-PHA1 A 0 ACS_ExecuteAlways(998,0,783)
+PHA1 A 0 ACS_ExecuteAlways(998,0,978)
 PHA1 A 1 A_WeaponReady
 Goto Ready+1
 Deselect:
@@ -53,7 +53,7 @@ PHA1 F 1
 PHA1 E 0 A_Refire("Hold3c")
 Goto Throw2
 Hold3c:
-PHA1 E 0 ACS_ExecuteAlways(991,0,783)
+PHA1 E 0 ACS_ExecuteAlways(991,0,978)
 PHA1 E 1
 PHA1 E 0 A_Refire("Hold3d")
 Goto Throw2
@@ -64,7 +64,7 @@ Goto Throw2
 Throw1:
 Altfire:
 PHA1 G 0 A_JumpIfNoAmmo("NoAmmo")
-PHA1 E 0 ACS_ExecuteAlways(991,0,783)
+PHA1 E 0 ACS_ExecuteAlways(991,0,978)
 PHA1 G 0 A_PlaySoundEx("weapon/pharaoh1","Weapon")
 PHA1 G 0 A_FireCustomMissile("PharaohManShot",0,0,8,0)
 PHA1 G 0 A_TakeInventory("PharaohCharge",999)
@@ -74,7 +74,7 @@ PHA1 MNA 2
 PHA1 A 0 A_Refire
 Goto Ready+1
 Throw2:
-PHA1 E 0 ACS_ExecuteAlways(991,0,783)
+PHA1 E 0 ACS_ExecuteAlways(991,0,978)
 PHA1 G 0 A_PlaySoundEx("weapon/pharaoh2","Weapon")
 PHA1 G 0 A_FireCustomMissile("PharaohManWave",0,0,8,0)
 PHA1 G 0 A_TakeInventory("PharaohCharge",999)

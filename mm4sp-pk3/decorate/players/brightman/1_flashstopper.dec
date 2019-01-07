@@ -6,7 +6,7 @@ Weapon.AmmoUse 7
 Weapon.AmmoGive 28
 Weapon.SlotNumber 0
 Tag "Flash Stopper"
-Inventory.Pickupmessage "Power up! It's lights out!"
+Inventory.Pickupmessage "Power up! It's lights on!"
 weapon.ammotype "BrightManAmmo2"
 +WEAPON.NOAUTOFIRE
 States

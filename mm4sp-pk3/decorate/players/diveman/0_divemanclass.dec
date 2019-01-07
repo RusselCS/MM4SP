@@ -4,7 +4,7 @@ player.displayname "diveman"
 
 player.startitem "BusterAmmo", 1
 player.startitem "DiveManWep"
-player.startitem "DiveManAmmo", 3
+player.startitem "DiveManAmmo", 2
 player.startitem "DiveManFlag"
 player.jumpz 14
 speed 1.0

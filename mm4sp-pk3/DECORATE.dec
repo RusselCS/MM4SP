@@ -35,6 +35,7 @@ actor GitTest
 #include "decorate/players/diveman/1_divemissile.dec"
 #include "decorate/players/pharaohman/0_pharaohmanclass.dec"
 #include "decorate/players/pharaohman/1_pharaohwave.dec"
+#include "decorate/players/pharaohman/1_pharaohpower.dec"
 #include "decorate/players/drillman/0_drillmanclass.dec"
 #include "decorate/players/drillman/1_drillbomb.dec"
 

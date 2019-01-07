@@ -4,7 +4,7 @@ player.displayname "ringman"
 
 player.startitem "BusterAmmo", 1
 player.startitem "RingManWep"
-player.startitem "RingManAmmo", 5
+player.startitem "RingManAmmo", 3
 player.startitem "RingManFlag"
 player.jumpz 14
 speed 1.15

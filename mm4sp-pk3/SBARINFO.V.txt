@@ -9,7 +9,14 @@ InInventory not NoHealthBar, 1
 {
 	DrawBar "BARHEALT", "BAREMPTY", Health, vertical, 24, 8;
 
-	InInventory SkullShieldCheck, 1{DrawBar "BARFLS5", "NOBAR", SkullShieldCheck, vertical, 24, 8;}
+	InInventory SkullShieldCheck, 1
+	{
+		DrawBar "BARFLS5", "NOBAR", SkullShieldCheck, vertical, 24, 8;
+		InInventory ShieldHits, 1	{ DrawImage "SKULBAR1",32,8; }
+		InInventory ShieldHits, 2	{ DrawImage "SKULBAR2",32,8; }
+		InInventory ShieldHits, 3	{ DrawImage "SKULBAR3",32,8; }
+	}
+	InInventory PharaohPowerCheck, 1{DrawBar "PHARBAR5", "NOBAR", PharaohPowerCheck, vertical, 24, 8;}
 	InInventory SkullBarrierProtection, 1{DrawBar "BARFLS5", "NOBAR", SkullShieldCheck, vertical, 24, 8;}
 	InInventory BasicArmor, 1{DrawBar "BARAMT31", "NOBAR", Armor, vertical, 24, 8;}
 
@@ -40,8 +47,6 @@ IsSelected RingManWep
 	InInventory RingManAmmo, 1	{ DrawImage "04_5_BA1",8,8;	}
 	InInventory RingManAmmo, 2	{ DrawImage "04_5_BA2",8,8;	}
 	InInventory RingManAmmo, 3	{ DrawImage "04_5_BA3",8,8; }
-	InInventory RingManAmmo, 4	{ DrawImage "04_5_BA4",8,8;	}
-	InInventory RingManAmmo, 5	{ DrawImage "04_5_BA5",8,8;	}
 }
 IsSelected Ring_WoodWep{Drawbar"BARAM201", "BAREMPTY", Ammo1, vertical, 16, 8;}	
 
@@ -55,9 +60,19 @@ IsSelected BrightmanWep2{Drawbar"BARAMM18", "BAREMPTY", Ammo1, vertical, 16, 8;}
 IsSelected SkullManWep2{Drawbar"BARAMM21", "BAREMPTY", Ammo1, vertical, 16, 8;	
 	InInventory SkullBarrierCooldown, 1{DrawBar "BARAMM65", "BAREMPTY", Ammo1, vertical, 16, 8;}}
 
+IsSelected DiveManWep
+	{
+		DrawImage "DIVEMPTY",8,8;
+		InInventory DiveManAmmo, 1	{ DrawImage "DIVEBAR1",8,8;	}
+		InInventory DiveManAmmo, 2	{ DrawImage "DIVEBAR2",8,8;	}
+	}
+
 IsSelected PharaohManWep{DrawImage"BAREMPTY", 16, 8;
-	InInventory PharaohCharge, 1{DrawBar "BARPHAR1", "BAREMPTY", PharaohCharge, vertical, 16, 8;	
-	InInventory PharaohCharge, 78{DrawBar "BARPHAR3", "BAREMPTY", PharaohCharge, vertical, 16, 8;}}}
+	InInventory PharaohCharge, 1{DrawBar "PHARBAR1", "BAREMPTY", PharaohCharge, vertical, 16, 8;	
+	InInventory PharaohCharge, 78{DrawBar "PHARBAR3", "BAREMPTY", PharaohCharge, vertical, 16, 8;}}}
+IsSelected PharaohManWep2{Drawbar"PHARBAR1", "BAREMPTY", Ammo1, vertical, 16, 8;
+	InInventory PharaohPowerCooldown, 1{DrawBar "BARAMM65", "BAREMPTY", Ammo1, vertical, 16, 8;}}
+	
 
 IsSelected DrillManWep{Drawbar"DRILLBAR", "BAREMPTY", Ammo1, vertical, 16, 8;}	
 

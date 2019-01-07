@@ -3,12 +3,14 @@
 #include "zcommon.acs"
 #include "8BDMLIB.acs"
 
+#DEFINE PHARAOHMANSP 978
 #DEFINE PHARAOHFLASH 979
 
 script "4SP_Colors" OPEN CLIENTSIDE
 {
 Delay(25);
-CreateTranslation(PHARAOHFLASH, 4:4=192:192, 210:210=198:198, 0:0=4:4);
+CreateTranslation(PHARAOHMANSP, 192:192=4:4, 198:198=216:216, 196:196=112:112);
+CreateTranslation(PHARAOHFLASH, 4:4=192:192, 210:210=198:198, 0:0=4:4, 196:196=112:112);
 }
 
 // [Trill] Scripts ported and slightly modified from MMSP-Basic
