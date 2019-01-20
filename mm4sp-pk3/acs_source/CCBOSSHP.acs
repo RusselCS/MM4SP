@@ -1,0 +1,31 @@
+#include "zcommon.acs"
+#include "8BDMLIB.acs"
+
+script "4SP_BossManage" (void)
+{
+    if(CheckInventory("BoostFlag")>0){ terminate; }
+    int HP = GetActorProperty(0, APROP_Health);
+    GiveInventory("BoostFlag", 1);
+
+    int currentCounter = 0;
+    int maxCounter = GetAmmoCapacity("CCBossHealth");
+    int counterIter = fixedMul(maxCounter, 0.04);
+    PrintBold(i:counterIter);
+    
+    /*while(currentCounter < maxCounter) {
+
+    }
+	
+    while(GetActorProperty(0, APROP_Health)>0){
+	
+        if(HP != GetActorProperty(0, APROP_Health)){
+        PlayActorSound(0, SOUND_Pain, CHAN_BODY, 1.0, false, ATTN_NORM);
+        SetActorProperty(0, APROP_RenderStyle, STYLE_None);
+        Delay(1);
+        SetActorProperty(0, APROP_RenderStyle, STYLE_Normal);
+        HP = GetActorProperty(0, APROP_Health);
+		}
+		
+    Delay(4);
+    }*/
+}

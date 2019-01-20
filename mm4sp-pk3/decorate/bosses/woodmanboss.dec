@@ -61,6 +61,7 @@ States
 {
 Intro:
 CUTM J 1
+CUTM A 0 ACS_NamedExecuteAlways("4SP_BossManage", 0)
 CUTM J 0 A_ChangeFlag("INVULNERABLE",1)
 CUTM J 0 A_JumpIf(floorz-z==0,"Intro2")
 loop
@@ -69,7 +70,6 @@ CUTM AI 5
 loop
 Spawn:
 CUTM A 0 A_ChangeFlag("INVULNERABLE",0)
-CUTM A 0 ACS_NamedExecuteAlways("4sp_enemypain", 0)
 CUTM A 0 A_JumpIfInventory("CutterFlag",1,"Spawn2")
 TakeFlags:
 CUTM B 0 A_TakeInventory("CutterFlag",999)
