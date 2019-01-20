@@ -1,0 +1,9 @@
+// Pharaoh Wave
+texture PHARBAR3
+pic PHARBAR2 tics 2
+pic PHARBAR1 tics 2
+
+//Pharaoh Power
+texture PHARBAR5
+pic PHARBAR4 tics 4
+pic TNT1A0 tics 4

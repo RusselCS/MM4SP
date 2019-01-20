@@ -1,0 +1,161 @@
+actor PharaohManSP : ClassBaseSP
+{
+player.displayname "pharaohman"
+
+player.startitem "BusterAmmo", 1
+player.startitem "PharaohManWep"
+player.startitem "PharaohManAmmo", 3
+player.startitem "PharaohManWep2"
+player.startitem "PharaohManAmmo2", 28
+player.startitem "PharaohManFlag"
+player.jumpz 12
+speed 1.15
+
+States
+{
+Spawn:
+PHAR A 0
+PHAR B 1 A_GiveInventory("FrameBGive",1)
+PHAR A 1 A_GiveInventory("FrameAGive",1)
+Goto Spawn+2
+See:
+PHAR B 5 A_GiveInventory("FrameBGive",1)
+PHAR C 5 A_GiveInventory("FrameCGive",1)
+PHAR D 5 A_GiveInventory("FrameDGive",1)
+PHAR E 5 A_GiveInventory("FrameEGive",1)
+Goto Spawn
+Missile:
+PHAR FFFFF 1 A_GiveInventory("FrameFGive",1)
+PHAR GGGG 1 A_GiveInventory("FrameGGive",1)
+goto Spawn
+ClassPain:
+PHAR H 0 A_GiveInventory("FrameHGive",1)
+goto PainContinue
+DeathFix:
+PHAR H 0
+goto DeathContinue
+ClassDeath:
+PHAR H 1
+goto MegaDeathEnd
+}
+}
+
+actor Frame : Inventory
+{
+inventory.amount 1
+inventory.maxamount 1
+}
+
+actor FrameA : Frame {}
+actor FrameB : Frame {}
+actor FrameC : Frame {}
+actor FrameD : Frame {}
+actor FrameE : Frame {}
+actor FrameF : Frame {}
+actor FrameG : Frame {}
+actor FrameH : Frame {}
+
+actor FramesTake : CustomInventory
+{
+States
+{
+Pickup:
+TNT1 A 0 A_TakeInventory("FrameA", 1)
+TNT1 A 0 A_TakeInventory("FrameB", 1)
+TNT1 A 0 A_TakeInventory("FrameC", 1)
+TNT1 A 0 A_TakeInventory("FrameD", 1)
+TNT1 A 0 A_TakeInventory("FrameE", 1)
+TNT1 A 0 A_TakeInventory("FrameF", 1)
+TNT1 A 0 A_TakeInventory("FrameG", 1)
+TNT1 A 0 A_TakeInventory("FrameH", 1)
+stop
+}
+}
+
+actor FrameAGive : CustomInventory
+{
+States
+{
+Pickup:
+TNT1 A 0 A_GiveInventory("FramesTake", 1)
+TNT1 A 0 A_GiveInventory("FrameA", 1)
+stop
+}
+}
+
+actor FrameBGive : CustomInventory
+{
+States
+{
+Pickup:
+TNT1 A 0 A_GiveInventory("FramesTake", 1)
+TNT1 A 0 A_GiveInventory("FrameB", 1)
+stop
+}
+}
+
+actor FrameCGive : CustomInventory
+{
+States
+{
+Pickup:
+TNT1 A 0 A_GiveInventory("FramesTake", 1)
+TNT1 A 0 A_GiveInventory("FrameC", 1)
+stop
+}
+}
+
+actor FrameDGive : CustomInventory
+{
+States
+{
+Pickup:
+TNT1 A 0 A_GiveInventory("FramesTake", 1)
+TNT1 A 0 A_GiveInventory("FrameD", 1)
+stop
+}
+}
+
+actor FrameEGive : CustomInventory
+{
+States
+{
+Pickup:
+TNT1 A 0 A_GiveInventory("FramesTake", 1)
+TNT1 A 0 A_GiveInventory("FrameE", 1)
+stop
+}
+}
+
+actor FrameFGive : CustomInventory
+{
+States
+{
+Pickup:
+TNT1 A 0 A_GiveInventory("FramesTake", 1)
+TNT1 A 0 A_GiveInventory("FrameF", 1)
+stop
+}
+}
+
+actor FrameGGive : CustomInventory
+{
+States
+{
+Pickup:
+TNT1 A 0 A_GiveInventory("FramesTake", 1)
+TNT1 A 0 A_GiveInventory("FrameG", 1)
+stop
+}
+}
+
+actor FrameHGive : CustomInventory
+{
+States
+{
+Pickup:
+TNT1 A 0 A_GiveInventory("FramesTake", 1)
+TNT1 A 0 A_GiveInventory("FrameH", 1)
+stop
+}
+}

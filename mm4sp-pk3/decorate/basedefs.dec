@@ -2,6 +2,12 @@ actor ClassFlag : Once {}
 
 actor RingManFlag : ClassFlag {}
 actor DustManFlag : ClassFlag {}
+actor ToadManFlag : ClassFlag {}
+actor BrightManFlag : ClassFlag {}
+actor SkullManFlag : ClassFlag {}
+actor DiveManFlag : ClassFlag {}
+actor PharaohManFlag : ClassFlag {}
+actor DrillManFlag : ClassFlag {}
 
 actor OnGround : Once {}
 actor InAir : Once {}
@@ -14,6 +20,8 @@ actor Counter : Inventory {
 actor RadiusCounter : Counter {}
 actor HeightCounter : Counter {}
 actor DamageCounter : Counter {}
+
+actor MonsterFreezeFlag : Counter {}
 
 actor BossFlag : Once {}
 
@@ -37,6 +45,14 @@ actor BasicClientside
 	radius 1
 }
 
+actor BasicBouncer
+{
++BOUNCEONWALLS
++BOUNCEONFLOORS
++BOUNCEONCEILINGS
++CANBOUNCEWATER
+}
+
 actor GenericRobot
 {
 damagefactor "Buster", 1.0
@@ -49,6 +65,47 @@ painchance 256
 damagetype "Enemy"
 painsound "misc/devilpain"
 scale 2.5
+var int user_velx;
+var int user_vely;
+var int user_velz;
+States
+{
+Pain.FlashStopper:
+"####" "#" 0 ACS_NamedExecuteAlways("4SP_EnemyManage",0,1,1)
+"####" "#" 0 A_ClearTarget
+"####" "####################################" 1 A_SpawnItemEx("BrightStoppedFX",random(0,5)+radius,0,random(0,height),0,0,0,random(1,18)*20,1,32)
+"####" "####################################" 1 A_SpawnItemEx("BrightStoppedFX",random(0,5)+radius,0,random(0,height),0,0,0,random(1,18)*20,1,32)
+"####" "####################################" 1 A_SpawnItemEx("BrightStoppedFX",random(0,5)+radius,0,random(0,height),0,0,0,random(1,18)*20,1,32)
+"####" "#" 0 ACS_NamedExecuteAlways("4SP_EnemyManage",0,1,0)
+"####" "#" 1 A_Jump(256,"Return")
+wait
+Return:
+"####" "#" 1 A_Jump(256,"Look")
+wait
+}
+}
+
+actor ChangeNoPainTrue : CustomInventory
+{
++INVENTORY.AUTOACTIVATE
+States
+{
+Use:
+TNT1 A 0
+TNT1 A 0 A_ChangeFlag("NOPAIN",1)
+stop
+}
+}
+
+actor ChangeNoPainFalse : CustomInventory
+{
++INVENTORY.AUTOACTIVATE
+States
+{
+Use:
+TNT1 A 0 A_ChangeFlag("NOPAIN",0)
+stop
+}
 }
 
 actor EnemyDeathFX
@@ -108,13 +165,26 @@ TNT1 A 0 A_SetUserVar("user_R",CallACS("4SP_CountInv",1,AAPTR_TARGET))
 TNT1 A 0 A_SetUserVar("user_H",CallACS("4SP_CountInv",2,AAPTR_TARGET))
 TNT1 A 0 A_SetUserVar("user_D",CallACS("4SP_CountInv",3,AAPTR_TARGET))
 TNT1 A 1 A_Warp(AAPTR_TARGET,0,0,user_H/2,0,WARPF_NOCHECKPOSITION,"Continue")
-stop
+TNT1 A 1 A_JumpIf(true, "End")
+wait
 Continue:
 TNT1 A 0 A_SetUserVar("user_R",ACS_NamedExecuteWithResult("4SP_CountInv",1,AAPTR_TARGET))
 TNT1 A 0 A_SetUserVar("user_H",ACS_NamedExecuteWithResult("4SP_CountInv",2,AAPTR_TARGET))
 TNT1 A 0 A_SetUserVar("user_D",ACS_NamedExecuteWithResult("4SP_CountInv",3,AAPTR_TARGET))
-TNT1 A 1 A_Explode(user_D,user_R+10,0,0,user_R+10)
+TNT1 A 1 
+TNT1 A 1 A_Warp(AAPTR_TARGET,0,0,user_H/2,0,WARPF_NOCHECKPOSITION,"Continue2")
+TNT1 A 1 A_JumpIf(true, "End")
+wait
+Continue2:
+TNT1 A 0 A_SetUserVar("user_R",ACS_NamedExecuteWithResult("4SP_CountInv",1,AAPTR_TARGET))
+TNT1 A 0 A_SetUserVar("user_H",ACS_NamedExecuteWithResult("4SP_CountInv",2,AAPTR_TARGET))
+TNT1 A 0 A_SetUserVar("user_D",ACS_NamedExecuteWithResult("4SP_CountInv",3,AAPTR_TARGET))
+TNT1 A 1 A_Explode(user_D,user_R+10,0,0,user_R+11)
 TNT1 A 1 A_Warp(AAPTR_TARGET,0,0,user_H/2,0,WARPF_NOCHECKPOSITION,"Continue")
+TNT1 A 1 A_JumpIf(true, "End")
+wait
+End:
+TNT1 A 0
 stop
 }
 }
@@ -123,4 +193,48 @@ actor EnemyContactDamagerProtect : PowerProtection
 {
 Powerup.Duration 10
 damagefactor "EnemyContact", 0.0
+}
+
+//[Trill] Base actors nicked from CBM
+//
+actor EnemyFloorQuake
+{
++MISSILE
+-SOLID
++DONTBLAST
++NOGRAVITY
++RIPPER
++SKYEXPLODE
++NOINTERACTION
++DONTSPLASH
++THRUGHOST
++THRUACTORS
++DONTREFLECT
+Damage 0
+radius 2
+height 2
+damagetype "Enemy"
++NOCLIP
+Renderstyle None
+States
+{
+Spawn:
+TNT1 A 0
+TNT1 A 0 A_SetScale(angle*256/360)
+TNT1 A 0 Thing_Move(0,1000+momz*8,1)
+TNT1 A 4 A_SpawnItemEx("EnemyFloorQuakeBoom",0,0,28,0,0,0,0,16384)
+stop
+}
+}
+
+actor EnemyFloorQuakeBoom : EnemyFloorQuake
+{
+States
+{
+Spawn:
+TNT1 A 0
+TNT1 A 0 A_Explode(ScaleX,15,0,0,15)
+TNT1 A 4
+stop
+}
 }

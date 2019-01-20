@@ -198,6 +198,8 @@ Damage (9)
 damagetype "Enemy"
 deathsound "misc/devilpain"
 painsound "misc/devilpain"
+damagefactor "Enemy", 0.0
+damagefactor "EnemyContact", 0.0
 painchance 256
 States
 {

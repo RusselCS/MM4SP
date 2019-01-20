@@ -3,6 +3,16 @@
 #include "zcommon.acs"
 #include "8BDMLIB.acs"
 
+#DEFINE PHARAOHMANSP 978
+#DEFINE PHARAOHFLASH 979
+
+script "4SP_Colors" OPEN CLIENTSIDE
+{
+Delay(25);
+CreateTranslation(PHARAOHMANSP, 192:192=4:4, 198:198=216:216, 196:196=112:112);
+CreateTranslation(PHARAOHFLASH, 4:4=192:192, 210:210=198:198, 0:0=4:4, 196:196=112:112);
+}
+
 // [Trill] Scripts ported and slightly modified from MMSP-Basic
 //
 script "4SP_EnemyStart" (void)
@@ -15,6 +25,12 @@ if(CheckInventory("HealthScaled")==1){terminate;}
 
 SetActorProperty(0,APROP_Health,GetActorProperty (0,APROP_Health) + (GetActorProperty (0,APROP_Health)/4) * PlayerCount());
 GiveInventory("HealthScaled",1);
+}
+
+// [Trill] Stop respawning enemies overflowing, ported from MMSP-Basic
+script "4SP_OverflowCheck" (int Enemy)
+{
+if(Enemy==0){if(ThingCountName("SP_Claw",0)>25){SetActorState(0, "Despawn"); }}
 }
 
 Script "4SP_EnemyPain" (void) //CLIENTSIDE
@@ -35,6 +51,39 @@ Script "4SP_EnemyPain" (void) //CLIENTSIDE
 		}
 		
     Delay(4);
+    }
+}
+
+script "4SP_EnemyManage" (int source, int value)
+{
+    switch(source) // "source" of damage
+    {
+    Case 1:
+        if(value > 0)
+        {
+            if(!CheckFlag(0, "NOGRAVITY"))
+            {
+                SetActorProperty(0, APROP_GRAVITY, 0);
+                GiveInventory("MonsterFreezeFlag", 1);
+            }
+            GiveInventory("ChangeNoPainTrue",1);
+            SetUserVariable(0,"user_velx",GetActorVelX(0));
+            SetUserVariable(0,"user_vely",GetActorVelY(0));
+            SetUserVariable(0,"user_velz",GetActorVelZ(0));
+            SetActorVelocity(0, 0, 0, 0, 0, 0);
+            Thing_Stop(0);
+        }
+        else
+        {
+            GiveInventory("ChangeNoPainFalse",1);
+            if(CheckInventory("MonsterFreezeFlag") > 0)
+            {
+                TakeInventory("MonsterFreezeFlag", 999);
+                SetActorProperty(0, APROP_GRAVITY, 1*65536);
+            }
+            SetActorVelocity(0,GetUserVariable(0,"user_velx"),GetUserVariable(0,"user_vely"),GetUserVariable(0,"user_velz"),0,0);
+        }
+    break;
     }
 }
 
@@ -78,6 +127,24 @@ dist = xyDistance(ActivatorTID(),3800);
 SetThingSpecial (3800, 0, dist, 0, 0, 0, 0);
 }
 
+//[Trill] Floor quakes in a radius, heavily modified from CBM. Niche script probably
+//
+script "4SP_FloorQuakeDamage" (int maxRange, int QuakePower)
+{
+	int zDist;
+	for(int p = 0;p < ServerMAX; p++)
+	{
+		if(!PlayerInGame(p))
+		{
+			continue;
+		}
+		if(xyDistance(0, p+1000) < maxRange && zDistance(0, p+1000) >= -32 && zDistance(0, p+1000) <= 32)
+		{
+			SpawnProjectile(0,"EnemyFloorQuake",QuakePower,0,p,0,0);
+		}
+	}
+}
+
 // [Russel] Check Alive script. Nicked from CBM.
 //
 script "4SP_CheckAlive" (void) {
@@ -99,10 +166,16 @@ str bossList[MAX_BOSSES][2] = {
     {"YamatoManBossCC", "Yamato"}
 };
 
-#define MAX_PLAYERS 2
+#define MAX_PLAYERS 8
 str playerList[MAX_PLAYERS][2] = {
     {"RingManSP", "Ring"},
-    {"DustManSP", "Dust"}
+    {"DustManSP", "Dust"},
+    {"ToadManSP", "Toad"},
+    {"BrightmanSP", "Bright"},
+    {"SkullmanSP", "Skull"},
+    {"DivemanSP", "Dive"},
+    {"PharaohmanSP", "Pharaoh"},
+    {"DrillmanSP", "Drill"}
 };
 
 script "4SP_GiveWeapons" ENTER {

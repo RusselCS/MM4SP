@@ -4,3 +4,13 @@ server noarchive bool SV_CC_Ring_Wood_Wep = false;
 server noarchive bool SV_CC_Ring_Spark_Wep = false;
 server noarchive bool SV_CC_Ring_Napalm_Wep = false;
 server noarchive bool SV_CC_Ring_Yamato_Wep = false;
+
+server noarchive bool SV_CC_Dust_Wood_Wep = false;
+server noarchive bool SV_CC_Dust_Spark_Wep = false;
+server noarchive bool SV_CC_Dust_Napalm_Wep = false;
+server noarchive bool SV_CC_Dust_Yamato_Wep = false;
+
+server noarchive bool SV_CC_Toad_Wood_Wep = false;
+server noarchive bool SV_CC_Toad_Spark_Wep = false;
+server noarchive bool SV_CC_Toad_Napalm_Wep = false;
+server noarchive bool SV_CC_Toad_Yamato_Wep = false;

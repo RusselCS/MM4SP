@@ -1,0 +1,36 @@
+actor ToadManSP : ClassBaseSP
+{
+player.displayname "toadman"
+
+player.startitem "BusterAmmo", 1
+player.startitem "ToadManWep"
+player.startitem "ToadManAmmo", 3
+player.startitem "ToadManFlag"
+player.jumpz 14
+speed 1.0
+
+States
+{
+Spawn:
+TOAD A 0
+TOAD B 1
+TOAD A 1
+Goto Spawn+2
+See:
+TOAD BCDE 5
+Goto Spawn
+Missile:
+TOAD F 5
+TOAD G 4
+goto Spawn
+ClassPain:
+TOAD H 0
+goto PainContinue
+DeathFix:
+TOAD H 0
+goto DeathContinue
+ClassDeath:
+TOAD H 1
+goto MegaDeathEnd
+}
+}

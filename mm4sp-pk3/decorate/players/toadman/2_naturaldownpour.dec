@@ -1,0 +1,230 @@
+actor Toad_WoodWep : BaseMM8BDMWep
+{
+dropitem ""
+inventory.icon "TARI2"
+Weapon.AmmoUse 1
+Weapon.AmmoGive 28
+Weapon.SlotNumber 6
+Tag "Natural Downpour"
+Inventory.Pickupmessage "Power up! Natural Downpour!"
+weapon.ammotype "NaturalDownpourAmmo"
++WEAPON.NOAUTOFIRE
+States
+{
+Spawn:
+TAR2 O 1
+loop
+Ready:
+TAR2 A 0 ACS_ExecuteAlways(998,0,2)
+TAR2 A 1 A_WeaponReady
+Goto Ready+1
+Deselect:
+TNT1 AAAAAAAAAAAAAAAAAAAAAA 0 A_Lower
+TAR2 A 1 A_Lower
+Loop
+Select:
+TNT1 AAAAAAAAAAAAAAAAAAAAAA 0 A_Raise
+TAR2 A 1 A_Raise
+Loop
+Fire:
+TAR2 A 0 A_JumpIfNoAmmo("NoAmmo")
+TAR2 A 0 A_GiveInventory("NaturalDownpourPowerdown",1)
+TAR2 A 0 A_PlaySoundEx("weapon/raindance","Weapon")
+TAR2 BCDEF 4
+TAR2 F 0 A_PlaySoundEx("weapon/rainflush","Weapon")
+TAR2 F 0 A_TakeInventory("NaturalDownpourAmmo",1)
+TAR2 F 0 A_RadiusGive("NaturalDownpourHealer",512,RGF_PLAYERS,1)
+TAR2 F 2 offset(-16,32) A_SpawnItemEX("NaturalDownpour_SP")
+TAR2 F 2 offset(-8,32) 
+TAR2 F 2 offset(1,32)
+TAR2 F 2 offset(8,32)
+TAR2 F 0 A_JumpIfNoAmmo("FireEnd")
+TAR2 F 0 A_TakeInventory("NaturalDownpourAmmo",1)
+TAR2 F 0 A_RadiusGive("NaturalDownpourHealer",512,RGF_PLAYERS,1)
+TAR2 F 2 offset(16,32) A_SpawnItemEX("NaturalDownpour_SP")
+TAR2 F 2 offset(8,32)
+TAR2 F 2 offset(-1,32)
+TAR2 F 2 offset(-8,32)
+TAR2 F 0 A_JumpIfNoAmmo("FireEnd")
+TAR2 F 0 A_TakeInventory("NaturalDownpourAmmo",1)
+TAR2 F 0 A_RadiusGive("NaturalDownpourHealer",512,RGF_PLAYERS,1)
+TAR2 F 2 offset(-16,32) A_SpawnItemEX("NaturalDownpour_SP")
+TAR2 F 2 offset(-8,32)
+TAR2 F 2 offset(1,32)
+TAR2 F 2 offset(8,32)
+TAR2 F 0 A_JumpIfNoAmmo("FireEnd")
+TAR2 F 0 A_TakeInventory("NaturalDownpourAmmo",1)
+TAR2 F 0 A_RadiusGive("NaturalDownpourHealer",512,RGF_PLAYERS,1)
+TAR2 F 2 offset(16,32) A_SpawnItemEX("NaturalDownpour_SP")
+TAR2 F 2 offset(8,32)
+TAR2 F 2 offset(-1,32)
+TAR2 F 2 offset(-8,32)
+TAR2 F 1 A_Refire("Fire2")
+goto FireEnd
+Fire2:
+TAR2 F 0 A_JumpIfNoAmmo("FireEnd")
+TAR2 F 0 A_PlaySoundEx("weapon/rainflush","Weapon")
+TAR2 F 0 A_TakeInventory("NaturalDownpourAmmo",1)
+TAR2 F 0 A_RadiusGive("NaturalDownpourHealer",512,RGF_PLAYERS,1)
+TAR2 F 2 offset(-16,32) A_SpawnItemEX("NaturalDownpour_SP")
+TAR2 F 2 offset(-8,32) 
+TAR2 F 2 offset(1,32)
+TAR2 F 2 offset(8,32)
+TAR2 F 1 A_Refire("Fire3")
+goto FireEnd
+Fire3:
+TAR2 F 0 A_JumpIfNoAmmo("FireEnd")
+TAR2 F 0 A_TakeInventory("NaturalDownpourAmmo",1)
+TAR2 F 0 A_RadiusGive("NaturalDownpourHealer",512,RGF_PLAYERS,1)
+TAR2 F 2 offset(16,32) A_SpawnItemEX("NaturalDownpour_SP")
+TAR2 F 2 offset(8,32)
+TAR2 F 2 offset(-1,32)
+TAR2 F 2 offset(-8,32)
+TAR2 F 1 A_Refire("Fire4")
+goto FireEnd
+Fire4:
+TAR2 F 0 A_JumpIfNoAmmo("FireEnd")
+TAR2 F 0 A_TakeInventory("NaturalDownpourAmmo",1)
+TAR2 F 0 A_RadiusGive("NaturalDownpourHealer",512,RGF_PLAYERS,1)
+TAR2 F 2 offset(-16,32) A_SpawnItemEX("NaturalDownpour_SP")
+TAR2 F 2 offset(-8,32) 
+TAR2 F 2 offset(1,32)
+TAR2 F 2 offset(8,32)
+TAR2 F 1 A_Refire("Fire5")
+goto FireEnd
+Fire5:
+TAR2 F 0 A_JumpIfNoAmmo("FireEnd")
+TAR2 F 0 A_TakeInventory("NaturalDownpourAmmo",1)
+TAR2 F 0 A_RadiusGive("NaturalDownpourHealer",512,RGF_PLAYERS,1)
+TAR2 F 2 offset(16,32) A_SpawnItemEX("NaturalDownpour_SP")
+TAR2 F 2 offset(8,32)
+TAR2 F 2 offset(-1,32)
+TAR2 F 2 offset(-8,32)
+TAR2 F 1 A_Refire("Fire2")
+goto FireEnd
+FireEnd:
+TNT1 A 0 A_TakeInventory("NaturalDownpourPowerdown",999)
+TNT1 A 15 A_WeaponReady(WRF_NOFIRE|WRF_NOSWITCH)
+TAR2 GHA 1
+TAR2 B 0 A_Refire
+goto Ready+1
+NoAmmo:
+TAR2 A 1 ACS_Execute(979,0)
+Goto Ready+1
+}
+}
+
+actor NaturalDownpourAmmo : Ammo
+{
+inventory.amount 1
+inventory.maxamount 28
++INVENTORY.IGNORESKILL
+}
+
+actor NaturalDownpourPowerdown : PowerSpeed
+{
++POWERSPEED.NOTRAIL
+Speed 0.5
+}
+
+actor NaturalDownpour_SP
+{
+damagetype "LeafShield"
++NOGRAVITY
++MISSILE
++SKYEXPLODE
++NOINTERACTION
++DONTBLAST
+height 1
+radius 1
+-SOLID
+States
+{
+Spawn:
+TNT1 A 0 
+TNT1 A 0 A_Explode(16,512,0,0,512)
+TNT1 A 0 A_SpawnItemEx("NaturalDownpourFX2", random(-128,384), random(-256,256), 256, -30, 0, -30, 180, SXF_CLIENTSIDE)
+TNT1 A 0 A_SpawnItemEx("NaturalDownpourFX", random(-128,384), random(-256,256), 256, -60, 0, -60, 180, SXF_CLIENTSIDE)
+TNT1 A 0 A_SpawnItemEx("NaturalDownpourFX", random(-128,384), random(-256,256), 256, -60, 0, -60, 180, SXF_CLIENTSIDE)
+TNT1 A 0 A_SpawnItemEx("NaturalDownpourFX", random(-128,384), random(-256,256), 256, -60, 0, -60, 180, SXF_CLIENTSIDE)
+TNT1 A 1 A_SpawnItemEx("NaturalDownpourFX", random(-128,384), random(-256,256), 256, -60, 0, -60, 180, SXF_CLIENTSIDE)
+TNT1 A 0 A_SpawnItemEx("NaturalDownpourFX2", random(-128,384), random(-256,256), 256, -30, 0, -30, 180, SXF_CLIENTSIDE)
+TNT1 A 0 A_SpawnItemEx("NaturalDownpourFX", random(-128,384), random(-256,256), 256, -60, 0, -60, 180, SXF_CLIENTSIDE)
+TNT1 A 0 A_SpawnItemEx("NaturalDownpourFX", random(-128,384), random(-256,256), 256, -60, 0, -60, 180, SXF_CLIENTSIDE)
+TNT1 A 0 A_SpawnItemEx("NaturalDownpourFX", random(-128,384), random(-256,256), 256, -60, 0, -60, 180, SXF_CLIENTSIDE)
+TNT1 A 1 A_SpawnItemEx("NaturalDownpourFX", random(-128,384), random(-256,256), 256, -60, 0, -60, 180, SXF_CLIENTSIDE)
+TNT1 A 0 A_SpawnItemEx("NaturalDownpourFX2", random(-128,384), random(-256,256), 256, -30, 0, -30, 180, SXF_CLIENTSIDE)
+TNT1 A 0 A_SpawnItemEx("NaturalDownpourFX", random(-128,384), random(-256,256), 256, -60, 0, -60, 180, SXF_CLIENTSIDE)
+TNT1 A 0 A_SpawnItemEx("NaturalDownpourFX", random(-128,384), random(-256,256), 256, -60, 0, -60, 180, SXF_CLIENTSIDE)
+TNT1 A 0 A_SpawnItemEx("NaturalDownpourFX", random(-128,384), random(-256,256), 256, -60, 0, -60, 180, SXF_CLIENTSIDE)
+TNT1 A 1 A_SpawnItemEx("NaturalDownpourFX", random(-128,384), random(-256,256), 256, -60, 0, -60, 180, SXF_CLIENTSIDE)
+TNT1 A 0 A_SpawnItemEx("NaturalDownpourFX2", random(-128,384), random(-256,256), 256, -30, 0, -30, 180, SXF_CLIENTSIDE)
+TNT1 A 0 A_SpawnItemEx("NaturalDownpourFX", random(-128,384), random(-256,256), 256, -60, 0, -60, 180, SXF_CLIENTSIDE)
+TNT1 A 0 A_SpawnItemEx("NaturalDownpourFX", random(-128,384), random(-256,256), 256, -60, 0, -60, 180, SXF_CLIENTSIDE)
+TNT1 A 0 A_SpawnItemEx("NaturalDownpourFX", random(-128,384), random(-256,256), 256, -60, 0, -60, 180, SXF_CLIENTSIDE)
+TNT1 A 1 A_SpawnItemEx("NaturalDownpourFX", random(-128,384), random(-256,256), 256, -60, 0, -60, 180, SXF_CLIENTSIDE)
+TNT1 A 0 A_SpawnItemEx("NaturalDownpourFX2", random(-128,384), random(-256,256), 256, -30, 0, -30, 180, SXF_CLIENTSIDE)
+TNT1 A 0 A_SpawnItemEx("NaturalDownpourFX", random(-128,384), random(-256,256), 256, -60, 0, -60, 180, SXF_CLIENTSIDE)
+TNT1 A 0 A_SpawnItemEx("NaturalDownpourFX", random(-128,384), random(-256,256), 256, -60, 0, -60, 180, SXF_CLIENTSIDE)
+TNT1 A 0 A_SpawnItemEx("NaturalDownpourFX", random(-128,384), random(-256,256), 256, -60, 0, -60, 180, SXF_CLIENTSIDE)
+TNT1 A 1 A_SpawnItemEx("NaturalDownpourFX", random(-128,384), random(-256,256), 256, -60, 0, -60, 180, SXF_CLIENTSIDE)
+TNT1 A 0 A_SpawnItemEx("NaturalDownpourFX2", random(-128,384), random(-256,256), 256, -30, 0, -30, 180, SXF_CLIENTSIDE)
+TNT1 A 0 A_SpawnItemEx("NaturalDownpourFX", random(-128,384), random(-256,256), 256, -60, 0, -60, 180, SXF_CLIENTSIDE)
+TNT1 A 0 A_SpawnItemEx("NaturalDownpourFX", random(-128,384), random(-256,256), 256, -60, 0, -60, 180, SXF_CLIENTSIDE)
+TNT1 A 0 A_SpawnItemEx("NaturalDownpourFX", random(-128,384), random(-256,256), 256, -60, 0, -60, 180, SXF_CLIENTSIDE)
+TNT1 A 1 A_SpawnItemEx("NaturalDownpourFX", random(-128,384), random(-256,256), 256, -60, 0, -60, 180, SXF_CLIENTSIDE)
+TNT1 A 0 A_SpawnItemEx("NaturalDownpourFX2", random(-128,384), random(-256,256), 256, -30, 0, -30, 180, SXF_CLIENTSIDE)
+TNT1 A 0 A_SpawnItemEx("NaturalDownpourFX", random(-128,384), random(-256,256), 256, -60, 0, -60, 180, SXF_CLIENTSIDE)
+TNT1 A 0 A_SpawnItemEx("NaturalDownpourFX", random(-128,384), random(-256,256), 256, -60, 0, -60, 180, SXF_CLIENTSIDE)
+TNT1 A 0 A_SpawnItemEx("NaturalDownpourFX", random(-128,384), random(-256,256), 256, -60, 0, -60, 180, SXF_CLIENTSIDE)
+TNT1 A 1 A_SpawnItemEx("NaturalDownpourFX", random(-128,384), random(-256,256), 256, -60, 0, -60, 180, SXF_CLIENTSIDE)
+TNT1 A 0 A_SpawnItemEx("NaturalDownpourFX2", random(-128,384), random(-256,256), 256, -30, 0, -30, 180, SXF_CLIENTSIDE)
+TNT1 A 0 A_SpawnItemEx("NaturalDownpourFX", random(-128,384), random(-256,256), 256, -60, 0, -60, 180, SXF_CLIENTSIDE)
+TNT1 A 0 A_SpawnItemEx("NaturalDownpourFX", random(-128,384), random(-256,256), 256, -60, 0, -60, 180, SXF_CLIENTSIDE)
+TNT1 A 0 A_SpawnItemEx("NaturalDownpourFX", random(-128,384), random(-256,256), 256, -60, 0, -60, 180, SXF_CLIENTSIDE)
+TNT1 A 1 A_SpawnItemEx("NaturalDownpourFX", random(-128,384), random(-256,256), 256, -60, 0, -60, 180, SXF_CLIENTSIDE)
+stop
+}
+}
+
+actor NaturalDownpourHealer : CustomInventory
+{
+inventory.amount 1
+inventory.maxamount 1
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+loop
+Use:
+TNT1 A 0 //A_JumpIf(CallACS,"Nope")
+TNT1 A 0 A_PlaySoundEx("item/energyup","Voice")
+TNT1 A 0 A_GiveInventory("Health",5)
+stop
+Nope:
+TNT1 A 0
+stop
+}
+}
+
+actor NaturalDownpourFX : RainSprinkle_SP
+{
+States
+{
+Spawn:
+TAR2 I 15
+stop
+}
+}
+
+actor NaturalDownpourFX2 : RainSprinkle_SP
+{
+States
+{
+Spawn:
+TAR2 JKLMNJKLMNJKLMN 2
+stop
+}
+}
+

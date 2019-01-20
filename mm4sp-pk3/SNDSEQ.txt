@@ -1,0 +1,4 @@
+:DoorNormal
+   playrepeat	misc/door2
+end
+

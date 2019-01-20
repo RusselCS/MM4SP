@@ -9,6 +9,15 @@ InInventory not NoHealthBar, 1
 {
 	DrawBar "BARHEALT", "BAREMPTY", Health, vertical, 24, 8;
 
+	InInventory SkullShieldCheck, 1
+	{
+		DrawBar "BARFLS5", "NOBAR", SkullShieldCheck, vertical, 24, 8;
+		InInventory ShieldHits, 1	{ DrawImage "SKULBAR1",32,8; }
+		InInventory ShieldHits, 2	{ DrawImage "SKULBAR2",32,8; }
+		InInventory ShieldHits, 3	{ DrawImage "SKULBAR3",32,8; }
+	}
+	InInventory PharaohPowerCheck, 1{DrawBar "PHARBAR5", "NOBAR", PharaohPowerCheck, vertical, 24, 8;}
+	InInventory SkullBarrierProtection, 1{DrawBar "BARFLS5", "NOBAR", SkullShieldCheck, vertical, 24, 8;}
 	InInventory BasicArmor, 1{DrawBar "BARAMT31", "NOBAR", Armor, vertical, 24, 8;}
 
 	//IfCVarInt mm8bdm_ammonumber, 1
@@ -38,11 +47,34 @@ IsSelected RingManWep
 	InInventory RingManAmmo, 1	{ DrawImage "04_5_BA1",8,8;	}
 	InInventory RingManAmmo, 2	{ DrawImage "04_5_BA2",8,8;	}
 	InInventory RingManAmmo, 3	{ DrawImage "04_5_BA3",8,8; }
-	InInventory RingManAmmo, 4	{ DrawImage "04_5_BA4",8,8;	}
-	InInventory RingManAmmo, 5	{ DrawImage "04_5_BA5",8,8;	}
 }
+IsSelected Ring_WoodWep{Drawbar"BARAM201", "BAREMPTY", Ammo1, vertical, 16, 8;}	
 
-}
+IsSelected DustManWep{Drawbar"DUSBAR", "DUSEMPTY", DustCharge, vertical, 16, 8;}
+IsSelected Dust_WoodWep{Drawbar"BARAM201", "BAREMPTY", Ammo1, vertical, 16, 8;}	
+
+IsSelected Toad_WoodWep{Drawbar"BARAM201", "BAREMPTY", Ammo1, vertical, 16, 8;}	
+
+IsSelected BrightmanWep2{Drawbar"BARAMM18", "BAREMPTY", Ammo1, vertical, 16, 8;}
+
+IsSelected SkullManWep2{Drawbar"BARAMM21", "BAREMPTY", Ammo1, vertical, 16, 8;	
+	InInventory SkullBarrierCooldown, 1{DrawBar "BARAMM65", "BAREMPTY", Ammo1, vertical, 16, 8;}}
+
+IsSelected DiveManWep
+	{
+		DrawImage "DIVEMPTY",8,8;
+		InInventory DiveManAmmo, 1	{ DrawImage "DIVEBAR1",8,8;	}
+		InInventory DiveManAmmo, 2	{ DrawImage "DIVEBAR2",8,8;	}
+	}
+
+IsSelected PharaohManWep{DrawImage"BAREMPTY", 16, 8;
+	InInventory PharaohCharge, 1{DrawBar "PHARBAR1", "BAREMPTY", PharaohCharge, vertical, 16, 8;	
+	InInventory PharaohCharge, 78{DrawBar "PHARBAR3", "BAREMPTY", PharaohCharge, vertical, 16, 8;}}}
+IsSelected PharaohManWep2{Drawbar"PHARBAR1", "BAREMPTY", Ammo1, vertical, 16, 8;
+	InInventory PharaohPowerCooldown, 1{DrawBar "BARAMM65", "BAREMPTY", Ammo1, vertical, 16, 8;}}
+	
+
+IsSelected DrillManWep{Drawbar"DRILLBAR", "BAREMPTY", Ammo1, vertical, 16, 8;}	
 
 //Assists
 InInventory RushJetCounter, 5{DrawImage "RUSHH2H8", 290,16;}
@@ -69,10 +101,10 @@ InInventory BossHealth5, 1{DrawBar "BARHEALT", "BAREMPTY", BossHealth5, vertical
 InInventory BossHealth6, 1{DrawBar "BARHEALT", "BAREMPTY", BossHealth6, vertical, 292, 8;}
 InInventory BossHealth7, 1{DrawBar "BARHEALT", "BAREMPTY", BossHealth7, vertical, 306, 8;}
 InInventory BossHealth8, 1{DrawBar "BARHEALT", "BAREMPTY", BossHealth8, vertical, 292, 8;}
-InInventory EvilRobotShield, 1{DrawBar "BARAMM32", "BAREMPTY", BossHealth1, vertical, 292, 8;}
 // [Russ] TO-DO: TEMP. REMOVE WHEN THE BOSS SYSTEM IS ACTUALLY IMPLEMENTED.
 InInventory BossHealthBar, 1 { DrawBar "BARHEALT", "BAREMPTY", BossHealthBar, vertical, 292, 8; }
 InInventory CCBossHealth, 1 { DrawBar "BARHEALT", "BAREMPTY", CCBossHealth, vertical, 292, 8; }
+InInventory EvilRobotShield, 1{DrawBar "BARAMM32", "NOBAR", BossHealthBar, vertical, 292, 8;}
 
 // Misc
 InInventory TimeStoppedCounter, 1{DrawImage "FLASHS", 36, 0;}

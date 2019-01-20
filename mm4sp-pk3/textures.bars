@@ -6,3 +6,18 @@ graphic 04_5_VA3,56,16{patch 04_5_BA3,0,0{rotate 90}}
 graphic 04_5_VA2,56,16{patch 04_5_BA2,0,0{rotate 90}}
 graphic 04_5_VA1,56,16{patch 04_5_BA1,0,0{rotate 90}}
 graphic 04_5_VA0,56,16{patch 04_5_BA0,0,0{rotate 90}}
+
+//Pharaohman
+texture PHARBAR1, 8, 56{patch BARENERG, 0, 0 {Translation "192:192=4:4", "198:198=216:216"}}
+texture PHARBAR2, 8, 56{patch BARENERG, 0, 0 {Translation "0:0=4:4"}}
+texture PHARBAR3, 8, 56{patch BARENERG, 0, 0}
+texture PHARVAR1, 56, 8{patch PHARBAR1, 0, 0{rotate 90}}
+texture PHARVAR2, 56, 8{patch PHARBAR2, 0, 0{rotate 90}}
+texture PHARVAR3, 56, 8{patch PHARBAR2, 0, 0{rotate 90}}
+
+texture PHARBAR4, 8, 56{patch BARTRANS, 0, 0 {Translation "198:198=129:129", "192:192=112:112"}}
+texture PHARBAR5, 8, 56{patch BARTRANS, 0, 0}
+
+//Dustman
+texture DUSVAR,56,8{patch DUSBAR,0,0{rotate 90}}
+texture DUSVMPTY,56,8{patch DUSEMPTY,0,0{rotate 90}}

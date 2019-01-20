@@ -1,0 +1,41 @@
+actor BrightManSP : ClassBaseSP
+{
+player.displayname "brightman"
+
+player.startitem "BusterAmmo", 1
+player.startitem "BrightManWep"
+player.startitem "BrightManAmmo", 3
+player.startitem "BrightmanWep2"
+player.startitem "BrightmanAmmo2", 28
+player.startitem "BrightManFlag"
+player.jumpz 12
+speed 1.15
+
+States
+{
+Spawn:
+BRIG A 0
+BRIG B 1
+BRIG A 1
+Goto Spawn+2
+See:
+BRIG BCDE 5
+Goto Spawn
+Missile:
+BRIG FFFFF 1 A_JumpIfInventory("BrightStopperUsed",1,"MissileFlash")
+BRIG G 4
+goto Spawn
+MissileFlash:
+BRIG VWXYZ 3
+goto Spawn
+ClassPain:
+BRIG H 0
+goto PainContinue
+DeathFix:
+BRIG H 0
+goto DeathContinue
+ClassDeath:
+BRIG H 1
+goto MegaDeathEnd
+}
+}

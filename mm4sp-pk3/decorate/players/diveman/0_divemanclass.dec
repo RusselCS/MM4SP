@@ -1,0 +1,36 @@
+actor DiveManSP : ClassBaseSP
+{
+player.displayname "diveman"
+
+player.startitem "BusterAmmo", 1
+player.startitem "DiveManWep"
+player.startitem "DiveManAmmo", 2
+player.startitem "DiveManFlag"
+player.jumpz 14
+speed 1.0
+
+States
+{
+Spawn:
+DIVM A 0
+DIVM B 1
+DIVM A 1
+Goto Spawn+2
+See:
+DIVM BCDE 5
+Goto Spawn
+Missile:
+DIVM F 5
+DIVM G 4
+goto Spawn
+ClassPain:
+DIVM H 0
+goto PainContinue
+DeathFix:
+DIVM H 0
+goto DeathContinue
+ClassDeath:
+DIVM H 1
+goto MegaDeathEnd
+}
+}

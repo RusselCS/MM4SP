@@ -1,0 +1,36 @@
+actor DrillManSP : ClassBaseSP
+{
+player.displayname "drillman"
+
+player.startitem "BusterAmmo", 1
+player.startitem "DrillManWep"
+player.startitem "DrillManAmmo", 3
+player.startitem "DrillManFlag"
+player.jumpz 12
+speed 1.0
+
+States
+{
+Spawn:
+DRIM A 0
+DRIM B 1
+DRIM A 1
+Goto Spawn+2
+See:
+DRIM BCDE 5
+Goto Spawn
+Missile:
+DRIM F 5
+DRIM G 4
+goto Spawn
+ClassPain:
+DRIM H 0
+goto PainContinue
+DeathFix:
+DRIM H 0
+goto DeathContinue
+ClassDeath:
+DRIM H 1
+goto MegaDeathEnd
+}
+}

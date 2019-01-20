@@ -1,6 +1,6 @@
 // Hammer Joe
 // Args0 = Stand still
-actor SP_HammerJoe : GenericRobot 30010
+actor SP_HammerJoe : GenericRobot 30014
 {
 //$Category MM8BDM-Enemies
 Height 52
@@ -116,7 +116,7 @@ loop
 }
 }
 
-actor SP_GiantSpringer : GenericRobot 30016
+actor SP_GiantSpringer : GenericRobot 30015
 {
 //$Category MM8BDM-Enemies
 Height 52
@@ -185,6 +185,8 @@ speed 13
 Damage (9)
 painsound "misc/devilpain"
 deathsound "misc/devilpain"
+damagefactor "Enemy", 0.0
+damagefactor "EnemyContact", 0.0
 painchance 256
 States
 {
@@ -203,5 +205,94 @@ Death:
 TNT1 A 0 A_Pain
 TNT1 A 5 A_SpawnItem("EnemyDeathFX",0,32)
 stop
+}
+}
+
+actor SP_Elecn : GenericRobot 30016
+{
+//$Category MM8BDM-Enemies
+Height 40
+Radius 32
+Health 75
+Obituary "%o was shocked silly by an Elec'n."
++FLOAT
++NOGRAVITY
++LOOKALLAROUND
+FloatSpeed 10
+fastspeed 10
+dropitem "WeaponEnergy", 16
+dropitem "SmallHealth", 16
+speed 4
+States
+{
+Spawn:
+TNT1 A 0
+TNT1 A 0 ACS_NamedExecuteAlways("4SP_EnemyStart",0)
+Look:
+ELCN A 4 A_LookEx(LOF_NOSOUNDCHECK,0,0,0,360,"See")
+Goto Look+1
+See:
+ELCN BCABCABCABCABCABCABCABCA 3 A_Chase
+ELCN A 0 A_JumpIfTargetInLOS("Shoot")
+loop
+Shoot:
+ELCN A 0 A_FaceTarget
+ELCN A 0 A_PlaySoundEx("enemy/elecnshot","Voice")
+SWBM B 0 A_SpawnItemEx("ElecnShot",0,0,20,25,0,0)
+SWBM B 0 A_SpawnItemEx("ElecnShot",0,0,20,0,25,0)
+SWBM B 0 A_SpawnItemEx("ElecnShot",0,0,20,-25,0,0)
+SWBM B 0 A_SpawnItemEx("ElecnShot",0,0,20,0,-25,0)
+SWBM B 0 A_SpawnItemEx("ElecnShot",0,0,20,25,25,0)
+SWBM B 0 A_SpawnItemEx("ElecnShot",0,0,20,25,-25,0)
+SWBM B 0 A_SpawnItemEx("ElecnShot",0,0,20,-25,25,0)
+SWBM B 0 A_SpawnItemEx("ElecnShot",0,0,20,-25,-25,0)
+SWBM B 0 A_SpawnItemEx("ElecnShot",0,0,20,25,0,20)
+SWBM B 0 A_SpawnItemEx("ElecnShot",0,0,20,0,25,20)
+SWBM B 0 A_SpawnItemEx("ElecnShot",0,0,20,-25,0,20)
+SWBM B 0 A_SpawnItemEx("ElecnShot",0,0,20,0,-25,20)
+SWBM B 0 A_SpawnItemEx("ElecnShot",0,0,20,25,25,20)
+SWBM B 0 A_SpawnItemEx("ElecnShot",0,0,20,25,-25,20)
+SWBM B 0 A_SpawnItemEx("ElecnShot",0,0,20,-25,25,20)
+SWBM B 0 A_SpawnItemEx("ElecnShot",0,0,20,-25,-25,20)
+SWBM B 0 A_SpawnItemEx("ElecnShot",0,0,20,25,0,-20)
+SWBM B 0 A_SpawnItemEx("ElecnShot",0,0,20,0,25,-20)
+SWBM B 0 A_SpawnItemEx("ElecnShot",0,0,20,-25,0,-20)
+SWBM B 0 A_SpawnItemEx("ElecnShot",0,0,20,0,-25,-20)
+SWBM B 0 A_SpawnItemEx("ElecnShot",0,0,20,25,25,-20)
+SWBM B 0 A_SpawnItemEx("ElecnShot",0,0,20,25,-25,-20)
+SWBM B 0 A_SpawnItemEx("ElecnShot",0,0,20,-25,25,-20)
+SWBM B 0 A_SpawnItemEx("ElecnShot",0,0,20,-25,-25,-20)
+ELCN D 5
+Goto See
+Pain.PunctureNeedle:
+CRAZ A 0 A_Stop
+CRAZ A 0 A_Pain
+SHEL B 30 A_SpawnItemEx("ShockFX",4,0,32)
+Goto Look
+Death:
+ELCN A 0 A_Pain
+ELCN A 0 A_Fall
+ELCN A 0 A_ChangeFlag("NOGRAVITY",1)
+MMFX BCDE 3
+TNT1 A 1
+stop
+}
+}
+
+actor ElecnShot
+{
+PROJECTILE
+Radius 10
+damagetype "Enemy"
+Height 5
+Damage (15)
+Speed 10
+scale 2.5
+translation "198:198=216:216"
+States
+{
+Spawn:
+ELCN FG 3
+loop
 }
 }
