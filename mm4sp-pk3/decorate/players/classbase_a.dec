@@ -18,6 +18,7 @@ actor ClassBaseSP_A : PlayerPawn
 	player.colorrange 0 0
 	mass 9999
 	damagefactor "Dummy", 0.0
+	damagefactor "Despawn", 0.0
 	gravity 0.8
 	scale 2.5
 	+QUICKTORETALIATE

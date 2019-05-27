@@ -33,6 +33,7 @@ enemy/cannon	canon
 enemy/powermusclerland	muscle
 enemy/taban	batwing
 enemy/metcannon	metcan
+enemy/monkingdrop monkdrop
 
 // BOSSES
 weapon/WoodSlam WOODHIT

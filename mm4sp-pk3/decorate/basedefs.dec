@@ -49,6 +49,7 @@ actor BasicBouncer
 
 actor GenericRobot
 {
+damagefactor "Despawn", 0.0
 damagefactor "Buster", 1.0
 damagefactor "Enemy", 0.0
 damagefactor "EnemyContact", 0.0
@@ -187,6 +188,62 @@ actor EnemyContactDamagerProtect : PowerProtection
 {
 Powerup.Duration 10
 damagefactor "EnemyContact", 0.0
+}
+
+actor EnemyFloorChecker
+{
+PROJECTILE
++DONTREFLECT
++DONTBLAST
++NOTARGETSWITCH
+renderstyle none
+damage (0)
+radius 47
+height 2
+states
+{
+Spawn:
+PLAY A 1
+stop
+Death:
+PLAY H 5 A_TakeFromTarget("EnemyJumping",999)
+stop
+}
+}
+actor EnemyJumping : Inventory
+{
+inventory.amount 1
+inventory.maxamount 1
+}
+
+actor EnemyDespawner 29999
+{
+PROJECTILE
++RIPPER
+-SOLID
++DONTBLAST
++NOGRAVITY
++THRUGHOST
++DONTREFLECT
+Damage (255)
++THRUSPECIES
+species "Player"
+damagetype "Despawn"
+renderstyle none
+Height 16
+Radius 16
+scale 2.5
+states
+{
+Spawn:
+TNT1 A 0 A_ClearTarget
+BUBS D 35
+Loop
+Death:
+BUBS D 2
+TNT1 A 0 A_SpawnItemEx("EnemyDespawner")
+stop
+}
 }
 
 //[Trill] Base actors nicked from CBM

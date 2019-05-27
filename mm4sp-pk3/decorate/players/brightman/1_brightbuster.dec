@@ -30,10 +30,30 @@ Loop
 Fire:
 FST1 A 0 A_JumpIfNoAmmo("NoAmmo")
 FST1 A 0 A_PlaySoundEx("weapon/pshot","Weapon")
+BASB B 0 A_GiveInventory("BrightBusterRage", 1)
+BASB B 0 A_JumpIfInventory("BrightBusterRage", 4*3, "Fire3")
+BASB B 0 A_JumpIfInventory("BrightBusterRage", 4*2, "Fire2")
+BASB B 0 A_JumpIfInventory("BrightBusterRage", 4*1, "Fire1")
+Fire0:
+FST1 A 0 A_FireCustomMissile("BrightShot", 0,0,8,0,0,0)
+goto Anim
+Fire1:
+FST1 A 0 A_FireCustomMissile("BrightShot", random(-1, 1),0,8,0,0,random(-1,1))
+goto Anim
+Fire2:
 FST1 A 0 A_FireCustomMissile("BrightShot", random(-2, 2),0,8,0,0,random(-2,2))
+goto Anim
+Fire3:
+FST1 A 0 A_FireCustomMissile("BrightShot", random(-3, 3),0,8,0,0,random(-3,3))
+goto Anim
+Anim:
 FST1 BC 3
 FST1 A 2
 FST1 B 0 A_Refire
+goto Cooldown
+Cooldown:
+FST1 C 7 A_TakeInventory("BrightBusterRage",999)
+FST1 B 3
 goto Ready+2
 NoAmmo:
 FST1 A 1
@@ -46,6 +66,12 @@ actor BrightManAmmo : Ammo
 inventory.amount 1
 inventory.maxamount 3
 +INVENTORY.IGNORESKILL
+}
+
+actor BrightBusterRage : Inventory
+{
+inventory.amount 1
+inventory.maxamount 999
 }
 
 actor BrightShot
