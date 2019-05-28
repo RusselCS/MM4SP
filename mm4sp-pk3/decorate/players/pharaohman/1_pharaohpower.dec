@@ -34,7 +34,7 @@ Fire:
 SKU1 D 0 A_JumpIfInventory("PharaohPowerCooldown", 1, "NoAmmoNoSound")
 SKU1 D 0 A_JumpIfInventory("PharaohPowerCheck", 1, "PowerActive")
 SKU1 D 0 A_JumpIfNoAmmo("NoAmmo")
-SKU1 D 0 A_GiveInventory("PharaohPowerCheck", 130)
+SKU1 D 0 A_GiveInventory("PharaohPowerCheck", 105)
 SKU1 D 0 A_TakeInventory("PharaohManAmmo2", 7)
 SKU1 D 0 A_SpawnItemEx("PharaohPowerWatcher")
 SKU1 D 0 A_SpawnItemEx("PharaohPowerSoundHelper")
@@ -109,7 +109,7 @@ stop
 actor PharaohPowerCheck : Inventory
 {
 inventory.amount 1
-inventory.maxamount 130
+inventory.maxamount 105
 }
 
 actor PharaohPowerWatcher
@@ -129,31 +129,31 @@ TNT1 A 0
 TNT1 A 2 A_GiveToTarget("PharaohPowerFXSpawner",1)
 TNT1 A 0 A_TakeFromTarget("PharaohPowerCheck",1)
 TNT1 A 0 A_SetUserVar("user_countdown", user_countdown + 1)
-TNT1 A 0 A_JumpIf(user_countdown >= 130, "Death")
+TNT1 A 0 A_JumpIf(user_countdown >= 105, "Death")
 TNT1 A 0 A_JumpIfInTargetInventory("PharaohPowerCheck", 1, 1)
 Goto Death
 TNT1 A 2
 TNT1 A 0 A_TakeFromTarget("PharaohPowerCheck",1)
 TNT1 A 0 A_SetUserVar("user_countdown", user_countdown + 1)
-TNT1 A 0 A_JumpIf(user_countdown >= 130, "Death")
+TNT1 A 0 A_JumpIf(user_countdown >= 105, "Death")
 TNT1 A 0 A_JumpIfInTargetInventory("PharaohPowerCheck", 1, 1)
 Goto Death
 TNT1 A 2
 TNT1 A 0 A_TakeFromTarget("PharaohPowerCheck",1)
 TNT1 A 0 A_SetUserVar("user_countdown", user_countdown + 1)
-TNT1 A 0 A_JumpIf(user_countdown >= 130, "Death")
+TNT1 A 0 A_JumpIf(user_countdown >= 105, "Death")
 TNT1 A 0 A_JumpIfInTargetInventory("PharaohPowerCheck", 1, 1)
 Goto Death
 TNT1 A 2
 TNT1 A 0 A_TakeFromTarget("PharaohPowerCheck",1)
 TNT1 A 0 A_SetUserVar("user_countdown", user_countdown + 1)
-TNT1 A 0 A_JumpIf(user_countdown >= 130, "Death")
+TNT1 A 0 A_JumpIf(user_countdown >= 105, "Death")
 TNT1 A 0 A_JumpIfInTargetInventory("PharaohPowerCheck", 1, 1)
 Goto Death
 TNT1 A 2
 TNT1 A 0 A_TakeFromTarget("PharaohPowerCheck",1)
 TNT1 A 0 A_SetUserVar("user_countdown", user_countdown + 1)
-TNT1 A 0 A_JumpIf(user_countdown >= 130, "Death")
+TNT1 A 0 A_JumpIf(user_countdown >= 105, "Death")
 TNT1 A 0 A_JumpIfInTargetInventory("PharaohPowerCheck", 1, "Spawn")
 Goto Death
 Death:
