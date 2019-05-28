@@ -54,6 +54,7 @@ goto Cooldown
 Cooldown:
 FST1 C 7 A_TakeInventory("BrightBusterRage",999)
 FST1 B 3
+FST1 B 0 A_Refire
 goto Ready+2
 NoAmmo:
 FST1 A 1

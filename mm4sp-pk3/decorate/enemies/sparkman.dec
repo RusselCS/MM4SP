@@ -121,8 +121,8 @@ actor SP_GiantSpringer : GenericRobot 30015
 //$Category MM8BDM-Enemies
 Height 52
 Radius 52
-Obituary "%o was shot by a giant springer."
-HitObituary "%o was bounced by a giant springer."
+Obituary "%o was shot by a Giant Springer."
+HitObituary "%o was bounced by a Giant Springer."
 Health 150
 maxstepheight 50
 +LOOKALLAROUND

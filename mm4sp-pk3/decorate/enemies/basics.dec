@@ -114,7 +114,7 @@ SNIP A 1 //A_JumpIfTargetInLOS("ShieldUp")
 Goto Missile
 ShieldUp:
 Missile:
-TNT1 A 0 A_SpawnItemEx("SP_SniperJoeShieldX",23,-7,8,momx, momy, momz, 0, SXF_NOCHECKPOSITION|SXF_ABSOLUTEMOMENTUM, 0)
+TNT1 A 0 A_SpawnItemEx("SniperJoeShieldX",23,-7,8,momx, momy, momz, 0, SXF_NOCHECKPOSITION|SXF_ABSOLUTEMOMENTUM, 0)
 TNT1 A 0 A_SpawnItemEx("SP_SniperJoeShieldFX",23,-17,8,momx, momy, momz, 0, SXF_NOCHECKPOSITION|SXF_ABSOLUTEMOMENTUM, 0)
 SNIP A 2 A_FaceTarget
 TNT1 A 0 A_GiveInventory("CutterFlag",1)
@@ -122,7 +122,7 @@ TNT1 A 0 A_JumpIfInventory("CutterFlag",30,"ReadyFire")
 loop
 ReadyFire:
 TNT1 A 0 A_TakeInventory("CutterFlag",999)
-TNT1 A 0 A_SpawnItemEx("SP_SniperJoeShieldX",23,-7,8,momx, momy, momz, 0, SXF_NOCHECKPOSITION|SXF_ABSOLUTEMOMENTUM, 0)
+TNT1 A 0 A_SpawnItemEx("SniperJoeShieldX",23,-7,8,momx, momy, momz, 0, SXF_NOCHECKPOSITION|SXF_ABSOLUTEMOMENTUM, 0)
 TNT1 A 0 A_SpawnItemEx("SP_SniperJoeShieldFX",23,-17,8,momx, momy, momz, 0, SXF_NOCHECKPOSITION|SXF_ABSOLUTEMOMENTUM, 0)
 SNIP A 2 A_FaceTarget
 SNIP A 0 A_Jump(20,"ShieldFire")
@@ -171,45 +171,6 @@ States
 Spawn:
 TNT1 A 0
 SNIP I 2
-stop
-}
-}
-
-actor SP_SniperJoeShieldX
-{
-+MISSILE
-Speed 0
-+DONTSPLASH
-Damage 0
-Height 32
-Radius 25
-health 9999
-scale 2.5
-+SHOOTABLE
-+NOBLOOD
--SOLID
-//+NOBLOCKMAP
-painchance 256
-bloodtype ""
-+NOTARGETSWITCH
-+DONTRIP
-+GHOST
-//+NOINTERACTION
-+NORADIUSDMG
-//+REFLECTIVE
-States
-{
-Spawn:
-TNT1 A 0
-TNT1 A 2
-stop
-Death:
-TNT1 A 0 //A_PlaySound("item/protoreflect")
-TNT1 A 1
-stop
-Pain:
-TNT1 A 0 
-TNT1 A 2 A_PlaySound("item/protoreflect")
 stop
 }
 }
@@ -511,7 +472,7 @@ actor SP_Metool : GenericRobot 30004
 Health 20
 Height 50
 Radius 32
-Obituary "%o shot by a metool."
+Obituary "%o was shot by a Metool."
 +SOLID
 maxstepheight 50
 +DROPOFF
@@ -586,7 +547,7 @@ actor SP_Cannon1 : GenericRobot 30005
 //$Category MM8BDM-Enemies
 Height 52
 Radius 32
-Obituary "%o was blown to bits by a cannon."
+Obituary "%o was blown to bits by a Cannon."
 Health 35
 maxstepheight 50
 dropitem "WeaponEnergy", 16

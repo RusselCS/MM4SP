@@ -4,11 +4,13 @@ actor SP_Batton : GenericRobot 30006
 Health 20
 Height 32
 Radius 32
-Obituary "%o was sucked on by a Batton."
+Obituary "%o was bitten by a Batton."
 maxstepheight 50
 +DROPOFF
 +NOGRAVITY
 speed 5
+dropitem "WeaponEnergy", 16
+dropitem "SmallHealth", 16
 States
 {
 Spawn:
@@ -193,8 +195,9 @@ TNT1 A 1
 stop
 Death.Despawn:
 TNT1 A 0 A_GiveInventory("CutterFlag",1)
-TNT1 A 1 A_KillChildren
-BATT A 0 A_Fall
+TNT1 A 0 A_JumpIfInventory("DropPipiEgg",1,2)
+TNT1 A 0 A_KillChildren
+TNT1 A 1 A_Fall
 stop
 }
 }
@@ -219,6 +222,7 @@ Radius 10
 scale 2.5
 speed 0
 Damage (0)
+obituary "A Pipi laid an egg on %o."
 painsound "misc/devilpain"
 damagefactor "Enemy", 0.0
 damagefactor "EnemyContact", 0.0
@@ -324,7 +328,7 @@ actor SP_Robbit : GenericRobot 30008
 {
 //$Category MM8BDM-Enemies
 Health 100
-Height 48
+Height 64
 Radius 48
 speed 0
 Obituary "%o was gnawed on by a Robbit."
@@ -332,6 +336,8 @@ maxstepheight 50
 +DROPOFF
 +SLIDESONWALLS
 +LOOKALLAROUND
+dropitem "WeaponEnergy", 16
+dropitem "SmallHealth", 16
 States
 {
 Spawn:
@@ -501,13 +507,15 @@ actor SP_Monking : GenericRobot 30010
 Health 80
 Height 64
 Radius 48
-Obituary "%o was jumped on by a Monking."
+Obituary "%o was trampled by a Monking."
 +NOGRAVITY
 speed 0
 maxstepheight 50
 +DROPOFF
 +SLIDESONWALLS
 //+LOOKALLAROUND
+dropitem "WeaponEnergy", 16
+dropitem "SmallHealth", 16
 States
 {
 Spawn:
@@ -585,11 +593,13 @@ actor SP_HotDog : GenericRobot 30011
 {
 //$Category MM8BDM-Enemies
 Health 200
-Height 128
+Height 96
 //+DONTRIP
-Radius 128
+Radius 80
 var int user_angle;
 Obituary "%o was burnt to ashes by a Hotdog."
+dropitem "BigWeaponEnergy", 32
+dropitem "BigHealth", 32
 States
 {
 Spawn:
@@ -599,8 +609,8 @@ TNT1 A 0 ACS_NamedExecuteAlways("4SP_EnemyStart",0)
 Look:
 FRIN A 0 A_ClearTarget
 FRIN A 0 A_SetAngle(user_angle)
-FRIN ABAB 3 A_LookEx(LOF_NOSOUNDCHECK,0,2500,0,360,"See")
-FRIN CDACD 4 A_LookEx(LOF_NOSOUNDCHECK,0,2500,0,360,"See")
+FRIN ABAB 3 A_LookEx(LOF_NOSOUNDCHECK,0,0,0,360,"See")
+FRIN CDACD 4 A_LookEx(LOF_NOSOUNDCHECK,0,0,0,360,"See")
 loop
 See:
 FRIN A 0 A_FaceTarget
@@ -682,6 +692,7 @@ FRIN E 1 A_SpawnItemEX("FrienderFire",20,0,30,30,0,0,0)
 FRIN E 7
 Goto Look
 Death:
+FRIN E 0 ACS_NamedExecuteAlways("4SP_BlockRemover",0,Args[0])
 FRIN E 0 A_ChangeFlag("NOGRAVITY",1)
 FRIN E 0 A_Stop
 FRIN E 0 A_Fall
@@ -744,6 +755,8 @@ maxstepheight 50
 +DROPOFF
 +SLIDESONWALLS
 +LOOKALLAROUND
+dropitem "WeaponEnergy", 16
+dropitem "SmallHealth", 16
 States
 {
 Spawn:
@@ -754,7 +767,7 @@ ANKO G 0 A_GiveInventory("DamageCounter",20)
 ANKO G 0 A_SpawnItemEX("BasicEnemyContactDamager")
 Look:
 ANKo G 15 A_ChangeVelocity(0, 0, -3,3)
-ANKO G 0 A_LookEx(LOF_NOSOUNDCHECK,0,2000,0,360,"See")
+ANKO G 0 A_LookEx(LOF_NOSOUNDCHECK,0,0,0,360,"See")
 loop
 See:
 ANKO G 0 A_FaceTarget(0,180)
@@ -801,7 +814,7 @@ Health 10
 height 32
 radius 16
 speed 7
-Obituary "%o was clawed by a Claw."
+Obituary "%o was pinched by a Claw."
 maxstepheight 32
 //+NOGRAVITY
 +DROPOFF

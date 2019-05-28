@@ -47,6 +47,191 @@ actor BasicBouncer
 +CANBOUNCEWATER
 }
 
+actor ObjectiveMarker : MapMarker 29998
+{
+//$Category MM8BDM-SinglePlayer
++NOINTERACTION
++NOGRAVITY
++SYNCHRONIZED
+-SOLID
+States
+{
+Spawn:
+MICO A 8
+TNT1 A 8
+loop
+}
+}
+
+//Args[0] - What boss
+actor BossMarker : MapMarker 29997
+{
+//$Category MM8BDM-SinglePlayer
++NOINTERACTION
++NOGRAVITY
+-SOLID
+States
+{
+Spawn:
+MICO B 0
+MICO B 0 A_JumpIf(Args[0]==1,"Wood")
+MICO B 0 A_JumpIf(Args[0]==2,"Spark")
+MICO B 0 A_JumpIf(Args[0]==3,"Napalm")
+MICO B 0 A_JumpIf(Args[0]==4,"Yamato")
+MICO B 0 A_JumpIf(Args[0]==5,"Burst")
+MICO B 0 A_JumpIf(Args[0]==6,"Sword")
+MICO B 0 A_JumpIf(Args[0]==7,"Cold")
+MICO B 0 A_JumpIf(Args[0]==8,"Galaxy")
+MICO B -1
+stop
+Wood:
+MICO C -1
+stop
+Spark:
+MICO D -1
+stop
+Napalm:
+MICO E -1
+stop
+Yamato:
+MICO F -1
+stop
+Burst:
+MICO G -1
+stop
+Sword:
+MICO H -1
+stop
+Cold:
+MICO I -1
+stop
+Galaxy:
+MICO J -1
+stop
+}
+}
+
+actor BrightMarker : MapMarker
+{
+height 0
+radius 0
++CLIENTSIDEONLY
++NOINTERACTION
++NOGRAVITY
+-SOLID
+States
+{
+Spawn:
+MICO K 2
+stop
+}
+}
+actor DiveMarker : MapMarker
+{
+height 0
+radius 0
++CLIENTSIDEONLY
++NOINTERACTION
++NOGRAVITY
+-SOLID
+States
+{
+Spawn:
+MICO L 2
+stop
+}
+}
+actor DrillMarker : MapMarker
+{
+height 0
+radius 0
++CLIENTSIDEONLY
++NOINTERACTION
++NOGRAVITY
+-SOLID
+States
+{
+Spawn:
+MICO M 2
+stop
+}
+}
+actor DustMarker : MapMarker
+{
+height 0
+radius 0
++CLIENTSIDEONLY
++NOINTERACTION
++NOGRAVITY
+-SOLID
+States
+{
+Spawn:
+MICO N 2
+stop
+}
+}
+actor PharaohMarker : MapMarker
+{
+height 0
+radius 0
++CLIENTSIDEONLY
++NOINTERACTION
++NOGRAVITY
+-SOLID
+States
+{
+Spawn:
+MICO O 2
+stop
+}
+}
+actor RingMarker : MapMarker
+{
+height 0
+radius 0
++CLIENTSIDEONLY
++NOINTERACTION
++NOGRAVITY
+-SOLID
+States
+{
+Spawn:
+MICO P 2
+stop
+}
+}
+actor SkullMarker : MapMarker
+{
+height 0
+radius 0
++CLIENTSIDEONLY
++NOINTERACTION
++NOGRAVITY
+-SOLID
+States
+{
+Spawn:
+MICO Q 2
+stop
+}
+}
+actor ToadMarker : MapMarker
+{
+height 0
+radius 0
++CLIENTSIDEONLY
++NOINTERACTION
++NOGRAVITY
+-SOLID
+States
+{
+Spawn:
+MICO R 2
+stop
+}
+}
+
 actor GenericRobot
 {
 damagefactor "Despawn", 0.0

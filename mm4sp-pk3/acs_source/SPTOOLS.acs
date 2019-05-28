@@ -288,3 +288,32 @@ script "4SP_GroundEnter" ENTER {
 script "4SP_GroundRespawn" RESPAWN {
     ACS_NamedExecuteAlways("4SP_GroundEnter", 0);
 }
+
+// [Trill] Script for removing blocking linedefs
+script "4SP_BlockRemover" (int which)
+{
+    if(which==0){
+        terminate;
+    }
+    Line_SetBlocking(which,0,BLOCKF_PLAYERS);
+}
+
+// [Trill] Minimap marker script, snagged from MMSP
+script "4SP_MinimapMarker" OPEN clientside
+{
+for(int i=0; i<64; i++)
+    {
+    if(ClassifyActor(1000+i) & 34){
+		if(CheckActorInventory(1000+i,"BrightmanWep")==1){SpawnSpot("BrightMarker",1000+i,0,0);}
+		if(CheckActorInventory(1000+i,"DivemanWep")==1){SpawnSpot("DiveMarker",1000+i,0,0);}
+		if(CheckActorInventory(1000+i,"DrillmanWep")==1){SpawnSpot("DrillMarker",1000+i,0,0);}
+        if(CheckActorInventory(1000+i,"DustmanWep")==1){SpawnSpot("DustMarker",1000+i,0,0);}
+        if(CheckActorInventory(1000+i,"PharaohmanWep")==1){SpawnSpot("PharaohMarker",1000+i,0,0);}
+		if(CheckActorInventory(1000+i,"RingmanWep")==1){SpawnSpot("RingMarker",1000+i,0,0);}
+		if(CheckActorInventory(1000+i,"SkullmanWep")==1){SpawnSpot("SkullMarker",1000+i,0,0);}
+		if(CheckActorInventory(1000+i,"ToadmanWep")==1){SpawnSpot("ToadMarker",1000+i,0,0);}
+	}
+    }
+	Delay(1);
+	restart;
+}
