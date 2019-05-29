@@ -9,8 +9,7 @@ maxstepheight 50
 +DROPOFF
 +NOGRAVITY
 speed 5
-dropitem "WeaponEnergy", 16
-dropitem "SmallHealth", 16
+dropitem "EnemyDrop", 255
 States
 {
 Spawn:
@@ -154,7 +153,6 @@ maxstepheight 50
 +DROPOFF
 +NOGRAVITY
 -COUNTKILL
-species "Enemy"
 States
 {
 Spawn:
@@ -336,8 +334,7 @@ maxstepheight 50
 +DROPOFF
 +SLIDESONWALLS
 +LOOKALLAROUND
-dropitem "WeaponEnergy", 16
-dropitem "SmallHealth", 16
+dropitem "EnemyDrop", 255
 States
 {
 Spawn:
@@ -401,6 +398,8 @@ PROJECTILE
 Damage (7)
 Obituary "%o was pelted by a Robbit."
 damagetype "Enemy"
+species "Enemy"
++THRUSPECIES
 Speed 20
 scale 2.5
 Height 8
@@ -453,38 +452,38 @@ ATOC A 0 ACS_NamedExecuteAlways("4SP_EnemyStart",0)
 ATOC A 0 A_GiveInventory("DamageCounter",15)
 ATOC A 0 A_SpawnItemEX("BasicEnemyContactDamager")
 Look:
-ATOC B 0 A_ChangeVelocity(9, vely, velz, CVF_REPLACE|CVF_RELATIVE)
+ATOC B 0 A_ChangeVelocity(9, 0, velz, CVF_REPLACE|CVF_RELATIVE)
 ATOC B 1 A_JumpIf(z-floorz>0,"Jumping")
-ATOC B 0 A_ChangeVelocity(9, vely, velz, CVF_REPLACE|CVF_RELATIVE)
+ATOC B 0 A_ChangeVelocity(9, 0, velz, CVF_REPLACE|CVF_RELATIVE)
 ATOC B 1 A_JumpIf(z-floorz>0,"Jumping")
-ATOC B 0 A_ChangeVelocity(9, vely, velz, CVF_REPLACE|CVF_RELATIVE)
+ATOC B 0 A_ChangeVelocity(9, 0, velz, CVF_REPLACE|CVF_RELATIVE)
 ATOC B 1 A_JumpIf(z-floorz>0,"Jumping")
-ATOC B 0 A_ChangeVelocity(9, vely, velz, CVF_REPLACE|CVF_RELATIVE)
+ATOC B 0 A_ChangeVelocity(9, 0, velz, CVF_REPLACE|CVF_RELATIVE)
 ATOC B 1 A_JumpIf(z-floorz>0,"Jumping")
-ATOC A 0 A_ChangeVelocity(9, vely, velz, CVF_REPLACE|CVF_RELATIVE)
+ATOC A 0 A_ChangeVelocity(9, 0, velz, CVF_REPLACE|CVF_RELATIVE)
 ATOC A 1 A_JumpIf(z-floorz>0,"Jumping")
-ATOC A 0 A_ChangeVelocity(9, vely, velz, CVF_REPLACE|CVF_RELATIVE)
+ATOC A 0 A_ChangeVelocity(9, 0, velz, CVF_REPLACE|CVF_RELATIVE)
 ATOC A 1 A_JumpIf(z-floorz>0,"Jumping")
-ATOC A 0 A_ChangeVelocity(9, vely, velz, CVF_REPLACE|CVF_RELATIVE)
+ATOC A 0 A_ChangeVelocity(9, 0, velz, CVF_REPLACE|CVF_RELATIVE)
 ATOC A 1 A_JumpIf(z-floorz>0,"Jumping")
-ATOC A 0 A_ChangeVelocity(9, vely, velz, CVF_REPLACE|CVF_RELATIVE)
+ATOC A 0 A_ChangeVelocity(9, 0, velz, CVF_REPLACE|CVF_RELATIVE)
 ATOC A 1 A_JumpIf(z-floorz>0,"Jumping")
-ATOC B 0 A_ChangeVelocity(9, vely, velz, CVF_REPLACE|CVF_RELATIVE)
+ATOC B 0 A_ChangeVelocity(9, 0, velz, CVF_REPLACE|CVF_RELATIVE)
 ATOC B 1 A_JumpIf(z-floorz>0,"Jumping")
-ATOC B 0 A_ChangeVelocity(9, vely, velz, CVF_REPLACE|CVF_RELATIVE)
+ATOC B 0 A_ChangeVelocity(9, 0, velz, CVF_REPLACE|CVF_RELATIVE)
 ATOC B 1 A_JumpIf(z-floorz>0,"Jumping")
-ATOC B 0 A_ChangeVelocity(9, vely, velz, CVF_REPLACE|CVF_RELATIVE)
+ATOC B 0 A_ChangeVelocity(9, 0, velz, CVF_REPLACE|CVF_RELATIVE)
 ATOC B 1 A_JumpIf(z-floorz>0,"Jumping")
-ATOC B 0 A_ChangeVelocity(9, vely, velz, CVF_REPLACE|CVF_RELATIVE)
+ATOC B 0 A_ChangeVelocity(9, 0, velz, CVF_REPLACE|CVF_RELATIVE)
 ATOC B 1 A_JumpIf(z-floorz>0,"Jumping")
 Jump:
 MONK D 0 A_GiveInventory("EnemyJumping",1)
 ATOC C 0 ThrustThingZ(0,60,0,0)
-ATOC CCCC 1 A_ChangeVelocity(9, vely, velz, CVF_REPLACE|CVF_RELATIVE)
+ATOC CCCC 1 A_ChangeVelocity(9, 0, velz, CVF_REPLACE|CVF_RELATIVE)
 Goto Jumping
 Return:
 Jumping:
-ATOC C 0 A_ChangeVelocity(9, vely, velz, CVF_REPLACE|CVF_RELATIVE)
+ATOC C 0 A_ChangeVelocity(9, 0, velz, CVF_REPLACE|CVF_RELATIVE)
 ATOC C 1 
 ATOC C 0 A_SpawnItemEx("EnemyFloorChecker",0,0,-2,0,0,0,0,SXF_SETMASTER)
 ATOC C 0 A_JumpIfInventory("EnemyJumping",1,"Jumping")
@@ -514,8 +513,7 @@ maxstepheight 50
 +DROPOFF
 +SLIDESONWALLS
 //+LOOKALLAROUND
-dropitem "WeaponEnergy", 16
-dropitem "SmallHealth", 16
+dropitem "EnemyDrop", 255
 States
 {
 Spawn:
@@ -589,6 +587,7 @@ stop
 }
 }
 
+// Args[0] == linedef it'll delete
 actor SP_HotDog : GenericRobot 30011
 {
 //$Category MM8BDM-Enemies
@@ -598,8 +597,12 @@ Height 96
 Radius 80
 var int user_angle;
 Obituary "%o was burnt to ashes by a Hotdog."
-dropitem "BigWeaponEnergy", 32
-dropitem "BigHealth", 32
+dropitem "BigEnemyDrop", 255
+-SOLID
+-SHOOTABLE
++INVULNERABLE
++INVISIBLE
++CANTSEEK
 States
 {
 Spawn:
@@ -613,6 +616,15 @@ FRIN ABAB 3 A_LookEx(LOF_NOSOUNDCHECK,0,0,0,360,"See")
 FRIN CDACD 4 A_LookEx(LOF_NOSOUNDCHECK,0,0,0,360,"See")
 loop
 See:
+FRIN A 0 A_JumpIfInventory("Once",1,"SkipAnimation")
+FRIN A 0 A_GiveInventory("Once",1)
+FRIN A 0 A_ChangeFlag("INVISIBLE",0)
+TFOG DEF 3
+FRIN A 0 A_ChangeFlag("SOLID",1)
+FRIN A 0 A_ChangeFlag("SHOOTABLE",1)
+FRIN A 0 A_ChangeFlag("INVULNERABLE",0)
+FRIN A 0 A_ChangeFlag("CANTSEEK",0)
+SkipAnimation:
 FRIN A 0 A_FaceTarget
 FRIN A 0 A_Jump(256,"Wag","Paw")
 Wag:
@@ -707,6 +719,8 @@ actor FrienderFire
 {
 PROJECTILE
 damagetype "Enemy"
+species "Enemy"
++THRUSPECIES
 scale 2.5
 Height 8
 Radius 8
@@ -742,6 +756,7 @@ loop
 }
 }
 
+// Args[0] == water level cannot pass
 actor SP_Shrink : GenericRobot 30012
 {
 //$Category MM8BDM-Enemies
@@ -755,8 +770,8 @@ maxstepheight 50
 +DROPOFF
 +SLIDESONWALLS
 +LOOKALLAROUND
-dropitem "WeaponEnergy", 16
-dropitem "SmallHealth", 16
+dropitem "EnemyDrop", 255
+var int user_height;
 States
 {
 Spawn:
@@ -766,17 +781,75 @@ ANKO G 0 ACS_NamedExecuteAlways("4SP_EnemyStart",0)
 ANKO G 0 A_GiveInventory("DamageCounter",20)
 ANKO G 0 A_SpawnItemEX("BasicEnemyContactDamager")
 Look:
-ANKo G 15 A_ChangeVelocity(0, 0, -3,3)
+ANKO GGGGGGGGGGGGGGG 1 A_ChangeVelocity(0, 0, -3,3)
 ANKO G 0 A_LookEx(LOF_NOSOUNDCHECK,0,0,0,360,"See")
 loop
 See:
 ANKO G 0 A_FaceTarget(0,180)
 ANKO G 0 A_JumpIf(pitch<0,2)
 ANKO G 0 A_JumpIf(pitch<90,"RiseAnyway")
-ANKO EEEEEFFFFF 1 A_ChangeVelocity(10, 0, sin(pitch)*10,3)
+ANKO E 0 A_JumpIf(Args[0]==0,2)
+ANKO E 0 A_JumpIf(z+32>Args[0],"Look")
+ANKO E 1 A_ChangeVelocity(10, 0, sin(pitch)*10,3)
+ANKO E 0 A_JumpIf(Args[0]==0,2)
+ANKO E 0 A_JumpIf(z+32>Args[0],"Look")
+ANKO E 1 A_ChangeVelocity(10, 0, sin(pitch)*10,3)
+ANKO E 0 A_JumpIf(Args[0]==0,2)
+ANKO E 0 A_JumpIf(z+32>Args[0],"Look")
+ANKO E 1 A_ChangeVelocity(10, 0, sin(pitch)*10,3)
+ANKO E 0 A_JumpIf(Args[0]==0,2)
+ANKO E 0 A_JumpIf(z+32>Args[0],"Look")
+ANKO E 1 A_ChangeVelocity(10, 0, sin(pitch)*10,3)
+ANKO E 0 A_JumpIf(Args[0]==0,2)
+ANKO E 0 A_JumpIf(z+32>Args[0],"Look")
+ANKO E 1 A_ChangeVelocity(10, 0, sin(pitch)*10,3)
+ANKO F 0 A_JumpIf(Args[0]==0,2)
+ANKO F 0 A_JumpIf(z+32>Args[0],"Look")
+ANKO F 1 A_ChangeVelocity(10, 0, sin(pitch)*10,3)
+ANKO F 0 A_JumpIf(Args[0]==0,2)
+ANKO F 0 A_JumpIf(z+32>Args[0],"Look")
+ANKO F 1 A_ChangeVelocity(10, 0, sin(pitch)*10,3)
+ANKO F 0 A_JumpIf(Args[0]==0,2)
+ANKO F 0 A_JumpIf(z+32>Args[0],"Look")
+ANKO F 1 A_ChangeVelocity(10, 0, sin(pitch)*10,3)
+ANKO F 0 A_JumpIf(Args[0]==0,2)
+ANKO F 0 A_JumpIf(z+32>Args[0],"Look")
+ANKO F 1 A_ChangeVelocity(10, 0, sin(pitch)*10,3)
+ANKO F 0 A_JumpIf(Args[0]==0,2)
+ANKO F 0 A_JumpIf(z+32>Args[0],"Look")
+ANKO F 1 A_ChangeVelocity(10, 0, sin(pitch)*10,3)
 goto Look
 RiseAnyway:
-ANKO EEEEEFFFFF 1 A_ChangeVelocity(10, 0, 10,3)
+ANKO E 0 A_JumpIf(Args[0]==0,2)
+ANKO E 0 A_JumpIf(z+32>Args[0],"Look")
+ANKO E 1 A_ChangeVelocity(10, 0, 10,3)
+ANKO E 0 A_JumpIf(Args[0]==0,2)
+ANKO E 0 A_JumpIf(z+32>Args[0],"Look")
+ANKO E 1 A_ChangeVelocity(10, 0, 10,3)
+ANKO E 0 A_JumpIf(Args[0]==0,2)
+ANKO E 0 A_JumpIf(z+32>Args[0],"Look")
+ANKO E 1 A_ChangeVelocity(10, 0, 10,3)
+ANKO E 0 A_JumpIf(Args[0]==0,2)
+ANKO E 0 A_JumpIf(z+32>Args[0],"Look")
+ANKO E 1 A_ChangeVelocity(10, 0, 10,3)
+ANKO E 0 A_JumpIf(Args[0]==0,2)
+ANKO E 0 A_JumpIf(z+32>Args[0],"Look")
+ANKO E 1 A_ChangeVelocity(10, 0, 10,3)
+ANKO E 0 A_JumpIf(Args[0]==0,2)
+ANKO F 0 A_JumpIf(z+32>Args[0],"Look")
+ANKO F 1 A_ChangeVelocity(10, 0, 10,3)
+ANKO E 0 A_JumpIf(Args[0]==0,2)
+ANKO F 0 A_JumpIf(z+32>Args[0],"Look")
+ANKO F 1 A_ChangeVelocity(10, 0, 10,3)
+ANKO E 0 A_JumpIf(Args[0]==0,2)
+ANKO F 0 A_JumpIf(z+32>Args[0],"Look")
+ANKO F 1 A_ChangeVelocity(10, 0, 10,3)
+ANKO E 0 A_JumpIf(Args[0]==0,2)
+ANKO F 0 A_JumpIf(z+32>Args[0],"Look")
+ANKO F 1 A_ChangeVelocity(10, 0, 10,3)
+ANKO E 0 A_JumpIf(Args[0]==0,2)
+ANKO F 0 A_JumpIf(z+32>Args[0],"Look")
+ANKO F 1 A_ChangeVelocity(10, 0, 10,3)
 goto Look
 Death:
 ANKO E 0 A_Pain

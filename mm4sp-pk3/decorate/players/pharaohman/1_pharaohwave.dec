@@ -106,6 +106,8 @@ Radius 10
 Height 10
 scale 2.5
 damage (12)
+species "Player"
++THRUSPECIES
 damagetype "Buster"
 speed 35
 States
@@ -129,6 +131,8 @@ Height 10
 scale 2.5
 damage (0)
 damagetype "Buster"
+species "Player"
++THRUSPECIES
 speed 35
 translation "211:211=4:4", "225:225=216:216"
 States

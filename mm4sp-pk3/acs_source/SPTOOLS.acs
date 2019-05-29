@@ -317,3 +317,30 @@ for(int i=0; i<64; i++)
 	Delay(1);
 	restart;
 }
+
+// [Trill] Survival checker
+script "4SP_SurvivalCheck" (void)
+{
+if(GetCvar("survival")==1)
+{SetResultValue(1);}
+Else
+{SetResultValue(0);}
+}
+
+// [Trill] 1-Up 
+script "4SP_GiveLife" (void) 
+{
+SetPlayerLivesLeft(PlayerNumber(),GetPlayerLivesLeft(PlayerNumber())+1); 
+}
+
+script "4SP_LifeDisplay" (void) CLIENTSIDE 
+{
+If(CheckActorClass(consolePlayerNumber()+1000,"BrightmanSP")){SetActorState(0,"Brightman");}
+If(CheckActorClass(consolePlayerNumber()+1000,"DivemanSP")){SetActorState(0,"Diveman");}
+If(CheckActorClass(consolePlayerNumber()+1000,"DrillmanSP")){SetActorState(0,"Drillman");}
+If(CheckActorClass(consolePlayerNumber()+1000,"DustmanSP")){SetActorState(0,"Dustman");}
+If(CheckActorClass(consolePlayerNumber()+1000,"PharaohmanSP")){SetActorState(0,"Pharaohman");}
+If(CheckActorClass(consolePlayerNumber()+1000,"RingmanSP")){SetActorState(0,"Ringman");}
+If(CheckActorClass(consolePlayerNumber()+1000,"SkullmanSP")){SetActorState(0,"Skullman");}
+If(CheckActorClass(consolePlayerNumber()+1000,"ToadmanSP")){SetActorState(0,"Toadman");}
+}

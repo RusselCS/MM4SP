@@ -89,6 +89,8 @@ damagetype "Buster"
 translation "93:93=87:87", "94:94=87:87", "68:68=4:4"
 Speed 30
 Damage (14)
+species "Player"
++THRUSPECIES
 radius 6
 height 6
 scale 2.5
@@ -158,6 +160,8 @@ actor DustBitted1
 {
 PROJECTILE
 +THRUACTORS
+species "Player"
++THRUSPECIES
 Radius 6
 Height 6
 translation "93:93=87:87", "94:94=87:87", "68:68=4:4"

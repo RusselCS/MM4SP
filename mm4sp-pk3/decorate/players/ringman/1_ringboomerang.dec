@@ -88,6 +88,8 @@ actor RingBoomerangB1 : BasicBouncer
 {
 	Translation "192:192=229:229"
 	PROJECTILE
+	species "Player"
+	+THRUSPECIES
 	damagetype "Buster"
 	+RIPPER
 	+NOTARGETSWITCH

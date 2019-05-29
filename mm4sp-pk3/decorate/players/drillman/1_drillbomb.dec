@@ -71,6 +71,8 @@ actor DrillBombSP
 {
 PROJECTILE
 +EXPLODEONWATER
+species "Player"
++THRUSPECIES
 Speed 25
 Damage 0
 Translation "87:87=4:4"

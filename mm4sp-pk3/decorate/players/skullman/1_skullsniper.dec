@@ -52,6 +52,8 @@ actor SkullSniperShot : FastProjectile
 Translation "215:215=87:87"
 PROJECTILE
 damagetype "Buster"
+species "Player"
++THRUSPECIES
 Speed 150
 Damage (10)
 radius 5

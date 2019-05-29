@@ -79,6 +79,8 @@ actor BrightShot
 {
 PROJECTILE
 damagetype "Buster"
+species "Player"
++THRUSPECIES
 Obituary "%o was bombed by %k's Bright Buster."
 Speed 37
 Damage (7)

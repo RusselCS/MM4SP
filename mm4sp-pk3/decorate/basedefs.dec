@@ -243,6 +243,7 @@ mass 99999999
 +NOBLOOD
 painchance 256
 damagetype "Enemy"
+species "Enemy"
 painsound "misc/devilpain"
 scale 2.5
 var int user_velx;
@@ -284,6 +285,142 @@ States
 {
 Use:
 TNT1 A 0 A_ChangeFlag("NOPAIN",0)
+stop
+}
+}
+
+actor EnemyDrop
+{
++NOGRAVITY
++NOINTERACTION
+-SOLID
+States
+{
+Spawn:
+TNT1 A 0
+TNT1 A 0 A_Jump(1, "YashichiDrop")
+TNT1 A 0 A_Jump(16, "BigHealthDrop", "BigWeaponDrop")
+TNT1 A 0 A_Jump(32, "SmallHealthDrop", "SmallWeaponDrop")
+TNT1 A 1
+stop
+SmallHealthDrop:
+TNT1 A 1 A_SpawnItemEx("SmallHealth",0,0,0,0,0,5)
+stop
+SmallWeaponDrop:
+TNT1 A 1 A_SpawnItemEx("WeaponEnergy",0,0,0,0,0,5)
+stop
+BigHealthDrop:
+TNT1 A 1 A_SpawnItemEx("BigHealth",0,0,0,0,0,5)
+stop
+BigWeaponDrop:
+TNT1 A 1 A_SpawnItemEx("BigWeaponEnergy",0,0,0,0,0,5)
+stop
+YashichiDrop:
+TNT1 A 0 A_JumpIf(CallACS("4SP_SurvivalCheck",0)==1,"1UpDrop")
+TNT1 A 1 A_SpawnItemEx("YashichiPickup",0,0,0,0,0,5)
+stop
+1UpDrop:
+TNT1 A 1 A_SpawnItemEx("1UpPickup",0,0,0,0,0,5)
+stop
+}
+}
+
+actor BigEnemyDrop
+{
++NOGRAVITY
++NOINTERACTION
+-SOLID
+States
+{
+Spawn:
+TNT1 A 0
+TNT1 A 0 A_Jump(4, "YashichiDrop")
+TNT1 A 0 A_Jump(64, "BigHealthDrop", "BigWeaponDrop")
+TNT1 A 0 A_Jump(128, "SmallHealthDrop", "SmallWeaponDrop")
+TNT1 A 1
+stop
+SmallHealthDrop:
+TNT1 A 1 A_SpawnItemEx("SmallHealth",0,0,0,0,0,5)
+stop
+SmallWeaponDrop:
+TNT1 A 1 A_SpawnItemEx("WeaponEnergy",0,0,0,0,0,5)
+stop
+BigHealthDrop:
+TNT1 A 1 A_SpawnItemEx("BigHealth",0,0,0,0,0,5)
+stop
+BigWeaponDrop:
+TNT1 A 1 A_SpawnItemEx("BigWeaponEnergy",0,0,0,0,0,5)
+stop
+YashichiDrop:
+TNT1 A 0 A_JumpIf(CallACS("4SP_SurvivalCheck",0)==1,"1UpDrop")
+TNT1 A 1 A_SpawnItemEx("YashichiPickup",0,0,0,0,0,5)
+stop
+1UpDrop:
+TNT1 A 1 A_SpawnItemEx("1UpPickup",0,0,0,0,0,5)
+stop
+}
+}
+
+actor YashichiPickup : CustomInventory 
+{
+inventory.pickupmessage "Picked up a Yashichi!"
+inventory.amount 1
+inventory.pickupsound "item/1up"
+Scale 2.0
+States
+{
+Spawn:
+YASH C 1
+loop
+Pickup:
+YASH C 0 HealThing(100)
+YASH C 0 ACS_ExecuteAlways(992, 0, 0, 1)
+stop
+}
+}
+
+actor 1UpPickup : CustomInventory
+{
+Scale 2.0
+inventory.pickupmessage "Picked up a 1-Up!"
+inventory.pickupsound "item/1up"
+States
+{
+Spawn:
+TNT1 A 0
+TNT1 A 0 Thing_ChangeTID(0,999)
+TNT1 A 0 ACS_NamedExecuteAlways("4SP_LifeDisplay",0)
+1UPI A 1
+Goto Spawn+1
+Megaman:
+1UPI A 1
+loop
+Brightman:
+1UPI B 1
+loop
+Diveman:
+1UPI C 1
+loop
+Drillman:
+1UPI D 1
+loop
+Dustman:
+1UPI E 1
+loop
+Pharaohman:
+1UPI F 1
+loop
+Ringman:
+1UPI G 1
+loop
+Skullman:
+1UPI H 1
+loop
+Toadman:
+1UPI I 1
+loop
+Pickup:
+TNT1 A 0 ACS_NamedExecuteAlways("4SP_GiveLife",0)
 stop
 }
 }

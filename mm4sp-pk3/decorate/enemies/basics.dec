@@ -9,8 +9,7 @@ Health 100
 translation "192:192=4:4", "198:198=102:102"
 maxstepheight 50
 +LOOKALLAROUND
-dropitem "WeaponEnergy", 16
-dropitem "SmallHealth", 16
+dropitem "EnemyDrop", 255
 speed 8
 States
 {
@@ -60,6 +59,8 @@ actor SniperJoeShot
 PROJECTILE
 Damage (10)
 damagetype "Enemy"
+species "Enemy"
++THRUSPECIES
 Speed 40
 scale 2.5
 Height 8
@@ -86,8 +87,7 @@ maxstepheight 50
 +MISSILEEVENMORE
 +MISSILEMORE
 +LOOKALLAROUND
-dropitem "WeaponEnergy", 16
-dropitem "SmallHealth", 16
+dropitem "EnemyDrop", 255
 speed 8
 States
 {
@@ -114,7 +114,7 @@ SNIP A 1 //A_JumpIfTargetInLOS("ShieldUp")
 Goto Missile
 ShieldUp:
 Missile:
-TNT1 A 0 A_SpawnItemEx("SniperJoeShieldX",23,-7,8,momx, momy, momz, 0, SXF_NOCHECKPOSITION|SXF_ABSOLUTEMOMENTUM, 0)
+TNT1 A 0 A_SpawnItemEx("SP_SniperJoeShieldX",23,-17,8,momx, momy, momz, 0, SXF_NOCHECKPOSITION|SXF_ABSOLUTEMOMENTUM, 0)
 TNT1 A 0 A_SpawnItemEx("SP_SniperJoeShieldFX",23,-17,8,momx, momy, momz, 0, SXF_NOCHECKPOSITION|SXF_ABSOLUTEMOMENTUM, 0)
 SNIP A 2 A_FaceTarget
 TNT1 A 0 A_GiveInventory("CutterFlag",1)
@@ -122,7 +122,7 @@ TNT1 A 0 A_JumpIfInventory("CutterFlag",30,"ReadyFire")
 loop
 ReadyFire:
 TNT1 A 0 A_TakeInventory("CutterFlag",999)
-TNT1 A 0 A_SpawnItemEx("SniperJoeShieldX",23,-7,8,momx, momy, momz, 0, SXF_NOCHECKPOSITION|SXF_ABSOLUTEMOMENTUM, 0)
+TNT1 A 0 A_SpawnItemEx("SP_SniperJoeShieldX",23,-17,8,momx, momy, momz, 0, SXF_NOCHECKPOSITION|SXF_ABSOLUTEMOMENTUM, 0)
 TNT1 A 0 A_SpawnItemEx("SP_SniperJoeShieldFX",23,-17,8,momx, momy, momz, 0, SXF_NOCHECKPOSITION|SXF_ABSOLUTEMOMENTUM, 0)
 SNIP A 2 A_FaceTarget
 SNIP A 0 A_Jump(20,"ShieldFire")
@@ -175,6 +175,33 @@ stop
 }
 }
 
+actor SP_SniperJoeShieldX : SniperJoeShieldX
+{
+States
+{
+Pain:
+TNT1 A 0 A_SpawnItemEx("JoeShieldDeathFX")
+TNT1 A 2 A_PlaySound("item/protoreflect")
+stop
+}
+}
+
+actor JoeShieldDeathFX
+{
+scale 2.5
++NOINTERACTION
++CLIENTSIDEONLY
+alpha 0.9
+renderstyle add
+states
+{
+Spawn:
+SNIP N 0 A_SetScale(scaleX + 0.1, 2.5) 
+SNIP N 1 A_FadeOut(0.05)
+loop
+}
+}
+
 // A Sniper joe that chucks grenades
 // Args0 = Stand still
 // Args1 = Don't use buster
@@ -208,7 +235,7 @@ SNIP A 1 //A_JumpIfTargetInLOS("ShieldUp")
 Goto Missile
 ShieldUp:
 Missile:
-TNT1 A 0 A_SpawnItemEx("SniperJoeShieldX",23,-7,8,momx, momy, momz, 0, SXF_NOCHECKPOSITION|SXF_ABSOLUTEMOMENTUM, 0)
+TNT1 A 0 A_SpawnItemEx("SP_SniperJoeShieldX",23,-17,8,momx, momy, momz, 0, SXF_NOCHECKPOSITION|SXF_ABSOLUTEMOMENTUM, 0)
 TNT1 A 0 A_SpawnItemEx("SniperJoeShieldGFX",23,-17,8,momx, momy, momz, 0, SXF_NOCHECKPOSITION|SXF_ABSOLUTEMOMENTUM, 0)
 SNIP A 2 A_FaceTarget
 TNT1 A 0 A_GiveInventory("CutterFlag",1)
@@ -216,7 +243,7 @@ TNT1 A 0 A_JumpIfInventory("CutterFlag",30,"ReadyFire")
 loop
 ReadyFire:
 TNT1 A 0 A_TakeInventory("CutterFlag",999)
-TNT1 A 0 A_SpawnItemEx("SniperJoeShieldX",23,-7,8,momx, momy, momz, 0, SXF_NOCHECKPOSITION|SXF_ABSOLUTEMOMENTUM, 0)
+TNT1 A 0 A_SpawnItemEx("SP_SniperJoeShieldX",23,-17,8,momx, momy, momz, 0, SXF_NOCHECKPOSITION|SXF_ABSOLUTEMOMENTUM, 0)
 TNT1 A 0 A_SpawnItemEx("SniperJoeShieldGFX",23,-17,8,momx, momy, momz, 0, SXF_NOCHECKPOSITION|SXF_ABSOLUTEMOMENTUM, 0)
 SNIP A 2 A_FaceTarget
 SNIP A 0 A_Jump(20,"ShieldFire")
@@ -254,7 +281,7 @@ stop
 }
 
 
-actor SniperJoeShieldGFX : SniperJoeShieldFX
+actor SniperJoeShieldGFX : SP_SniperJoeShieldFX
 {
 translation "192:192=4:4", "198:198=106:106"
 }
@@ -305,8 +332,6 @@ maxstepheight 50
 +DONTBLAST
 +SLIDESONWALLS
 speed 0
-dropitem "WeaponEnergy", 32
-dropitem "SmallHealth", 32
 States
 {
 Spawn:
@@ -375,6 +400,8 @@ actor SniperArmorShot
 PROJECTILE
 Damage (9)
 damagetype "Enemy"
+species "Enemy"
++THRUSPECIES
 Speed 70
 scale 2.5
 Height 8
@@ -392,8 +419,7 @@ actor SP_ReturningSniperJoe : SP_SniperJoeShielded
 {
 Obituary "%o was sniped by a Returning Sniper Joe."
 translation "192:192=4:4", "198:198=225:225"
-dropitem "BigWeaponEnergy", 32
-dropitem "BigHealth", 32
+dropitem "BigEnemyDrop", 255
 +DROPOFF
 States
 {
@@ -420,7 +446,7 @@ SNIP A 1 //A_JumpIfTargetInLOS("ShieldUp")
 Goto Missile
 ShieldUp:
 Missile:
-TNT1 A 0 A_SpawnItemEx("SniperJoeShieldX",23,-7,8,momx, momy, momz, 0, SXF_NOCHECKPOSITION|SXF_ABSOLUTEMOMENTUM, 0)
+TNT1 A 0 A_SpawnItemEx("SP_SniperJoeShieldX",23,-17,8,momx, momy, momz, 0, SXF_NOCHECKPOSITION|SXF_ABSOLUTEMOMENTUM, 0)
 TNT1 A 0 A_SpawnItemEx("ReturningSniperJoeShieldFX",23,-17,8,momx, momy, momz, 0, SXF_NOCHECKPOSITION|SXF_ABSOLUTEMOMENTUM, 0)
 SNIP A 2 A_FaceTarget
 TNT1 A 0 A_GiveInventory("CutterFlag",1)
@@ -428,7 +454,7 @@ TNT1 A 0 A_JumpIfInventory("CutterFlag",30,"ReadyFire")
 loop
 ReadyFire:
 TNT1 A 0 A_TakeInventory("CutterFlag",999)
-TNT1 A 0 A_SpawnItemEx("SniperJoeShieldX",23,-7,8,momx, momy, momz, 0, SXF_NOCHECKPOSITION|SXF_ABSOLUTEMOMENTUM, 0)
+TNT1 A 0 A_SpawnItemEx("SP_SniperJoeShieldX",23,-17,8,momx, momy, momz, 0, SXF_NOCHECKPOSITION|SXF_ABSOLUTEMOMENTUM, 0)
 TNT1 A 0 A_SpawnItemEx("ReturningSniperJoeShieldFX",23,-17,8,momx, momy, momz, 0, SXF_NOCHECKPOSITION|SXF_ABSOLUTEMOMENTUM, 0)
 SNIP A 2 A_FaceTarget
 SNIP A 0 A_Jump(20,"ShieldFire")
@@ -483,8 +509,7 @@ MONSTER
 +NOBLOOD
 +DONTBLAST
 speed 8
-dropitem "WeaponEnergy", 32
-dropitem "SmallHealth", 32
+dropitem "EnemyDrop", 255
 States
 {
 Spawn:
@@ -529,6 +554,8 @@ actor MetEnemyShot
 PROJECTILE
 Damage (6)
 damagetype "Enemy"
+species "Enemy"
++THRUSPECIES
 Speed 18
 scale 2.5
 Height 8
@@ -550,8 +577,7 @@ Radius 32
 Obituary "%o was blown to bits by a Cannon."
 Health 35
 maxstepheight 50
-dropitem "WeaponEnergy", 16
-dropitem "SmallHealth", 16
+dropitem "EnemyDrop", 255
 speed 0
 States
 {
@@ -599,6 +625,8 @@ Height 8
 Radius 8
 Speed 25
 damagetype "Enemy"
+species "Enemy"
++THRUSPECIES
 States
 {
 Spawn:

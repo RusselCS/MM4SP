@@ -66,6 +66,8 @@ actor SPDiveMissile
 PROJECTILE
 translation "192:192=4:4", "198:198=227:227"
 +SEEKERMISSILE
+species "Player"
++THRUSPECIES
 +SCREENSEEKER
 -EXTREMEDEATH
 Radius 5
