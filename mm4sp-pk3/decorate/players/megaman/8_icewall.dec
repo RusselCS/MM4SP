@@ -1,0 +1,4 @@
+actor Mega_ColdWep : IceWallWep {
++INVENTORY.UNDROPPABLE
+Weapon.SlotNumber 8
+}

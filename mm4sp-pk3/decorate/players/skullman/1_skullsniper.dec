@@ -8,6 +8,7 @@ Weapon.SlotNumber 1
 Tag "Skull Sniper"
 Inventory.Pickupmessage "Power up! To the grave..."
 weapon.ammotype "SkullManAmmo"
++INVENTORY.UNDROPPABLE
 +WEAPON.NOAUTOFIRE
 States
 {
@@ -52,8 +53,7 @@ actor SkullSniperShot : FastProjectile
 Translation "215:215=87:87"
 PROJECTILE
 damagetype "Buster"
-species "Player"
-+THRUSPECIES
++MTHRUSPECIES
 Speed 150
 Damage (10)
 radius 5

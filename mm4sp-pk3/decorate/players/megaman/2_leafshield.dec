@@ -1,0 +1,17 @@
+actor Mega_WoodWep : LeafShieldWep {
++INVENTORY.UNDROPPABLE
+Weapon.SlotNumber 2
+}
+actor LeafShieldGuardSP : LeafShieldGuard replaces LeafShieldGuard
+{
+species "Megaman"
++THRUSPECIES
+}
+actor LeafShieldSP : LeafShield replaces LeafShield
+{
++MTHRUSPECIES
+}
+actor LeafShieldCounterShotSP : LeafShieldCounterShot replaces LeafShieldCounterShot
+{
++MTHRUSPECIES
+}

@@ -1,0 +1,4 @@
+actor Mega_GalaxyWep : BlackHoleBombWep {
++INVENTORY.UNDROPPABLE
+Weapon.SlotNumber 9
+}

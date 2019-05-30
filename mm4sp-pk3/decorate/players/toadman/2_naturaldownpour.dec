@@ -4,10 +4,11 @@ dropitem ""
 inventory.icon "TARI2"
 Weapon.AmmoUse 1
 Weapon.AmmoGive 28
-Weapon.SlotNumber 6
+Weapon.SlotNumber 2
 Tag "Natural Downpour"
 Inventory.Pickupmessage "Power up! Natural Downpour!"
 weapon.ammotype "NaturalDownpourAmmo"
++INVENTORY.UNDROPPABLE
 +WEAPON.NOAUTOFIRE
 States
 {

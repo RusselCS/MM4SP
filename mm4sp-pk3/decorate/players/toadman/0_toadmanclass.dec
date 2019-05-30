@@ -6,6 +6,7 @@ player.startitem "BusterAmmo", 1
 player.startitem "ToadManWep"
 player.startitem "ToadManAmmo", 3
 player.startitem "ToadManFlag"
+player.startitem "EnergyBalancer"
 player.jumpz 14
 speed 1.0
 

@@ -8,11 +8,12 @@ Weapon.SlotNumber 1
 Tag "Drill Bomb"
 Inventory.Pickupmessage "Power up! Music in your heart!"
 weapon.ammotype "DrillManAmmo"
++INVENTORY.UNDROPPABLE
 +WEAPON.NOAUTOFIRE
 States
 {
 Spawn:
-WEAP V 1
+TNT1 A 1
 loop
 Ready:
 DRIA A 0 ACS_ExecuteAlways(998,0,782)
@@ -71,8 +72,7 @@ actor DrillBombSP
 {
 PROJECTILE
 +EXPLODEONWATER
-species "Player"
-+THRUSPECIES
++MTHRUSPECIES
 Speed 25
 Damage 0
 Translation "87:87=4:4"

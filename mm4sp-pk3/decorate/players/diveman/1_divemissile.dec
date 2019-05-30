@@ -8,11 +8,12 @@ Weapon.SlotNumber 1
 Tag "Dive Missile"
 Inventory.Pickupmessage "Power up! In the navy!"
 weapon.ammotype "DiveManAmmo"
++INVENTORY.UNDROPPABLE
 +WEAPON.NOAUTOFIRE
 States
 {
 Spawn:
-WEA2 S 1
+TNT1 A 1
 loop
 Ready:
 DIV1 A 0 ACS_ExecuteAlways(998,0,786)
@@ -66,8 +67,7 @@ actor SPDiveMissile
 PROJECTILE
 translation "192:192=4:4", "198:198=227:227"
 +SEEKERMISSILE
-species "Player"
-+THRUSPECIES
++MTHRUSPECIES
 +SCREENSEEKER
 -EXTREMEDEATH
 Radius 5

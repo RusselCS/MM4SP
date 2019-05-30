@@ -1,0 +1,8 @@
+actor Mega_SparkWep : SparkShockWep {
++INVENTORY.UNDROPPABLE
+Weapon.SlotNumber 3
+}
+actor SparkShockSP : SparkShock replaces SparkShock
+{
++MTHRUSPECIES
+}

@@ -8,11 +8,12 @@ Weapon.SlotNumber 1
 Tag "Bright Buster"
 Inventory.Pickupmessage "Power up! It's lights out!"
 weapon.ammotype "BrightManAmmo"
++INVENTORY.UNDROPPABLE
 +WEAPON.NOAUTOFIRE
 States
 {
 Spawn:
-WEAP X 1
+TNT1 A 1
 loop
 Ready:
 FST1 A 0 ACS_ExecuteAlways(998,0,780)
@@ -79,8 +80,7 @@ actor BrightShot
 {
 PROJECTILE
 damagetype "Buster"
-species "Player"
-+THRUSPECIES
++MTHRUSPECIES
 Obituary "%o was bombed by %k's Bright Buster."
 Speed 37
 Damage (7)

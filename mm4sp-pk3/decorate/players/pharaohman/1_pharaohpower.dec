@@ -8,6 +8,7 @@ Weapon.SlotNumber 0
 Tag "Pharaoh Power"
 Inventory.Pickupmessage "Power up! Pharaoh's Power!"
 weapon.ammotype "PharaohManAmmo2"
++INVENTORY.UNDROPPABLE
 +WEAPON.NOAUTOFIRE
 States
 {

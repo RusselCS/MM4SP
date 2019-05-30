@@ -8,6 +8,7 @@ actor SkullManFlag : ClassFlag {}
 actor DiveManFlag : ClassFlag {}
 actor PharaohManFlag : ClassFlag {}
 actor DrillManFlag : ClassFlag {}
+actor MegaManFlag : ClassFlag {}
 
 actor OnGround : Once {}
 actor InAir : Once {}
@@ -85,8 +86,8 @@ MICO B 0 A_JumpIf(Args[0]==8,"Galaxy")
 MICO B -1
 stop
 Wood:
-MICO C -1
-stop
+MICO C 1
+loop
 Spark:
 MICO D -1
 stop
@@ -231,11 +232,27 @@ MICO R 2
 stop
 }
 }
+actor MegaMarker : MapMarker
+{
+height 0
+radius 0
++CLIENTSIDEONLY
++NOINTERACTION
++NOGRAVITY
+-SOLID
+States
+{
+Spawn:
+MICO S 2
+stop
+}
+}
 
 actor GenericRobot
 {
 damagefactor "Despawn", 0.0
 damagefactor "Buster", 1.0
+damagefactor "FlameSword", 0.5
 damagefactor "Enemy", 0.0
 damagefactor "EnemyContact", 0.0
 MONSTER
@@ -257,6 +274,14 @@ Pain.FlashStopper:
 "####" "####################################" 1 A_SpawnItemEx("BrightStoppedFX",random(0,5)+radius,0,random(0,height),0,0,0,random(1,18)*20,1,32)
 "####" "####################################" 1 A_SpawnItemEx("BrightStoppedFX",random(0,5)+radius,0,random(0,height),0,0,0,random(1,18)*20,1,32)
 "####" "####################################" 1 A_SpawnItemEx("BrightStoppedFX",random(0,5)+radius,0,random(0,height),0,0,0,random(1,18)*20,1,32)
+"####" "#" 0 ACS_NamedExecuteAlways("4SP_EnemyManage",0,1,0)
+"####" "#" 1 A_Jump(256,"Return")
+wait
+Pain.SparkShock:
+"####" "#" 0 ACS_NamedExecuteAlways("4SP_EnemyManage",0,1,1)
+"####" "#" 0 A_ClearTarget
+"####" "#" 0 A_SpawnItemEX("ShockFX",0,0,height/2)
+"####" "#" 35 
 "####" "#" 0 ACS_NamedExecuteAlways("4SP_EnemyManage",0,1,0)
 "####" "#" 1 A_Jump(256,"Return")
 wait
@@ -287,6 +312,11 @@ Use:
 TNT1 A 0 A_ChangeFlag("NOPAIN",0)
 stop
 }
+}
+
+actor EnemyDamageCheck : Powerup
+{
+Powerup.Duration 3
 }
 
 actor EnemyDrop
@@ -481,6 +511,7 @@ TNT1 A 0
 TNT1 A 0 A_SetUserVar("user_R",CallACS("4SP_CountInv",1,AAPTR_TARGET))
 TNT1 A 0 A_SetUserVar("user_H",CallACS("4SP_CountInv",2,AAPTR_TARGET))
 TNT1 A 0 A_SetUserVar("user_D",CallACS("4SP_CountInv",3,AAPTR_TARGET))
+TNT1 A 0 A_JumpIfInTargetInventory("IsDead",1,"End")
 TNT1 A 1 A_Warp(AAPTR_TARGET,0,0,user_H/2,0,WARPF_NOCHECKPOSITION,"Continue")
 TNT1 A 1 A_JumpIf(true, "End")
 wait
@@ -488,7 +519,7 @@ Continue:
 TNT1 A 0 A_SetUserVar("user_R",ACS_NamedExecuteWithResult("4SP_CountInv",1,AAPTR_TARGET))
 TNT1 A 0 A_SetUserVar("user_H",ACS_NamedExecuteWithResult("4SP_CountInv",2,AAPTR_TARGET))
 TNT1 A 0 A_SetUserVar("user_D",ACS_NamedExecuteWithResult("4SP_CountInv",3,AAPTR_TARGET))
-TNT1 A 1 
+TNT1 A 1 A_JumpIfInTargetInventory("IsDead",1,"End")
 TNT1 A 1 A_Warp(AAPTR_TARGET,0,0,user_H/2,0,WARPF_NOCHECKPOSITION,"Continue2")
 TNT1 A 1 A_JumpIf(true, "End")
 wait
@@ -496,6 +527,7 @@ Continue2:
 TNT1 A 0 A_SetUserVar("user_R",ACS_NamedExecuteWithResult("4SP_CountInv",1,AAPTR_TARGET))
 TNT1 A 0 A_SetUserVar("user_H",ACS_NamedExecuteWithResult("4SP_CountInv",2,AAPTR_TARGET))
 TNT1 A 0 A_SetUserVar("user_D",ACS_NamedExecuteWithResult("4SP_CountInv",3,AAPTR_TARGET))
+TNT1 A 0 A_JumpIfInTargetInventory("IsDead",1,"End")
 TNT1 A 1 A_Explode(user_D,user_R+10,0,0,user_R+11)
 TNT1 A 1 A_Warp(AAPTR_TARGET,0,0,user_H/2,0,WARPF_NOCHECKPOSITION,"Continue")
 TNT1 A 1 A_JumpIf(true, "End")
@@ -520,7 +552,7 @@ PROJECTILE
 +NOTARGETSWITCH
 renderstyle none
 damage (0)
-radius 47
+radius 48
 height 2
 states
 {

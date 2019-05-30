@@ -8,6 +8,7 @@ player.startitem "BrightManAmmo", 3
 player.startitem "BrightmanWep2"
 player.startitem "BrightmanAmmo2", 28
 player.startitem "BrightManFlag"
+player.startitem "EnergyBalancer"
 player.jumpz 12
 speed 1.15
 

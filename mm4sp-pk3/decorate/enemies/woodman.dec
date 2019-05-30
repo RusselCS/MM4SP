@@ -113,6 +113,7 @@ BATT A 0 A_GiveInventory("CutterFlag",1)
 BATT A 0 A_JumpIfInventory("CutterFlag",60,"SpawnLoop")
 Goto Chase
 Death:
+BATT A 0 A_GiveInventory("IsDead",1)
 BATT A 0 A_Pain
 BATT A 0 A_Fall
 BATT A 0 A_Stop
@@ -146,7 +147,7 @@ actor SP_Pipi : GenericRobot
 {
 damagefactor "Despawn", 1.0
 //$Category MM8BDM-Enemies
-Health 10
+Health 5
 Height 22
 Radius 22
 maxstepheight 50
@@ -183,6 +184,7 @@ BATT A 0 A_GiveInventory("DamageCounter",15)
 BATT A 0 A_SpawnItemEX("BasicEnemyContactDamager")
 Goto Fly2
 Death:
+BATT A 0 A_GiveInventory("IsDead",1)
 TNT1 A 0 A_Pain
 TNT1 A 0 A_KillChildren
 TNT1 A 0 A_Stop
@@ -192,6 +194,7 @@ ROBB B 0 A_SpawnItem("EnemyDeathFX",0,16)
 TNT1 A 1
 stop
 Death.Despawn:
+BATT A 0 A_GiveInventory("IsDead",1)
 TNT1 A 0 A_GiveInventory("CutterFlag",1)
 TNT1 A 0 A_JumpIfInventory("DropPipiEgg",1,2)
 TNT1 A 0 A_KillChildren
@@ -214,7 +217,7 @@ actor PipiEgg
 +THRUSPECIES
 species "Enemy"
 damagetype "Enemy"
-Health 1
+Health 5
 Height 16
 Radius 10
 scale 2.5
@@ -280,7 +283,7 @@ actor Copipi
 species "Enemy"
 damagetype "EnemyContact"
 Obituary "%o was pecked by a Copipi."
-Health 1
+Health 5
 Height 16
 Radius 16
 scale 2.5
@@ -384,6 +387,7 @@ ROBB B 0 A_PlaySoundEx("misc/devilfire","Voice")
 ROBB B 35 A_CustomMissile("RobbitCarrot",32,0,random(-4,4))
 Goto Look
 Death:
+BATT A 0 A_GiveInventory("IsDead",1)
 ROBB B 0 A_Pain
 ROBB B 0 A_Fall
 ROBB B 0 A_SpawnItem("EnemyDeathFX",0,32)
@@ -398,8 +402,7 @@ PROJECTILE
 Damage (7)
 Obituary "%o was pelted by a Robbit."
 damagetype "Enemy"
-species "Enemy"
-+THRUSPECIES
++MTHRUSPECIES
 Speed 20
 scale 2.5
 Height 8
@@ -489,6 +492,7 @@ ATOC C 0 A_SpawnItemEx("EnemyFloorChecker",0,0,-2,0,0,0,0,SXF_SETMASTER)
 ATOC C 0 A_JumpIfInventory("EnemyJumping",1,"Jumping")
 goto Look
 Death:
+BATT A 0 A_GiveInventory("IsDead",1)
 ATOC C 0 A_Pain
 ATOC C 0 A_Fall
 ATOC C 0 A_SpawnItem("EnemyDeathFX",0,32)
@@ -545,7 +549,14 @@ goto WoofWoof
 WoofWoof:
 MONK A 0 A_Stop
 MONK D 0 ThrustThingZ(0,0,0,0)
-MONK ABCB 6 A_LookEx(LOF_NOSOUNDCHECK,0,800,0,180,"SeeDrop")
+MONK A 0 A_LookEx(LOF_NOSOUNDCHECK,0,800,0,180,"SeeDrop")
+MONK AAAAAA 1 A_JumpIfInventory("EnemyDamageCheck",1,"SeeDrop")
+MONK A 0 A_LookEx(LOF_NOSOUNDCHECK,0,800,0,180,"SeeDrop")
+MONK BBBBBB 1 A_JumpIfInventory("EnemyDamageCheck",1,"SeeDrop")
+MONK A 0 A_LookEx(LOF_NOSOUNDCHECK,0,800,0,180,"SeeDrop")
+MONK CCCCCC 1 A_JumpIfInventory("EnemyDamageCheck",1,"SeeDrop")
+MONK A 0 A_LookEx(LOF_NOSOUNDCHECK,0,800,0,180,"SeeDrop")
+MONK BBBBBB 1 A_JumpIfInventory("EnemyDamageCheck",1,"SeeDrop")
 loop
 SeeDrop:
 MONK D 0 A_FaceTarget
@@ -579,6 +590,7 @@ Look:
 MONK E 1 A_LookEx(LOF_NOSOUNDCHECK,0,0,0,360,"See")
 loop
 Death:
+BATT A 0 A_GiveInventory("IsDead",1)
 MONK E 0 A_Pain
 MONK E 0 A_Fall
 MONK E 0 A_SpawnItem("EnemyDeathFX",0,32)
@@ -781,7 +793,7 @@ ANKO G 0 ACS_NamedExecuteAlways("4SP_EnemyStart",0)
 ANKO G 0 A_GiveInventory("DamageCounter",20)
 ANKO G 0 A_SpawnItemEX("BasicEnemyContactDamager")
 Look:
-ANKO GGGGGGGGGGGGGGG 1 A_ChangeVelocity(0, 0, -3,3)
+ANKO GGGGGGGGGGGGGGGGGGGG 1 A_ChangeVelocity(0, 0, -3,3)
 ANKO G 0 A_LookEx(LOF_NOSOUNDCHECK,0,0,0,360,"See")
 loop
 See:
@@ -852,6 +864,7 @@ ANKO F 0 A_JumpIf(z+32>Args[0],"Look")
 ANKO F 1 A_ChangeVelocity(10, 0, 10,3)
 goto Look
 Death:
+BATT A 0 A_GiveInventory("IsDead",1)
 ANKO E 0 A_Pain
 ANKO E 0 A_Fall
 ANKO E 0 A_SpawnItem("EnemyDeathFX",0,32)
@@ -875,7 +888,7 @@ Spawn:
 CLAW A 1 A_LookEx(LOF_NOSOUNDCHECK,0,2000,0,360,"See")
 loop
 See:
-CLAW A 400 A_SpawnItemEx("SP_Claw")
+CLAW A 800 A_SpawnItemEx("SP_Claw")
 Goto Spawn
 }
 }
@@ -883,7 +896,7 @@ Goto Spawn
 actor SP_Claw : GenericRobot 
 {
 //$Category MM8BDM-Enemies
-Health 10
+Health 5
 height 32
 radius 16
 speed 7
@@ -940,12 +953,14 @@ Chase:
 CLAW AAAABBBB 1 A_Chase("","")
 loop
 Death:
+BATT A 0 A_GiveInventory("IsDead",1)
 ROBB B 0 A_Pain
 ROBB B 0 A_Fall
 ROBB B 0 A_SpawnItem("EnemyDeathFX",0,32)
 TNT1 A 1
 stop
 Despawn:
+BATT A 0 A_GiveInventory("IsDead",1)
 TNT1 A 0 A_Fall
 stop
 }

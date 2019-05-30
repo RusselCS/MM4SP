@@ -1,4 +1,5 @@
 clearplayerclasses
+addplayerclass MegamanSP
 addplayerclass BrightmanSP
 addplayerclass ToadmanSP
 addplayerclass DrillmanSP

@@ -21,3 +21,7 @@ texture PHARBAR5, 8, 56{patch BARTRANS, 0, 0}
 //Dustman
 texture DUSVAR,56,8{patch DUSBAR,0,0{rotate 90}}
 texture DUSVMPTY,56,8{patch DUSEMPTY,0,0{rotate 90}}
+
+//Megaman
+texture EDDIEBAR, 8, 56{patch BARENERG, 0, 0 {Translation "192:192=4:4", "198:198=227:227"}}
+texture EDDIEVAR, 56, 8{patch EDDIEBAR, 0, 0{rotate 90}}

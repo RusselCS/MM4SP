@@ -7,6 +7,7 @@ player.startitem "DustManWep"
 player.startitem "DustManAmmo", 3
 player.startitem "DustCharge", 84
 player.startitem "DustManFlag"
+player.startitem "EnergyBalancer"
 player.jumpz 12
 speed 1.0
 
