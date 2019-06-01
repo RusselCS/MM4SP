@@ -10,12 +10,15 @@ script "4SP_BossManage" (void)
     int currentCounter = 0;
     int maxCounter = GetAmmoCapacity("CCBossHealth");
     int counterIter = fixedMul(maxCounter, 0.04);
-    PrintBold(i:counterIter);
     
-    /*while(currentCounter < maxCounter) {
-
+    while(currentCounter < maxCounter) {
+        AmbientSound("item/energyup",127);
+        currentCounter = clamp(0, currentCounter+counterIter, maxCounter);
+        updateBossHealth(currentCounter);
+        Delay(3);
     }
 	
+    /* 
     while(GetActorProperty(0, APROP_Health)>0){
 	
         if(HP != GetActorProperty(0, APROP_Health)){
@@ -28,4 +31,35 @@ script "4SP_BossManage" (void)
 		
     Delay(4);
     }*/
+}
+
+function void updateBossHealth(int amount) {
+    for(int i = 0; i < 64; i++) {
+        SetActorInventory(i+1000, "CCBossHealth", amount);
+    }
+}
+
+function void SetActorInventory(int tid, str inv, int amt) {
+    int oldamt = CheckActorInventory(tid, inv);
+	if(oldamt>amt)
+	{
+		TakeActorInventory(tid, inv, oldamt-amt);
+	}
+	else
+	{
+		GiveActorInventory(tid, inv, amt-oldamt);
+	}
+}
+
+function int clamp(int minamt, int amt, int maxamt) {
+
+    if(amt < minamt) {
+        return minamt;
+    }
+
+    if(amt > maxamt) {
+        return maxamt;
+    }
+
+    return amt;
 }
