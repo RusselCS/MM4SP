@@ -1,5 +1,14 @@
 server noarchive bool SV_CC_AllWeapons = true;
 
+server noarchive bool SV_CC_Mega_Wood_Wep = false;
+server noarchive bool SV_CC_Mega_Spark_Wep = false;
+server noarchive bool SV_CC_Mega_Napalm_Wep = false;
+server noarchive bool SV_CC_Mega_Yamato_Wep = false;
+server noarchive bool SV_CC_Mega_Burst_Wep = false;
+server noarchive bool SV_CC_Mega_Sword_Wep = false;
+server noarchive bool SV_CC_Mega_Cold_Wep = false;
+server noarchive bool SV_CC_Mega_Galaxy_Wep = false;
+
 server noarchive bool SV_CC_Ring_Wood_Wep = false;
 server noarchive bool SV_CC_Ring_Spark_Wep = false;
 server noarchive bool SV_CC_Ring_Napalm_Wep = false;

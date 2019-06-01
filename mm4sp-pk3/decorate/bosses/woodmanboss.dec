@@ -162,6 +162,13 @@ Pain.FlashStopper:
 "####" "##################" 1 A_SpawnItemEx("BrightStoppedFX",random(0,5)+radius,0,random(0,height),0,0,0,random(1,18)*20,1,32)
 "####" "#" 0 ACS_NamedExecuteAlways("4SP_EnemyManage",0,1,0)
 goto Return
+Pain.SparkShock:
+"####" "#" 0 ACS_NamedExecuteAlways("4SP_EnemyManage",0,1,1)
+"####" "#" 0 A_ClearTarget
+"####" "#" 0 A_SpawnItemEX("ShockFX",0,0,height/2)
+"####" "#" 17 
+"####" "#" 0 ACS_NamedExecuteAlways("4SP_EnemyManage",0,1,0)
+goto Return
 }
 }
 

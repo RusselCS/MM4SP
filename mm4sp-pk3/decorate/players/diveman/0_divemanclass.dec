@@ -6,6 +6,7 @@ player.startitem "BusterAmmo", 1
 player.startitem "DiveManWep"
 player.startitem "DiveManAmmo", 2
 player.startitem "DiveManFlag"
+player.startitem "EnergyBalancer"
 player.jumpz 14
 speed 1.0
 

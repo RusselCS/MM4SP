@@ -41,6 +41,18 @@ InInventory not NoHealthBar, 1
 DrawSelectedInventory INDEXFONT ,24, 64, 37, 64, white;
 DrawImage weaponicon, 16, 64;
 
+IsSelected MegamanWep2{Drawbar"EDDIEBAR", "BAREMPTY", Ammo1, vertical, 16, 8;}
+IsSelected Mega_WoodWep{Drawbar"BARAM201", "BAREMPTY", Ammo1, vertical, 16, 8;	
+	InInventory ShieldCheck, 1{DrawBar "BARFLS1", "NOBAR", LeafShieldCharge, vertical, 16, 8;}}
+IsSelected Mega_SparkWep{Drawbar"BARAMM12", "BAREMPTY", Ammo1, vertical, 16, 8;}
+IsSelected Mega_NapalmWep{Drawbar"BARAMM24", "BAREMPTY", Ammo1, vertical, 16, 8;}
+IsSelected Mega_YamatoWep{Drawbar"BARAMM30", "BAREMPTY", Ammo1, vertical, 16, 8;}
+IsSelected Mega_BurstWep{Drawbar"BARAMM33", "BAREMPTY", Ammo1, vertical, 16, 8;}
+IsSelected Mega_SwordWep{Drawbar"BARAMM42", "BAREMPTY", Ammo1, vertical, 16, 8;}
+IsSelected Mega_ColdWep{Drawbar"BARAMM54", "BAREMPTY", Ammo1, vertical, 16, 8;}
+IsSelected Mega_GalaxyWep {DrawBar "BARAMM66", "BAREMPTY", Ammo1, vertical, 16, 8;
+	InInventory BlackHoleBombCooldown, 1 {DrawBar "BARFLS15", "BAREMPTY", Ammo1, vertical, 16, 8;}}
+
 IsSelected RingManWep
 {
 	DrawImage "04_5_BA0",8,8;

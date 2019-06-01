@@ -38,6 +38,17 @@ actor GitTest
 #include "decorate/players/pharaohman/1_pharaohpower.dec"
 #include "decorate/players/drillman/0_drillmanclass.dec"
 #include "decorate/players/drillman/1_drillbomb.dec"
+#include "decorate/players/megaman/0_megamanclass.dec"
+#include "decorate/players/megaman/1_megabuster.dec"
+#include "decorate/players/megaman/1_eddiecall.dec"
+#include "decorate/players/megaman/2_leafshield.dec"
+#include "decorate/players/megaman/3_sparkshock.dec"
+#include "decorate/players/megaman/4_napalmbomb.dec"
+#include "decorate/players/megaman/5_yamatospear.dec"
+#include "decorate/players/megaman/6_dangerwrap.dec"
+#include "decorate/players/megaman/7_flamesword.dec"
+#include "decorate/players/megaman/8_icewall.dec"
+#include "decorate/players/megaman/9_blackholebomb.dec"
 
 // ENEMIES
 #include "decorate/enemies/basics.dec"

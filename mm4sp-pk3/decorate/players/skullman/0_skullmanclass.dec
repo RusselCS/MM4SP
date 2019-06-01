@@ -8,8 +8,9 @@ player.startitem "SkullManAmmo", 3
 player.startitem "SkullmanWep2"
 player.startitem "SkullmanAmmo2", 28
 player.startitem "SkullManFlag"
+player.startitem "EnergyBalancer"
 player.jumpz 14
-speed 1.15
+speed 1.0
 
 States
 {

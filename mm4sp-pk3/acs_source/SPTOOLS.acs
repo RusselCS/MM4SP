@@ -5,12 +5,14 @@
 
 #DEFINE PHARAOHMANSP 978
 #DEFINE PHARAOHFLASH 979
+#DEFINE EDDIECALL 980
 
 script "4SP_Colors" OPEN CLIENTSIDE
 {
 Delay(25);
 CreateTranslation(PHARAOHMANSP, 192:192=4:4, 198:198=216:216, 196:196=112:112);
 CreateTranslation(PHARAOHFLASH, 4:4=192:192, 210:210=198:198, 0:0=4:4, 196:196=112:112);
+CreateTranslation(EDDIECALL, 192:192=4:4, 198:198=227:227);
 }
 
 // [Trill] Scripts ported and slightly modified from MMSP-Basic
@@ -45,6 +47,7 @@ Script "4SP_EnemyPain" (void) //CLIENTSIDE
         if(HP != GetActorProperty(0, APROP_Health)){
         PlayActorSound(0, SOUND_Pain, CHAN_BODY, 1.0, false, ATTN_NORM);
         SetActorProperty(0, APROP_RenderStyle, STYLE_None);
+        GiveInventory("EnemyDamageCheck",1);
         Delay(1);
         SetActorProperty(0, APROP_RenderStyle, STYLE_Normal);
         HP = GetActorProperty(0, APROP_Health);
@@ -166,16 +169,17 @@ str bossList[MAX_BOSSES][2] = {
     {"YamatoManBossCC", "Yamato"}
 };
 
-#define MAX_PLAYERS 8
+#define MAX_PLAYERS 9
 str playerList[MAX_PLAYERS][2] = {
     {"RingManSP", "Ring"},
     {"DustManSP", "Dust"},
     {"ToadManSP", "Toad"},
-    {"BrightmanSP", "Bright"},
-    {"SkullmanSP", "Skull"},
-    {"DivemanSP", "Dive"},
-    {"PharaohmanSP", "Pharaoh"},
-    {"DrillmanSP", "Drill"}
+    {"MegaManSP", "Mega"},
+    {"BrightManSP", "Bright"},
+    {"SkullManSP", "Skull"},
+    {"DiveManSP", "Dive"},
+    {"PharaohManSP", "Pharaoh"},
+    {"DrillManSP", "Drill"}
 };
 
 script "4SP_GiveWeapons" ENTER {
@@ -287,4 +291,62 @@ script "4SP_GroundEnter" ENTER {
 
 script "4SP_GroundRespawn" RESPAWN {
     ACS_NamedExecuteAlways("4SP_GroundEnter", 0);
+}
+
+// [Trill] Script for removing blocking linedefs
+script "4SP_BlockRemover" (int which)
+{
+    if(which==0){
+        terminate;
+    }
+    Line_SetBlocking(which,0,BLOCKF_PLAYERS);
+}
+
+// [Trill] Minimap marker script, snagged from MMSP
+script "4SP_MinimapMarker" OPEN clientside
+{
+for(int i=0; i<64; i++)
+    {
+    if(ClassifyActor(1000+i) & 34){
+		if(CheckActorInventory(1000+i,"BrightmanWep")==1){SpawnSpot("BrightMarker",1000+i,0,0);}
+		if(CheckActorInventory(1000+i,"DivemanWep")==1){SpawnSpot("DiveMarker",1000+i,0,0);}
+		if(CheckActorInventory(1000+i,"DrillmanWep")==1){SpawnSpot("DrillMarker",1000+i,0,0);}
+        if(CheckActorInventory(1000+i,"DustmanWep")==1){SpawnSpot("DustMarker",1000+i,0,0);}
+        if(CheckActorInventory(1000+i,"PharaohmanWep")==1){SpawnSpot("PharaohMarker",1000+i,0,0);}
+		if(CheckActorInventory(1000+i,"RingmanWep")==1){SpawnSpot("RingMarker",1000+i,0,0);}
+		if(CheckActorInventory(1000+i,"SkullmanWep")==1){SpawnSpot("SkullMarker",1000+i,0,0);}
+		if(CheckActorInventory(1000+i,"ToadmanWep")==1){SpawnSpot("ToadMarker",1000+i,0,0);}
+		if(CheckActorInventory(1000+i,"MegamanWep")==1){SpawnSpot("MegaMarker",1000+i,0,0);}
+	}
+    }
+	Delay(1);
+	restart;
+}
+
+// [Trill] Survival checker
+script "4SP_SurvivalCheck" (void)
+{
+if(GetCvar("survival")==1)
+{SetResultValue(1);}
+Else
+{SetResultValue(0);}
+}
+
+// [Trill] 1-Up 
+script "4SP_GiveLife" (void) 
+{
+SetPlayerLivesLeft(PlayerNumber(),GetPlayerLivesLeft(PlayerNumber())+1); 
+}
+
+script "4SP_LifeDisplay" (void) CLIENTSIDE 
+{
+If(CheckActorClass(consolePlayerNumber()+1000,"BrightmanSP")){SetActorState(0,"Brightman");}
+If(CheckActorClass(consolePlayerNumber()+1000,"DivemanSP")){SetActorState(0,"Diveman");}
+If(CheckActorClass(consolePlayerNumber()+1000,"DrillmanSP")){SetActorState(0,"Drillman");}
+If(CheckActorClass(consolePlayerNumber()+1000,"DustmanSP")){SetActorState(0,"Dustman");}
+If(CheckActorClass(consolePlayerNumber()+1000,"PharaohmanSP")){SetActorState(0,"Pharaohman");}
+If(CheckActorClass(consolePlayerNumber()+1000,"RingmanSP")){SetActorState(0,"Ringman");}
+If(CheckActorClass(consolePlayerNumber()+1000,"SkullmanSP")){SetActorState(0,"Skullman");}
+If(CheckActorClass(consolePlayerNumber()+1000,"ToadmanSP")){SetActorState(0,"Toadman");}
+If(CheckActorClass(consolePlayerNumber()+1000,"MegamanSP")){SetActorState(0,"Megaman");}
 }

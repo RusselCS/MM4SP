@@ -1,0 +1,403 @@
+#library "wepacs"
+
+// [Mike] Scripts file for changing colors based on your weapon
+#include "zcommon.acs"// [Lego] Always include this before 8bdmlib
+#include "8bdmlib.acs"// included with MM8BDM under acs_source.
+					  // See 8bdmlib.acs for details.
+
+#DEFINE MAX_WEAPONS_GLOBAL 15 // Maximum number of weapons for the following arrays
+// CC total should be 76
+#DEFINE MAX_BUSTERS 7 // Maximum number of non-ammo buster upgrades for the following arrays
+// v7's max busters would be 8
+
+// Array Layout
+//  0 - Weapon Name according to the Engine (Ex. RollingCutterWep)
+//  1 - Weapon Ammo according to the Engine (Ex. RollingCutterAmmo)
+//  2 - Weapon Name according to the Player (Ex. Rolling Cutter)
+//  3 - Ammo gain multiplier (0.0 - 1.0)
+//  4 - Can be given by Eddie? (YES/NO)
+//  5 - Can be Stolen by Reggae (no longer used)? (YES/NO)
+//  6 - LMS Slot
+
+str weapons_ammo[MAX_WEAPONS_GLOBAL][7] = 
+{
+{"BrightmanWep2", "BrightManAmmo2", "Flash Stopper", 1.0, "NO", "NO", "SLOT_NONE"},
+{"SkullmanWep2", "SkullManAmmo2", "Skull Barrier", 1.0, "NO", "NO", "SLOT_NONE"},
+{"PharaohmanWep2", "PharaohManAmmo2", "Pharaoh Power", 1.0, "NO", "NO", "SLOT_NONE"},
+{"MegamanWep2", "MegaManAmmo2", "Eddie Call", 1.0, "NO", "NO", "SLOT_NONE"},
+
+{"Mega_WoodWep", "LeafShieldAmmo", "Leaf Shield", 1.0, "NO", "NO", "SLOT_NONE"},
+{"Mega_SparkWep", "SparkShockAmmo", "Spark Shock", 1.0, "NO", "NO", "SLOT_NONE"},
+{"Mega_NapalmWep", "NapalmBombAmmo", "Napalm Bomb", 1.0, "NO", "NO", "SLOT_NONE"},
+{"Mega_YamatoWep", "YamatoSpearAmmo", "Yamato Spear", 1.0, "NO", "NO", "SLOT_NONE"},
+{"Mega_BurstWep", "DangerWrapAmmo", "Danger Wrap", 1.0, "NO", "NO", "SLOT_NONE"},
+{"Mega_SwordWep", "FlameSwordAmmo", "Flame Sword", 1.0, "NO", "NO", "SLOT_NONE"},
+{"Mega_ColdWep", "IceWallAmmo", "Ice Wall", 1.0, "NO", "NO", "SLOT_NONE"},
+{"Mega_GalaxyWep", "BlackHoleBombAmmo", "Black Hole Bomb", 1.0, "NO", "NO", "SLOT_NONE"},
+
+{"Ring_WoodWep", "StumpSatelliteAmmo", "Stump Satellite", 1.0, "NO", "NO", "SLOT_NONE"},
+
+{"Dust_WoodWep", "LogChipperAmmo", "Log Chipper", 1.0, "NO", "NO", "SLOT_NONE"},
+
+{"Toad_WoodWep", "NaturalDownpourAmmo", "Natural Downpour", 1.0, "NO", "NO", "SLOT_NONE"},
+};
+
+str BusterUpgrades[MAX_BUSTERS] =
+{
+"ProtoUpgrade",
+"ArrowBusterUpgrade",
+"LaserBusterUpgrade",
+"BassUpgrade",
+"DuoFistUpgrade",
+"AdaptorUpgrade",
+"TrebleBoostUpgrade"/*,
+"MegaArmUpgrade"*/
+};
+
+
+Script 992 (int amount, int AmmoMode) // Script to determine which weapon to give ammo to
+{
+	Switch(AmmoMode)
+	{
+	Case 1: // If this is an mtank, give exactly the ammo of each weapon and terminate
+		For(int i = 0; i < MAX_WEAPONS_GLOBAL; i++)
+		{
+			If(CheckInventory(weapons_ammo[i][0]) == 1)
+			{
+				GiveInventory(weapons_ammo[i][1], GetAmmoCapacity(weapons_ammo[i][1]));
+			}
+		}
+		terminate;
+
+	Case 2: // Double ammo for Energy Saver
+		For(i = 0; i < MAX_WEAPONS_GLOBAL; i++)
+		{
+			If(CheckInventory(weapons_ammo[i][1]) > 0)
+			{
+				GiveInventory(weapons_ammo[i][1], CheckInventory(weapons_ammo[i][1]));
+			}
+		}
+		terminate;
+	}
+	
+	
+	// Which weapon player currently has equipped.
+	int ThisWeapon = WhichWeapon();
+
+	//print(i:ThisWeapon);
+
+	If(CheckInventory("EnergyBalancerActive"))
+	{
+		If(CheckInventory(weapons_ammo[ThisWeapon][1]) == GetAmmoCapacity(weapons_ammo[ThisWeapon][1]) || ThisWeapon < 0)  // If player has the Energy Balancer, then check to see if the currently selected weapon is not at maximum
+		{
+			ThisWeapon = EnergyBalancer(); // Finds the lowest ammo weapon using the Energy Balancer function and sets it as the weapon to fill
+		}
+	}
+
+	If(ThisWeapon >= 0) //If this weapon is not a buster
+	{
+		// [Lego] Ammo capsules now specify a percentage
+		// This percentage is then converted to fixed, then divided by 100.
+		int percentage = FixedMul(FixedDiv(amount << 16, 100.0), weapons_ammo[ThisWeapon][3]);
+		
+		amount = (GetAmmoCapacity(weapons_ammo[ThisWeapon][1]) * percentage) >> 16;
+		//printbold(s:"Percentage is: ", f:percentage, s:"\nAmount is:", i:amount);
+			
+		int AmmoMultiplier = 1.0;
+		
+		Amount = FixedMul(Amount, AmmoMultiplier);
+		//printbold(i:Amount);
+		GiveInventory(weapons_ammo[ThisWeapon][1], amount);
+	}
+}
+
+//Is the player's current weapon not full?
+//If the player has the energy balancer and there was no fail recently, do they have a not-full weapon?
+//If so, pickup ammo
+script 984 (void)
+{
+	int ThisWeapon = WhichWeapon();
+	if(ThisWeapon>=0 && CheckInventory(weapons_ammo[ThisWeapon][1]) < GetAmmoCapacity(weapons_ammo[ThisWeapon][1])) {
+		SetResultValue( TRUE );
+	} else if(CheckInventory("EnergyBalancerActive")&&!CheckInventory("EnergyBalancerFullDelay")) {
+		ThisWeapon = EnergyBalancer();
+		if(ThisWeapon>=0) {
+			SetResultValue( TRUE );
+		} else {
+			GiveInventory("EnergyBalancerFullDelay",1);
+			SetResultValue( FALSE );
+		}
+	} else {
+		SetResultValue( FALSE );
+	}
+}
+
+
+// LMS Weapon Randomization
+//
+script 981 (void)
+{
+// Check server CVAR to see if weapons are enabled (default true)
+if(GetCvar("mm8bdm_sv_nolmsweapons")==true){terminate;}
+
+// Check server CVAR to see if random start weapon is enabled
+if(GetCvar("mm8bdm_sv_randomstartweapon")== true){
+	str rweapon = weapons_ammo[random(0,MAX_WEAPONS_GLOBAL)][0];
+	GiveInventory(rweapon,1);
+	SetWeapon(rweapon);
+	}
+
+// Check if the game is actually LMS
+if(GetCvar("lastmanstanding")==1||GetCvar("teamlms")==1){
+	// Ignore if game is set to instagib
+	if(GetCvar("instagib")==1){terminate;}
+	
+	while(GetGameModeState()!=GAMESTATE_COUNTDOWN && GetGameModeState()!=GAMESTATE_INPROGRESS && ShieldWepRandom == 0)
+    {
+        Delay(5);
+    }
+	
+	Delay(5);
+	
+	// Take bots Mega Buster so they actually use a different weapon (limited to ranged weapon at present)
+	if(PlayerIsBot(PlayerNumber())){
+		TakeInventory("MegaBuster",1);
+	}
+	
+	// Give players one of each weapon type at random
+	
+	GiveInventory(weapons_ammo[ShieldWepRandom][0],1);
+	GiveInventory(weapons_ammo[RapidWepRandom][0],1);
+	GiveInventory(weapons_ammo[CloseWepRandom][0],1);
+	GiveInventory(weapons_ammo[PowerWepRandom][0],1);
+	GiveInventory(weapons_ammo[RangedWepRandom][0],1);
+	Delay(1);
+	
+	// Give the bot the Mega Buster back
+	if(PlayerIsBot(PlayerNumber())){
+		GiveInventory("MegaBuster",1);
+	}
+}
+}
+
+// A script to generate random numbers for LMS weapons
+//
+script 980 OPEN
+{
+	int WeaponSelect;
+	If(ACS_ExecuteWithResult(975) != 2){terminate;}
+	
+	do
+	{
+		Delay(5);
+	}
+	while(GetGameModeState()==GAMESTATE_INPROGRESS);
+	
+	//Ranged Wep
+	do
+	{
+		WeaponSelect = Random(0, MAX_WEAPONS_GLOBAL-1);	
+	}
+	while(weapons_ammo[WeaponSelect][6] != "SLOT_RANGED"); //AKA 2
+	RangedWepRandom = WeaponSelect;
+
+	//Rapid Wep
+	do
+	{
+		WeaponSelect = Random(0, MAX_WEAPONS_GLOBAL-1);	
+	}
+	while(weapons_ammo[WeaponSelect][6] != "SLOT_RAPID"); //AKA 3
+	RapidWepRandom = WeaponSelect;
+
+	//Close Wep
+	do
+	{
+		WeaponSelect = Random(0, MAX_WEAPONS_GLOBAL-1);	
+	}
+	while(weapons_ammo[WeaponSelect][6] != "SLOT_CLOSE"); //AKA 4
+	CloseWepRandom = WeaponSelect;
+
+	//Power Wep
+	do
+	{
+		WeaponSelect = Random(0, MAX_WEAPONS_GLOBAL-1);	
+	}
+	while(weapons_ammo[WeaponSelect][6] != "SLOT_POWER"); //AKA 5
+	PowerWepRandom = WeaponSelect;
+	
+
+	//Shield Wep
+	do
+	{
+		WeaponSelect = Random(0, MAX_WEAPONS_GLOBAL-1);	
+	}
+	while(weapons_ammo[WeaponSelect][6] != "SLOT_SHIELD"); //AKA 7
+	ShieldWepRandom = WeaponSelect;
+
+}
+
+
+
+//Eddie Random Weapon script
+Script 256 (void)
+{
+	int i = 0;
+	int TotalWeapons = MAX_WEAPONS_GLOBAL + MAX_BUSTERS;
+	int ThePlayer = ACS_ExecuteWithResult(257);
+	bool finished = false;
+	
+	while(!finished)
+	{
+		int RandomSelection = random(1, TotalWeapons)-1;
+		int WeaponName;
+		
+		if(RandomSelection >= MAX_WEAPONS_GLOBAL)
+		{
+			RandomSelection-=MAX_WEAPONS_GLOBAL;
+			WeaponName = BusterUpgrades[RandomSelection];
+		}
+		else
+		{
+			WeaponName = Weapons_Ammo[RandomSelection][0];
+		}
+		
+		//printbold(i:RandomSelection, s:" - ", s:WeaponName);
+		
+		if(Weapons_Ammo[RandomSelection][4] != "NO")
+		{
+			//PrintBold(s:WeaponName);
+			if(CheckActorInventory(ThePlayer, WeaponName) || ThingCountName(WeaponName, 0) > 0)
+			{
+				//PrintBold(s:WeaponName, s:" is invalid!");
+				i++;
+				if(i>35){
+				finished = true;
+				}
+			}
+			else
+			{
+				finished = true;
+			}
+		}
+	}
+
+	// [Lego] This would cause the weapon to not spawn under certain circumstances.
+	//SpawnProjectile(0, WeaponName, GetActorAngle(0)>>8, 75, 40, 1.0, 0);
+	
+	int tempTID = thePlayer + 3000;
+	SpawnForced(weaponName, GetActorX(0), GetActorY(0), GetActorZ(0), tempTID);
+	ThrustThing(GetActorAngle(0)>>8, 9, false, tempTID);
+	ThrustThingZ(tempTID, 10, 0, 0);
+	Thing_ChangeTID(tempTID, 0);
+}
+
+
+Script 252 ENTER
+{
+if(PlayerIsBot(PlayerNumber()))
+	{
+	int xPos;
+	int yPos;
+	int d = 10;
+	int BotWeapon;
+	int MaxPlayers = GetMaxPlayers();
+	Delay(35);
+	if(CheckInventory("NoBotFix")==1){terminate;}
+	While(GetActorProperty(ActivatorTID(), APROP_HEALTH) > 0 && !CheckInventory("IsDead")==1)
+		{
+		xPos = GetActorX(0);
+		yPos = GetActorY(0);
+		Delay(35);
+		BotWeapon = BotWeaponSelect();
+		If(d <= 0 && BotWeapon >= 0)
+			{
+			If(BotWeapon >= MAX_WEAPONS_GLOBAL)
+				{
+				UseInventory(BusterUpgrades[BotWeapon-MAX_WEAPONS_GLOBAL]);
+				d=Random(15, 25);
+				}
+			Else
+				{
+				If(weapons_ammo[BotWeapon][0] == "TrebleBoost")
+					{
+					UseInventory("TrebleBoostUpgrade");
+					d=Random(15, 25);
+					}
+				Else
+					{
+					SetWeapon(weapons_ammo[BotWeapon][0]);
+					//printbold(s:weapons_ammo[BotWeapon][0]);
+					d=Random(5, 15);
+					}
+				}
+			}
+		Else
+			{
+			If(d > 0){d--;}
+			}
+		if(ACS_ExecuteWithResult(972)==2 || GetActorProperty(ActivatorTID(), APROP_HEALTH) <= 0 || CheckInventory("IsDead")==1){terminate;}
+
+		}
+	}
+}
+
+
+
+// [Mess] Energy Balancer Functions
+Function int WhichWeapon(void) // Which weapon is the player currently using.  From weapons_ammo array
+{
+For(int i = 0; i < MAX_WEAPONS_GLOBAL; i++)
+	{
+	If(CheckWeapon(weapons_ammo[i][0]))
+		{
+		If(weapons_ammo[i][3] > 0.0){Return i;}
+		}
+	}
+Return -1;
+}
+
+Function int EnergyBalancer(void) // Finds out which weapon has the lowest ammo ratio wise from the players inventory
+{
+int CurrentRatio;
+int MinRatio = 1.0;
+int LowestWeapon = -1;
+
+For(int w = 0; w < MAX_WEAPONS_GLOBAL; w++)
+	{
+	If(CheckInventory(weapons_ammo[w][0])&&weapons_ammo[w][3]>0.0)
+		{
+		CurrentRatio = 1.0*CheckInventory(weapons_ammo[w][1])/GetAmmoCapacity(weapons_ammo[w][1]);
+		If(CurrentRatio < MinRatio)
+			{
+			MinRatio = CurrentRatio;
+			LowestWeapon = w;
+			}
+		}
+	}
+return LowestWeapon;
+}
+
+function int BotWeaponSelect (void)
+{
+int SelectedWeapon;
+int WeaponName;
+int i = 0;
+
+While(i <= 15)
+	{
+	SelectedWeapon = Random(0, MAX_WEAPONS_GLOBAL + MAX_BUSTERS-1);
+	If(SelectedWeapon >= MAX_WEAPONS_GLOBAL)
+		{
+		WeaponName = BusterUpgrades[SelectedWeapon-MAX_WEAPONS_GLOBAL];
+		}
+	Else
+		{
+		WeaponName = weapons_ammo[SelectedWeapon][0];
+		If(WeaponName == "TrebleBoost"){WeaponName = "TrebleBoostUpgrade";}
+		}
+	i++;
+	If(CheckInventory(WeaponName)){Return(SelectedWeapon);}
+	}
+Return(-1);
+}
+

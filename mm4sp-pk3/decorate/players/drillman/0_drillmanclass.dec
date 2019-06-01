@@ -6,6 +6,7 @@ player.startitem "BusterAmmo", 1
 player.startitem "DrillManWep"
 player.startitem "DrillManAmmo", 3
 player.startitem "DrillManFlag"
+player.startitem "EnergyBalancer"
 player.jumpz 12
 speed 1.0
 

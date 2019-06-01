@@ -4,7 +4,7 @@ Dropitem ""
 inventory.icon "DUSI2"
 Weapon.AmmoUse 2
 Weapon.AmmoGive 28
-Weapon.SlotNumber 7
+Weapon.SlotNumber 2
 Tag "Log Chipper"
 Inventory.Pickupmessage "Power up! Log Chipper!"
 weapon.ammotype "LogChipperAmmo"
@@ -59,6 +59,7 @@ actor ChippedLog
 PROJECTILE
 damagetype "LeafShield"
 Speed 40
++MTHRUSPECIES
 Damage (10)
 radius 5
 height 5

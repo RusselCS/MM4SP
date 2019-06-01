@@ -8,6 +8,7 @@ actor RingManWep : BaseMM8BDMWep
 	Tag "Ring Boomerang"
 	Inventory.Pickupmessage "Power up! Ring Thing Cometh!"
 	weapon.ammotype "RingManAmmo"
+	+INVENTORY.UNDROPPABLE
 	+WEAPON.NOAUTOFIRE
 	States
 	{
@@ -88,6 +89,7 @@ actor RingBoomerangB1 : BasicBouncer
 {
 	Translation "192:192=229:229"
 	PROJECTILE
+	+MTHRUSPECIES
 	damagetype "Buster"
 	+RIPPER
 	+NOTARGETSWITCH

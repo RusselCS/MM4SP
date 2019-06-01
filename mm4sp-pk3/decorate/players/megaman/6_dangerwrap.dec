@@ -1,0 +1,12 @@
+actor Mega_BurstWep : DangerWrapWep {
++INVENTORY.UNDROPPABLE
+Weapon.SlotNumber 6
+}
+actor DangerWrapSP : DangerWrap replaces DangerWrap
+{
++MTHRUSPECIES
+}
+actor DangerWrapMineSP : DangerWrapMine replaces DangerWrapMine
+{
++MTHRUSPECIES
+}

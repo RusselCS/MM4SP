@@ -1,0 +1,8 @@
+actor Mega_YamatoWep : YamatoSpearWep {
++INVENTORY.UNDROPPABLE
+Weapon.SlotNumber 5
+}
+actor YamatoSpearSP : YamatoSpear replaces YamatoSpear
+{
++MTHRUSPECIES
+}

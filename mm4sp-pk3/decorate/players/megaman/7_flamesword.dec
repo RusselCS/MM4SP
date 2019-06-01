@@ -1,0 +1,16 @@
+actor Mega_SwordWep : FlameSwordWep {
++INVENTORY.UNDROPPABLE
+Weapon.SlotNumber 7
+}
+actor FlameSwordTrailSP : FlameSwordTrail replaces FlameSwordTrail
+{
++MTHRUSPECIES
+}
+actor FlameSwordTrail2SP : FlameSwordTrail2 replaces FlameSwordTrail2
+{
++MTHRUSPECIES
+}
+actor FlameSwordSparkSP : FlameSwordSpark replaces FlameSwordSpark
+{
++MTHRUSPECIES
+}
