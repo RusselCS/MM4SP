@@ -139,7 +139,7 @@ PROJECTILE
 +DONTREFLECT
 damage (4)
 Radius 16
-Height 57
+Height 58
 damagetype "LeafShield"
 renderstyle none
 States

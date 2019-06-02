@@ -51,6 +51,11 @@ script "4SP_BossStatus_Enter" ENTER
                 SetActorInventory(tid, "CCBossHealth", hpAmt);
             }
 
+            if(bossHP <= 0)
+            {
+                SetActorInventory(tid, "CCBossHealth", 0);
+            }
+
             if(bossInvuln && CheckInventory("CCBossInvuln") == 0)
             {
                 GiveInventory("CCBossInvuln", 1);
