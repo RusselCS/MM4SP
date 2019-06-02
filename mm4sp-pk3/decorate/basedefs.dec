@@ -34,8 +34,16 @@ actor DamageCounter : Counter {}
 actor MonsterFreezeFlag : Counter {}
 
 actor BossFlag : Once {}
+actor BossIntroFlag : Once {}
+actor CCBossInvuln : Once {}
 
 Actor BossHealthBar : Counter { inventory.maxamount 100 }
+
+Actor CCBossHealth : Ammo {
+	inventory.amount 1
+	inventory.maxamount 500
+	+INVENTORY.IGNORESKILL
+}
 
 actor BasicClientside
 {

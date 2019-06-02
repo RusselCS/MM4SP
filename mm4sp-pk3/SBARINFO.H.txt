@@ -119,17 +119,15 @@ InInventory Flashed, 1{DrawImage "FBLIND",  -30,-20;}
 InInventory EnergyBalancerActive, 1{DrawImage "NRGOUT", 267, 10;}
 
 //Boss Health
-InInventory BossHealth1, 1{DrawBar "VARHEALT", "VAREMPTY", BossHealth1, horizontal, 202, 184;}
-InInventory BossHealth2, 1{DrawBar "VARHEALT", "VAREMPTY", BossHealth2, horizontal, 202, 184;}
-InInventory BossHealth3, 1{DrawBar "VARHEALT", "VAREMPTY", BossHealth3, horizontal, 202, 184;}
-InInventory BossHealth4, 1{DrawBar "VARHEALT", "VAREMPTY", BossHealth4, horizontal, 202, 184;}
-InInventory BossHealth5, 1{DrawBar "VARHEALT", "VAREMPTY", BossHealth5, horizontal, 202, 184;}
-InInventory BossHealth6, 1{DrawBar "VARHEALT", "VAREMPTY", BossHealth6, horizontal, 202, 184;}
-InInventory BossHealth7, 1{DrawBar "VARHEALT", "VAREMPTY", BossHealth7, horizontal, 202, 168;}
-InInventory BossHealth8, 1{DrawBar "VARHEALT", "VAREMPTY", BossHealth8, horizontal, 202, 184;}
-InInventory EvilRobotShield, 1{DrawBar "VARAMM32", "VAREMPTY", BossHealth1, horizontal, 202, 184;}
-// [Russ] TO-DO: TEMP. REMOVE WHEN THE BOSS SYSTEM IS ACTUALLY IMPLEMENTED.
-InInventory BossHealthBar, 1 { DrawBar "BARHEALT", "BAREMPTY", BossHealthBar, vertical, 292, 8; }
+InInventory CCBossHealth, 1
+{
+    DrawBar "VARHEALT", "VAREMPTY", CCBossHealth, horizontal, 202, 184;
+
+    InInventory CCBossInvuln, 1
+    {
+        DrawBar "VARAMM32", "VAREMPTY", CCBossHealth, horizontal, 202, 184;
+    }
+}
 
 // Misc
 InInventory TimeStoppedCounter, 1{DrawImage "FLASHS", 36, 0;}

@@ -1,3 +1,7 @@
+server noarchive string CCSP_BossObj = "Null";
+server noarchive int CCSP_BossDoor = 0;
+server noarchive int CCSP_BossSpawn = 0;
+
 server noarchive bool SV_CC_AllWeapons = true;
 
 server noarchive bool SV_CC_Mega_Wood_Wep = false;
