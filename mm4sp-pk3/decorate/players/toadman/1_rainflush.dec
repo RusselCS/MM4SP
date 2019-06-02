@@ -7,9 +7,8 @@ Weapon.AmmoGive 3
 Weapon.SlotNumber 1
 Tag "Rain Flush"
 Inventory.Pickupmessage "Power up! Acid Rain!"
-weapon.ammotype "ToadManAmmo"
+weapon.ammotype "BusterAmmo"
 +INVENTORY.UNDROPPABLE
-+WEAPON.NOAUTOFIRE
 States
 {
 Spawn:

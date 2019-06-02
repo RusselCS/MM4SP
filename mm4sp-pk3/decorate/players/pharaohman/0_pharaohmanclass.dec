@@ -4,7 +4,6 @@ player.displayname "pharaohman"
 
 player.startitem "BusterAmmo", 1
 player.startitem "PharaohManWep"
-player.startitem "PharaohManAmmo", 3
 player.startitem "PharaohManWep2"
 player.startitem "PharaohManAmmo2", 28
 player.startitem "PharaohManFlag"

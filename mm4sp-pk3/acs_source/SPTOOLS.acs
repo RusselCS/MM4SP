@@ -130,6 +130,23 @@ dist = xyDistance(ActivatorTID(),3800);
 SetThingSpecial (3800, 0, dist, 0, 0, 0, 0);
 }
 
+// [Trill] HP script, heavily modified and cut down from CBM
+script "4SP_HealthManager" (int Which, int HPBoost)
+{
+	int HP = max(GetActorProperty(0,APROP_HEALTH),0);
+	int Spawn_H = GetActorProperty(0, APROP_SPAWNHEALTH);
+	switch(Which)
+	{
+		Case 1://Heal
+			if(HP <= 0){terminate;}
+			HealThing(HPBoost,Spawn_H);
+			break;
+		Case 0://Return false if max health
+			if(HP >= Spawn_H){SetResultValue(0);}
+			break;
+	}
+}
+
 //[Trill] Floor quakes in a radius, heavily modified from CBM. Niche script probably
 //
 script "4SP_FloorQuakeDamage" (int maxRange, int QuakePower)
@@ -349,4 +366,12 @@ If(CheckActorClass(consolePlayerNumber()+1000,"RingmanSP")){SetActorState(0,"Rin
 If(CheckActorClass(consolePlayerNumber()+1000,"SkullmanSP")){SetActorState(0,"Skullman");}
 If(CheckActorClass(consolePlayerNumber()+1000,"ToadmanSP")){SetActorState(0,"Toadman");}
 If(CheckActorClass(consolePlayerNumber()+1000,"MegamanSP")){SetActorState(0,"Megaman");}
+}
+
+// [Trill] Script for Drillman
+script "4SP_GetHeight" (void)
+{
+SetActivatorToTarget(0);
+int Result = GetActorZ(0)/65536;
+SetResultValue(Result);
 }

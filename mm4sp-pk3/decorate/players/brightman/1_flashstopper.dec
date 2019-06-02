@@ -9,7 +9,6 @@ Tag "Flash Stopper"
 Inventory.Pickupmessage "Power up! It's lights on!"
 weapon.ammotype "BrightManAmmo2"
 +INVENTORY.UNDROPPABLE
-+WEAPON.NOAUTOFIRE
 States
 {
 Spawn:

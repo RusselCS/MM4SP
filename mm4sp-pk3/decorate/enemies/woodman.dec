@@ -71,13 +71,16 @@ See:
 BATT D 0 A_ChangeFlag("INVULNERABLE",0)
 CANN A 0 A_ChangeFlag("CANTSEEK",0)
 BATT E 0 A_ChangeFlag("FLOAT",1)
-BATT EFG 4 A_FaceTarget
+BATT EF 4 A_FaceTarget
+BATT C 0 A_PlaySoundEX("enemy/batton","Voice",0,-1)
+BATT G 4 A_FaceTarget
 Chase:
 BATT C 0 A_JumpIfInTargetInventory("EnemyContactDamagerProtect",1,"SpawnLoopCheck1")
 goto Chase2
 SpawnLoopCheck1:
 BATT C 0 A_JumpIfCloser(64,"SpawnLoopWait")
 Chase2:
+BATT C 0 A_PlaySoundEX("enemy/batton","Voice",0,-1)
 BATT C 2 A_Chase("")
 BATT C 0 A_JumpIfInTargetInventory("EnemyContactDamagerProtect",1,"SpawnLoopCheck2")
 goto Chase3
@@ -603,7 +606,7 @@ stop
 actor SP_HotDog : GenericRobot 30011
 {
 //$Category MM8BDM-Enemies
-Health 200
+Health 300
 Height 96
 //+DONTRIP
 Radius 80

@@ -23,6 +23,11 @@ weapon/skullbust SKULSHOT
 // PHARAOH MAN
 classes/float PHACURSE
 
+// DRILL MAN
+classes/drilling drillin
+classes/drillout drillout
+classes/rootrupture WOODHIT2
+
 // ENEMIES
 misc/door2	bdoor2
 enemy/hammerjoeswing	hjswin
@@ -32,6 +37,8 @@ enemy/elecnshot sprksprd
 enemy/cannon	canon
 enemy/powermusclerland	muscle
 enemy/taban	batwing
+
+enemy/batton batfly
 enemy/metcannon	metcan
 enemy/monkingdrop monkdrop
 

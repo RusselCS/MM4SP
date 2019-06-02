@@ -41,3 +41,21 @@ graphic PHAI1, 30, 30
    YScale 2.0
    Patch PHAAV0, 0, 0
 }
+
+//DIVE MAN
+//Sprout Mine
+graphic DIVI2, 30, 30
+{
+   XScale 2.0
+   YScale 2.0
+   Patch DIV2E0, 0, 0
+}
+
+//DRILL MAN
+//Root Rupture
+graphic DRII2, 30, 30
+{
+   XScale 2.0
+   YScale 2.0
+   Patch DRI2I0, 0, 0
+}

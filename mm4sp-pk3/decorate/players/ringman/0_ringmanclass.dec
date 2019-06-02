@@ -10,6 +10,10 @@ player.startitem "EnergyBalancer"
 player.jumpz 14
 speed 1.15
 
+Health 75
+Player.MaxHealth 75
+player.startitem "ClassBarGlass"
+
 States
 {
 Spawn:

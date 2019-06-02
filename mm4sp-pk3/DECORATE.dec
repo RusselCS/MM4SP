@@ -14,6 +14,7 @@ actor GitTest
 #include "decorate/players/classbase_a.dec"
 #include "decorate/players/classbasesp.dec"
 #include "decorate/wepgivers.dec"
+#include "decorate/items.dec"
 
 // CLASSES (followed by weapons)
 #include "decorate/players/ringman/0_ringmanclass.dec"
@@ -33,11 +34,13 @@ actor GitTest
 #include "decorate/players/skullman/1_skullbarrier.dec"
 #include "decorate/players/diveman/0_divemanclass.dec"
 #include "decorate/players/diveman/1_divemissile.dec"
+#include "decorate/players/diveman/2_sproutmine.dec"
 #include "decorate/players/pharaohman/0_pharaohmanclass.dec"
 #include "decorate/players/pharaohman/1_pharaohwave.dec"
 #include "decorate/players/pharaohman/1_pharaohpower.dec"
 #include "decorate/players/drillman/0_drillmanclass.dec"
 #include "decorate/players/drillman/1_drillbomb.dec"
+#include "decorate/players/drillman/2_rootrupture.dec"
 #include "decorate/players/megaman/0_megamanclass.dec"
 #include "decorate/players/megaman/1_megabuster.dec"
 #include "decorate/players/megaman/1_eddiecall.dec"

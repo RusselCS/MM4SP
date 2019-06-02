@@ -9,7 +9,6 @@ Tag "Pharaoh Power"
 Inventory.Pickupmessage "Power up! Pharaoh's Power!"
 weapon.ammotype "PharaohManAmmo2"
 +INVENTORY.UNDROPPABLE
-+WEAPON.NOAUTOFIRE
 States
 {
 Spawn:
@@ -176,7 +175,7 @@ actor PharaohPowerSpeed : PowerSpeed
 {
 +POWERSPEED.NOTRAIL
 powerup.duration 0x7FFFFFFF
-Speed 1.4
+Speed 1.3
 }
 
 actor PharaohPowerCooldown : Powerup

@@ -7,9 +7,8 @@ Weapon.AmmoGive 3
 Weapon.SlotNumber 1
 Tag "Bright Buster"
 Inventory.Pickupmessage "Power up! It's lights out!"
-weapon.ammotype "BrightManAmmo"
+weapon.ammotype "BusterAmmo"
 +INVENTORY.UNDROPPABLE
-+WEAPON.NOAUTOFIRE
 States
 {
 Spawn:
@@ -49,7 +48,7 @@ FST1 A 0 A_FireCustomMissile("BrightShot", random(-3, 3),0,8,0,0,random(-3,3))
 goto Anim
 Anim:
 FST1 BC 3
-FST1 A 2
+FST1 C 2
 FST1 B 0 A_Refire
 goto Cooldown
 Cooldown:
@@ -61,13 +60,6 @@ NoAmmo:
 FST1 A 1
 Goto Ready+2
 }
-}
-
-actor BrightManAmmo : Ammo
-{
-inventory.amount 1
-inventory.maxamount 3
-+INVENTORY.IGNORESKILL
 }
 
 actor BrightBusterRage : Inventory

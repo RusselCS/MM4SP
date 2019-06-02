@@ -9,7 +9,6 @@ Tag "Dive Missile"
 Inventory.Pickupmessage "Power up! In the navy!"
 weapon.ammotype "DiveManAmmo"
 +INVENTORY.UNDROPPABLE
-+WEAPON.NOAUTOFIRE
 States
 {
 Spawn:
@@ -17,8 +16,18 @@ TNT1 A 1
 loop
 Ready:
 DIV1 A 0 ACS_ExecuteAlways(998,0,786)
+DIV1 A 0 A_GiveInventory("SpawningMisfire",1)
+goto Ready0
+Ready0:
+DIV1 A 2 A_WeaponReady
+DIV1 A 0 A_TakeInventory("SpawningMisfire",1)
+Goto Ready2
+SpawnProtect:
+DIV1 A 1
+Goto Ready0
+Ready2:
 DIV1 A 1 A_WeaponReady
-Goto Ready+1
+Goto Ready2
 Deselect:
 TNT1 AAAAAAAAAAAAAAAAAAAAAA 0 A_Lower
 DIV1 A 1 A_Lower
@@ -28,6 +37,7 @@ TNT1 AAAAAAAAAAAAAAAAAAAAAA 0 A_Raise
 DIV1 A 1 A_Raise
 Loop
 Fire:
+DIV1 A 0 A_JumpIfInventory("SpawningMisfire",1,"SpawnProtect")
 DIV1 A 0 //A_JumpIfNoAmmo("NoAmmo")
 DIV1 A 0 A_JumpIfInventory("FiredFirstMissile",1,"Fire2")
 DIV1 A 0 A_PlaySoundEx("weapon/mbuster","Weapon")
@@ -37,7 +47,7 @@ DIV1 A 0 A_SpawnItemEx("DiveCounterHelper")
 DIV1 BCDCB 3
 DIV1 A 4
 DIV1 A 0 A_Refire
-goto Ready+1
+goto Ready2
 Fire2:
 DIV1 A 0 A_JumpIfInventory("FiredSecondMissile",1,"NoAmmo")
 DIV1 A 0 A_PlaySoundEx("weapon/mbuster","Weapon")
@@ -47,11 +57,11 @@ DIV1 A 0 A_SpawnItemEx("DiveCounterHelper2")
 DIV1 BCDCB 3
 DIV1 A 4
 DIV1 A 0 A_Refire
-goto Ready+1
+goto Ready2
 NoAmmo:
 DIV1 A 1
 DIV1 A 0 A_Refire
-Goto Ready+1
+Goto Ready2
 }
 }
 

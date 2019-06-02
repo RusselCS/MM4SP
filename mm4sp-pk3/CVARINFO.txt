@@ -13,13 +13,70 @@ server noarchive bool SV_CC_Ring_Wood_Wep = false;
 server noarchive bool SV_CC_Ring_Spark_Wep = false;
 server noarchive bool SV_CC_Ring_Napalm_Wep = false;
 server noarchive bool SV_CC_Ring_Yamato_Wep = false;
+server noarchive bool SV_CC_Ring_Burst_Wep = false;
+server noarchive bool SV_CC_Ring_Sword_Wep = false;
+server noarchive bool SV_CC_Ring_Cold_Wep = false;
+server noarchive bool SV_CC_Ring_Galaxy_Wep = false;
 
 server noarchive bool SV_CC_Dust_Wood_Wep = false;
 server noarchive bool SV_CC_Dust_Spark_Wep = false;
 server noarchive bool SV_CC_Dust_Napalm_Wep = false;
 server noarchive bool SV_CC_Dust_Yamato_Wep = false;
+server noarchive bool SV_CC_Dust_Burst_Wep = false;
+server noarchive bool SV_CC_Dust_Sword_Wep = false;
+server noarchive bool SV_CC_Dust_Cold_Wep = false;
+server noarchive bool SV_CC_Dust_Galaxy_Wep = false;
 
 server noarchive bool SV_CC_Toad_Wood_Wep = false;
 server noarchive bool SV_CC_Toad_Spark_Wep = false;
 server noarchive bool SV_CC_Toad_Napalm_Wep = false;
 server noarchive bool SV_CC_Toad_Yamato_Wep = false;
+server noarchive bool SV_CC_Toad_Burst_Wep = false;
+server noarchive bool SV_CC_Toad_Sword_Wep = false;
+server noarchive bool SV_CC_Toad_Cold_Wep = false;
+server noarchive bool SV_CC_Toad_Galaxy_Wep = false;
+
+server noarchive bool SV_CC_Dive_Wood_Wep = false;
+server noarchive bool SV_CC_Dive_Spark_Wep = false;
+server noarchive bool SV_CC_Dive_Napalm_Wep = false;
+server noarchive bool SV_CC_Dive_Yamato_Wep = false;
+server noarchive bool SV_CC_Dive_Burst_Wep = false;
+server noarchive bool SV_CC_Dive_Sword_Wep = false;
+server noarchive bool SV_CC_Dive_Cold_Wep = false;
+server noarchive bool SV_CC_Dive_Galaxy_Wep = false;
+
+server noarchive bool SV_CC_Drill_Wood_Wep = false;
+server noarchive bool SV_CC_Drill_Spark_Wep = false;
+server noarchive bool SV_CC_Drill_Napalm_Wep = false;
+server noarchive bool SV_CC_Drill_Yamato_Wep = false;
+server noarchive bool SV_CC_Drill_Burst_Wep = false;
+server noarchive bool SV_CC_Drill_Sword_Wep = false;
+server noarchive bool SV_CC_Drill_Cold_Wep = false;
+server noarchive bool SV_CC_Drill_Galaxy_Wep = false;
+
+server noarchive bool SV_CC_Bright_Wood_Wep = false;
+server noarchive bool SV_CC_Bright_Spark_Wep = false;
+server noarchive bool SV_CC_Bright_Napalm_Wep = false;
+server noarchive bool SV_CC_Bright_Yamato_Wep = false;
+server noarchive bool SV_CC_Bright_Burst_Wep = false;
+server noarchive bool SV_CC_Bright_Sword_Wep = false;
+server noarchive bool SV_CC_Bright_Cold_Wep = false;
+server noarchive bool SV_CC_Bright_Galaxy_Wep = false;
+
+server noarchive bool SV_CC_Skull_Wood_Wep = false;
+server noarchive bool SV_CC_Skull_Spark_Wep = false;
+server noarchive bool SV_CC_Skull_Napalm_Wep = false;
+server noarchive bool SV_CC_Skull_Yamato_Wep = false;
+server noarchive bool SV_CC_Skull_Burst_Wep = false;
+server noarchive bool SV_CC_Skull_Sword_Wep = false;
+server noarchive bool SV_CC_Skull_Cold_Wep = false;
+server noarchive bool SV_CC_Skull_Galaxy_Wep = false;
+
+server noarchive bool SV_CC_Pharaoh_Wood_Wep = false;
+server noarchive bool SV_CC_Pharaoh_Spark_Wep = false;
+server noarchive bool SV_CC_Pharaoh_Napalm_Wep = false;
+server noarchive bool SV_CC_Pharaoh_Yamato_Wep = false;
+server noarchive bool SV_CC_Pharaoh_Burst_Wep = false;
+server noarchive bool SV_CC_Pharaoh_Sword_Wep = false;
+server noarchive bool SV_CC_Pharaoh_Cold_Wep = false;
+server noarchive bool SV_CC_Pharaoh_Galaxy_Wep = false;

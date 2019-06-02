@@ -9,7 +9,6 @@ Tag "Mega Buster"
 Inventory.Pickupmessage "Power up! Super Fighting Robot!"
 weapon.ammotype "BusterAmmo"
 +INVENTORY.UNDROPPABLE
-+WEAPON.NOAUTOFIRE
 States
 {
 Spawn:
@@ -20,7 +19,7 @@ BUST B 0 ACS_ExecuteAlways(998,0,0)
 BUST B 0 ACS_ExecuteAlways(991,0,0)
 BUST B 0 A_TakeInventory("WeaponCharge",999)
 BUST B 2 A_WeaponReady
-Goto Ready+2
+Goto Ready+3
 Deselect:
 TNT1 AAAAAAAAAAAAAAAAAAAAAA 0 A_Lower
 BUST B 1 A_Lower
@@ -29,8 +28,8 @@ Select:
 TNT1 AAAAAAAAAAAAAAAAAAAAAA 0 A_Raise
 BUST B 1 A_Raise
 Loop
-Fire:
 Altfire:
+Fire:
 BUST B 0 A_JumpIfNoAmmo("Hold")
 BUST B 0 A_PlaySoundEx("weapon/mbuster","Weapon")
 BUST B 0 A_FireCustomMissile("MegaShotSP",0,0,8,0)
@@ -57,13 +56,11 @@ BUST C 9
 BUST B 0 A_Refire
 goto Ready+2
 Hold:
-//BUST B 0 A_JumpIfInventory("WeaponCharge",34,"Charge2Start")
 BUST B 0 A_JumpIfInventory("WeaponCharge",18,"Charge")
 BUST B 1 A_GiveInventory("WeaponCharge",1)
 BUST B 0 A_Refire
 Goto Ready+2
 Charge:
-//BUST B 0 A_JumpIfInventory("WeaponCharge",34,"Charge2Start")
 BUST B 0 A_JumpIfInventory("WeaponCharge",19,"Charge1")
 BUST B 0 A_PlaySoundEx("weapon/coilstart","Weapon")
 Goto Charge1

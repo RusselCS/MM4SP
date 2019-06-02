@@ -10,6 +10,10 @@ player.startitem "EnergyBalancer"
 player.jumpz 12
 speed 1.0
 
+Health 85
+Player.MaxHealth 85
+player.startitem "ClassBarLight"
+
 States
 {
 Spawn:
@@ -21,9 +25,19 @@ See:
 DRIM BCDE 5
 Goto Spawn
 Missile:
-DRIM F 5
+DRIM FFFFF 1 A_JumpIfInventory("RootRuptureUsed",1,"Drill")
 DRIM G 4
 goto Spawn
+Drill:
+DRIM IIIIJJJJ 1 A_JumpIf(momz<=0,"Drill2")
+loop
+Drill2:
+DRIM K 4
+goto Drill3
+Drill3:
+DRIM LM 4
+DRIM L 4 A_JumpIfInventory("RootRuptureUsed",1,"Drill3")
+Goto Spawn
 ClassPain:
 DRIM H 0
 goto PainContinue

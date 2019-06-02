@@ -9,15 +9,38 @@ InInventory not NoHealthBar, 1
 {
 	Drawbar "VARHEALT", "VAREMPTY", Health, horizontal, 130, 184;
 
+	InInventory ClassBarHard, 1{DrawBar "VARHEALR", "VAREMPTY", Health, horizontal, 130, 184;}
+	InInventory ClassBarHeavy, 1{DrawBar "VARHEALH", "VAREMPTY", Health, horizontal, 130, 184;}
+	InInventory ClassBarLight, 1{DrawBar "VARHEALL", "VAREMPTY", Health, horizontal, 130, 184;}
+	InInventory ClassBarGlass, 1{DrawBar "VARHEALG", "VAREMPTY", Health, horizontal, 130, 184;}
+
+	InInventory IsInvuln, 1{DrawBar "INVVAR", "VNOBAR", Health, horizontal, 130, 184;}
+
+	InInventory SkullShieldCheck, 1
+	{
+		DrawBar "VARFLS5", "VNOBAR", SkullShieldCheck, horizontal, 130, 184;
+		InInventory ShieldHits, 1	{ DrawImage "SKULVAR1",145, 192; }
+		InInventory ShieldHits, 2	{ DrawImage "SKULVAR2",145, 192; }
+		InInventory ShieldHits, 3	{ DrawImage "SKULVAR3",145, 192; }
+	}
+	InInventory SkullBarrierProtection, 1{DrawBar "VARFLS5", "VNOBAR", SkullShieldCheck, horizontal, 130, 184;}
+	InInventory PharaohPowerCheck, 1{DrawBar "PHARVAR5", "VNOBAR", PharaohPowerCheck, horizontal, 130, 184;}
 	InInventory BasicArmor, 1{DrawBar "VARAMT31", "VNOBAR", Armor, horizontal, 130, 184;}
 
 	//IfCVarInt mm8bdm_healthnumber, 1
 	InInventory AmmoNumberFlag, 1
 	{
+		IsSelected Not DivemanWep
+		{
+		IsSelected Not DrillmanWep
+		{
+		IsSelected Not RingmanWep
+		{
 		WeaponAmmo not BusterAmmo
 		{
 			DrawNumber 3, "8BDMAFONT", Untranslated, Ammo1, alignment(left), 80, 177;
 		}
+		}}}
 	}
 
 	//IfCVarInt mm8bdm_healthnumber, 1
@@ -31,18 +54,54 @@ InInventory not NoHealthBar, 1
 DrawSelectedInventory INDEXFONT ,122, 184, 120, 185, white;
 DrawImage weaponicon, 50, 184;
 
+IsSelected MegamanWep2{Drawbar"EDDIEVAR", "VAREMPTY", Ammo1, horizontal, 58, 184;}
+IsSelected Mega_WoodWep{Drawbar"VARAM201", "VAREMPTY", Ammo1, horizontal, 58, 184;	
+	InInventory ShieldCheck, 1{DrawBar "VARFLS1", "VNOBAR", LeafShieldCharge, horizontal, 58, 184;}}
+IsSelected Mega_SparkWep{Drawbar"VARAMM12", "VAREMPTY", Ammo1, horizontal, 58, 184;}
+IsSelected Mega_NapalmWep{Drawbar"VARAMM24", "VAREMPTY", Ammo1, horizontal, 58, 184;}
+IsSelected Mega_YamatoWep{Drawbar"VARAMM30", "VAREMPTY", Ammo1, horizontal, 58, 184;}
+IsSelected Mega_BurstWep{Drawbar"VARAMM33", "VAREMPTY", Ammo1, horizontal, 58, 184;}
+IsSelected Mega_SwordWep{Drawbar"VARAMM42", "VAREMPTY", Ammo1, horizontal, 58, 184;}
+IsSelected Mega_ColdWep{Drawbar"VARAMM54", "VAREMPTY", Ammo1, horizontal, 58, 184;}
+IsSelected Mega_GalaxyWep {DrawBar "VARAMM66", "VAREMPTY", Ammo1, horizontal, 58, 184;
+	InInventory BlackHoleBombCooldown, 1 {DrawBar "VARFLS15", "VAREMPTY", Ammo1, horizontal, 58, 184;}}
+
 IsSelected RingManWep
 {
 	DrawImage "04_5_VA0",58,176;
 	InInventory RingManAmmo, 1	{ DrawImage "04_5_VA1",58,176; }
 	InInventory RingManAmmo, 2	{ DrawImage "04_5_VA2",58,176; }
 	InInventory RingManAmmo, 3	{ DrawImage "04_5_VA3",58,176; }
-	InInventory RingManAmmo, 4	{ DrawImage "04_5_VA4",58,176; }
-	InInventory RingManAmmo, 5	{ DrawImage "04_5_VA5",58,176; }
 }
 IsSelected Ring_WoodWep{Drawbar"VARAM201", "VAREMPTY", Ammo1, horizontal, 58, 184;}	
 
+IsSelected DustManWep{Drawbar"DUSVAR", "DUSVMPTY", DustCharge, horizontal, 58, 184;}
+IsSelected Dust_WoodWep{Drawbar"VARAM201", "VAREMPTY", Ammo1, horizontal, 58, 184;}	
+
+IsSelected Toad_WoodWep{Drawbar"VARAM201", "VAREMPTY", Ammo1, horizontal, 58, 184;}	
+
+IsSelected BrightmanWep2{Drawbar"VARAMM18", "VAREMPTY", Ammo1, horizontal, 58, 184;}
+
+IsSelected SkullManWep2{Drawbar"VARAMM21", "VAREMPTY", Ammo1, horizontal, 58, 184;	
+	InInventory SkullBarrierCooldown, 1{DrawBar "VARAMM65", "VAREMPTY", Ammo1, horizontal, 58, 184;}}
+
+IsSelected DiveManWep
+	{
+		DrawImage "DIVEVPTY",58,176;
+		InInventory DiveManAmmo, 1	{ DrawImage "DIVEVAR1",58,176;	}
+		InInventory DiveManAmmo, 2	{ DrawImage "DIVEVAR2",58,176;	}
+	}
+IsSelected Dive_WoodWep{Drawbar"VARAM201", "VAREMPTY", Ammo1, horizontal, 58, 184;}	
 }
+
+IsSelected PharaohManWep{DrawImage"VAREMPTY", 58, 184;
+	InInventory PharaohCharge, 1{DrawBar "PHARVAR1", "VAREMPTY", PharaohCharge, horizontal, 58, 184;	
+	InInventory PharaohCharge, 78{DrawBar "PHARVAR3", "VAREMPTY", PharaohCharge, horizontal, 58, 184;}}}
+IsSelected PharaohManWep2{Drawbar"PHARVAR1", "VAREMPTY", Ammo1, horizontal, 58, 184;
+	InInventory PharaohPowerCooldown, 1{DrawBar "VARAMM65", "VAREMPTY", Ammo1, horizontal, 58, 184;}}
+
+IsSelected DrillManWep{Drawbar"DRILLVAR", "VAREMPTY", Ammo1, horizontal, 58, 184;}	
+IsSelected Drill_WoodWep{Drawbar"VARAM201", "VAREMPTY", Ammo1, horizontal, 58, 184;}	
 
 //Assists
 InInventory RushJetCounter, 5{DrawImage "RUSHH2H8", 290,16;}

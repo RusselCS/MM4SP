@@ -4,11 +4,14 @@ player.displayname "toadman"
 
 player.startitem "BusterAmmo", 1
 player.startitem "ToadManWep"
-player.startitem "ToadManAmmo", 3
 player.startitem "ToadManFlag"
 player.startitem "EnergyBalancer"
 player.jumpz 14
 speed 1.0
+
+Health 125
+Player.MaxHealth 125
+player.startitem "ClassBarHeavy"
 
 States
 {

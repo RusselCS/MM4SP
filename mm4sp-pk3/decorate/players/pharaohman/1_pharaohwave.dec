@@ -7,9 +7,8 @@ Weapon.AmmoGive 3
 Weapon.SlotNumber 1
 Tag "Pharaoh Wave"
 Inventory.Pickupmessage "Power up! Pharaoh's Curse!"
-weapon.ammotype "PharaohManAmmo"
+weapon.ammotype "BusterAmmo"
 +INVENTORY.UNDROPPABLE
-+WEAPON.NOAUTOFIRE
 States
 {
 Spawn:

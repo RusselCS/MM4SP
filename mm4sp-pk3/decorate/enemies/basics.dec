@@ -5,7 +5,7 @@ actor SP_SniperJoeScout : GenericRobot 30000
 Height 52
 Radius 32
 Obituary "%o was sniped by a Sniper Joe Scout."
-Health 100
+Health 95
 translation "192:192=4:4", "198:198=102:102"
 maxstepheight 50
 +LOOKALLAROUND

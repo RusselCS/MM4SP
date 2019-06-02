@@ -4,7 +4,6 @@ player.displayname "skullman"
 
 player.startitem "BusterAmmo", 1
 player.startitem "SkullManWep"
-player.startitem "SkullManAmmo", 3
 player.startitem "SkullmanWep2"
 player.startitem "SkullmanAmmo2", 28
 player.startitem "SkullManFlag"
