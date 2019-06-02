@@ -25,6 +25,8 @@ actor DamageCounter : Counter {}
 actor MonsterFreezeFlag : Counter {}
 
 actor BossFlag : Once {}
+actor BossIntroFlag : Once {}
+actor CCBossInvuln : Once {}
 
 Actor BossHealthBar : Counter { inventory.maxamount 100 }
 

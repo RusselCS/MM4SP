@@ -21,7 +21,7 @@
 //
 str boss_obj[9][6] = {
     {"Wood Man", "CCMUG02", "CCART02", "CCNAME02", "CCCAM02", "CCWOO"},
-    {"Spark Man", "CCMUG03", "CCART03", "CCNAME03", "CCCAM00", "CCHUB"},
+    {"Spark Man", "CCMUG03", "CCART03", "CCNAME03", "CCCAM00", "CCEX"},
     {"Napalm Man", "CCMUG05", "CCART05", "CCNAME05", "CCCAM00", "CCHUB"},
    
     {"Yamato Man", "CCMUG06", "CCART06", "CCNAME06", "CCCAM00", "CCHUB"},
