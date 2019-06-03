@@ -306,7 +306,7 @@ States
 Spawn:
 TNT1 A 0
 TNT1 A 0 A_PlaySound("classes/rootrupture",1,0.5)
-DRI2 JKLMNOPPPONMLKJ 2 A_Explode(3, 50, 0, 50)
+DRI2 JKLMNOPPPONMLKJ 2 A_Explode(4, 50, 0, 50)
 stop
 }
 }

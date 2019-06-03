@@ -16,6 +16,7 @@ MONSTER
 -SOLID
 -CANPASS
 +LOOKALLAROUND
++SLIDESONWALLS
 mass 99999999
 painchance 256
 +THRUGHOST
@@ -96,16 +97,16 @@ WODM A 0 A_SpawnItemEx("WoodLeafStart", 0, 0, 63, 0, 0, 18)
 WODM IJ 5 A_FaceTarget
 WODM A 0 A_SpawnItemEx("WoodLeafStart", 0, 0, 63, 0, 0, 18)
 WODM IJ 5 A_FaceTarget
-WODM A 0 A_SpawnItemEx("WoodLeafDropper", 0, 0, ceilingz-48 , 10, 0, 0 , 0,SXF_NOCHECKPOSITION)
-WODM A 0 A_SpawnItemEx("WoodLeafDropper", 0, 0, ceilingz-48 , 10, 0, 0 , 36,SXF_NOCHECKPOSITION)
-WODM A 0 A_SpawnItemEx("WoodLeafDropper", 0, 0, ceilingz-48 , 10, 0, 0 , 72,SXF_NOCHECKPOSITION)
-WODM A 0 A_SpawnItemEx("WoodLeafDropper", 0, 0, ceilingz-48 , 10, 0, 0 , 108,SXF_NOCHECKPOSITION)
-WODM A 0 A_SpawnItemEx("WoodLeafDropper", 0, 0, ceilingz-48 , 10, 0, 0 , 144,SXF_NOCHECKPOSITION)
-WODM A 0 A_SpawnItemEx("WoodLeafDropper", 0, 0, ceilingz-48 , 10, 0, 0 , 180,SXF_NOCHECKPOSITION)
-WODM A 0 A_SpawnItemEx("WoodLeafDropper", 0, 0, ceilingz-48 , 10, 0, 0 , 216,SXF_NOCHECKPOSITION)
-WODM A 0 A_SpawnItemEx("WoodLeafDropper", 0, 0, ceilingz-48 , 10, 0, 0 , 252,SXF_NOCHECKPOSITION)
-WODM A 0 A_SpawnItemEx("WoodLeafDropper", 0, 0, ceilingz-48 , 10, 0, 0 , 288,SXF_NOCHECKPOSITION)
-WODM A 0 A_SpawnItemEx("WoodLeafDropper", 0, 0, ceilingz-48 , 10, 0, 0 , 324,SXF_NOCHECKPOSITION)
+WODM A 0 A_SpawnItemEx("WoodLeafDropper", 0, 0, 178 , 10, 0, 0 , 0,SXF_NOCHECKPOSITION)
+WODM A 0 A_SpawnItemEx("WoodLeafDropper", 0, 0, 178 , 10, 0, 0 , 36,SXF_NOCHECKPOSITION)
+WODM A 0 A_SpawnItemEx("WoodLeafDropper", 0, 0, 178 , 10, 0, 0 , 72,SXF_NOCHECKPOSITION)
+WODM A 0 A_SpawnItemEx("WoodLeafDropper", 0, 0, 178 , 10, 0, 0 , 108,SXF_NOCHECKPOSITION)
+WODM A 0 A_SpawnItemEx("WoodLeafDropper", 0, 0, 178 , 10, 0, 0 , 144,SXF_NOCHECKPOSITION)
+WODM A 0 A_SpawnItemEx("WoodLeafDropper", 0, 0, 178 , 10, 0, 0 , 180,SXF_NOCHECKPOSITION)
+WODM A 0 A_SpawnItemEx("WoodLeafDropper", 0, 0, 178 , 10, 0, 0 , 216,SXF_NOCHECKPOSITION)
+WODM A 0 A_SpawnItemEx("WoodLeafDropper", 0, 0, 178 , 10, 0, 0 , 252,SXF_NOCHECKPOSITION)
+WODM A 0 A_SpawnItemEx("WoodLeafDropper", 0, 0, 178 , 10, 0, 0 , 288,SXF_NOCHECKPOSITION)
+WODM A 0 A_SpawnItemEx("WoodLeafDropper", 0, 0, 178 , 10, 0, 0 , 324,SXF_NOCHECKPOSITION)
 WODM A 0 A_FaceTarget
 WODM AL 10
 WODM G 0 A_FaceTarget

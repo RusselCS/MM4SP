@@ -84,7 +84,7 @@ YASH C 1
 loop
 Pickup:
 YASH C 0 ACS_ExecuteAlways(992, 0, 0, 1)
-YASH C 0 HealThing(100)
+YASH C 0 ACS_NamedExecuteAlways("4SP_HealthManager",0,1,200)
 stop
 }
 }
