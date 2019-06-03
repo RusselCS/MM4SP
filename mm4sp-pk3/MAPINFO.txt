@@ -11,7 +11,7 @@ map CCHUB "QUARTER OF CRUSADERS"
    next = "CCWOO"
    sky1 = "BLACK", 0
    cluster = 1
-   music = "4DC1MUS"
+   music = "CCHUBMUS"
    aircontrol = 0.5
    levelnum = 500
    nointermission

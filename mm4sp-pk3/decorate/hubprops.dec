@@ -1,0 +1,211 @@
+actor SP_DocronSpawner 29988
+{
+//$Category MM8BDM-Enemies
++NOGRAVITY
++ISMONSTER
+height 0
+scale 2.5
+radius 32
+states
+{
+Spawn:
+C1PR F 1 A_LookEx(LOF_NOSOUNDCHECK,0,2000,0,360,"See")
+loop
+See:
+C1PR F 200 A_SpawnItemEx("SP_Docron",0,0,-64)
+Goto Spawn
+}
+}
+
+actor SP_Docron : GenericRobot 
+{
+//$Category MM8BDM-Enemies
+Health 60
+height 64
+radius 32
+speed 5
++DROPOFF
++SLIDESONWALLS
++LOOKALLAROUND
+-COUNTKILL
+States
+{
+Spawn:
+C1PR C 0
+C1PR C 0 ACS_NamedExecuteAlways("4SP_OverflowCheck",0,1)
+C1PR C 0 A_JumpIfInventory("HealthScaled",1,"Look")
+C1PR C 0 A_GiveInventory("HealthScaled",1)
+C1PR C 0 ACS_NamedExecuteAlways("4SP_EnemyStart",0)
+TNT1 A 1
+goto Fall
+Return:
+C1PR C 0 A_JumpIfInventory("CutterFlag",1,"BounceFall")
+Fall:
+C1PR C 1 A_JumpIf(velz==0,"Bounce")
+loop
+Bounce:
+C1PR C 0 A_GiveInventory("CutterFlag")
+C1PR C 0 ThrustThingZ(0,20,0,0)
+C1PR C 1
+goto BounceFall
+BounceFall:
+C1PR C 1 A_JumpIf(velz==0,"Look")
+loop
+Look:
+C1PR C 0 A_SetGravity(1.0)
+C1PR C 4 A_LookEx(LOF_NOSOUNDCHECK,0,0,0,360,"See")
+loop
+See:
+C1PR CCCCCDDDDD 1 A_Chase("","")
+loop
+Death:
+BATT A 0 A_GiveInventory("IsDead",1)
+ROBB B 0 A_Pain
+ROBB B 0 A_Fall
+ROBB B 0 A_SpawnItem("EnemyDeathFX",0,32)
+TNT1 A 1
+stop
+Despawn:
+BATT A 0 A_GiveInventory("IsDead",1)
+TNT1 A 0 A_Fall
+stop
+}
+}
+
+actor SP_Jumbig : GenericRobot 29987
+{
+//$Category MM8BDM-Enemies
+Health 300
+height 128
+radius 48
++DROPOFF
++SLIDESONWALLS
++LOOKALLAROUND
+-COUNTKILL
+States
+{
+Spawn:
+C1PR E 0
+C1PR E 0 ACS_NamedExecuteAlways("4SP_EnemyStart",0)
+goto SpawnLoop
+Return:
+SpawnLoop:
+C1PR E 1
+loop
+Death:
+BATT A 0 A_GiveInventory("IsDead",1)
+NAPA A 0 A_PlaySoundEx("weapon/drillexplode", "Weapon")
+NAPA A 0 A_ChangeFlag("NOGRAVITY",1)
+NAPA D 0 A_Stop
+NAPA D 0 A_Fall
+NAPA EFGHIJKLMNOPQRS 2
+C1PR E 0 A_SpawnItemEX("SP_Jumbig",0,0,220)
+TNT1 A 1
+stop
+}
+}
+
+actor DrCossackSP 29986
+{
+//$Category MM8BDM-Props
+scale 2.5
+States
+{
+Spawn:
+DRCO A -1
+loop 
+Talk:
+DRCO ABABABABABABABABABABA 4
+Goto Spawn
+}
+}
+
+actor KalinkaSP 29985
+{
+//$Category MM8BDM-Props
+translation "198:198=227:227", "192:192=87:87"
+scale 2.5
+States
+{
+Spawn:
+KALC A -1
+loop
+}
+}
+
+actor CockroachDummySP 29984
+{
+//$Category MM8BDM-Props
+scale 2.5
+States
+{
+Spawn:
+MDAD KL 5
+loop
+}
+}
+
+actor CockroachDummyIdiotSP 29983
+{
+//$Category MM8BDM-Props
++NOGRAVITY
+scale 2.5
+States
+{
+Spawn:
+C1PR AB 5
+loop
+}
+}
+
+actor DompanSP replaces EddieProp
+{
+//$Category MM8BDM-Props
+scale 2.5
+States
+{
+Spawn:
+DOMP D -1
+loop
+Give:
+DOMP A 0 A_JumpIfInventory("DompFireworkDelay",1,3)
+DOMP A 0 A_SpawnItemEx("DompFirework",0,0,9,0,0,32)
+DOMP A 0 A_GiveInventory("DompFireworkDelay",1)
+DOMP B 35
+Goto Spawn
+}
+}
+
+actor DompFireworkDelay : Powerup
+{
+Powerup.Duration 35
+}
+
+actor DompFirework : BasicClientside
+{
+States
+{
+Spawn:
+DOMP G 4
+DOMP G 0 A_Stop
+DOMP H 4 A_SpawnItemEx("DompFireworkExp",random(-10,10),random(-10,10),10)
+DOMP H 4 A_SpawnItemEx("DompFireworkExp",random(-10,10),random(-10,10),0)
+DOMP H 4 A_SpawnItemEx("DompFireworkExp",random(-10,10),random(-10,10),-10)
+stop
+}
+}
+actor DompFireworkExp : BrightFireworkExp {+CLIENTSIDEONLY}
+
+actor DompanPickup : CustomInventory 
+{
+inventory.amount 1
+Scale 2.0
+States
+{
+Pickup:
+TNT1 A 0 A_PlaySound("item/energyup")
+TNT1 A 0 ACS_ExecuteAlways(992, 0, 0, 1)
+TNT1 A 0 ACS_NamedExecuteAlways("4SP_HealthManager",0,1,200)
+stop
+}
+}

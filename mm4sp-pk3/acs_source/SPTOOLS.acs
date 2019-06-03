@@ -33,6 +33,8 @@ GiveInventory("HealthScaled",1);
 script "4SP_OverflowCheck" (int Enemy)
 {
 if(Enemy==0){if(ThingCountName("SP_Claw",0)>25){SetActorState(0, "Despawn"); }}
+if(Enemy==1){if(ThingCountName("SP_Docron",0)>4){SetActorState(0, "Despawn"); }}
+if(Enemy==2){if(ThingCountName("SP_Docron",0)>4){SetActorState(0, "SeeWait"); }}
 }
 
 Script "4SP_EnemyPain" (void) //CLIENTSIDE

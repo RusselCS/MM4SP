@@ -15,6 +15,7 @@ actor GitTest
 #include "decorate/players/classbasesp.dec"
 #include "decorate/wepgivers.dec"
 #include "decorate/items.dec"
+#include "decorate/hubprops.dec"
 
 // CLASSES (followed by weapons)
 #include "decorate/players/ringman/0_ringmanclass.dec"
