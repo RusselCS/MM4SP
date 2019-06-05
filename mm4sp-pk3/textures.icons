@@ -42,6 +42,14 @@ graphic PHAI1, 30, 30
    Patch PHAAV0, 0, 0
 }
 
+//Solar Totem
+graphic PHAI2, 30, 30
+{
+   XScale 2.0
+   YScale 2.0
+   Patch PHA2J0, 0, 0
+}
+
 //DIVE MAN
 //Sprout Mine
 graphic DIVI2, 30, 30
@@ -58,4 +66,22 @@ graphic DRII2, 30, 30
    XScale 2.0
    YScale 2.0
    Patch DRI2I0, 0, 0
+}
+
+//BRIGHT MAN
+//Bonsai Barrage
+graphic BRII2, 30, 30
+{
+   XScale 2.0
+   YScale 2.0
+   Patch FST2C0, 0, 0
+}
+
+//SKULL MAN
+//Poison Sporegun
+graphic SKUI2, 30, 30
+{
+   XScale 2.0
+   YScale 2.0
+   Patch SKU2D0, 0, 0
 }

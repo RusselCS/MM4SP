@@ -377,3 +377,16 @@ SetActivatorToTarget(0);
 int Result = GetActorZ(0)/65536;
 SetResultValue(Result);
 }
+
+script "4SP_GetEnemyStats" (int which)
+{
+SetActivator(0,AAPTR_TRACER);
+switch(which){
+Case 0: //radius
+SetResultValue(GetActorProperty(0,APROP_Radius)/65536);
+break;
+Case 1: //height
+SetResultValue(GetActorProperty(0,APROP_Height)/65536);
+break;
+}
+}

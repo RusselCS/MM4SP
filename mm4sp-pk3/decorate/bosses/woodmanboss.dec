@@ -9,6 +9,7 @@ Obituary "%o was beat down by \cqWood Man\c-."
 
 damagefactor "Buster", 1.0
 damagefactor "LeafShield", 0.5
+damagefactor "FlameSword", 2.0
 
 maxstepheight 50
 +DROPOFF

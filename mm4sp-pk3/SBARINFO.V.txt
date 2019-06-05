@@ -82,9 +82,11 @@ IsSelected Dust_WoodWep{Drawbar"BARAM201", "BAREMPTY", Ammo1, vertical, 16, 8;}
 IsSelected Toad_WoodWep{Drawbar"BARAM201", "BAREMPTY", Ammo1, vertical, 16, 8;}	
 
 IsSelected BrightmanWep2{Drawbar"BARAMM18", "BAREMPTY", Ammo1, vertical, 16, 8;}
+IsSelected Bright_WoodWep{Drawbar"BARAM201", "BAREMPTY", Ammo1, vertical, 16, 8;}	
 
 IsSelected SkullManWep2{Drawbar"BARAMM21", "BAREMPTY", Ammo1, vertical, 16, 8;	
 	InInventory SkullBarrierCooldown, 1{DrawBar "BARAMM65", "BAREMPTY", Ammo1, vertical, 16, 8;}}
+IsSelected Skull_WoodWep{Drawbar"BARAM201", "BAREMPTY", Ammo1, vertical, 16, 8;}	
 
 IsSelected DiveManWep
 	{
@@ -96,10 +98,11 @@ IsSelected Dive_WoodWep{Drawbar"BARAM201", "BAREMPTY", Ammo1, vertical, 16, 8;}
 
 IsSelected PharaohManWep{DrawImage"BAREMPTY", 16, 8;
 	InInventory PharaohCharge, 1{DrawBar "PHARBAR1", "BAREMPTY", PharaohCharge, vertical, 16, 8;	
-	InInventory PharaohCharge, 78{DrawBar "PHARBAR3", "BAREMPTY", PharaohCharge, vertical, 16, 8;}}}
+	InInventory PharaohBarBlink, 1{DrawBar "PHARBAR2", "BAREMPTY", PharaohCharge, vertical, 16, 8;}}}
 IsSelected PharaohManWep2{Drawbar"PHARBAR1", "BAREMPTY", Ammo1, vertical, 16, 8;
 	InInventory PharaohPowerCooldown, 1{DrawBar "BARAMM65", "BAREMPTY", Ammo1, vertical, 16, 8;}}
-	
+IsSelected Pharaoh_WoodWep{Drawbar"BARAM201", "BAREMPTY", Ammo1, vertical, 16, 8;}	
+
 IsSelected DrillManWep{Drawbar"DRILLBAR", "BAREMPTY", Ammo1, vertical, 16, 8;}	
 IsSelected Drill_WoodWep{Drawbar"BARAM201", "BAREMPTY", Ammo1, vertical, 16, 8;}	
 

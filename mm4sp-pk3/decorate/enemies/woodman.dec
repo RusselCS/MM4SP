@@ -154,6 +154,7 @@ Health 5
 Height 22
 Radius 22
 maxstepheight 50
+-SOLID
 +DROPOFF
 +NOGRAVITY
 -COUNTKILL
@@ -365,16 +366,18 @@ ROBB C 1 ThrustThing(angle*256/360,4,0,0)
 Goto Leaping
 Return:
 ROBB C 0 A_FaceTarget
-ROBB C 1 
-ROBB C 0 A_SpawnItemEx("EnemyFloorChecker",0,0,-2)
-ROBB C 0 A_JumpIfInventory("EnemyJumping",1,"Return")
+ROBB C 0 A_SpawnItemEx("EnemyFloorChecker",0,0,-2,0,0,0,0,SXF_SETMASTER)
+ROBB C 1 A_JumpIfInventory("EnemyJumping",1,1)
 goto LookReturn
+ROBB C 1
+goto Return
 Leaping:
 ROBB C 0 A_FaceTarget
-ROBB C 1 
-ROBB C 0 A_SpawnItemEx("EnemyFloorChecker",0,0,-2)
-ROBB C 0 A_JumpIfInventory("EnemyJumping",1,"Leaping")
+ROBB C 0 A_SpawnItemEx("EnemyFloorChecker",0,0,-2,0,0,0,0,SXF_SETMASTER)
+ROBB C 1 A_JumpIfInventory("EnemyJumping",1,1)
 goto Land
+ROBB C 1
+goto Leaping
 Land:
 ROBB A 0 A_Stop
 ROBB AAA 0 A_Chase
@@ -442,10 +445,11 @@ actor SP_AtomicChicken : GenericRobot
 {
 //$Category MM8BDM-Enemies
 damagefactor "Despawn", 1.0
-Health 80
+Health 40
 Height 64
 Radius 48
 maxstepheight 50
+-SOLID
 +DROPOFF
 +LOOKALLAROUND
 -COUNTKILL
@@ -490,10 +494,11 @@ Goto Jumping
 Return:
 Jumping:
 ATOC C 0 A_ChangeVelocity(9, 0, velz, CVF_REPLACE|CVF_RELATIVE)
-ATOC C 1 
 ATOC C 0 A_SpawnItemEx("EnemyFloorChecker",0,0,-2,0,0,0,0,SXF_SETMASTER)
-ATOC C 0 A_JumpIfInventory("EnemyJumping",1,"Jumping")
+ATOC C 1 A_JumpIfInventory("EnemyJumping",1,1)
 goto Look
+ATOC C 1
+goto Jumping
 Death:
 BATT A 0 A_GiveInventory("IsDead",1)
 ATOC C 0 A_Pain
@@ -542,10 +547,11 @@ MONK B 0 A_JumpIf(ceilingz-z<=100,"OperationConsistentHeight")
 MONK B 1 ThrustThingZ(0,65,0,0)
 loop
 ReturnLoop:
-MONK D 1 
-ROBB C 0 A_SpawnItemEx("EnemyFloorChecker",0,0,-2,0,0,0,0,SXF_SETMASTER)
-ROBB C 0 A_JumpIfInventory("EnemyJumping",1,"ReturnLoop")
+MONK D 0 A_SpawnItemEx("EnemyFloorChecker",0,0,-2,0,0,0,0,SXF_SETMASTER)
+MONK D 1 A_JumpIfInventory("EnemyJumping",1,1)
 goto Land
+MONK D 1
+goto ReturnLoop
 OperationConsistentHeight:
 MONK B 1 ThrustThingZ(0,-4*(101-(ceilingz-z)),0,0)
 goto WoofWoof
@@ -579,10 +585,11 @@ TNT1 A 0 A_ChangeFlag("NOGRAVITY",0)
 Goto Leaping
 Leaping:
 MONK D 0 A_FaceTarget
-MONK D 1 
-ROBB C 0 A_SpawnItemEx("EnemyFloorChecker",0,0,-2,0,0,0,0,SXF_SETMASTER)
-ROBB C 0 A_JumpIfInventory("EnemyJumping",1,"Leaping")
+MONK D 0 A_SpawnItemEx("EnemyFloorChecker",0,0,-2,0,0,0,0,SXF_SETMASTER)
+MONK D 1 A_JumpIfInventory("EnemyJumping",1,1)
 goto Land
+MONK D 1
+goto Leaping
 Land: 
 Wait:
 MONK A 0 A_Stop
@@ -616,12 +623,12 @@ dropitem "BigEnemyDrop", 255
 -SOLID
 -SHOOTABLE
 +INVULNERABLE
-+INVISIBLE
 +CANTSEEK
 States
 {
 Spawn:
 TNT1 A 0
+FRIN A 0 A_SetTranslucent(0.0,0)
 TNT1 A 0 A_SetUserVar("user_angle",angle)
 TNT1 A 0 ACS_NamedExecuteAlways("4SP_EnemyStart",0)
 Look:
@@ -633,7 +640,7 @@ loop
 See:
 FRIN A 0 A_JumpIfInventory("Once",1,"SkipAnimation")
 FRIN A 0 A_GiveInventory("Once",1)
-FRIN A 0 A_ChangeFlag("INVISIBLE",0)
+FRIN A 0 A_SetTranslucent(1.0,0)
 TFOG DEF 3
 FRIN A 0 A_ChangeFlag("SOLID",1)
 FRIN A 0 A_ChangeFlag("SHOOTABLE",1)

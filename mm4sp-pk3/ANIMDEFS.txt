@@ -8,15 +8,6 @@ pic INVVAR1 tics 4
 pic INVVAR2 tics 4
 pic INVVAR3 tics 4
 
-// Pharaoh Wave
-texture PHARBAR3
-pic PHARBAR2 tics 2
-pic PHARBAR1 tics 2
-
-texture PHARVAR3
-pic PHARVAR2 tics 2
-pic PHARVAR1 tics 2
-
 //Pharaoh Power
 texture PHARBAR5
 pic PHARBAR4 tics 4

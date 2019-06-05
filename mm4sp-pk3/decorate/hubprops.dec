@@ -26,17 +26,18 @@ radius 32
 speed 5
 +DROPOFF
 +SLIDESONWALLS
++THRUSPECIES
 +LOOKALLAROUND
 -COUNTKILL
 States
 {
 Spawn:
-C1PR C 0
-C1PR C 0 ACS_NamedExecuteAlways("4SP_OverflowCheck",0,1)
-C1PR C 0 A_JumpIfInventory("HealthScaled",1,"Look")
-C1PR C 0 A_GiveInventory("HealthScaled",1)
-C1PR C 0 ACS_NamedExecuteAlways("4SP_EnemyStart",0)
-TNT1 A 1
+TNT1 A 0
+TNT1 A 0 ACS_NamedExecuteAlways("4SP_OverflowCheck",0,1)
+TNT1 A 0 A_JumpIfInventory("HealthScaled",1,"Look")
+TNT1 A 0 A_GiveInventory("HealthScaled",1)
+TNT1 A 0 ACS_NamedExecuteAlways("4SP_EnemyStart",0)
+TNT1 A 2
 goto Fall
 Return:
 C1PR C 0 A_JumpIfInventory("CutterFlag",1,"BounceFall")
@@ -76,9 +77,10 @@ actor SP_Jumbig : GenericRobot 29987
 {
 //$Category MM8BDM-Enemies
 Health 300
-height 128
+height 110
 radius 48
 +DROPOFF
+-SOLID
 +SLIDESONWALLS
 +LOOKALLAROUND
 -COUNTKILL
@@ -87,9 +89,17 @@ States
 Spawn:
 C1PR E 0
 C1PR E 0 ACS_NamedExecuteAlways("4SP_EnemyStart",0)
+C1PR E 0 A_SpawnItemEX("JumbigResolidifier")
 goto SpawnLoop
 Return:
+C1PR E 1 A_JumpIf(z-floorz==0,"SpawnLoop2")
+goto SpawnLoop
 SpawnLoop:
+C1PR E 1 A_JumpIf(z-floorz==0,"Land")
+loop
+Land:
+C1PR G 4
+SpawnLoop2:
 C1PR E 1
 loop
 Death:
@@ -99,10 +109,76 @@ NAPA A 0 A_ChangeFlag("NOGRAVITY",1)
 NAPA D 0 A_Stop
 NAPA D 0 A_Fall
 NAPA EFGHIJKLMNOPQRS 2
-C1PR E 0 A_SpawnItemEX("SP_Jumbig",0,0,220)
+C1PR E 0 A_SpawnItemEX("SP_Jumbig",0,0,ceilingz-height,0,0,0,0,SXF_NOCHECKPOSITION)
 TNT1 A 1
 stop
 }
+}
+
+actor JumbigResolidifier : Resolidifier
+{
+States
+{
+Spawn:
+TNT1 A 0
+TNT1 A 0 A_GiveToTarget("ResolidifierCheck_P2",1)
+TNT1 A 1
+TNT1 A 0 A_JumpIfInTargetInventory("IsDead",1,"End")
+TNT1 A 0 A_CheckFlag("SOLID","End",AAPTR_TARGET)
+goto Spawn
+End:
+TNT1 A 0
+stop
+}
+}
+
+actor ResolidifierCheck_P2 : CustomInventory
+{
+states
+{
+Pickup:
+TNT1 A 0 A_SpawnItemEx("ReSolidifierCheck2",0,0,0,momx,momy,momz,0,8,0)
+stop
+}
+}
+
+actor ResolidifierCheck2 : ResolidifierCheck
+{
+radius 48
+height 110
+States
+{
+Spawn:
+TNT1 A 0
+TNT1 A 1
+TNT1 A 0 A_GiveToTarget("ReSolidify",1)
+stop
+Death:
+XDeath:
+TNT1 A 0
+stop
+}
+}
+
+actor TalkingDelayCossack : Powerup
+{
+Powerup.Duration 80
+}
+actor TalkingDelayKalinka : Powerup
+{
+Powerup.Duration 80
+}
+actor TalkingDelayDummy1 : Powerup
+{
+Powerup.Duration 80
+}
+actor TalkingDelayDummy2 : Powerup
+{
+Powerup.Duration 80
+}
+actor TalkingDelayWall : Powerup
+{
+Powerup.Duration 80
 }
 
 actor DrCossackSP 29986
@@ -115,7 +191,7 @@ Spawn:
 DRCO A -1
 loop 
 Talk:
-DRCO ABABABABABABABABABABA 4
+DRCO ABABABABABABABABABAB 4
 Goto Spawn
 }
 }
@@ -130,6 +206,9 @@ States
 Spawn:
 KALC A -1
 loop
+Talk:
+KALC AIAIAIAIAIAIAIAIAIAI 4
+Goto Spawn
 }
 }
 
@@ -140,8 +219,11 @@ scale 2.5
 States
 {
 Spawn:
-MDAD KL 5
+MDAD K -1
 loop
+Talk:
+MDAD KLKLKLKLKLKLKLKL 5
+Goto Spawn
 }
 }
 
@@ -153,8 +235,11 @@ scale 2.5
 States
 {
 Spawn:
-C1PR AB 5
+C1PR A -1
 loop
+Talk:
+C1PR ABABABABABABABAB 5
+Goto Spawn
 }
 }
 

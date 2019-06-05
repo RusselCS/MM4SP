@@ -196,3 +196,9 @@ function int clamp(int minamt, int amt, int maxamt) {
 
     return amt;
 }
+
+script "4SP_HealthPercent" (void)
+{
+int res = 100 / (bossMaxHP/bossHP);
+SetResultValue(res);
+}

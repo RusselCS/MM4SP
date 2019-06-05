@@ -67,17 +67,24 @@ sprite FST1E0, 116, 96 {Offset -209, -96 Patch FSTBE0, 0, 0 {Translation "192:19
 sprite FST1F0, 116, 96 {Offset -189, -82 Patch FSTBF0, 0, 0 {Translation "192:192=226:226", "198:198=42:42"}}
 sprite FST1G0, 128, 128 {Offset -177, -50 Patch FSTBG0, 0, 0 {Translation "192:192=226:226", "198:198=42:42"}}
 
+sprite FST2Q0, 148, 80 {Offset -202, -103 Patch FSTBD0, 0, 0 {Translation "192:192=4:4", "198:198=129:129"}}
+
 //SKULL MAN
 //Skull Sniper
-sprite SKU1A0, 120, 100 {Offset -184, -94 Patch SKUBA0, 0, 0 {Translation "192:192=4:4", "198:198=87:87"}}
-sprite SKU1B0, 140, 116 {Offset -184, -98 Patch SKUBB0, 0, 0 {Translation "192:192=4:4", "198:198=87:87"}}
-sprite SKU1C0, 144, 112 {Offset -187, -102 Patch SKUBC0, 0, 0 {Translation "192:192=4:4", "198:198=87:87"}}
+sprite SKU1A0, 120, 100 {Offset -184, -94 Patch SKUBA0, 0, 0 {Translation "192:192=4:4", "198:198=67:67"}}
+sprite SKU1B0, 140, 116 {Offset -184, -98 Patch SKUBB0, 0, 0 {Translation "192:192=4:4", "198:198=67:67"}}
+sprite SKU1C0, 144, 112 {Offset -187, -102 Patch SKUBC0, 0, 0 {Translation "192:192=4:4", "198:198=67:67"}}
 
 //Skull Barrier
-sprite SKU1D0, 148, 80 {Offset -202, -103 Patch SKUBD0, 0, 0 {Translation "192:192=4:4", "198:198=87:87"}}
-sprite SKU1E0, 116, 96 {Offset -209, -96 Patch SKUBE0, 0, 0 {Translation "192:192=4:4", "198:198=87:87"}}
-sprite SKU1F0, 116, 96 {Offset -189, -82 Patch SKUBF0, 0, 0 {Translation "192:192=4:4", "198:198=87:87"}}
-sprite SKU1G0, 128, 128 {Offset -177, -50 Patch SKUBG0, 0, 0 {Translation "192:192=4:4", "198:198=87:87"}}
+sprite SKU1D0, 148, 80 {Offset -202, -103 Patch SKUBD0, 0, 0 {Translation "192:192=4:4", "198:198=67:67"}}
+sprite SKU1E0, 116, 96 {Offset -209, -96 Patch SKUBE0, 0, 0 {Translation "192:192=4:4", "198:198=67:67"}}
+sprite SKU1F0, 116, 96 {Offset -189, -82 Patch SKUBF0, 0, 0 {Translation "192:192=4:4", "198:198=67:67"}}
+sprite SKU1G0, 128, 128 {Offset -177, -50 Patch SKUBG0, 0, 0 {Translation "192:192=4:4", "198:198=67:67"}}
+
+//Poison Sporegun
+sprite SKU2A0, 120, 100 {Offset -184, -94 Patch SKUBA0, 0, 0 {Translation "192:192=4:4", "198:198=129:129"}}
+sprite SKU2B0, 140, 116 {Offset -184, -98 Patch SKUBB0, 0, 0 {Translation "192:192=4:4", "198:198=129:129"}}
+sprite SKU2C0, 144, 112 {Offset -187, -102 Patch SKUBC0, 0, 0 {Translation "192:192=4:4", "198:198=129:129"}}
 
 //DIVE MAN
 //Dive Missile
@@ -99,7 +106,7 @@ sprite PHA1B0, 180, 160 {Offset -198, -84 Patch PHAAB0, 0, 0 {Translation "192:1
 sprite PHA1C0, 180, 160 {Offset -214, -52 Patch PHAAC0, 0, 0 {Translation "192:192=160:160", "198:198=162:162"}}
 sprite PHA1D0, 80, 200 {Offset -266, -13 Patch PHAAD0, 0, 0 {Translation "192:192=160:160", "198:198=162:162"}}
 sprite PHA1E0, 80, 200 {Offset -293, 0 Patch PHAAE0, 0, 0 {Translation "192:192=160:160", "198:198=162:162"}}
-sprite PHA1F0, 80, 200 {Offset -293, 0 Patch PHAAE0, 0, 0 {Translation "4:4=192:192", "89:89=198:198", "5:5=89:89", "0:0=4:4", "7:8=4:4"}}
+sprite PHA1F0, 80, 200 {Offset -293, 0 Patch PHAAE0, 0, 0 {Translation "4:4=192:192", "67:67=198:198", "5:5=67:67", "0:0=4:4", "7:8=4:4"}}
 sprite PHA1G0, 308, 204 {Offset -272, 46 Patch PHAAG0, 0, 0 {Translation "192:192=160:160", "198:198=162:162"}}
 sprite PHA1H0, 308, 204 {Offset -202, 4 Patch PHAAH0, 0, 0 {Translation "192:192=160:160", "198:198=162:162"}}
 sprite PHA1I0, 308, 204 {Offset -151, -36 Patch PHAAI0, 0, 0 {Translation "192:192=160:160", "198:198=162:162"}}
@@ -115,6 +122,15 @@ sprite PHA1R0, 180, 160 {Offset -198, -84 Patch PHAAR0, 0, 0 {Translation "192:1
 sprite PHA1S0, 180, 160 {Offset -214, -52 Patch PHAAS0, 0, 0 {Translation "192:192=160:160", "198:198=162:162"}}
 sprite PHA1T0, 96, 200 {Offset -254, -13 Patch PHAAT0, 0, 0 {Translation "192:192=160:160", "198:198=162:162"}}
 sprite PHA1U0, 96, 200 {Offset -281, 0 Patch PHAAU0, 0, 0 {Translation "192:192=160:160", "198:198=162:162"}}
+
+//Solar Totem
+sprite PHA2A0, 148, 80 {Offset -202, -103 Patch PHAAA0, 0, 0 {Translation "192:192=4:4", "198:198=129:129"}}
+sprite PHA2G0, 308, 204 {Offset -193, -175 Patch PHAAL0, 0, 0 {Translation "192:192=4:4", "198:198=129:129"}}
+sprite PHA2F0, 308, 204 {Offset -105, -147 Patch PHAAK0, 0, 0 {Translation "192:192=4:4", "198:198=129:129"}}
+sprite PHA2E0, 308, 204 {Offset -126, -123 Patch PHAAJ0, 0, 0 {Translation "192:192=4:4", "198:198=129:129"}}
+sprite PHA2D0, 308, 204 {Offset -151, -36 Patch PHAAI0, 0, 0 {Translation "192:192=4:4", "198:198=129:129"}}
+sprite PHA2C0, 308, 204 {Offset -202, 4 Patch PHAAH0, 0, 0 {Translation "192:192=4:4", "198:198=129:129"}}
+sprite PHA2B0, 308, 204 {Offset -272, 46 Patch PHAAG0, 0, 0 {Translation "192:192=4:4", "198:198=129:129"}}
 
 //DRILL MAN
 //Drill Bomb

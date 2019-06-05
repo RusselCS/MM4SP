@@ -7,6 +7,7 @@ weapon/woodsatellitehit WOODSA1
 weapon/dustshot DUSTBIT
 weapon/Shoomp DUSTSHOT
 item/JunkArmor JUNKARMR
+weapon/logchipper 0C
 
 // TOAD MAN
 weapon/raindrizzle DRIZZLE
@@ -18,9 +19,12 @@ weapon/brightshot BUSTER
 // SKULL MAN
 weapon/skullshieldbuzz SKULBAR4
 weapon/skullbust SKULSHOT
+weapon/poisonsporegun GRENSHOT
 
 // PHARAOH MAN
 classes/float PHACURSE
+weapon/pcharged p4char
+weapon/solartotem solart
 
 // DRILL MAN
 classes/drilling drillin
