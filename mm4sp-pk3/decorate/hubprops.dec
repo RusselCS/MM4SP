@@ -294,3 +294,87 @@ TNT1 A 0 ACS_NamedExecuteAlways("4SP_HealthManager",0,1,200)
 stop
 }
 }
+
+//args[0] - weapon to translate to
+actor WeaponGetActor 29982
+{
+//$Category MM8BDM-Props
++NOGRAVITY
++FORCEYBILLBOARD
+scale 2.0
+States
+{
+Spawn:
+TNT1 A -1
+loop
+Mega:
+PLAY V 8
+goto SpawnStart
+Dive:
+DIVA V 8
+goto SpawnStart
+SpawnStart:
+"####" WXYZ 8
+"####" ZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZ 1 A_ChangeVelocity(0, -5, 0, CVF_REPLACE|CVF_RELATIVE)
+goto Spawn2
+Spawn2:
+"####" Z 0 Thing_SetTranslation(0,args[0])
+"####" Z 0 A_Stop
+"####" Z 1 A_ChangeVelocity(0, 0, 0, CVF_REPLACE|CVF_RELATIVE)
+goto SpawnLoop
+SpawnLoop:
+"####" Z -1
+loop
+}
+}
+
+actor ActivateClientsideWepGetScript : CustomInventory
+{
+inventory.amount 1
+inventory.maxamount 1
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+loop
+Use:
+TNT1 A 0 ACS_NamedExecuteAlways("4SP_ClientsideWeaponGet",0)
+TNT1 A 0 A_TakeInventory("ActivateClientsideWepGetScript",999)
+fail
+}
+}
+
+actor 4SPChangeCamera : CustomInventory
+{
+inventory.amount 1
+inventory.maxamount 1
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+loop
+Use:
+TNT1 A 0 ACS_NamedExecuteAlways("4SP_ChangeCamera",0,0)
+TNT1 A 0 A_TakeInventory("4SPChangeCamera",999)
+fail
+}
+}
+
+actor 4SPChangeCameraBack : CustomInventory
+{
+inventory.amount 1
+inventory.maxamount 1
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+loop
+Use:
+TNT1 A 0 ACS_NamedExecuteAlways("4SP_ChangeCamera",0,1)
+TNT1 A 0 A_TakeInventory("4SPChangeCameraBack",999)
+fail
+}
+}

@@ -28,6 +28,7 @@ map CCWOO "WOOD MAN'S BRAMBLE TREK"
    cluster = 1
    music = "WOOMUS"
    aircontrol = 0.5
+   levelnum = 501
    par = 1
    clipmidtextures
    nointermission
@@ -41,7 +42,7 @@ map CCEX "EXAMPLE MAP"
    cluster = 1
    music = "MM8INT"
    aircontrol = 0.5
-   levelnum = 501
+   levelnum = 512
    par = 1
    clipmidtextures
    nointermission

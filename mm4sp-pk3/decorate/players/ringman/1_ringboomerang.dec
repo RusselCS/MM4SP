@@ -3,7 +3,7 @@ actor RingManWep : BaseMM8BDMWep
 	dropitem ""
 	inventory.icon "NULLICON"
 	Weapon.AmmoUse 1
-	Weapon.AmmoGive 5
+	Weapon.AmmoGive 3
 	Weapon.SlotNumber 1
 	Tag "Ring Boomerang"
 	Inventory.Pickupmessage "Power up! Ring Thing Cometh!"
@@ -174,7 +174,7 @@ actor RingBoomerangB1 : BasicBouncer
 		TNT1 A 0 A_RearrangePointers(AAPTR_DEFAULT, AAPTR_DEFAULT, AAPTR_TARGET)
 		TNT1 A 0 A_FaceTarget
 		RIN1 I 0 A_Explode(3, radius, 0, 0, radius+1)
-		RIN1 H 1 A_SeekerMissile(180, 180, SMF_PRECISE)
+		RIN1 I 1 A_SeekerMissile(180, 180, SMF_PRECISE)
 		RIN1 I 0 A_TakeFromTarget("SPRingCounter1",999)
 		RIN1 W 0 A_JumpIfCloser(32, "Give")
 		RIN1 W 0 A_Explode(3, radius, 0, 0, radius+1)
@@ -190,6 +190,7 @@ actor RingBoomerangB1 : BasicBouncer
 		RIN1 I 0 A_TakeFromTarget("SPRingCounter1",999)
 		RIN1 W 0 A_JumpIfCloser(32, "Give")
 		RIN1 W 0 A_SpawnItemEx("RingSparkle", frandom(-16, 16), frandom(-16, 16), frandom(-16, 16))
+		RIN1 W 0 A_JumpIfInTargetInventory("IsDead", 1, "Death")
 		RIN1 W 0 A_JumpIf(CallACS("4SP_CheckAlive")==0, "Death")
 		goto Return+3
 	Death: // As a failsafe
@@ -266,7 +267,7 @@ actor RingBoomerangB2 : RingBoomerangB1
 		TNT1 A 0 A_RearrangePointers(AAPTR_DEFAULT, AAPTR_DEFAULT, AAPTR_TARGET)
 		TNT1 A 0 A_FaceTarget
 		RIN1 I 0 A_Explode(3, radius, 0, 0, radius+1)
-		RIN1 H 1 A_SeekerMissile(180, 180, SMF_PRECISE)
+		RIN1 I 1 A_SeekerMissile(180, 180, SMF_PRECISE)
 		RIN1 I 0 A_TakeFromTarget("SPRingCounter2",999)
 		RIN1 W 0 A_JumpIfCloser(32, "Give")
 		RIN1 W 0 A_Explode(3, radius, 0, 0, radius+1)
@@ -282,6 +283,7 @@ actor RingBoomerangB2 : RingBoomerangB1
 		RIN1 I 0 A_TakeFromTarget("SPRingCounter2",999)
 		RIN1 W 0 A_JumpIfCloser(32, "Give")
 		RIN1 W 0 A_SpawnItemEx("RingSparkle", frandom(-16, 16), frandom(-16, 16), frandom(-16, 16))
+		RIN1 W 0 A_JumpIfInTargetInventory("IsDead", 1, "Death")
 		RIN1 W 0 A_JumpIf(CallACS("4SP_CheckAlive")==0, "Death")
 		goto Return+3
 	Death: // As a failsafe
@@ -358,7 +360,7 @@ actor RingBoomerangB3 : RingBoomerangB1
 		TNT1 A 0 A_RearrangePointers(AAPTR_DEFAULT, AAPTR_DEFAULT, AAPTR_TARGET)
 		TNT1 A 0 A_FaceTarget
 		RIN1 I 0 A_Explode(3, radius, 0, 0, radius+1)
-		RIN1 H 1 A_SeekerMissile(180, 180, SMF_PRECISE)
+		RIN1 I 1 A_SeekerMissile(180, 180, SMF_PRECISE)
 		RIN1 I 0 A_TakeFromTarget("SPRingCounter3",999)
 		RIN1 W 0 A_JumpIfCloser(32, "Give")
 		RIN1 W 0 A_Explode(3, radius, 0, 0, radius+1)
@@ -374,6 +376,7 @@ actor RingBoomerangB3 : RingBoomerangB1
 		RIN1 I 0 A_TakeFromTarget("SPRingCounter3",999)
 		RIN1 W 0 A_JumpIfCloser(32, "Give")
 		RIN1 W 0 A_SpawnItemEx("RingSparkle", frandom(-16, 16), frandom(-16, 16), frandom(-16, 16))
+		RIN1 W 0 A_JumpIfInTargetInventory("IsDead", 1, "Death")
 		RIN1 W 0 A_JumpIf(CallACS("4SP_CheckAlive")==0, "Death")
 		goto Return+3
 	Death: // As a failsafe

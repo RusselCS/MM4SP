@@ -1,4 +1,4 @@
-#library "SPTOOLSL"
+#library "SPTOOLS"
 
 #include "zcommon.acs"
 #include "8BDMLIB.acs"
@@ -6,6 +6,14 @@
 #DEFINE PHARAOHMANSP 978
 #DEFINE PHARAOHFLASH 979
 #DEFINE EDDIECALL 980
+#DEFINE LEAFSHIELDSP 990
+#DEFINE SPARKSHOCKSP 991
+#DEFINE NAPALMBOMBSP 992
+#DEFINE YAMATOSPEARSP 993
+#DEFINE DANGERWRAPSP 994
+#DEFINE FLAMESWORDSP 995
+#DEFINE ICEWALLSP 996
+#DEFINE BLACKHOLEBOMBSP 997
 
 script "4SP_Colors" OPEN CLIENTSIDE
 {
@@ -13,6 +21,30 @@ Delay(25);
 CreateTranslation(PHARAOHMANSP, 192:192=4:4, 198:198=216:216, 196:196=112:112);
 CreateTranslation(PHARAOHFLASH, 4:4=192:192, 210:210=198:198, 0:0=4:4, 196:196=112:112);
 CreateTranslation(EDDIECALL, 192:192=4:4, 198:198=227:227);
+
+CreateTranslation(LEAFSHIELDSP, 192:192=4:4, 198:198=129:129, 199:199=131:131);
+CreateTranslation(SPARKSHOCKSP, 192:192=4:4, 198:198=225:225, 199:199=222:222);
+CreateTranslation(NAPALMBOMBSP, 192:192=216:216, 198:198=75:75, 199:199=243:243);
+CreateTranslation(YAMATOSPEARSP, 192:192=4:4, 198:198=236:236, 199:199=251:251);
+CreateTranslation(DANGERWRAPSP, 192:192=4:4, 198:198=230:230, 199:199=166:166);
+CreateTranslation(FLAMESWORDSP, 192:192=248:248, 198:198=41:41, 199:199=45:45);
+CreateTranslation(ICEWALLSP, 192:192=200:200, 198:198=75:75, 199:199=243:243);
+CreateTranslation(BLACKHOLEBOMBSP, 192:192=59:59, 198:198=62:62, 199:199=79:79);
+}
+
+// [Trill] CPU saving script, changemap to hub if no players remain in server.
+//
+Script "4SP_ResetToHub" OPEN
+{
+if(GameType()==GAME_SINGLE_PLAYER){terminate;}
+if(GetLevelInfo(LEVELINFO_LEVELNUM)==500){terminate;}
+Delay(70);
+until(PlayerCount()<=0) 
+{  
+Delay(35);
+}
+ChangeLevel("CCHUB", 0, CHANGELEVEL_NOINTERMISSION|CHANGELEVEL_RESETHEALTH|CHANGELEVEL_RESETINVENTORY);
+terminate;
 }
 
 // [Trill] Scripts ported and slightly modified from MMSP-Basic
@@ -23,10 +55,20 @@ Delay(1);
 ACS_NamedExecuteAlways("4SP_EnemyPain",0);
 GiveInventory("RadiusCounter",GetActorProperty(0,APROP_Radius)/65536);
 GiveInventory("HeightCounter",GetActorProperty(0,APROP_Height)/65536);
-if(CheckInventory("HealthScaled")==1){terminate;}
 
-SetActorProperty(0,APROP_Health,GetActorProperty (0,APROP_Health) + (GetActorProperty (0,APROP_Health)/4) * PlayerCount());
-GiveInventory("HealthScaled",1);
+if(CheckInventory("HealthScaled")==1){terminate;}
+if(PlayerCount()==1){GiveInventory("HealthScaled",1); terminate;}
+if(GetCvar("ccsp_healthscaling")==0){GiveInventory("HealthScaled",1); terminate;}
+
+if(GetCvar("ccsp_healthscaling")==2)
+{
+SetActorProperty(0,APROP_Health,GetActorProperty (0,APROP_Health) + (GetActorProperty (0,APROP_Health)/4) * PlayerCount()); 
+GiveInventory("HealthScaled",1); 
+terminate;
+}
+
+if(PlayerCount()>=8){SetActorProperty(0,APROP_Health,GetActorProperty(0,APROP_Health)*2); GiveInventory("HealthScaled",1); terminate;}
+else{SetActorProperty(0,APROP_Health,GetActorProperty (0,APROP_Health) + (GetActorProperty (0,APROP_Health)/8) * PlayerCount()); GiveInventory("HealthScaled",1); terminate;}
 }
 
 // [Trill] Stop respawning enemies overflowing, ported from MMSP-Basic
@@ -222,12 +264,19 @@ script "4SP_SetWeaponGiven" (int debug) {
 
     str boss;
     str cvar;
+    str cvar2;
     if(debug == 0) {
         boss = getPrefix(getActorClass(0), 1);
     } else {
         boss = bossList[debug-1][1];
     }
     str player = getPrefix(getActorClass(ACS_ExecuteWithResult(257)), 0); // Player who killed the boss
+
+    str playercolor = getColor(player);
+    str bosscolor = getColor(boss);
+
+    cvar2 = strParam(s:boss, s:"_", s:player);
+    setCvarString("CCSP_WeaponGet",cvar2);
 
     if(GetCVar("SV_CC_AllWeapons")) {
         for(int i = 0; i < MAX_PLAYERS; i++) {
@@ -238,6 +287,12 @@ script "4SP_SetWeaponGiven" (int debug) {
         cvar = strParam(s:"SV_CC_", s:player, s:"_", s:boss, s:"_Wep");
         setCVar(cvar, true);
     }
+
+    SetActivatorToTarget(0);
+    //if(GameType()!=GAME_SINGLE_PLAYER){
+    SetHudSize(600,380,0);
+    HudMessageBold(n:0, s:" (", s:playercolor, s:player, s:" man\cf) has slain ", s:bosscolor, s:boss, s:" man\cf!";HUDMSG_FADEOUT|HUDMSG_LOG,2,CR_GOLD,300.4,50.0,4.0,0.5);
+    //}
 }
 
 function str getPrefix(str name, bool which) {
@@ -389,4 +444,125 @@ Case 1: //height
 SetResultValue(GetActorProperty(0,APROP_Height)/65536);
 break;
 }
+}
+
+//[Trill] The big bad weapon get display
+#DEFINE MAX_WEAPONGETS 9 // Maximum number of weapon gets
+
+str weapon_gets[MAX_WEAPONGETS][5] = 
+{
+{"Wood_Mega", 990, "Leaf Shield", "Mega", "Wood"},
+{"Wood_Bright", 990, "Bonsai Barrage", "Bright", "Wood"},
+{"Wood_Toad", 990, "Natural Downpour", "Toad", "Wood"},
+{"Wood_Drill", 990, "Root Rupture", "Drill", "Wood"},
+{"Wood_Pharaoh", 990, "Solar Totem", "Pharaoh", "Wood"},
+{"Wood_Ring", 990, "Stump Satellite", "Ring", "Wood"},
+{"Wood_Dust", 990, "Log Chipper", "Dust", "Wood"},
+{"Wood_Dive", 990, "Sprout Mine", "Dive", "Wood"},
+{"Wood_Skull", 990, "Poison Sporegun", "Skull", "Wood"}
+};
+
+script "4SP_WeaponGetDisplay" (void)
+{ 
+Delay(1);
+//Log(s:GetCvarString("CCSP_WeaponGet"));
+if(GetCvarString("CCSP_WeaponGet")=="Null"){terminate;}
+//GiveInventory("PlayerFreeze",1);
+SetMusic("4WEPGET",0);
+GiveInventory("NOHUD",1);
+ACS_NamedExecuteAlways("4SP_ChangeCamera",0,0);
+
+for(int i = 0; i < MAX_WEAPONGETS; i++) 
+{
+if(StrIcmp(weapon_gets[i][0], GetCvarString("CCSP_WeaponGet"))==0) 
+{
+str weapon = weapon_gets[i][2];
+SetThingSpecial(406,0,weapon_gets[i][1]);
+SetCvarString("CCSP_WeaponGetBoss",weapon_gets[i][4]);
+str class = weapon_gets[i][3];
+}
+}
+
+if(GetCvar("SV_CC_AllWeapons"))
+{
+Log(s:"Clientside");
+GiveInventory("ActivateClientsideWepGetScript",1);
+}
+else
+{
+Log(s:"Serverside");
+Log(s:weapon);
+SetActorState(406,class);
+}
+
+Delay(212);
+
+SetCvarString("CCSP_WeaponGet","Null");
+SetCvarString("CCSP_WeaponGetBoss","Null");
+SetMusic("CCHUBMUS",0);
+ACS_NamedExecuteAlways("4SP_ChangeCamera",0,1);
+TakeInventory("NOHUD",999);
+}
+
+script "4SP_ChangeCamera" (int which)
+{
+int MaxPlayers = GetMaxPlayers();
+for(int p = 0; p < MaxPlayers; p++)
+{
+SetActivator(p+1000);
+if(which==0){ChangeCamera(405,0,0);}
+else{ChangeCamera(0,0,0);}
+}
+}
+
+script "4SP_ClientsideWeaponGet" (void) CLIENTSIDE
+{
+str dummycvar = strparam(s:GetCvarString("CCSP_WeaponGetBoss"),s:"_",s:GetPrefix(getActorClass(consolePlayerNumber()+1000),0));
+for(int i = 0; i < MAX_WEAPONGETS; i++) 
+{
+if(StrIcmp(weapon_gets[i][0], dummycvar)==0) 
+{
+str dummyweapon = weapon_gets[i][2];
+Log(s:dummyweapon);
+str dummyclass = weapon_gets[i][3];
+SetActorState(406,dummyclass);
+}
+}
+}
+
+//[Trill] Color grabber for random stuff.
+#DEFINE MAX_TEXTCOLORS 17 // Maximum number of colors
+
+str char_colors[MAX_TEXTCOLORS][2] = 
+{
+{"Mega", "\cn"},
+{"Bright", "\ci"},
+{"Toad", "\cd"},
+{"Drill", "\cg"},
+{"Pharaoh", "\ck"},
+{"Ring", "\cg"},
+{"Dust", "\cn"},
+{"Dive", "\ch"},
+{"Skull", "\cj"},
+{"Wood", "\cq"},
+{"Spark", "\ci"},
+{"Napalm", "\ct"},
+{"Yamato", "\ct"},
+{"Burst", "\ci"},
+{"Sword", "\cr"},
+{"Cold", "\cv"},
+{"Galaxy", "\ct"}
+};
+
+function str getColor(str name) 
+{
+str res = "";
+for(int i = 0; i < MAX_TEXTCOLORS; i++) 
+{
+if(strcmp(char_colors[i][0], name)==0) 
+{
+res = char_colors[i][1];
+}
+}
+return res;
 }

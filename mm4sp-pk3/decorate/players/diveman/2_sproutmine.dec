@@ -30,13 +30,13 @@ Fire:
 DIV2 A 0 A_JumpIfNoAmmo("NoAmmo")
 DIV2 A 0 A_PlaySoundEx("weapon/mbuster","Weapon")
 DIV2 A 0 A_FireCustomMissile("SproutMine",0,1,0,0)
-DIV2 A 0 A_Jump(256,"LeftBias","RightBias")
-goto LeftBias
-LeftBias:
 DIV2 A 0 A_FireCustomMissile("SproutMine3",random(15,20),0,0,0)
 DIV2 A 0 A_FireCustomMissile("SproutMine2",random(-20,-15),0,0,0)
 goto Anim
-RightBias:
+Altfire:
+DIV2 A 0 A_JumpIfNoAmmo("NoAmmo")
+DIV2 A 0 A_PlaySoundEx("weapon/mbuster","Weapon")
+DIV2 A 0 A_FireCustomMissile("SproutMine",0,1,0,0)
 DIV2 A 0 A_FireCustomMissile("SproutMine2",random(15,20),0,0,0)
 DIV2 A 0 A_FireCustomMissile("SproutMine3",random(-20,-15),0,0,0)
 goto Anim

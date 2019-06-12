@@ -1,6 +1,11 @@
+server noarchive int CCSP_HealthScaling = 1;
+
 server noarchive string CCSP_BossObj = "Null";
 server noarchive int CCSP_BossDoor = 0;
 server noarchive int CCSP_BossSpawn = 0;
+
+server noarchive string CCSP_WeaponGet = "Null";
+server noarchive string CCSP_WeaponGetBoss = "Null";
 
 server noarchive bool SV_CC_AllWeapons = true;
 

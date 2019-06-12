@@ -108,9 +108,7 @@ Goto Spawn+2
 Search:
 EDDI A 0 A_ChangeFlag("NOCLIP",0)
 EDDI A 3
-EDDI AAAABBBBAAAACCCCDDDD 1 A_Chase
-EDDI A 0 A_CountDown
-Goto Search+3
+goto Melee
 Melee:
 EDDI E 4 A_FaceTarget
 EDDI F 18 A_SpawnItemEx("RandomDrop",0,0,32,0,0,0)

@@ -25,7 +25,7 @@ str boss_obj[9][6] = {
     {"Napalm Man", "CCMUG05", "CCART05", "CCNAME05", "CCCAM00", "CCHUB"},
    
     {"Yamato Man", "CCMUG06", "CCART06", "CCNAME06", "CCCAM00", "CCHUB"},
-    {"", "BLACK", "CLOUINVS", "CCNAME00", "CCCAM00", "CCHUB"}, // This should always be empty
+    {"", "CCMUG48", "CLOUINVS", "CCNAME00", "CCCAM00", "CCHUB"}, // This should always be empty
     {"Burst Man", "CCMUG07", "CCART07", "CCNAME07", "CCCAM00", "CCHUB"},
    
     {"Sword Man", "CCMUG08", "CCART08", "CCNAME08", "CCCAM00", "CCHUB"},
@@ -148,7 +148,7 @@ script "4SP_StageSelect" (void) {
         ACS_NamedExecuteAlways("core_freezeplayer", 0, 0, 0);
         TakeInventory("NoHud", 1);
         Delay(1);
-        ChangeLevel(boss_obj[stageSelection-1][5], 0, CHANGELEVEL_NOINTERMISSION);
+        ChangeLevel(boss_obj[stageSelection-1][5], 0, CHANGELEVEL_NOINTERMISSION|CHANGELEVEL_RESETHEALTH|CHANGELEVEL_RESETINVENTORY);
 
     }
 }

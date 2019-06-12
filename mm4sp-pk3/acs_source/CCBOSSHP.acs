@@ -121,6 +121,21 @@ script "4SP_BossManage" (void)
     
     str victoryMusic = GetCVarString("mm8bdm_map_victorymusic");
 
+    GiveInventory("RadiusCounter",GetActorProperty(0,APROP_Radius)/65536);
+    GiveInventory("HeightCounter",GetActorProperty(0,APROP_Height)/65536);
+
+    if(PlayerCount()==1){GiveInventory("HealthScaled",1);}
+    else if(GetCvar("ccsp_healthscaling")==0){GiveInventory("HealthScaled",1);}
+    else if(GetCvar("ccsp_healthscaling")==1)
+    {
+    if(PlayerCount()>=8){SetActorProperty(0,APROP_Health,GetActorProperty(0,APROP_Health)*2); GiveInventory("HealthScaled",1);}
+    else{SetActorProperty(0,APROP_Health,GetActorProperty (0,APROP_Health) + (GetActorProperty (0,APROP_Health)/8) * PlayerCount()); GiveInventory("HealthScaled",1);}
+    }
+    else if(GetCvar("ccsp_healthscaling")==2)
+    {
+    SetActorProperty(0,APROP_Health,GetActorProperty (0,APROP_Health) + (GetActorProperty (0,APROP_Health)/4) * PlayerCount()); GiveInventory("HealthScaled",1);
+    }
+
     bossMaxHP = GetActorProperty(0, APROP_Health);
 
     int hpIter = fixedMul(bossMaxHP, 0.04);
@@ -142,6 +157,7 @@ script "4SP_BossManage" (void)
         {
             PlayActorSound(0, SOUND_Pain, CHAN_BODY, 1.0, false, ATTN_NORM);
             SetActorProperty(0, APROP_RenderStyle, STYLE_None);
+            GiveInventory("EnemyDamageCheck",1);
             Delay(1);
             SetActorProperty(0, APROP_RenderStyle, STYLE_Normal);
             bossHP = GetActorProperty(0, APROP_Health);
@@ -169,7 +185,7 @@ script "4SP_BossManage" (void)
     SetMusic("");
     Delay(35);
 
-    ChangeLevel("CCHUB", 0, CHANGELEVEL_NOINTERMISSION);
+    ChangeLevel("CCHUB", 0, CHANGELEVEL_NOINTERMISSION|CHANGELEVEL_RESETHEALTH|CHANGELEVEL_RESETINVENTORY);
 }
 
 function void SetActorInventory(int tid, str inv, int amt) {
