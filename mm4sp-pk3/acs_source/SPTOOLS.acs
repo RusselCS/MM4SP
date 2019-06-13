@@ -472,7 +472,7 @@ str weapon_gets[MAX_WEAPONGETS][6] =
 
 script "4SP_WeaponGetDisplay" (void)
 { 
-Delay(3);
+Delay(10);
 if(GetCvarString("CCSP_WeaponGet")=="Null"){terminate;}
 SetMusic("4WEPGET",0);
 GiveInventory("4SPWeaponGetChange",1);
