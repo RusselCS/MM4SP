@@ -307,11 +307,21 @@ States
 Spawn:
 TNT1 A -1
 loop
+Bright:
+Toad:
+Pharaoh:
+Drill:
+Ring:
+Dust:
+Skull:
 Mega:
 PLAY V 8
 goto SpawnStart
 Dive:
 DIVA V 8
+goto SpawnStart
+Resync:
+TNT1 A 8
 goto SpawnStart
 SpawnStart:
 "####" WXYZ 8
@@ -345,7 +355,7 @@ fail
 }
 }
 
-actor 4SPChangeCamera : CustomInventory
+actor 4SPWeaponGetChange : CustomInventory
 {
 inventory.amount 1
 inventory.maxamount 1
@@ -356,13 +366,13 @@ Spawn:
 TNT1 A 0
 loop
 Use:
-TNT1 A 0 ACS_NamedExecuteAlways("4SP_ChangeCamera",0,0)
-TNT1 A 0 A_TakeInventory("4SPChangeCamera",999)
+TNT1 A 0 ACS_NamedExecuteAlways("4SP_WeaponGetChange",0,1)
+TNT1 A 0 A_TakeInventory("4SPWeaponGetChange",999)
 fail
 }
 }
 
-actor 4SPChangeCameraBack : CustomInventory
+actor 4SPWeaponGetChangeBack : CustomInventory
 {
 inventory.amount 1
 inventory.maxamount 1
@@ -373,8 +383,8 @@ Spawn:
 TNT1 A 0
 loop
 Use:
-TNT1 A 0 ACS_NamedExecuteAlways("4SP_ChangeCamera",0,1)
-TNT1 A 0 A_TakeInventory("4SPChangeCameraBack",999)
+TNT1 A 0 ACS_NamedExecuteAlways("4SP_WeaponGetChange",0,0)
+TNT1 A 0 A_TakeInventory("4SPWeaponGetChangeBack",999)
 fail
 }
 }

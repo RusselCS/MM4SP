@@ -62,17 +62,29 @@ States
 {
 Spawn:
 DRIL A 0
-SKU2 EF 4 
+SKU2 EEFF 2 A_SpawnItemEx("PoisonSporegunFX")
 loop
 Death:
 DRIL A 0 A_Stop
-DRIL A 0 A_PlaySoundEx("weapon/napalmexplode", "Weapon")
+DRIL A 0 A_PlaySoundEx("weapon/napalm", "Weapon")
 DRIL A 0 A_SpawnItemEx("PoisonSpore",8,0,0,2,0,16,0,SXF_NOCHECKPOSITION)
 DRIL A 0 A_SpawnItemEx("PoisonSpore",8,0,0,2,0,16,72,SXF_NOCHECKPOSITION)
 DRIL A 0 A_SpawnItemEx("PoisonSpore",8,0,0,2,0,16,144,SXF_NOCHECKPOSITION)
 DRIL A 0 A_SpawnItemEx("PoisonSpore",8,0,0,2,0,16,216,SXF_NOCHECKPOSITION)
 DRIL A 0 A_SpawnItemEx("PoisonSpore",8,0,0,2,0,16,288,SXF_NOCHECKPOSITION)
 TNT1 A 2 A_SpawnItem("DrillExplode")
+stop
+}
+}
+
+actor PoisonSporegunFX : BasicClientSide
+{
+Scale 2.0
+States
+{
+Spawn:
+TNT1 A 1
+DRI2 DEFGH 2 //ignore the reused drill sprites
 stop
 }
 }

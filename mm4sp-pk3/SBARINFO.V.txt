@@ -97,8 +97,8 @@ IsSelected DiveManWep
 IsSelected Dive_WoodWep{Drawbar"BARAM201", "BAREMPTY", Ammo1, vertical, 16, 8;}	
 
 IsSelected PharaohManWep{DrawImage"BAREMPTY", 16, 8;
-	InInventory PharaohCharge, 1{DrawBar "PHARBAR1", "BAREMPTY", PharaohCharge, vertical, 16, 8;	
-	InInventory PharaohBarBlink, 1{DrawBar "PHARBAR2", "BAREMPTY", PharaohCharge, vertical, 16, 8;}}}
+	InInventory PharaohSPCharge, 1{DrawBar "PHARBAR1", "BAREMPTY", PharaohSPCharge, vertical, 16, 8;	
+	InInventory PharaohBarBlink, 1{DrawBar "PHARBAR2", "BAREMPTY", PharaohSPCharge, vertical, 16, 8;}}}
 IsSelected PharaohManWep2{Drawbar"PHARBAR1", "BAREMPTY", Ammo1, vertical, 16, 8;
 	InInventory PharaohPowerCooldown, 1{DrawBar "BARAMM65", "BAREMPTY", Ammo1, vertical, 16, 8;}}
 IsSelected Pharaoh_WoodWep{Drawbar"BARAM201", "BAREMPTY", Ammo1, vertical, 16, 8;}	

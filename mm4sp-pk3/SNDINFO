@@ -51,3 +51,4 @@ weapon/WoodSlam WOODHIT
 // SOUNDS
 menu/ccmenu M_SELE
 menu/ccselect DSRADIO
+menu/cctext WEPTEXT

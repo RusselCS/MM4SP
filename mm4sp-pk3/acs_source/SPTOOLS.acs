@@ -447,30 +447,35 @@ break;
 }
 
 //[Trill] The big bad weapon get display
-#DEFINE MAX_WEAPONGETS 9 // Maximum number of weapon gets
+#DEFINE MAX_WEAPONGETS 10 // Maximum number of weapon gets
 
-str weapon_gets[MAX_WEAPONGETS][5] = 
+//0 - Cvar
+//1 - Translation
+//2 - Name with line breaks included
+//3 - Class
+//4 - Boss
+//5 - Number of characters (spaces and linebreaks (\n) count as characters!)
+str weapon_gets[MAX_WEAPONGETS][6] = 
 {
-{"Wood_Mega", 990, "Leaf Shield", "Mega", "Wood"},
-{"Wood_Bright", 990, "Bonsai Barrage", "Bright", "Wood"},
-{"Wood_Toad", 990, "Natural Downpour", "Toad", "Wood"},
-{"Wood_Drill", 990, "Root Rupture", "Drill", "Wood"},
-{"Wood_Pharaoh", 990, "Solar Totem", "Pharaoh", "Wood"},
-{"Wood_Ring", 990, "Stump Satellite", "Ring", "Wood"},
-{"Wood_Dust", 990, "Log Chipper", "Dust", "Wood"},
-{"Wood_Dive", 990, "Sprout Mine", "Dive", "Wood"},
-{"Wood_Skull", 990, "Poison Sporegun", "Skull", "Wood"}
+{"Wood_Mega", 990, "Leaf Shield", "Mega", "Wood", 11.0},
+{"Wood_Bright", 990, "Bonsai\n\nBarrage", "Bright", "Wood", 15.0},
+{"Wood_Toad", 990, "Natural\n\nDownpour", "Toad", "Wood", 17.0},
+{"Wood_Drill", 990, "Root Rupture", "Drill", "Wood", 12.0},
+{"Wood_Pharaoh", 990, "Solar Totem", "Pharaoh", "Wood", 11.0},
+{"Wood_Ring", 990, "Stump\n\nSatellite", "Ring", "Wood", 16.0},
+{"Wood_Dust", 990, "Log Chipper", "Dust", "Wood", 11.0},
+{"Wood_Dive", 990, "Sprout Mine", "Dive", "Wood", 11.0},
+{"Wood_Skull", 990, "Poison\n\nSporegun", "Skull", "Wood", 16.0},
+
+{"Galaxy_Mega",997, "Black Hole\n\nBomb", "Mega", "Galaxy", 16.0}
 };
 
 script "4SP_WeaponGetDisplay" (void)
 { 
 Delay(1);
-//Log(s:GetCvarString("CCSP_WeaponGet"));
 if(GetCvarString("CCSP_WeaponGet")=="Null"){terminate;}
-//GiveInventory("PlayerFreeze",1);
 SetMusic("4WEPGET",0);
-GiveInventory("NOHUD",1);
-ACS_NamedExecuteAlways("4SP_ChangeCamera",0,0);
+GiveInventory("4SPWeaponGetChange",1);
 
 for(int i = 0; i < MAX_WEAPONGETS; i++) 
 {
@@ -480,19 +485,24 @@ str weapon = weapon_gets[i][2];
 SetThingSpecial(406,0,weapon_gets[i][1]);
 SetCvarString("CCSP_WeaponGetBoss",weapon_gets[i][4]);
 str class = weapon_gets[i][3];
+int charactercount = weapon_gets[i][5] >> 16;
 }
 }
 
 if(GetCvar("SV_CC_AllWeapons"))
 {
-Log(s:"Clientside");
+SetActorState(406,"Resync");
 GiveInventory("ActivateClientsideWepGetScript",1);
+Delay(65);
 }
 else
 {
-Log(s:"Serverside");
-Log(s:weapon);
 SetActorState(406,class);
+Delay(65);
+SetHudSize(352,240,0);
+SetFont("4SPFONT");
+HudMessageBold(s:"\n\nYOU GOT" ,s:"\n\n", s:weapon; HUDMSG_TYPEON, 1, CR_WHITE, 150.1, 47.1, 7.0, 0.15, 0.0);
+ACS_NamedExecuteAlways("4SP_WeaponGetSoundServer",0,charactercount);
 }
 
 Delay(212);
@@ -500,19 +510,13 @@ Delay(212);
 SetCvarString("CCSP_WeaponGet","Null");
 SetCvarString("CCSP_WeaponGetBoss","Null");
 SetMusic("CCHUBMUS",0);
-ACS_NamedExecuteAlways("4SP_ChangeCamera",0,1);
-TakeInventory("NOHUD",999);
+GiveInventory("4SPWeaponGetChangeBack",1);
 }
 
-script "4SP_ChangeCamera" (int which)
+script "4SP_WeaponGetChange" (int which)
 {
-int MaxPlayers = GetMaxPlayers();
-for(int p = 0; p < MaxPlayers; p++)
-{
-SetActivator(p+1000);
-if(which==0){ChangeCamera(405,0,0);}
-else{ChangeCamera(0,0,0);}
-}
+if(which==1){ChangeCamera(405,0,0); GiveInventory("NoHud",1); ACS_NamedExecuteAlways("core_freezeplayer", 0, 0, 1);}
+if(which==0){ChangeCamera(0,0,0); TakeInventory("NoHud",999); ACS_NamedExecuteAlways("core_freezeplayer", 0, 0, 0); HudMessage(s:"\n"; HUDMSG_TYPEON, 1, CR_WHITE, 150.1, 47.1, 0.1, 0.01, 0.0);}
 }
 
 script "4SP_ClientsideWeaponGet" (void) CLIENTSIDE
@@ -523,11 +527,47 @@ for(int i = 0; i < MAX_WEAPONGETS; i++)
 if(StrIcmp(weapon_gets[i][0], dummycvar)==0) 
 {
 str dummyweapon = weapon_gets[i][2];
-Log(s:dummyweapon);
 str dummyclass = weapon_gets[i][3];
+int dummycharactercount = weapon_gets[i][5] >> 16;
 SetActorState(406,dummyclass);
+Delay(65);
+SetHudSize(352,240,0);
+SetFont("4SPFONT");
+HudMessage(s:"\n\nYOU GOT" ,s:"\n\n", s:dummyweapon; HUDMSG_TYPEON|HUDMSG_LOG, 1, CR_WHITE, 150.1, 47.1, 7.0, 0.14, 0.0);
+ACS_NamedExecuteAlways("4SP_WeaponGetSound",0,dummycharactercount);
 }
 }
+}
+
+script "4SP_WeaponGetSound" (int dummycharactercount) CLIENTSIDE
+{
+If(PlayerNumber()!=ConsolePlayerNumber())
+{
+SetActivator(ConsolePlayerNumber()+1000);
+terminate;
+}
+Delay(10);
+dummycharactercount = dummycharactercount+9; //adding the YOU GOT
+while(dummycharactercount>0)
+{
+AmbientSound("menu/cctext",127);
+dummycharactercount = dummycharactercount-1;
+delay(5);
+}
+terminate;
+}
+
+script "4SP_WeaponGetSoundServer" (int charactercount)
+{
+Delay(10);
+charactercount = charactercount+9; //adding the YOU GOT
+while(charactercount>0)
+{
+AmbientSound("menu/cctext",127);
+charactercount = charactercount-1;
+delay(5);
+}
+terminate;
 }
 
 //[Trill] Color grabber for random stuff.
