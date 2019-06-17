@@ -4,6 +4,9 @@ Weapon.SlotNumber 2
 }
 actor LeafShieldGuardSP : LeafShieldGuard replaces LeafShieldGuard
 {
+damagefactor "Normal", 0.0
+damagefactor "Enemy", 1.0
+damagefactor "EnemyContact", 1.0
 species "Megaman"
 +THRUSPECIES
 }
