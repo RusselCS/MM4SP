@@ -289,10 +289,11 @@ script "4SP_SetWeaponGiven" (int debug) {
     }
 
     SetActivatorToTarget(0);
-    //if(GameType()!=GAME_SINGLE_PLAYER){
+    if(GameType()!=GAME_SINGLE_PLAYER){
     SetHudSize(600,380,0);
-    HudMessageBold(n:0, s:" (", s:playercolor, s:player, s:" man\cf) has slain ", s:bosscolor, s:boss, s:" man\cf!";HUDMSG_FADEOUT|HUDMSG_LOG,2,CR_GOLD,300.4,50.0,4.0,0.5);
-    //}
+    if(GetCvar("SV_CC_AllWeapons")){HudMessageBold(n:0, s:" has slain ", s:bosscolor, s:boss, s:" man\cf!";HUDMSG_FADEOUT|HUDMSG_LOG,2,CR_GOLD,300.4,50.0,4.0,0.5);}
+    else{HudMessageBold(n:0, s:" (", s:playercolor, s:player, s:" man\cf) has slain ", s:bosscolor, s:boss, s:" man\cf!";HUDMSG_FADEOUT|HUDMSG_LOG,2,CR_GOLD,300.4,50.0,4.0,0.5);}
+    }
 }
 
 function str getPrefix(str name, bool which) {
@@ -447,6 +448,7 @@ break;
 }
 
 //[Trill] The big bad weapon get display
+int weapongetwait = 212;
 #DEFINE MAX_WEAPONGETS 10 // Maximum number of weapon gets
 
 //0 - Cvar
@@ -472,7 +474,6 @@ str weapon_gets[MAX_WEAPONGETS][6] =
 
 script "4SP_WeaponGetDisplay" (void)
 { 
-Delay(10);
 if(GetCvarString("CCSP_WeaponGet")=="Null"){terminate;}
 SetMusic("4WEPGET",0);
 GiveInventory("4SPWeaponGetChange",1);
@@ -505,7 +506,7 @@ HudMessageBold(s:"\n\nYOU GOT" ,s:"\n\n", s:weapon; HUDMSG_TYPEON, 1, CR_WHITE, 
 ACS_NamedExecuteAlways("4SP_WeaponGetSoundServer",0,charactercount);
 }
 
-Delay(212);
+Delay(weapongetwait);
 
 SetCvarString("CCSP_WeaponGet","Null");
 SetCvarString("CCSP_WeaponGetBoss","Null");
@@ -521,6 +522,11 @@ if(which==0){ChangeCamera(0,0,0); TakeInventory("NoHud",999); ACS_NamedExecuteAl
 
 script "4SP_ClientsideWeaponGet" (void) CLIENTSIDE
 {
+If(PlayerNumber()!=ConsolePlayerNumber())
+{
+SetActivator(ConsolePlayerNumber()+1000);
+terminate;
+}
 str dummycvar = strparam(s:GetCvarString("CCSP_WeaponGetBoss"),s:"_",s:GetPrefix(getActorClass(consolePlayerNumber()+1000),0));
 for(int i = 0; i < MAX_WEAPONGETS; i++) 
 {
@@ -533,8 +539,10 @@ SetActorState(406,dummyclass);
 Delay(65);
 SetHudSize(352,240,0);
 SetFont("4SPFONT");
-HudMessage(s:"\n\nYOU GOT" ,s:"\n\n", s:dummyweapon; HUDMSG_TYPEON|HUDMSG_LOG, 1, CR_WHITE, 150.1, 47.1, 7.0, 0.14, 0.0);
+HudMessage(s:"\n\nYOU GOT" ,s:"\n\n", s:dummyweapon; HUDMSG_TYPEON/*|HUDMSG_LOG*/, 1, CR_WHITE, 150.1, 47.1, 7.0, 0.14, 0.0);
 ACS_NamedExecuteAlways("4SP_WeaponGetSound",0,dummycharactercount);
+Delay(weapongetwait);
+HudMessage(s:"\n"; HUDMSG_TYPEON, 1, CR_WHITE, 150.1, 47.1, 0.1, 0.01, 0.0);
 }
 }
 }

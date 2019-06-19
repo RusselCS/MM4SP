@@ -1,13 +1,3 @@
-texture INVBAR
-pic INVBAR1 tics 4
-pic INVBAR2 tics 4
-pic INVBAR3 tics 4
-
-texture INVVAR
-pic INVVAR1 tics 4
-pic INVVAR2 tics 4
-pic INVVAR3 tics 4
-
 //Pharaoh Power
 texture PHARBAR5
 pic PHARBAR4 tics 4

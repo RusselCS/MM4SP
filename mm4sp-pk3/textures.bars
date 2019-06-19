@@ -4,12 +4,6 @@ texture VARHEALL, 56, 8{patch BARHEALL,0,0{rotate 90}}
 texture VARHEALH, 56, 8{patch BARHEALH,0,0{rotate 90}}
 texture VARHEALR, 56, 8{patch BARHEALR,0,0{rotate 90}}
 
-texture INVBAR, 56, 8{patch TNT1A0,0,0}
-texture INVVAR, 56, 8{patch TNT1A0,0,0{rotate 90}}
-texture INVVAR1, 56, 8{patch INVBAR1,0,0{rotate 90}}
-texture INVVAR2, 56, 8{patch INVBAR2,0,0{rotate 90}}
-texture INVVAR3, 56, 8{patch INVBAR3,0,0{rotate 90}}
-
 //Ringman
 graphic 04_5_VA3,56,16{patch 04_5_BA3,0,0{rotate 90}}
 graphic 04_5_VA2,56,16{patch 04_5_BA2,0,0{rotate 90}}

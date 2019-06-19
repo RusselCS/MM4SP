@@ -14,7 +14,7 @@ InInventory not NoHealthBar, 1
 	InInventory ClassBarLight, 1{DrawBar "VARHEALL", "VAREMPTY", Health, horizontal, 130, 184;}
 	InInventory ClassBarGlass, 1{DrawBar "VARHEALG", "VAREMPTY", Health, horizontal, 130, 184;}
 
-	InInventory IsInvuln, 1{DrawBar "INVVAR", "VNOBAR", Health, horizontal, 130, 184;}
+	InInventory IsInvuln, 1{DrawBar "VARAMM32", "VNOBAR", Health, horizontal, 130, 184;}
 
 	InInventory SkullShieldCheck, 1
 	{

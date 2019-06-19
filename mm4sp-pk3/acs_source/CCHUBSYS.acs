@@ -19,22 +19,22 @@
 // 4 - Camera Texture Name (ex. CCCAM02)
 // 5 - Map name
 //
-str boss_obj[9][6] = {
-    {"Wood Man", "CCMUG02", "CCART02", "CCNAME02", "CCCAM02", "CCWOO"},
-    {"Spark Man", "CCMUG03", "CCART03", "CCNAME03", "CCCAM00", "CCEX"},
-    {"Napalm Man", "CCMUG05", "CCART05", "CCNAME05", "CCCAM00", "CCHUB"},
+str boss_obj[9][8] = {
+    {"Wood Man", "CCMUG02", "CCART02", "CCNAME02", "CCCAM02", "CCWOO", "WoodmanDisplay", "4STGSEL1"},
+    {"Spark Man", "CCMUG03", "CCART03", "CCNAME03", "CCCAM00", "CCEX", "SparkmanDisplay", "4STGSEL2"},
+    {"Napalm Man", "CCMUG05", "CCART05", "CCNAME05", "CCCAM00", "CCHUB", "NapalmmanDisplay", "4STGSEL3"},
    
-    {"Yamato Man", "CCMUG06", "CCART06", "CCNAME06", "CCCAM00", "CCHUB"},
-    {"", "CCMUG48", "CLOUINVS", "CCNAME00", "CCCAM00", "CCHUB"}, // This should always be empty
-    {"Burst Man", "CCMUG07", "CCART07", "CCNAME07", "CCCAM00", "CCHUB"},
+    {"Yamato Man", "CCMUG06", "CCART06", "CCNAME06", "CCCAM00", "CCHUB", "YamatomanDisplay", "4STGSEL4"},
+    {"", "BLACK", "CLOUINVS", "CCNAME00", "CCCAM00", "CCHUB", "", ""}, // This should always be empty
+    {"Burst Man", "CCMUG07", "CCART07", "CCNAME07", "CCCAM00", "CCHUB", "BurstmanDisplay", "4STGSEL5"},
    
-    {"Sword Man", "CCMUG08", "CCART08", "CCNAME08", "CCCAM00", "CCHUB"},
-    {"Cold Man", "CCMUG0B", "CCART0B", "CCNAME0B", "CCCAM00", "CCHUB"},
-    {"Galaxy Man", "CCMUG09", "CCART09", "CCNAME09", "CCCAM00", "CCHUB"}
+    {"Sword Man", "CCMUG08", "CCART08", "CCNAME08", "CCCAM00", "CCHUB", "SwordmanDisplay", "4STGSEL6"},
+    {"Cold Man", "CCMUG0B", "CCART0B", "CCNAME0B", "CCCAM00", "CCHUB", "ColdmanDisplay", "4STGSEL7"},
+    {"Galaxy Man", "CCMUG09", "CCART09", "CCNAME09", "CCCAM00", "CCHUB", "GalaxymanDisplay", "4STGSEL8"}
 };
  
 str defCam = "CCCAM00";
- 
+int firstTile;
 script "4SP_DefineSelect" (void) {
  
     for(int i = 0; i < 9; i++) {
@@ -43,6 +43,9 @@ script "4SP_DefineSelect" (void) {
             SetCameraToTexture(CAMSTART+i+1, boss_obj[i][4], 120);
         }
         SetLineTexture(FACESTART+i+1, SIDE_FRONT, TEXTURE_MIDDLE, boss_obj[i][1]);
+        if(strcmp("BLACK", boss_obj[i][1]) == 0) {
+            firstTile = i;
+        }
     }
     SetLineTexture(LINESTART, SIDE_FRONT, TEXTURE_MIDDLE, "CCNAME00");
     SetLineTexture(LINESTART+1, SIDE_FRONT, TEXTURE_MIDDLE, "CLOUINVS");
@@ -68,6 +71,21 @@ script "4SP_StageSelect" (void) {
 
     ACS_NamedExecuteAlways("core_freezeplayer", 0, 0, 1);
     GiveInventory("NoHud", 1);
+
+    If(CheckActorClass(tid,"MegamanSP")){SetLineTexture(FACESTART+firstTile+1, SIDE_FRONT, TEXTURE_MIDDLE, "CCMUG40");}
+    If(CheckActorClass(tid,"BrightmanSP")){SetLineTexture(FACESTART+firstTile+1, SIDE_FRONT, TEXTURE_MIDDLE, "CCMUG41");}
+    If(CheckActorClass(tid,"ToadmanSP"))   
+    {
+    int toadrandom = random(1,32);
+    if(toadrandom==2){SetLineTexture(FACESTART+firstTile+1, SIDE_FRONT, TEXTURE_MIDDLE, "CCMUG4X");}//lucky lucky number 2
+    else{SetLineTexture(FACESTART+firstTile+1, SIDE_FRONT, TEXTURE_MIDDLE, "CCMUG42");}
+    }
+    If(CheckActorClass(tid,"DrillmanSP")){SetLineTexture(FACESTART+firstTile+1, SIDE_FRONT, TEXTURE_MIDDLE, "CCMUG43");}
+    If(CheckActorClass(tid,"PharaohmanSP")){SetLineTexture(FACESTART+firstTile+1, SIDE_FRONT, TEXTURE_MIDDLE, "CCMUG44");}
+    If(CheckActorClass(tid,"RingmanSP")){SetLineTexture(FACESTART+firstTile+1, SIDE_FRONT, TEXTURE_MIDDLE, "CCMUG45");}
+    If(CheckActorClass(tid,"DustmanSP")){SetLineTexture(FACESTART+firstTile+1, SIDE_FRONT, TEXTURE_MIDDLE, "CCMUG46");}
+    If(CheckActorClass(tid,"DivemanSP")){SetLineTexture(FACESTART+firstTile+1, SIDE_FRONT, TEXTURE_MIDDLE, "CCMUG47");}
+    If(CheckActorClass(tid,"SkullmanSP")){SetLineTexture(FACESTART+firstTile+1, SIDE_FRONT, TEXTURE_MIDDLE, "CCMUG48");}
  
     while(!ended) {
 
@@ -127,7 +145,7 @@ script "4SP_StageSelect" (void) {
     }
 
     if(stageSelection == 0 || StrCmp("CCHUB", boss_obj[stageSelection-1][5]) == 0) { // Player jumped off teleporter.
-
+        
         for(int i = 0; i < 9; i++) {
             SetLineTexture(SELECTSTART+i+1, SIDE_FRONT, TEXTURE_MIDDLE, "4WINDOW1");
         }
@@ -135,21 +153,49 @@ script "4SP_StageSelect" (void) {
         ChangeCamera(0, 0, 0);
         TakeInventory("NoHud", 1);
         SetLineTexture(LINESTART, SIDE_FRONT, TEXTURE_MIDDLE, "CCNAME00");
+        SetLineTexture(FACESTART+firstTile+1, SIDE_FRONT, TEXTURE_MIDDLE, "BLACK"); // mugshot
         SetLineTexture(LINESTART+1, SIDE_FRONT, TEXTURE_MIDDLE, "CLOUINVS"); // art
         SetLineTexture(LINESTART+2, SIDE_FRONT, TEXTURE_MIDDLE, "CCCAM00"); // bg
 
     } else {
 
         AmbientSound("menu/ccselect", 128);
-        SetMusic("");
-        Delay(35);
+        SetMusic("",0);
+        SetActivator(-1); 
         FadeTo(0.0, 0.0, 0.0, 1.0, 0.5);
+        SetActivator(tid);
+        Delay(15);    
+        SetActivator(-1); 
+        setplayerproperty(1,1,4);
+        GiveInventory("NoHud",1);
+        FadeTo(0.0, 0.0, 0.0, 0.0, 0.5);
+        SetActivator(tid);
+        SetMusic("MM4SEL");
+        ChangeCamera(408, 1, 0);
+        
+        SetHudSize(208,176,0);
+        SetFont("CSPFONT");
+        HudMessageBold(s:boss_obj[stageSelection-1][0]; HUDMSG_TYPEON, 1, CR_WHITE, 104.4, 115.0, 7.0, 0.30, 0.0);
+
+        SpawnSpotFacing(boss_obj[stageSelection-1][6], 409);
+        SetLineTexture(61, SIDE_FRONT, TEXTURE_TOP, boss_obj[stageSelection-1][7]);
+        SetLineTexture(61, SIDE_FRONT, TEXTURE_BOTTOM, boss_obj[stageSelection-1][7]);
+        Scroll_Wall(61,0,1*65536,0,1);
+        Scroll_Wall(61,0,-1*65536,0,4);
+
+        Delay(245);
+        HudMessageBold(s:boss_obj[stageSelection-1][0]; HUDMSG_FADEOUT, 1, CR_WHITE, 104.4, 115.0, 0, 0.5);
+        SetActivator(-1); 
+        FadeTo(0.0, 0.0, 0.0, 1.0, 0.5);
+        SetActivator(tid);
         Delay(20);
         ACS_NamedExecuteAlways("core_freezeplayer", 0, 0, 0);
-        TakeInventory("NoHud", 1);
+        SetActivator(-1); 
+        setplayerproperty(1,0,4);
+        TakeInventory("NoHud",999);
+        SetActivator(tid);
         Delay(1);
         ChangeLevel(boss_obj[stageSelection-1][5], 0, CHANGELEVEL_NOINTERMISSION|CHANGELEVEL_RESETHEALTH|CHANGELEVEL_RESETINVENTORY);
-
     }
 }
  
