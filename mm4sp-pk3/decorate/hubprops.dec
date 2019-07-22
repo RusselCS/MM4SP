@@ -438,3 +438,20 @@ SPAR A 5
 loop
 }
 }
+actor YamatomanDisplay
+{
+translation "192:192=4:4", "198:198=60:60"
++NOGRAVITY
++FORCEYBILLBOARD
+scale 2.0
+States
+{
+Spawn:
+YAMM A 18
+YAMM FGFGFG 2
+YAMM K 10
+SpawnLoop:
+YAMM A 5
+loop
+}
+}

@@ -32,6 +32,20 @@ CreateTranslation(ICEWALLSP, 192:192=200:200, 198:198=75:75, 199:199=243:243);
 CreateTranslation(BLACKHOLEBOMBSP, 192:192=59:59, 198:198=62:62, 199:199=79:79);
 }
 
+// [Trill] Cooperative/survival can be tricky about resetting inventories properly, put stuff that needs to be corrected here.
+//
+script "4SP_ResetPlayer" ENTER 
+{
+TakeInventory("IsDead",999);
+}
+
+script "4SP_ResetPlayer_Respawn" RESPAWN 
+{
+ACS_NamedExecuteAlways("4SP_ResetPlayer", 0);
+}
+
+/* [Trill] I'm not satisfied with how this script works, will look at again later
+//
 // [Trill] CPU saving script, changemap to hub if no players remain in server.
 //
 Script "4SP_ResetToHub" OPEN
@@ -45,7 +59,7 @@ Delay(35);
 }
 ChangeLevel("CCHUB", 0, CHANGELEVEL_NOINTERMISSION|CHANGELEVEL_RESETHEALTH|CHANGELEVEL_RESETINVENTORY);
 terminate;
-}
+}*/
 
 // [Trill] Scripts ported and slightly modified from MMSP-Basic
 //
@@ -221,6 +235,9 @@ script "4SP_CheckAlive" (void) {
 // [Russel] The big bad weapon script. Gives weapons based on completed bosses and selected class.
 // CVARS: SV_CC_[player]_[boss]_WEP
 // WEPS: [player]_[boss]WEP
+// [Trill] Hey guess what, I added non-standard weapons for 4 classes then hackjobbed their ammo into this.
+// It fixes the issue of ammo not regenning in cooperative/survival modes.
+// AMMO: [player]ammo2
 //
 #define MAX_BOSSES 4
 str bossList[MAX_BOSSES][2] = {
@@ -246,6 +263,11 @@ str playerList[MAX_PLAYERS][2] = {
 script "4SP_GiveWeapons" ENTER {
 
     str player = getPrefix(getActorClass(0), 0);
+
+    if(player == "Mega"||player == "Bright"||player == "Skull"||player == "Pharaoh"){
+        str ammo = StrParam(s:player, s:"ManAmmo2");
+        GiveInventory(ammo, GetAmmoCapacity(ammo));
+    }
 
     for(int i = 0; i < MAX_BOSSES; i++) {
         str cvar = strParam(s:"SV_CC_", s:player, s:"_", s:bossList[i][1], s:"_Wep");
@@ -449,7 +471,7 @@ break;
 
 //[Trill] The big bad weapon get display
 int weapongetwait = 212;
-#DEFINE MAX_WEAPONGETS 10 // Maximum number of weapon gets
+#DEFINE MAX_WEAPONGETS 11 // Maximum number of weapon gets
 
 //0 - Cvar
 //1 - Translation
@@ -468,6 +490,8 @@ str weapon_gets[MAX_WEAPONGETS][6] =
 {"Wood_Dust", 990, "Log Chipper", "Dust", "Wood", 11.0},
 {"Wood_Dive", 990, "Sprout Mine", "Dive", "Wood", 11.0},
 {"Wood_Skull", 990, "Poison\n\nSporegun", "Skull", "Wood", 16.0},
+
+{"Yamato_Mega", 993, "Yamato Spear", "Mega", "Yamato", 12.0},
 
 {"Galaxy_Mega",997, "Black Hole\n\nBomb", "Mega", "Galaxy", 16.0}
 };

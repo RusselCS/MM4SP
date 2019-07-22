@@ -6,3 +6,17 @@ actor SparkShockSP : SparkShock replaces SparkShock
 {
 +MTHRUSPECIES
 }
+
+actor ShockFXCC
+{
++NOINTERACTION
+-SOLID
++NOGRAVITY
+Scale 2.5
+States
+{
+Spawn:
+SPAS FGFGFGF 2
+stop
+}
+}

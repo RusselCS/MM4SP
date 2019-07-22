@@ -1007,14 +1007,6 @@
 #define CPXF_CHECKSIGHT  (1 << 12)
 
 // Zandronum game events ----------------------------------------------------
-#define GAMEEVENT_PLAYERFRAGS	0
-#define GAMEEVENT_MEDALS		1
-#define GAMEEVENT_CAPTURES		2
-#define GAMEEVENT_TOUCHES		3
-#define GAMEEVENT_RETURNS		4
-#define GAMEEVENT_ROUND_STARTS	5
-#define GAMEEVENT_ROUND_ENDS	6
-#define GAMEEVENT_ROUND_ABORTED	7
 
 // Zandronum gamemode states ------------------------------------------------
 #define GAMESTATE_UNSPECIFIED		-1

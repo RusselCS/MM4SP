@@ -5,7 +5,7 @@ player.displayname "pharaohman"
 player.startitem "BusterAmmo", 1
 player.startitem "PharaohManWep"
 player.startitem "PharaohManWep2"
-player.startitem "PharaohManAmmo2", 28
+//player.startitem "PharaohManAmmo2", 28
 player.startitem "PharaohManFlag"
 player.startitem "EnergyBalancer"
 player.jumpz 12

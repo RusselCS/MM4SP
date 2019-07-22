@@ -24,7 +24,7 @@ str boss_obj[9][8] = {
     {"Spark Man", "CCMUG03", "CCART03", "CCNAME03", "CCCAM00", "CCEX", "SparkmanDisplay", "4STGSEL2"},
     {"Napalm Man", "CCMUG05", "CCART05", "CCNAME05", "CCCAM00", "CCHUB", "NapalmmanDisplay", "4STGSEL3"},
    
-    {"Yamato Man", "CCMUG06", "CCART06", "CCNAME06", "CCCAM00", "CCHUB", "YamatomanDisplay", "4STGSEL4"},
+    {"Yamato Man", "CCMUG06", "CCART06", "CCNAME06", "CCCAM00", "CCYAM", "YamatomanDisplay", "4STGSEL4"},
     {"", "BLACK", "CLOUINVS", "CCNAME00", "CCCAM00", "CCHUB", "", ""}, // This should always be empty
     {"Burst Man", "CCMUG07", "CCART07", "CCNAME07", "CCCAM00", "CCHUB", "BurstmanDisplay", "4STGSEL5"},
    

@@ -1,0 +1,74 @@
+actor YamatoManBossCC : BasicBossCC
+{
+Height 52
+Radius 48
+Health 1000
+
+translation "192:192=4:4", "198:198=60:60"
+Obituary "%o was pierced by \ctYamato Man\c-."
+
+damagefactor "Buster", 1.0
+damagefactor "LeafShield", 1.0
+damagefactor "SparkShock", 1.0
+damagefactor "NapalmBomb", 2.0
+damagefactor "YamatoSpear", 0.5
+damagefactor "DangerWrap", 1.0
+damagefactor "FlameSword", 0.5 
+damagefactor "IceWall", 1.0
+damagefactor "BlackHoleBomb", 1.0
+
+speed 0
+
+var int user_velx;
+var int user_vely;
+var int user_velz;
+
+States
+{
+Intro:
+YAMM A 0
+YAMM A 0 A_TakeInventory("BossIntroFlag", 1)
+YAMM A 0 A_ChangeFlag("CANTSEEK", true)
+YAMM A 0 A_ChangeFlag("INVULNERABLE", true)
+IntroLoop:
+YAMM FFGG 1 A_JumpIf(floorz-z==0,"Intro2")
+loop
+Intro2:
+YAMM FGFGFG 2
+YAMM K 10
+YAMM A 1
+wait
+Spawn:
+YAMM A 0
+YAMM A 0 Thing_SetTranslation(0,827)
+YAMM A 0 A_ChangeFlag("CANTSEEK", false)
+YAMM A 0 A_ChangeFlag("INVULNERABLE", false)
+YAMM A 0 A_JumpIfInventory("HealthScaled",1,"Spawn2")
+YAMM A 0 ACS_NamedExecuteAlways("4SP_BossManage", 0)
+YAMM A 0 A_GiveInventory("DamageCounter",10)
+YAMM A 0 A_SpawnItemEX("BasicEnemyContactDamager")
+YAMM A 0 A_JumpIfInventory("BossIntroFlag", 1, "Intro")
+Return:
+Spawn2:
+YAMM A 5 //A_LookEx(LOF_NOSOUNDCHECK,0,0,0,360,"See")
+loop
+
+/*Super:
+WODM A 0 A_PlaySoundEx("enemy/bosssuper","Voice",0,1)
+WODM A 0 A_ChangeFlag("INVULNERABLE",1)
+WODM G 0 A_FaceTarget
+WODM I 5 Thing_SetTranslation(0,62)
+WODM J 5 Thing_SetTranslation(0,747)
+WODM I 5 Thing_SetTranslation(0,62)
+WODM J 5 Thing_SetTranslation(0,747)
+WODM I 5 Thing_SetTranslation(0,62)
+WODM J 5 Thing_SetTranslation(0,747)
+WODM I 5 Thing_SetTranslation(0,62)
+WODM J 5 Thing_SetTranslation(0,747)
+WODM A 12 A_FaceTarget
+WODM G 0 A_FaceTarget
+WODM G 35 A_CustomMissile("GiantRollingCutter",0,0,0,2)
+WODM A 0 A_ChangeFlag("INVULNERABLE",0)
+Goto See2*/
+}
+}

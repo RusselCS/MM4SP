@@ -21,14 +21,26 @@ map CCHUB "QUARTER OF CRUSADERS"
 
 map CCWOO "WOOD MAN'S BRAMBLE TREK"
 {
-//   levelnum = 1
-//   titlepatch = "WILV00"
    next = "CCSPA"
    sky1 = "WODM25X", 0
    cluster = 1
    music = "WOOMUS"
    aircontrol = 0.5
    levelnum = 501
+   par = 1
+   clipmidtextures
+   nointermission
+   KeepFullInventory
+}
+
+map CCYAM "YAMATO MAN'S IMPREGNABLE FORTRESS"
+{
+   next = "CCBUR"
+   sky1 = "BLACK", 0
+   cluster = 1
+   music = "YAMMUS"
+   aircontrol = 0.5
+   levelnum = 504
    par = 1
    clipmidtextures
    nointermission

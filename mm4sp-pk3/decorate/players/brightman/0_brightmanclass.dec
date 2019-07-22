@@ -5,7 +5,7 @@ player.displayname "brightman"
 player.startitem "BusterAmmo", 1
 player.startitem "BrightManWep"
 player.startitem "BrightmanWep2"
-player.startitem "BrightmanAmmo2", 28
+//player.startitem "BrightmanAmmo2", 28
 player.startitem "BrightManFlag"
 player.startitem "EnergyBalancer"
 player.jumpz 12

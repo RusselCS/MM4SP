@@ -5,7 +5,7 @@ player.displayname "megaman"
 player.startitem "BusterAmmo", 3
 player.startitem "MegaManWep"
 player.startitem "MegaManWep2"
-player.startitem "MegamanAmmo2", 28
+//player.startitem "MegamanAmmo2", 28
 player.startitem "MegaManFlag"
 player.startitem "EnergyBalancer"
 player.jumpz 12

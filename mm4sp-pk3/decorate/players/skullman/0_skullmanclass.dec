@@ -5,7 +5,7 @@ player.displayname "skullman"
 player.startitem "BusterAmmo", 1
 player.startitem "SkullManWep"
 player.startitem "SkullmanWep2"
-player.startitem "SkullmanAmmo2", 28
+//player.startitem "SkullmanAmmo2", 28
 player.startitem "SkullManFlag"
 player.startitem "EnergyBalancer"
 player.jumpz 14
