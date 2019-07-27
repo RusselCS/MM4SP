@@ -37,6 +37,7 @@ CreateTranslation(BLACKHOLEBOMBSP, 192:192=59:59, 198:198=62:62, 199:199=79:79);
 script "4SP_ResetPlayer" ENTER 
 {
 TakeInventory("IsDead",999);
+TakeInventory("BossFlag",999);
 }
 
 script "4SP_ResetPlayer_Respawn" RESPAWN 

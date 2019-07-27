@@ -14,6 +14,11 @@ int bossHP = 0;
 
 bool bossInvuln = false;
 
+script "4SP_BossStatus_Respawn" RESPAWN
+{
+ACS_NamedExecuteAlways("4SP_BossStatus_Enter",0);
+}
+
 script "4SP_BossStatus_Enter" ENTER
 {
     Delay(1);
@@ -75,14 +80,7 @@ script "4SP_BossActivate" (void)
 {
     str bossTheme = GetCVarString("mm8bdm_map_bossmusic");
 
-    if(bossState == BOSS_INTRO)
-    {
-        if(CheckInventory("BossFlag") == 0)
-        {
-            GiveInventory("BossFlag", 1);
-        }
-    }
-    else if(bossState == BOSS_NOTSTARTED)
+    if(bossState == BOSS_NOTSTARTED)
     {
         bossState = BOSS_INTRO;
         GiveInventory("BossFlag", 1);
@@ -107,7 +105,14 @@ script "4SP_BossActivate" (void)
         SpawnSpot(bossObj, spot, bossTID, GetActorAngle(spot)>>8);
         GiveActorInventory(bossTID, "BossIntroFlag", 1);
     }
-    else if(bossState == BOSS_INPROGRESS || bossState == BOSS_DEFEATED)
+    else if(bossState == BOSS_INTRO || bossState == BOSS_INPROGRESS)
+    {
+        if(CheckInventory("BossFlag") == 1){terminate;}
+        GiveInventory("BossFlag", 1);
+        spot = GetCVar("CCSP_BossDoor");
+        Teleport(spot, 0, false);
+    }
+    else if(bossState == BOSS_DEFEATED)
     {
         spot = GetCVar("CCSP_BossDoor");
         Teleport(spot, 0, false);
